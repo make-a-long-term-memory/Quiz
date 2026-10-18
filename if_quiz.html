@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파이썬 선택문 퀴즈</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#3b3552;
+    --ink-soft:#756d8f;
+    --card:#ffffff;
+    --line:#efe6f7;
+    --pink:#ff8fb1;
+    --pink-deep:#ee6797;
+    --yellow:#ffd36e;
+    --lav:#c9b8ff;
+    --good:#22b46a;
+    --good-bg:#e5f8ee;
+    --bad:#ef4f6b;
+    --bad-bg:#ffe9ee;
+    --code-bg:#2f3150;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{
+    font-family:'Gowun Dodum','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    color:var(--ink);
+    background-color:#fff8ec;
+    background-image:
+      radial-gradient(#ffd6e5 1.5px, transparent 1.6px),
+      linear-gradient(160deg,#fff6e0 0%,#ffeef5 50%,#e8f6ff 100%);
+    background-size:24px 24px, 100% 100%;
+    background-attachment:fixed;
+    display:flex;justify-content:center;align-items:flex-start;
+    padding:28px 16px 48px;
+    line-height:1.6;
+  }
+  .app{width:100%;max-width:700px}
+  .hidden{display:none !important}
+  .jua{font-family:'Jua',sans-serif;font-weight:400}
+
+  /* ---------- 헤더 ---------- */
+  .top{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:0 4px}
+  .mascot{
+    flex:none;font-size:2.3rem;width:62px;height:62px;border-radius:20px;
+    background:#fff;display:grid;place-items:center;
+    border:3px solid #ffe7a3;box-shadow:0 5px 0 var(--yellow);
+    animation:bob 2.6s ease-in-out infinite;
+  }
+  h1{font-family:'Jua',sans-serif;font-weight:400;font-size:1.75rem;line-height:1.25}
+  h1 .accent{color:var(--pink-deep)}
+  .top p{color:var(--ink-soft);font-size:.95rem}
+
+  /* ---------- 카드 ---------- */
+  .card{
+    background:var(--card);border-radius:28px;padding:28px;
+    border:3px solid #f1e8ff;
+    box-shadow:0 8px 0 rgba(201,184,255,.55), 0 20px 40px rgba(120,90,160,.12);
+  }
+  .card.enter{animation:pop .35s ease}
+
+  /* ---------- 버튼 ---------- */
+  .btn{
+    font-family:'Jua',sans-serif;font-size:1.15rem;
+    border:none;border-radius:999px;padding:13px 28px;cursor:pointer;
+    background:var(--pink);color:#fff;
+    box-shadow:0 5px 0 var(--pink-deep);
+    transition:transform .08s, box-shadow .08s, filter .15s;
+  }
+  .btn:hover{filter:brightness(1.04)}
+  .btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--pink-deep)}
+  .btn.sub{background:#a99bff;box-shadow:0 5px 0 #8676ee}
+  .btn.sub:active{box-shadow:0 2px 0 #8676ee}
+  .btn.small{font-size:.95rem;padding:8px 16px;box-shadow:0 3px 0 var(--pink-deep)}
+  .btn.small.sub{box-shadow:0 3px 0 #8676ee}
+  .btn.small.plain{background:#fff;color:var(--ink);border:2px solid #e6dcf5;box-shadow:0 3px 0 #e6dcf5}
+  .btn:focus-visible,.choice:focus-visible{outline:3px dashed var(--lav);outline-offset:3px}
+
+  /* ---------- 시작 화면 ---------- */
+  #start{text-align:center}
+  .hero{font-size:4.4rem;display:inline-block;animation:bob 2.6s ease-in-out infinite}
+  #start h2{font-family:'Jua',sans-serif;font-weight:400;font-size:1.6rem;margin-top:6px}
+  .rules{list-style:none;margin:18px auto 22px;max-width:450px;display:grid;gap:10px;text-align:left}
+  .rules li{
+    background:#fffaf0;border:2px solid #fff0cc;border-radius:16px;
+    padding:10px 14px;display:flex;gap:10px;align-items:center;word-break:keep-all;
+  }
+  .rules li span{font-size:1.25rem}
+
+  .name-form{max-width:450px;margin:0 auto;text-align:left}
+  .name-form label{display:block;font-family:'Jua',sans-serif;font-size:1.15rem;margin-bottom:8px;padding-left:6px}
+  .name-row{display:flex;gap:10px}
+  .name-row input{
+    flex:1;min-width:0;font:inherit;font-size:1.1rem;padding:12px 18px;border-radius:999px;
+    border:2.5px solid #e6dcf5;background:#fff;color:var(--ink);outline:none;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .name-row input:focus{border-color:var(--lav);box-shadow:0 0 0 4px #efe8ff}
+  .name-row input.invalid{border-color:var(--bad);animation:shake .4s}
+  .name-row .btn{flex:none}
+  .name-error{color:var(--bad);font-size:.92rem;margin-top:6px;padding-left:8px}
+
+  /* 순위 파일 패널 */
+  .file-panel{
+    max-width:450px;margin:22px auto 0;text-align:left;
+    background:#f6fbff;border:2px dashed #b9dcf7;border-radius:18px;padding:12px 14px;
+    font-size:.93rem;
+  }
+  .file-panel .fp-title{font-family:'Jua',sans-serif;font-size:1rem;color:#2c78b8;margin-bottom:2px}
+  .file-panel .fp-msg{color:var(--ink-soft);word-break:keep-all}
+  .file-panel .fp-msg b{color:var(--ink)}
+  .fp-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .fp-actions:empty{display:none}
+
+  /* ---------- 진행 상태 ---------- */
+  .status{display:flex;justify-content:space-between;align-items:center;gap:8px 10px;margin-bottom:10px;flex-wrap:wrap}
+  .progress-text{font-family:'Jua',sans-serif;font-size:1.15rem;color:var(--ink-soft)}
+  .progress-text b{font-weight:400;color:var(--pink-deep);font-size:1.4rem}
+  .status-right{display:flex;gap:8px;align-items:center}
+  .player-chip{
+    font-family:'Jua',sans-serif;font-size:1rem;background:#f1ecff;border:2px solid #e2d8ff;
+    border-radius:999px;padding:4px 12px;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .score-badge{
+    font-family:'Jua',sans-serif;font-size:1.05rem;
+    background:#fff4cf;border:2px solid var(--yellow);border-radius:999px;padding:4px 14px;
+    white-space:nowrap;
+  }
+  .score-badge.bump{animation:bump .45s ease}
+  .steps{display:flex;gap:8px;margin-bottom:20px}
+  .dot{flex:1;height:10px;border-radius:999px;background:#f1ebfa;transition:background .3s}
+  .dot.current{background:var(--lav);animation:pulse 1.4s ease-in-out infinite}
+  .dot.good{background:var(--good)}
+  .dot.bad{background:var(--bad)}
+
+  /* ---------- 문제 ---------- */
+  .tag{
+    display:inline-block;font-family:'Jua',sans-serif;font-size:.9rem;
+    padding:3px 12px;border-radius:999px;background:#eef0ff;color:#5b5fc7;
+  }
+  .tag[data-type="조건식"]{background:#e6f4ff;color:#2c78b8}
+  .tag[data-type="단순 선택문"]{background:#e3f8ef;color:#1f8a5b}
+  .tag[data-type="다중 선택문"]{background:#ffe9f1;color:#cc4479}
+  .question{font-family:'Jua',sans-serif;font-weight:400;font-size:1.32rem;line-height:1.5;margin:10px 0 4px;word-break:keep-all}
+  code{
+    font-family:'Nanum Gothic Coding',Consolas,monospace;font-size:.92em;
+    background:#f4efff;color:#5a3fb3;padding:1px 6px;border-radius:6px;
+  }
+
+  pre.code{
+    position:relative;
+    background:var(--code-bg);color:#f1f0ff;border-radius:18px;
+    padding:38px 18px 16px;margin:14px 0 18px;
+    font-family:'Nanum Gothic Coding',Consolas,monospace;font-size:1.02rem;line-height:1.7;
+    overflow-x:auto;
+  }
+  pre.code::before{
+    content:"";position:absolute;top:14px;left:18px;width:10px;height:10px;border-radius:50%;
+    background:#ff8fb1;box-shadow:16px 0 0 #ffd36e, 32px 0 0 #8ee3c8;
+  }
+  pre.code::after{
+    content:"python";position:absolute;top:8px;right:16px;
+    font-size:.78rem;color:#9b98c4;letter-spacing:.5px;
+  }
+  .t-kw{color:#ff9ecb;font-weight:700}
+  .t-str{color:#ffe08a}
+  .t-num{color:#9ee7ff}
+  .t-fn{color:#b8f0a0}
+  .t-com{color:#8e8bb5;font-style:italic}
+
+  /* ---------- 보기 (2 x 2) ---------- */
+  .choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .choice{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    background:#fffdf7;border:2.5px solid #ebe2f5;border-radius:18px;
+    padding:14px 14px;font:inherit;font-size:1.08rem;color:var(--ink);cursor:pointer;
+    box-shadow:0 4px 0 #ebe2f5;min-height:64px;
+    transition:transform .12s, box-shadow .12s, border-color .12s, background .2s, opacity .2s;
+  }
+  .choice:hover:not(:disabled){border-color:var(--lav);transform:translateY(-2px);box-shadow:0 6px 0 #e3d8ff}
+  .choice:disabled{cursor:default}
+  .choice .num{
+    flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;
+    font-family:'Jua',sans-serif;font-size:1.05rem;color:var(--ink);
+  }
+  .choice:nth-child(1) .num{background:#ffd9e6}
+  .choice:nth-child(2) .num{background:#ffefbf}
+  .choice:nth-child(3) .num{background:#d4f5e9}
+  .choice:nth-child(4) .num{background:#d9efff}
+  .choice .label{flex:1;min-width:0;word-break:keep-all}
+  .choice .label.out{font-family:'Nanum Gothic Coding',Consolas,monospace;white-space:pre;font-size:1.05rem}
+  .choice .mark{flex:none;font-size:1.3rem;font-weight:700;width:22px;text-align:center}
+
+  .choice.correct{background:var(--good-bg);border-color:var(--good);box-shadow:0 4px 0 #a9e6c6}
+  .choice.correct .num{background:var(--good);color:#fff}
+  .choice.correct .mark{color:var(--good)}
+  .choice.wrong{background:var(--bad-bg);border-color:var(--bad);box-shadow:0 4px 0 #ffc2ce}
+  .choice.wrong .num{background:var(--bad);color:#fff}
+  .choice.wrong .mark{color:var(--bad)}
+  .choice.shake{animation:shake .4s ease}
+  .choice.dim{opacity:.5}
+
+  /* ---------- 피드백 ---------- */
+  .feedback{
+    margin-top:18px;border-radius:18px;padding:14px 18px;
+    border:2.5px dashed;font-size:1.02rem;word-break:keep-all;
+    animation:pop .3s ease;
+  }
+  .feedback.good{background:var(--good-bg);border-color:var(--good);color:#145c38}
+  .feedback.bad{background:var(--bad-bg);border-color:var(--bad);color:#8a1f33}
+  .fb-title{font-family:'Jua',sans-serif;font-size:1.25rem;margin-bottom:4px}
+  .fb-sub{font-size:.92rem;opacity:.85;margin-bottom:6px}
+  .hint,.explain{background:#fff;border-radius:14px;padding:10px 14px;margin-top:8px;color:var(--ink)}
+  .hint{border:2px solid #ffd0da}
+  .hint b{font-family:'Jua',sans-serif;font-weight:400;color:#e0a100}
+  .explain{border:2px solid #bfeccf}
+  .explain b{font-family:'Jua',sans-serif;font-weight:400;color:var(--good)}
+  .retry-note{margin-top:8px;font-family:'Jua',sans-serif}
+
+  .actions{display:flex;justify-content:flex-end;margin-top:18px}
+
+  /* ---------- 결과 화면 ---------- */
+  #result{text-align:center}
+  .trophy{font-size:4.4rem;display:inline-block;animation:bob 2.6s ease-in-out infinite}
+  #result h2{font-family:'Jua',sans-serif;font-weight:400;font-size:1.6rem;word-break:keep-all}
+  .final-score{font-family:'Jua',sans-serif;font-size:4rem;line-height:1.1;color:var(--pink-deep);margin:8px 0 2px}
+  .final-score small{font-size:1.5rem;color:var(--ink-soft)}
+  .final-time{color:var(--ink-soft);font-size:.98rem}
+  .final-msg{font-size:1.1rem;margin:6px 0 12px;word-break:keep-all}
+  .review{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+  .review .chip{font-family:'Jua',sans-serif;padding:3px 12px;border-radius:999px;border:2px solid;font-size:.95rem}
+  .chip.ok{background:var(--good-bg);border-color:#a9e6c6;color:var(--good)}
+  .chip.no{background:var(--bad-bg);border-color:#ffc2ce;color:var(--bad)}
+
+  .ranking{
+    background:#fffaf0;border:2.5px solid #ffe8b0;border-radius:22px;padding:16px;
+    margin:0 auto 22px;max-width:500px;text-align:left;
+  }
+  .rank-head{display:flex;justify-content:space-between;align-items:baseline;gap:4px 8px;margin-bottom:10px;flex-wrap:wrap}
+  .rank-head h3{font-family:'Jua',sans-serif;font-weight:400;font-size:1.35rem}
+  .rank-sub{font-family:'Jua',sans-serif;color:var(--pink-deep);font-size:1.05rem}
+  .best-note{font-size:.9rem;background:#fff;border-radius:12px;padding:8px 12px;margin-bottom:10px;border:2px solid #ffe3a3;word-break:keep-all}
+  .rank-cols{display:flex;gap:10px;padding:0 14px 4px;font-size:.8rem;color:var(--ink-soft)}
+  .rank-cols .c-rk{width:34px;text-align:center}
+  .rank-cols .c-nm{flex:1}
+  .rank-cols .c-sc{width:46px;text-align:right}
+  .rank-cols .c-tm{width:62px;text-align:right}
+  .rank-list{list-style:none;display:grid;gap:6px;max-height:330px;overflow-y:auto;padding:2px;position:relative}
+  .rank-list li{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid #f6ecd2;border-radius:14px;padding:7px 12px}
+  .rank-list li.me{background:#fff0f6;border-color:var(--pink);box-shadow:0 3px 0 #ffd0e1}
+  .rank-list li.empty{justify-content:center;color:var(--ink-soft)}
+  .rk{flex:none;width:34px;text-align:center;font-family:'Jua',sans-serif;font-size:1.1rem;color:var(--ink-soft)}
+  .rk.medal{font-size:1.35rem}
+  .rn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .me-badge{font-family:'Jua',sans-serif;font-size:.75rem;background:var(--pink);color:#fff;border-radius:999px;padding:1px 8px;margin-left:6px}
+  .rs{width:46px;text-align:right;font-family:'Jua',sans-serif;color:var(--pink-deep);white-space:nowrap}
+  .rt{width:62px;text-align:right;font-size:.85rem;color:var(--ink-soft);white-space:nowrap}
+  .save-box{margin-top:12px;font-size:.88rem;color:var(--ink-soft);word-break:keep-all}
+  .save-box.ok{color:#1f8a5b}
+  .save-box.warn{color:#b0402c}
+  .save-box .fp-actions{margin-top:8px}
+
+  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  footer{text-align:center;color:var(--ink-soft);font-size:.85rem;margin-top:22px}
+
+  /* ---------- 효과 ---------- */
+  .particle{
+    position:fixed;pointer-events:none;font-size:20px;z-index:50;
+    animation:fly .9s ease-out forwards;
+  }
+  @keyframes fly{
+    0%{transform:translate(-50%,-50%) scale(.6);opacity:1}
+    100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.15) rotate(var(--rot));opacity:0}
+  }
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+  @keyframes pop{from{transform:translateY(8px) scale(.98);opacity:.3}to{transform:none;opacity:1}}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important}
+  }
+  @media (max-width:560px){
+    body{padding:18px 16px 36px}
+    .card{padding:20px 16px;border-radius:22px}
+    h1{font-size:1.4rem}
+    .mascot{width:52px;height:52px;font-size:1.9rem;border-radius:16px}
+    .question{font-size:1.16rem}
+    pre.code{font-size:.92rem;padding:36px 14px 14px}
+    .choices{grid-template-columns:1fr}
+    .choice{min-height:56px;padding:11px 12px}
+    .final-score{font-size:3.3rem}
+    .ranking{padding:12px}
+    .player-chip{max-width:120px}
+  }
+  @media (max-width:400px){
+    .name-row{flex-direction:column}
+    .name-row .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="top">
+    <div class="mascot" aria-hidden="true">🐍</div>
+    <div>
+      <h1>파이썬 <span class="accent">선택문</span> 퀴즈</h1>
+      <p>if · elif · else 를 정복해 봐요!</p>
+    </div>
+  </header>
+
+  <!-- 시작 화면 -->
+  <section id="start" class="card">
+    <div class="hero" aria-hidden="true">🐍</div>
+    <h2>선택문 퀴즈에 도전해 볼까요?</h2>
+    <ul class="rules">
+      <li><span>📝</span><div>코드를 보고 <b>실행 결과</b>를 고르는 <b>5문제</b>예요</div></li>
+      <li><span>⭐</span><div>처음 고른 답이 정답이면 <b>10점</b>! 틀리면 <b>힌트</b>를 보고 다시 골라요</div></li>
+      <li><span>🏆</span><div>다 풀면 <b>최종 순위</b>가 나와요 (점수가 같으면 더 빨리 푼 사람이 위!)</div></li>
+    </ul>
+
+    <div class="name-form" id="nameForm">
+      <label for="nameInput">이름을 입력하세요</label>
+      <div class="name-row">
+        <input id="nameInput" type="text" maxlength="12" placeholder="예: 3번 김미림" autocomplete="off">
+        <button class="btn" type="button" id="startBtn">시작하기 ▶</button>
+      </div>
+      <p class="name-error hidden" id="nameError">이름을 입력해야 시작할 수 있어요!</p>
+    </div>
+
+    <div class="file-panel" id="filePanel">
+      <div class="fp-title">📁 순위 파일 (선생님용)</div>
+      <div class="fp-msg" id="fpMsg"></div>
+      <div class="fp-actions" id="fpActions"></div>
+    </div>
+  </section>
+
+  <!-- 문제 화면 -->
+  <section id="quiz" class="card hidden">
+    <div class="status">
+      <div class="progress-text"><b id="qNum">1</b> / <span id="qTotal">5</span> 번째 문제</div>
+      <div class="status-right">
+        <span class="player-chip">🙋 <span id="playerName"></span></span>
+        <div class="score-badge" id="scoreBadge">⭐ <span id="score">0</span>점</div>
+      </div>
+    </div>
+    <div class="steps" id="steps" aria-hidden="true"></div>
+
+    <span class="tag" id="qType">조건식</span>
+    <h2 class="question" id="qText"></h2>
+    <pre class="code" id="qCode"></pre>
+
+    <div class="choices" id="choices"></div>
+
+    <div class="feedback hidden" id="feedback" aria-live="polite"></div>
+    <div class="actions">
+      <button class="btn hidden" id="nextBtn" type="button">다음 문제 ▶</button>
+    </div>
+  </section>
+
+  <!-- 결과 화면 -->
+  <section id="result" class="card hidden">
+    <div class="trophy" id="resultEmoji" aria-hidden="true">🏆</div>
+    <h2><span id="resultName"></span>님, 퀴즈 끝!</h2>
+    <div class="final-score"><span id="finalScore">0</span><small> / <span id="maxScore">50</span>점</small></div>
+    <p class="final-time" id="finalTime"></p>
+    <p class="final-msg" id="finalMsg"></p>
+    <div class="review" id="review"></div>
+
+    <div class="ranking">
+      <div class="rank-head">
+        <h3>🏆 최종 순위</h3>
+        <span class="rank-sub" id="rankSub"></span>
+      </div>
+      <p class="best-note hidden" id="bestNote"></p>
+      <div class="rank-cols" aria-hidden="true"><span class="c-rk">순위</span><span class="c-nm">이름</span><span class="c-sc">점수</span><span class="c-tm">걸린 시간</span></div>
+      <ol class="rank-list" id="rankList"></ol>
+      <div class="save-box" id="saveBox" aria-live="polite"></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn" id="retryBtn" type="button">🔄 다시 풀기</button>
+      <button class="btn sub" id="nextPlayerBtn" type="button">👤 다음 사람 풀기</button>
+    </div>
+  </section>
+
+  <footer>고등학교 정보 · 알고리즘과 프로그래밍 · 선택 구조</footer>
+</div>
+
+<!-- 파일 자동 저장을 지원하지 않는 브라우저용 -->
+<input type="file" id="fileInput" accept=".txt,text/plain" class="hidden">
+
+<script>
+/* =========================================================
+   문제 데이터 (모두 "실행 결과 고르기" 형식)
+   - answer : choices 배열에서 정답의 위치(0부터 시작)
+   - 힌트/해설 속 `백틱`은 코드 모양으로 표시됩니다
+   ========================================================= */
+const QUESTIONS = [
+  {
+    type: "조건식",
+    code: "a = 10\nb = 3\nprint(a % b == 1 and a < b)",
+    choices: ["True", "False", "1", "오류 발생"],
+    answer: 1,
+    hint: "`%`는 나눈 나머지를 구해요. 그리고 `and`는 양쪽 조건이 모두 True일 때만 True가 돼요!",
+    explain: "`10 % 3`은 1이라서 `a % b == 1`은 True예요. 하지만 `a < b`(10 < 3)는 False! `and`는 둘 다 참이어야 하므로 결과는 False예요."
+  },
+  {
+    type: "조건식",
+    code: "age = 19\nprint(age >= 13 and age <= 19)",
+    choices: ["True", "False", "19", "오류 발생"],
+    answer: 0,
+    hint: "`<=`는 '작거나 같다'라는 뜻이에요. 19는 19보다 작거나 같을까요?",
+    explain: "`19 >= 13`은 True, `19 <= 19`도 True예요(`<=`는 같은 값도 포함해요). 두 조건이 모두 참이니 `and`의 결과는 True!"
+  },
+  {
+    type: "단순 선택문",
+    code: 'score = 75\nif score >= 80:\n    print("합격")\nprint("끝")',
+    choices: ["합격", "끝", "합격\n끝", "오류 발생"],
+    answer: 1,
+    hint: "먼저 `score >= 80`이 참인지 확인해 보세요. 그리고 `print(\"끝\")`은 if문 안에 있을까요, 밖에 있을까요? 들여쓰기를 살펴보세요!",
+    explain: "`75 >= 80`은 False라서 들여쓰기된 `print(\"합격\")`은 건너뛰어요. 들여쓰기가 없는 `print(\"끝\")`은 if문 밖에 있어서 항상 실행돼요."
+  },
+  {
+    type: "다중 선택문",
+    code: 'score = 85\nif score >= 90:\n    print("A")\nelse if score >= 80:\n    print("B")\nelse:\n    print("C")',
+    choices: ["A", "B", "C", "오류 발생"],
+    answer: 3,
+    hint: "파이썬에서 '그렇지 않고 만약 ~라면'을 나타내는 키워드를 떠올려 보세요. 다른 프로그래밍 언어와 조금 달라요!",
+    explain: "파이썬은 `else if`가 아니라 `elif`를 써요. `else` 뒤에는 바로 `:`가 와야 해서 문법 오류(SyntaxError)가 발생하고, 코드는 한 줄도 실행되지 않아요."
+  },
+  {
+    type: "다중 선택문",
+    code: 'temp = 30\nif temp >= 20:\n    print("따뜻해요")\nelif temp >= 28:\n    print("더워요")\nelse:\n    print("추워요")',
+    choices: ["따뜻해요", "더워요", "따뜻해요\n더워요", "추워요"],
+    answer: 0,
+    hint: "if-elif-else 구조에서는 참인 조건을 '처음' 만나면 그 블록만 실행하고, 나머지는 모두 건너뛰어요.",
+    explain: "`30 >= 20`이 먼저 True가 되어 \"따뜻해요\"만 출력돼요. `30 >= 28`도 참이지만, 이미 앞에서 참인 조건을 만났기 때문에 검사하지 않아요."
+  }
+];
+
+const POINT = 10;
+const DEFAULT_QUESTION = "다음 코드의 실행 결과는?";
+const DEFAULT_FILE_NAME = "if퀴즈_순위.txt";
+
+/* ---------- 도우미 함수 ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const fmt = s => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
+
+function highlight(code){
+  const re = /("[^"\n]*"|'[^'\n]*')|(#.*$)|\b(if|elif|else|and|or|not|True|False)\b|\b(print|input|int)\b|\b(\d+)\b/gm;
+  let out = "", last = 0, m;
+  while ((m = re.exec(code))){
+    out += esc(code.slice(last, m.index));
+    if (m[1]) out += `<span class="t-str">${esc(m[1])}</span>`;
+    else if (m[2]) out += `<span class="t-com">${esc(m[2])}</span>`;
+    else if (m[3]) out += `<span class="t-kw">${m[3]}</span>`;
+    else if (m[4]) out += `<span class="t-fn">${m[4]}</span>`;
+    else if (m[5]) out += `<span class="t-num">${m[5]}</span>`;
+    last = re.lastIndex;
+  }
+  return out + esc(code.slice(last));
+}
+
+function shuffle(arr){
+  for (let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function fmtTime(sec){
+  sec = Math.max(0, Math.round(sec));
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return m ? `${m}분 ${s}초` : `${s}초`;
+}
+
+function nowText(){
+  const d = new Date(), p = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function burst(x, y, n = 12){
+  if (reduceMotion) return;
+  const emojis = ["⭐", "✨", "💖", "🎉", "🌟"];
+  for (let i = 0; i < n; i++){
+    const s = document.createElement("span");
+    s.className = "particle";
+    s.textContent = emojis[i % emojis.length];
+    const ang = Math.random() * Math.PI * 2;
+    const dist = 60 + Math.random() * 90;
+    s.style.left = x + "px";
+    s.style.top = y + "px";
+    s.style.setProperty("--dx", Math.cos(ang) * dist + "px");
+    s.style.setProperty("--dy", Math.sin(ang) * dist - 30 + "px");
+    s.style.setProperty("--rot", (Math.random() * 240 - 120) + "deg");
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 1000);
+  }
+}
+
+function restartAnim(el, cls){
+  el.classList.remove(cls);
+  void el.offsetWidth;
+  el.classList.add(cls);
+}
+
+/* =========================================================
+   순위 텍스트 파일
+   형식(탭으로 구분, 한 줄에 한 명):
+   순위  이름  점수  걸린시간(초)  푼 날짜
+   ========================================================= */
+let IN_FRAME = false;
+try{ IN_FRAME = window.self !== window.top; }catch(e){ IN_FRAME = true; }
+// 미리보기 창(다른 페이지 안)에서는 파일 선택 창을 열 수 없어서 자동 저장을 끕니다
+const FS_OK = !IN_FRAME && "showOpenFilePicker" in window && "showSaveFilePicker" in window;
+let fileHandle = null;        // 연결된 순위 파일 (크롬·엣지)
+let rememberedHandle = null;  // 지난번에 연결했던 파일
+let fallbackText = null;      // 파일 자동 저장이 안 되는 브라우저: 불러온 내용
+let fallbackName = DEFAULT_FILE_NAME;
+let fileCount = null;         // 파일에 있는 기록 수
+
+function parseRanking(text){
+  const list = [];
+  String(text || "").replace(/^﻿/, "").split(/\r?\n/).forEach(line => {
+    if (!line.trim() || line.trim().startsWith("#")) return;
+    const cols = line.split("\t");
+    if (cols.length < 4) return;
+    const name = cols[1].trim();
+    const score = parseInt(cols[2], 10);
+    const time = parseInt(cols[3], 10);
+    if (!name || isNaN(score) || isNaN(time)) return;
+    list.push({ name, score, time, date: (cols[4] || "").trim() });
+  });
+  return sortRanking(list);
+}
+
+function sortRanking(list){
+  return list.sort((a, b) => b.score - a.score || a.time - b.time || a.date.localeCompare(b.date));
+}
+
+function serializeRanking(list){
+  const lines = [
+    "# 파이썬 선택문 퀴즈 순위 (퀴즈가 자동으로 업데이트하는 파일입니다)",
+    "# 순위\t이름\t점수\t걸린시간(초)\t푼 날짜"
+  ];
+  sortRanking(list).forEach((r, i) => lines.push([i + 1, r.name, r.score, r.time, r.date].join("\t")));
+  return "﻿" + lines.join("\r\n") + "\r\n";
+}
+
+// 이번 기록을 목록과 비교해서 반영 (같은 이름은 최고 기록만 남김)
+function mergeRecord(list, rec){
+  const old = list.find(r => r.name === rec.name);
+  let isBest = true, prev = null;
+  if (!old){
+    list.push({ ...rec });
+  } else if (rec.score > old.score || (rec.score === old.score && rec.time < old.time)){
+    prev = { ...old };
+    Object.assign(old, rec);
+  } else {
+    isBest = false;
+    prev = { ...old };
+  }
+  sortRanking(list);
+  return { list, isBest, prev };
+}
+
+/* 파일 핸들 기억하기 (IndexedDB) */
+function idbOpen(){
+  return new Promise((res, rej) => {
+    const r = indexedDB.open("if-quiz-ranking", 1);
+    r.onupgradeneeded = () => r.result.createObjectStore("h");
+    r.onsuccess = () => res(r.result);
+    r.onerror = () => rej(r.error);
+  });
+}
+async function idbSet(v){
+  try{
+    const db = await idbOpen();
+    await new Promise((res, rej) => {
+      const tx = db.transaction("h", "readwrite");
+      tx.objectStore("h").put(v, "file");
+      tx.oncomplete = res; tx.onerror = () => rej(tx.error);
+    });
+  }catch(e){}
+}
+async function idbGet(){
+  try{
+    const db = await idbOpen();
+    return await new Promise(res => {
+      const q = db.transaction("h", "readonly").objectStore("h").get("file");
+      q.onsuccess = () => res(q.result || null);
+      q.onerror = () => res(null);
+    });
+  }catch(e){ return null; }
+}
+
+async function ensurePermission(h){
+  const opt = { mode: "readwrite" };
+  if (h.queryPermission && await h.queryPermission(opt) === "granted") return true;
+  if (h.requestPermission) return (await h.requestPermission(opt)) === "granted";
+  return true;
+}
+
+async function readFileText(){
+  const f = await fileHandle.getFile();
+  return await f.text();
+}
+async function writeFileText(text){
+  const w = await fileHandle.createWritable();
+  await w.write(text);
+  await w.close();
+}
+
+const PICK_TYPES = [{ description: "순위 텍스트 파일", accept: { "text/plain": [".txt"] } }];
+
+async function useHandle(h){
+  if (!await ensurePermission(h)) throw new Error("파일을 저장할 권한을 받지 못했어요.");
+  fileHandle = h;
+  rememberedHandle = h;
+  idbSet(h);
+  const text = await readFileText();
+  const list = parseRanking(text);
+  if (!text.trim()) await writeFileText(serializeRanking(list));  // 새 파일이면 머리글 기록
+  fileCount = list.length;
+}
+
+async function fileAction(act){
+  try{
+    if (act === "open"){
+      const [h] = await window.showOpenFilePicker({ types: PICK_TYPES, multiple: false });
+      await useHandle(h);
+    } else if (act === "create"){
+      const h = await window.showSaveFilePicker({ suggestedName: DEFAULT_FILE_NAME, types: PICK_TYPES });
+      await useHandle(h);
+    } else if (act === "reconnect" && rememberedHandle){
+      await useHandle(rememberedHandle);
+    } else if (act === "load"){
+      $("fileInput").click();
+      return;
+    } else if (act === "download"){
+      downloadRanking();
+      return;
+    } else if (act === "save"){
+      // 저장 다시 시도
+    }
+  }catch(e){
+    if (e && e.name === "AbortError") return;   // 사용자가 창을 닫음
+    const m = "⚠️ 순위 파일을 여는 중 문제가 생겼어요. (" + esc(e && e.message ? e.message : e) + ")";
+    if (!$("result").classList.contains("hidden")){ $("saveBox").className = "save-box warn"; $("saveBox").innerHTML = m + `<div class="fp-actions">${fileButtons(["open", "create"])}</div>`; }
+    else { $("fpMsg").innerHTML = m; }
+    return;
+  }
+  renderFilePanel();
+  if (!$("result").classList.contains("hidden")) await syncRanking();
+}
+
+// 파일 자동 저장을 지원하지 않는 브라우저: 파일 불러오기
+$("fileInput").addEventListener("change", async e => {
+  const f = e.target.files && e.target.files[0];
+  if (!f) return;
+  fallbackText = await f.text();
+  fallbackName = f.name || DEFAULT_FILE_NAME;
+  fileCount = parseRanking(fallbackText).length;
+  e.target.value = "";
+  renderFilePanel();
+  if (!$("result").classList.contains("hidden")) await syncRanking();
+});
+
+function downloadRanking(){
+  const text = fallbackText !== null ? fallbackText : serializeRanking([]);
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = fallbackName;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+function fileButtons(acts){
+  const label = {
+    open: "📂 기존 파일 열기",
+    create: "📝 새 파일 만들기",
+    reconnect: rememberedHandle ? `🔗 '${esc(rememberedHandle.name)}' 다시 연결` : "",
+    load: "📂 순위 파일 불러오기",
+    download: "💾 순위 파일 저장(다운로드)",
+    save: "💾 다시 저장하기"
+  };
+  return acts.filter(a => label[a]).map(a =>
+    `<button type="button" class="btn small ${a === "open" || a === "load" || a === "reconnect" ? "" : "plain"}" data-file-act="${a}">${label[a]}</button>`
+  ).join("");
+}
+
+function renderFilePanel(){
+  const msg = $("fpMsg"), acts = $("fpActions");
+  if (FS_OK){
+    if (fileHandle){
+      msg.innerHTML = `✅ <b>${esc(fileHandle.name)}</b> 파일에 순위를 저장하고 있어요` +
+        (fileCount !== null ? ` (지금 ${fileCount}명 기록)` : "") + ".";
+      acts.innerHTML = fileButtons(["open", "create"]);
+    } else {
+      msg.innerHTML = "학생들이 풀기 전에 순위를 저장할 <b>텍스트 파일(.txt)</b>을 연결해 주세요. 처음이면 <b>새 파일 만들기</b>, 이어서 쓰려면 <b>기존 파일 열기</b>를 누르세요.";
+      acts.innerHTML = fileButtons(rememberedHandle ? ["reconnect", "open", "create"] : ["open", "create"]);
+    }
+  } else if (IN_FRAME){
+    msg.innerHTML = "지금은 <b>미리보기 화면</b>이라 순위 파일을 저장할 수 없어요. 퀴즈와 순위 화면은 확인할 수 있어요. 실제 수업에서는 파일을 내려받아 <b>크롬이나 엣지</b>로 열어 주세요.";
+    acts.innerHTML = "";
+    return;
+  } else {
+    if (fallbackText !== null){
+      msg.innerHTML = `✅ <b>${esc(fallbackName)}</b> 파일을 불러왔어요` + (fileCount !== null ? ` (지금 ${fileCount}명 기록)` : "") +
+        ". 이 브라우저는 자동 저장이 안 돼서, 끝나면 결과 화면에서 <b>다운로드</b>로 저장해 주세요.";
+    } else {
+      msg.innerHTML = "이 브라우저는 파일 자동 저장을 지원하지 않아요(크롬·엣지 권장). 기존 순위 파일이 있으면 <b>불러오기</b>를 눌러 주세요.";
+    }
+    acts.innerHTML = fileButtons(["load"]);
+  }
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-file-act]");
+  if (b) fileAction(b.dataset.fileAct);
+});
+
+/* ---------- 상태 ---------- */
+let playerName = "";
+let startTime = 0;
+let current = 0;
+let score = 0;
+let tries = 0;
+let locked = false;
+let results = [];          // true: 첫 시도 정답, false: 첫 시도 오답, null: 아직 안 품
+let pendingRecord = null;  // 아직 파일에 저장하지 못한 이번 기록
+let lastRecord = null;     // 이번 기록 (순위에서 '나' 표시용)
+let lastMerge = null;
+
+/* ---------- 화면 전환 ---------- */
+function showScreen(id){
+  ["start", "quiz", "result"].forEach(s => $(s).classList.toggle("hidden", s !== id));
+  window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+}
+
+function startFromName(){
+  const name = $("nameInput").value.replace(/[\t\r\n]/g, " ").replace(/\s+/g, " ").trim().slice(0, 12);
+  if (!name){
+    $("nameError").classList.remove("hidden");
+    restartAnim($("nameInput"), "invalid");
+    $("nameInput").focus();
+    return;
+  }
+  $("nameError").classList.add("hidden");
+  $("nameInput").classList.remove("invalid");
+  playerName = name;
+  startQuiz();
+}
+$("startBtn").addEventListener("click", startFromName);
+$("nameInput").addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.isComposing){ e.preventDefault(); startFromName(); }
+});
+
+function startQuiz(){
+  current = 0;
+  score = 0;
+  results = QUESTIONS.map(() => null);
+  $("score").textContent = 0;
+  $("qTotal").textContent = QUESTIONS.length;
+  $("playerName").textContent = playerName;
+  startTime = Date.now();
+  showScreen("quiz");
+  renderQuestion();
+}
+
+function renderSteps(){
+  $("steps").innerHTML = QUESTIONS.map((_, i) => {
+    let c = "dot";
+    if (results[i] === true) c += " good";
+    else if (results[i] === false) c += " bad";
+    else if (i === current) c += " current";
+    return `<span class="${c}"></span>`;
+  }).join("");
+}
+
+function renderQuestion(){
+  const q = QUESTIONS[current];
+  tries = 0;
+  locked = false;
+
+  $("qNum").textContent = current + 1;
+  $("qType").textContent = q.type;
+  $("qType").dataset.type = q.type;
+  $("qText").innerHTML = fmt(q.question || DEFAULT_QUESTION);
+  $("qCode").innerHTML = highlight(q.code);
+
+  const box = $("choices");
+  box.innerHTML = "";
+  shuffle(q.choices.map((_, i) => i)).forEach((ci, pos) => {
+    const t = q.choices[ci];
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.innerHTML =
+      `<span class="num">${pos + 1}</span>` +
+      `<span class="label${t === "오류 발생" ? "" : " out"}">${esc(t)}</span>` +
+      `<span class="mark" aria-hidden="true"></span>`;
+    b.addEventListener("click", () => choose(b, ci));
+    box.appendChild(b);
+  });
+
+  const fb = $("feedback");
+  fb.className = "feedback hidden";
+  fb.innerHTML = "";
+
+  const next = $("nextBtn");
+  next.classList.add("hidden");
+  next.textContent = current === QUESTIONS.length - 1 ? "결과 보기 🏁" : "다음 문제 ▶";
+
+  renderSteps();
+  restartAnim($("quiz"), "enter");
+}
+
+function choose(btn, ci){
+  if (locked || btn.disabled) return;
+  const q = QUESTIONS[current];
+  const fb = $("feedback");
+  tries++;
+
+  if (ci === q.answer){
+    locked = true;
+    btn.classList.add("correct");
+    btn.querySelector(".mark").textContent = "✔";
+    document.querySelectorAll(".choice").forEach(b => {
+      b.disabled = true;
+      if (b !== btn && !b.classList.contains("wrong")) b.classList.add("dim");
+    });
+
+    let title, sub = "";
+    if (tries === 1){
+      score += POINT;
+      results[current] = true;
+      $("score").textContent = score;
+      restartAnim($("scoreBadge"), "bump");
+      title = `🎉 정답이에요! +${POINT}점`;
+    } else {
+      title = "👍 정답! 힌트를 보고 찾아냈어요";
+      sub = `<div class="fb-sub">첫 번째 시도가 아니라서 이번 문제는 0점이에요.</div>`;
+    }
+    fb.className = "feedback good";
+    fb.innerHTML =
+      `<div class="fb-title">${title}</div>${sub}` +
+      `<div class="explain"><b>✏️ 해설</b><br>${fmt(q.explain)}</div>`;
+
+    const r = btn.getBoundingClientRect();
+    burst(r.left + 30, r.top + r.height / 2);
+
+    const next = $("nextBtn");
+    next.classList.remove("hidden");
+    next.focus({ preventScroll: true });
+    next.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+  } else {
+    btn.classList.add("wrong");
+    btn.disabled = true;
+    btn.querySelector(".mark").textContent = "✖";
+    restartAnim(btn, "shake");
+    if (tries === 1) results[current] = false;
+
+    fb.className = "feedback bad";
+    fb.innerHTML =
+      `<div class="fb-title">😢 아쉬워요, 오답이에요!</div>` +
+      `<div class="hint"><b>💡 힌트</b><br>${fmt(q.hint)}</div>` +
+      `<div class="retry-note">다른 보기를 다시 골라 보세요!</div>`;
+    restartAnim(fb, "feedback");
+    fb.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+  }
+  renderSteps();
+}
+
+function nextQuestion(){
+  if (current < QUESTIONS.length - 1){
+    current++;
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  } else {
+    showResult();
+  }
+}
+
+/* ---------- 결과 & 순위 ---------- */
+function showResult(){
+  const max = QUESTIONS.length * POINT;
+  const sec = Math.max(1, Math.round((Date.now() - startTime) / 1000));
+  $("maxScore").textContent = max;
+  $("resultName").textContent = playerName;
+  $("finalTime").textContent = `걸린 시간 ${fmtTime(sec)}`;
+
+  let emoji, msg;
+  if (score === max){ emoji = "🏆"; msg = "완벽해요! 이제 선택문 마스터예요! 🐍✨"; }
+  else if (score >= max * 0.6){ emoji = "🥳"; msg = "잘했어요! 조금만 더 하면 만점이에요."; }
+  else if (score > 0){ emoji = "🌱"; msg = "좋은 시작이에요! 힌트를 떠올리며 한 번 더 풀어 봐요."; }
+  else { emoji = "💪"; msg = "괜찮아요! 다시 풀다 보면 실력이 쑥쑥 늘 거예요."; }
+  $("resultEmoji").textContent = emoji;
+  $("finalMsg").textContent = msg;
+
+  $("review").innerHTML = QUESTIONS.map((q, i) => {
+    const ok = results[i] === true;
+    return `<span class="chip ${ok ? "ok" : "no"}">${i + 1}번 ${ok ? "⭕" : "❌"}</span>`;
+  }).join("");
+
+  lastRecord = { name: playerName, score, time: sec, date: nowText() };
+  pendingRecord = { ...lastRecord };
+  lastMerge = null;
+
+  showScreen("result");
+
+  const el = $("finalScore");
+  if (reduceMotion || score === 0){
+    el.textContent = score;
+  } else {
+    let v = 0;
+    el.textContent = 0;
+    const step = () => {
+      v = Math.min(score, v + 1);
+      el.textContent = v;
+      if (v < score) setTimeout(step, 28);
+    };
+    step();
+  }
+
+  if (score === max){
+    setTimeout(() => {
+      burst(window.innerWidth / 2, window.innerHeight / 3, 24);
+      setTimeout(() => burst(window.innerWidth / 2, window.innerHeight / 3, 24), 350);
+    }, 400);
+  }
+
+  syncRanking();
+}
+
+// 텍스트 파일에서 목록을 불러와 이번 기록과 비교 → 저장 → 순위 출력
+async function syncRanking(){
+  const box = $("saveBox");
+  $("rankList").innerHTML = `<li class="empty">순위 파일을 불러오는 중…</li>`;
+
+  if (FS_OK && fileHandle){
+    try{
+      if (!await ensurePermission(fileHandle)) throw new Error("파일 저장 권한이 없어요.");
+      let list = parseRanking(await readFileText());
+      if (pendingRecord){
+        lastMerge = mergeRecord(list, pendingRecord);
+        list = lastMerge.list;
+        await writeFileText(serializeRanking(list));
+        pendingRecord = null;
+      }
+      fileCount = list.length;
+      renderRanking(list);
+      box.className = "save-box ok";
+      box.innerHTML = `💾 <b>${esc(fileHandle.name)}</b> 파일에서 순위를 불러와 비교하고, 이번 기록까지 저장했어요.`;
+      renderFilePanel();
+    }catch(e){
+      renderRanking(null);
+      box.className = "save-box warn";
+      box.innerHTML = `⚠️ 순위 파일을 읽거나 저장하지 못했어요. (${esc(e && e.message ? e.message : e)})` +
+        `<div class="fp-actions">${fileButtons(["save", "open", "create"])}</div>`;
+    }
+    return;
+  }
+
+  if (FS_OK){
+    renderRanking(null);
+    box.className = "save-box warn";
+    box.innerHTML = "⚠️ 순위 파일이 연결되지 않아 순위를 불러올 수 없어요. 파일을 연결하면 이번 기록도 바로 저장돼요." +
+      `<div class="fp-actions">${fileButtons(rememberedHandle ? ["reconnect", "open", "create"] : ["open", "create"])}</div>`;
+    return;
+  }
+
+  // 자동 저장을 지원하지 않는 브라우저
+  let list = parseRanking(fallbackText || "");
+  if (pendingRecord){
+    lastMerge = mergeRecord(list, pendingRecord);
+    list = lastMerge.list;
+    fallbackText = serializeRanking(list);
+    pendingRecord = null;
+  }
+  fileCount = list.length;
+  renderRanking(list);
+  box.className = "save-box warn";
+  if (IN_FRAME){ box.innerHTML = "ℹ️ 미리보기 화면이라 순위는 이 창에만 임시로 보여요. 파일을 내려받아 크롬·엣지로 열면 텍스트 파일에 저장돼요."; renderFilePanel(); return; }
+  box.innerHTML = "⚠️ 이 브라우저는 파일 자동 저장이 안 돼요. 아래 버튼으로 순위 파일을 저장해 두고, 다음에 <b>불러오기</b>로 이어서 쓰세요." +
+    `<div class="fp-actions">${fileButtons(["download"])}</div>`;
+  renderFilePanel();
+}
+
+function renderRanking(list){
+  const ul = $("rankList");
+  const note = $("bestNote");
+  note.classList.add("hidden");
+
+  if (!list){
+    ul.innerHTML = `<li class="empty">순위 파일을 연결하면 순위가 나타나요</li>`;
+    $("rankSub").textContent = "";
+    return;
+  }
+  if (!list.length){
+    ul.innerHTML = `<li class="empty">아직 기록이 없어요</li>`;
+    $("rankSub").textContent = "";
+    return;
+  }
+
+  const me = lastRecord ? lastRecord.name : null;
+  const medals = ["🥇", "🥈", "🥉"];
+  ul.innerHTML = list.map((r, i) => {
+    const isMe = r.name === me;
+    return `<li class="${isMe ? "me" : ""}">` +
+      `<span class="rk ${i < 3 ? "medal" : ""}">${i < 3 ? medals[i] : i + 1}</span>` +
+      `<span class="rn">${esc(r.name)}${isMe ? '<span class="me-badge">나</span>' : ""}</span>` +
+      `<span class="rs">${r.score}점</span>` +
+      `<span class="rt">${fmtTime(r.time)}</span></li>`;
+  }).join("");
+
+  const myIdx = list.findIndex(r => r.name === me);
+  $("rankSub").textContent = myIdx >= 0 ? `전체 ${list.length}명 중 ${myIdx + 1}등!` : `전체 ${list.length}명`;
+
+  if (lastMerge && !lastMerge.isBest && lastMerge.prev){
+    note.innerHTML = `이번 기록: <b>${lastRecord.score}점 · ${fmtTime(lastRecord.time)}</b> → ` +
+      `순위에는 최고 기록(${lastMerge.prev.score}점 · ${fmtTime(lastMerge.prev.time)})이 남아 있어요.`;
+    note.classList.remove("hidden");
+  } else if (lastMerge && lastMerge.isBest && lastMerge.prev){
+    note.innerHTML = `🎊 최고 기록 갱신! (이전 ${lastMerge.prev.score}점 · ${fmtTime(lastMerge.prev.time)})`;
+    note.classList.remove("hidden");
+  }
+
+  const meEl = ul.querySelector("li.me");
+  if (meEl) ul.scrollTop = meEl.offsetTop - ul.clientHeight / 2 + meEl.offsetHeight / 2;
+}
+
+/* ---------- 이벤트 ---------- */
+$("nextBtn").addEventListener("click", nextQuestion);
+$("retryBtn").addEventListener("click", startQuiz);
+$("nextPlayerBtn").addEventListener("click", () => {
+  $("nameInput").value = "";
+  showScreen("start");
+  renderFilePanel();
+  $("nameInput").focus({ preventScroll: true });
+});
+
+// 키보드 1~4로 보기 선택
+document.addEventListener("keydown", e => {
+  if ($("quiz").classList.contains("hidden")) return;
+  if (["1", "2", "3", "4"].includes(e.key)){
+    const b = document.querySelectorAll(".choice")[Number(e.key) - 1];
+    if (b && !b.disabled) b.click();
+  }
+});
+
+// 처음 열 때: 지난번 파일 기억해 두기
+(async () => {
+  try{ renderFilePanel(); }catch(e){}
+  if (FS_OK){
+    const h = await idbGet();
+    if (h && h.getFile){
+      rememberedHandle = h;
+      try{
+        if (h.queryPermission && await h.queryPermission({ mode: "readwrite" }) === "granted"){
+          fileHandle = h;
+          fileCount = parseRanking(await readFileText()).length;
+        }
+      }catch(e){ fileHandle = null; }
+      renderFilePanel();
+    }
+  }
+  if (window.matchMedia("(pointer: fine)").matches) $("nameInput").focus({ preventScroll: true });
+})();
+</script>
+</body>
+</html>
