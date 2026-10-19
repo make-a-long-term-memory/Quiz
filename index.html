@@ -25,7 +25,7 @@
   }
   main{max-width:680px;margin:0 auto;padding:28px 16px 48px}
   .top{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding:0 4px}
-  .mascot{flex:none;font-size:2.3rem;width:62px;height:62px;border-radius:20px;background:#ffffff;display:grid;place-items:center;border:2.2px solid #bcb7c4;animation:bob 2.6s ease-in-out infinite}
+  .mascot{flex:none;font-size:2.3rem;width:62px;height:62px;border-radius:20px;background:#ffffff;display:grid;place-items:center;border:2.2px solid #bcb7c4;box-shadow:none;animation:bob 2.6s ease-in-out infinite}
   .eyebrow{display:inline-block;font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:6px;white-space:nowrap;max-width:100%}
   h1{font-weight:800;font-size:1.7rem;line-height:1.25}
   h1 .accent{color:var(--accent)}
@@ -61,6 +61,7 @@
     .ic{width:48px;height:48px;font-size:1.6rem;border-radius:14px}
     .go{display:none}
   }
+  .globe{width:1em;height:1em;display:block}
 </style>
 </head>
 <body>
@@ -70,23 +71,23 @@
     <div>
       <span class="eyebrow">미림마이스터고 디자인과 재학생을 위한</span>
       <h1>디자인과 <span class="accent">코딩 퀴즈</span> 모음</h1>
-      <p>파이썬 · HTML과 CSS · 인터넷과 IT 서비스</p>
+      <p>인터넷과 IT 서비스 · HTML과 CSS · 파이썬</p>
     </div>
   </header>
   <div class="guide">풀고 싶은 묶음을 고르면 됨. 묶음마다 <b>워밍업부터 차례대로</b> 풀어 보면 좋음. 모든 문제에 힌트가 함께 보임.</div>
   <nav class="list" aria-label="퀴즈 묶음">
-    <a class="set" href="python_quiz_all.html">
-      <span class="ic" style="background:#f8eaf0" aria-hidden="true">🐍</span>
+    <a class="set" href="internet_it_quiz.html">
+      <span class="ic" style="background:#e6f3ef" aria-hidden="true">🛰️</span>
       <span class="bd">
-        <span class="kicker" style="color:#bd426e">프로그래밍 기초</span>
-        <span class="tt">파이썬 기초 퀴즈</span>
-        <span class="ds">파이썬이 무엇인지부터 조건문·반복문까지</span>
-        <span class="tags"><span>퀴즈 4개</span><span>60문제</span><span>OX · 빈칸 · 선택문 순위</span></span>
+        <span class="kicker" style="color:#2a7365">웹을 공개하고 운영하기</span>
+        <span class="tt">인터넷과 IT 서비스 퀴즈</span>
+        <span class="ds">서버와 호스팅, 도메인, 깃허브, 워드프레스, GA4</span>
+        <span class="tags"><span>8단계</span><span>30문제</span><span>비용 감 잡기</span></span>
       </span>
       <span class="go" aria-hidden="true">›</span>
     </a>
     <a class="set" href="html_quiz_all.html">
-      <span class="ic" style="background:#ecf3f9" aria-hidden="true">🌐</span>
+      <span class="ic" style="background:#ecf3f9" aria-hidden="true"><svg class="globe" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="#4f88c9"/><g fill="none" stroke="#ffffff" stroke-width="3"><ellipse cx="32" cy="32" rx="11" ry="27"/><path d="M5 32H59M8.5 19H55.5M8.5 45H55.5M32 5V59"/></g></svg></span>
       <span class="bd">
         <span class="kicker" style="color:#406ba1">웹페이지 만들기</span>
         <span class="tt">HTML · CSS 퀴즈</span>
@@ -95,13 +96,13 @@
       </span>
       <span class="go" aria-hidden="true">›</span>
     </a>
-    <a class="set" href="internet_it_quiz.html">
-      <span class="ic" style="background:#e6f3ef" aria-hidden="true">🛰️</span>
+    <a class="set" href="python_quiz_all.html">
+      <span class="ic" style="background:#f8eaf0" aria-hidden="true">🐍</span>
       <span class="bd">
-        <span class="kicker" style="color:#2a7365">웹을 공개하고 운영하기</span>
-        <span class="tt">인터넷과 IT 서비스 퀴즈</span>
-        <span class="ds">서버와 호스팅, 도메인, 깃허브, 워드프레스, GA4</span>
-        <span class="tags"><span>8단계</span><span>30문제</span><span>비용 감 잡기</span></span>
+        <span class="kicker" style="color:#bd426e">프로그래밍 기초</span>
+        <span class="tt">파이썬 기초 퀴즈</span>
+        <span class="ds">파이썬이 무엇인지부터 조건문·반복문까지</span>
+        <span class="tags"><span>퀴즈 4개</span><span>60문제</span><span>OX · 빈칸 · 선택문 순위</span></span>
       </span>
       <span class="go" aria-hidden="true">›</span>
     </a>
