@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>디자인과 코딩 퀴즈 모음</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:400;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Medium'),local('KoPubWorldDotumMedium'),local('KoPubWorld돋움체 Medium'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff') format('woff')}
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:700;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Bold'),local('KoPubWorldDotumBold'),local('KoPubWorld돋움체 Bold'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff') format('woff')}
+  :root{
+    --font:'KoPubWorld Dotum','KoPubWorld돋움체','KoPub돋움체','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    --ink:#33303c; --ink-soft:#686472; --accent:#5d4dbe; --line:#ddd7e6; --line-hover:#c9c2d5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:var(--font);color:var(--ink);background-color:#f8f6f4;
+    background-image:linear-gradient(160deg,#f7f2e8 0%,#f4f1fa 50%,#eef5f6 100%);
+    background-size:100% 100%;background-attachment:fixed;min-height:100vh;
+    line-height:1.4;letter-spacing:-0.01em;word-break:keep-all;
+  }
+  main{max-width:680px;margin:0 auto;padding:28px 16px 48px}
+  .top{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding:0 4px}
+  .mascot{flex:none;font-size:2.3rem;width:62px;height:62px;border-radius:20px;background:#ffffff;display:grid;place-items:center;border:2.2px solid #bcb7c4;animation:bob 2.6s ease-in-out infinite}
+  .eyebrow{display:inline-block;font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:6px;white-space:nowrap;max-width:100%}
+  h1{font-weight:800;font-size:1.7rem;line-height:1.25}
+  h1 .accent{color:var(--accent)}
+  .top p{color:var(--ink-soft);font-size:.95rem}
+  .guide{background:#ffffff;border-radius:22px;padding:14px 18px;margin-bottom:18px;box-shadow:0 6px 0 var(--line)}
+  .guide b{color:var(--accent)}
+  .list{display:grid;gap:14px}
+  .set{
+    display:flex;gap:16px;align-items:center;text-decoration:none;color:inherit;
+    background:#ffffff;border:2.5px solid var(--line);border-radius:24px;padding:18px 20px;
+    box-shadow:0 6px 0 var(--line);transition:transform .12s, box-shadow .12s, border-color .12s;
+  }
+  .set:hover{transform:translateY(-3px);border-color:var(--line-hover);box-shadow:0 9px 0 var(--line-hover)}
+  .set:active{transform:translateY(2px);box-shadow:0 3px 0 var(--line)}
+  .set:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ic{flex:none;width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:1.9rem}
+  .bd{flex:1;min-width:0}
+  .kicker{display:block;font-size:.8rem;font-weight:700}
+  .tt{display:block;font-size:1.2rem;font-weight:800;line-height:1.35}
+  .ds{display:block;font-size:.92rem;color:var(--ink-soft)}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .tags span{font-size:.78rem;font-weight:700;border-radius:999px;padding:2px 10px;background:#f6f4fa;color:#5a4f7e}
+  .go{flex:none;font-size:1.3rem;color:#bfb4e4;font-weight:800}
+  footer{color:var(--ink-soft);font-size:.85rem;margin-top:22px;padding-left:4px}
+  .credit{display:block;margin-top:4px;font-weight:700;color:var(--ink)}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+  @media (max-width:560px){
+    h1{font-size:1.4rem}
+    .eyebrow{font-size:min(.85rem,3.4vw)}
+    .mascot{width:52px;height:52px;font-size:1.9rem;border-radius:16px}
+    .set{padding:14px 14px;gap:12px}
+    .ic{width:48px;height:48px;font-size:1.6rem;border-radius:14px}
+    .go{display:none}
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div class="mascot" aria-hidden="true">💻</div>
+    <div>
+      <span class="eyebrow">미림마이스터고 디자인과 재학생을 위한</span>
+      <h1>디자인과 <span class="accent">코딩 퀴즈</span> 모음</h1>
+      <p>파이썬 · HTML과 CSS · 인터넷과 IT 서비스</p>
+    </div>
+  </header>
+  <div class="guide">풀고 싶은 묶음을 고르면 됨. 묶음마다 <b>워밍업부터 차례대로</b> 풀어 보면 좋음. 모든 문제에 힌트가 함께 보임.</div>
+  <nav class="list" aria-label="퀴즈 묶음">
+    <a class="set" href="python_quiz_all.html">
+      <span class="ic" style="background:#f8eaf0" aria-hidden="true">🐍</span>
+      <span class="bd">
+        <span class="kicker" style="color:#bd426e">프로그래밍 기초</span>
+        <span class="tt">파이썬 기초 퀴즈</span>
+        <span class="ds">파이썬이 무엇인지부터 조건문·반복문까지</span>
+        <span class="tags"><span>퀴즈 4개</span><span>60문제</span><span>OX · 빈칸 · 선택문 순위</span></span>
+      </span>
+      <span class="go" aria-hidden="true">›</span>
+    </a>
+    <a class="set" href="html_quiz_all.html">
+      <span class="ic" style="background:#ecf3f9" aria-hidden="true">🌐</span>
+      <span class="bd">
+        <span class="kicker" style="color:#406ba1">웹페이지 만들기</span>
+        <span class="tt">HTML · CSS 퀴즈</span>
+        <span class="ds">태그와 문서 구조, 시안을 웹으로 옮기는 CSS 레이아웃까지</span>
+        <span class="tags"><span>퀴즈 4개</span><span>75문제</span><span>휴대폰·PC 미리보기</span></span>
+      </span>
+      <span class="go" aria-hidden="true">›</span>
+    </a>
+    <a class="set" href="internet_it_quiz.html">
+      <span class="ic" style="background:#e6f3ef" aria-hidden="true">🛰️</span>
+      <span class="bd">
+        <span class="kicker" style="color:#2a7365">웹을 공개하고 운영하기</span>
+        <span class="tt">인터넷과 IT 서비스 퀴즈</span>
+        <span class="ds">서버와 호스팅, 도메인, 깃허브, 워드프레스, GA4</span>
+        <span class="tags"><span>8단계</span><span>30문제</span><span>비용 감 잡기</span></span>
+      </span>
+      <span class="go" aria-hidden="true">›</span>
+    </a>
+  </nav>
+  <footer>고등학교 정보 · 웹디자인 기초<span class="credit">by Make a long term memory</span></footer>
+</main>
+</body>
+</html>

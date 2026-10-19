@@ -1,0 +1,2947 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파이썬 기초 퀴즈 모음</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+  /* KoPubWorld 돋움체 (문화체육관광부·한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:400;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Medium'),local('KoPubWorldDotumMedium'),local('KoPubWorld돋움체 Medium'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff') format('woff')}
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:700;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Bold'),local('KoPubWorldDotumBold'),local('KoPubWorld돋움체 Bold'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff') format('woff')}
+</style>
+<style>
+  /* calm-palette */ /* contrast-v2 */
+  :root{
+    --font:'KoPubWorld Dotum','KoPubWorld돋움체','KoPub돋움체','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    --ink:#33303c; --ink-soft:#686472; --pink:#d6557d; --pink-deep:#bd426e; --yellow:#d3b981;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);color:var(--ink);background-color:#faf7f1;
+    background-image:linear-gradient(160deg,#f7f2e8 0%,#fbf2f6 50%,#eef5f9 100%);
+    background-size:100% 100%;background-attachment:fixed;
+    line-height:1.4;letter-spacing:-0.01em;
+  }
+  .hidden{display:none !important}
+  #menu{max-width:680px;margin:0 auto;padding:28px 16px 48px}
+  .top{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding:0 4px}
+  .mascot{flex:none;font-size:2.3rem;width:62px;height:62px;border-radius:20px;background:#ffffff;display:grid;place-items:center;border:2.2px solid #bcb7c4;box-shadow:none;animation:bob 2.6s ease-in-out infinite}
+  .eyebrow{display:inline-block;font-size:.85rem;font-weight:700;color:#bd426e;background:none;padding:0;margin-bottom:6px;white-space:nowrap;max-width:100%}
+  h1{font-weight:800;font-size:1.7rem;line-height:1.25}
+  h1 .accent{color:var(--pink-deep)}
+  .top p{color:var(--ink-soft);font-size:.95rem}
+  .guide{background:#ffffff;border:none;border-radius:22px;padding:14px 18px;margin-bottom:18px;box-shadow:0 6px 0 #ddd7e6}
+  .guide b{color:var(--pink-deep)}
+  .list{display:grid;gap:14px}
+  .quiz-card{
+    display:flex;gap:16px;align-items:center;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;
+    background:#ffffff;border:2.5px solid #ddd7e6;border-radius:24px;padding:18px 20px;
+    box-shadow:0 6px 0 #ddd7e6;transition:transform .12s, box-shadow .12s, border-color .12s;
+  }
+  .quiz-card:hover{transform:translateY(-3px);border-color:#c9c2d5;box-shadow:0 9px 0 #c9c2d5}
+  .quiz-card:active{transform:translateY(2px);box-shadow:0 3px 0 #ddd7e6}
+  .quiz-card:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .qc-icon{flex:none;width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:1.9rem}
+  .qc-body{flex:1;min-width:0}
+  .qc-step{font-size:.8rem;font-weight:700;color:var(--ink-soft)}
+  .qc-title{font-size:1.2rem;font-weight:800;line-height:1.35}
+  .qc-desc{font-size:.92rem;color:var(--ink-soft)}
+  .qc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .qc-tags span{font-size:.78rem;font-weight:700;border-radius:999px;padding:2px 10px;background:#f6f4fa;color:#5a4f7e}
+  .qc-tags .qc-diff .st{color:#efb72d;letter-spacing:1px;background:none;padding:0;margin-left:2px;font-size:.9rem}
+  .qc-go{flex:none;font-size:1.3rem;color:#bfb4e4;font-weight:800}
+  footer{color:var(--ink-soft);font-size:.85rem;margin-top:22px;padding-left:4px}
+  .credit{display:block;margin-top:4px;font-weight:700;color:var(--ink)}
+
+  #player{position:fixed;inset:0;display:flex;flex-direction:column}
+  .bar{
+    flex:none;display:flex;align-items:center;gap:12px;padding:10px 16px;
+    background:rgba(255,255,255,.92);border-bottom:2px solid #ddd7e6;backdrop-filter:blur(6px);
+  }
+  .back{
+    font-family:var(--font);font-weight:700;font-size:.95rem;cursor:pointer;
+    background:#ffffff;color:var(--ink);border:2px solid #ddd7e6;border-radius:999px;padding:6px 14px;box-shadow:0 3px 0 #ddd7e6;
+  }
+  .back:active{transform:translateY(2px);box-shadow:0 1px 0 #ddd7e6}
+  .bar-title{font-weight:800;font-size:1rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .frames{flex:1;position:relative}
+  .frames iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+  @media (max-width:560px){
+    h1{font-size:1.4rem}
+    .eyebrow{font-size:min(.85rem,3.4vw)}
+    .mascot{width:52px;height:52px;font-size:1.9rem;border-radius:16px}
+    .quiz-card{padding:14px 14px;gap:12px}
+    .qc-icon{width:48px;height:48px;font-size:1.6rem;border-radius:14px}
+    .qc-go{display:none}
+  }
+  .home-link{display:inline-block;margin-bottom:6px;font-weight:700;color:var(--ink);text-decoration:none;border-bottom:1.5px solid #ddd7e6}
+  .home-link:hover{border-color:#c9c2d5}
+</style>
+</head>
+<body>
+<main id="menu">
+  <header class="top">
+    <div class="mascot" aria-hidden="true">🐍</div>
+    <div>
+      <span class="eyebrow">미림마이스터고 디자인과 재학생을 위한</span>
+      <h1>파이썬 <span class="accent">기초 퀴즈</span> 모음</h1>
+      <p>처음 배우는 사람을 위한 3단계 퀴즈</p>
+    </div>
+  </header>
+  <div class="guide">파이썬이 처음이라면 <b>워밍업 OX 퀴즈</b>로 시작해서 <b>1단계부터 차례대로</b> 풀어 보면 됨. 모든 문제에 힌트가 함께 보임. 퀴즈를 풀다가 <b>← 목록</b>을 눌러도 푼 내용은 그대로 남아 있음.</div>
+  <div class="list">
+    <button class="quiz-card" data-quiz="ox" data-title="워밍업 · 파이썬 OX 퀴즈" type="button">
+      <span class="qc-icon" style="background:#e8f3ee">⭕</span>
+      <span class="qc-body">
+        <span class="qc-step">워밍업 · 시작하기 전에</span>
+        <span class="qc-title" style="display:block">파이썬 OX 퀴즈</span>
+        <span class="qc-desc" style="display:block">파이썬의 이름과 역사, 특징과 문법, 활용 분야를 O, X로 알아봄.</span>
+        <span class="qc-tags"><span class="qc-diff">난이도 <span class="st">★~★★</span></span><span>15문제</span><span>O / X</span><span>힌트 항상 보기</span></span>
+      </span>
+      <span class="qc-go" aria-hidden="true">›</span>
+    </button>
+    <button class="quiz-card" data-quiz="blank" data-title="1단계 · 파이썬 빈칸 채우기" type="button">
+      <span class="qc-icon" style="background:#ede4cd">✏️</span>
+      <span class="qc-body">
+        <span class="qc-step">1단계 · 기초 다지기</span>
+        <span class="qc-title" style="display:block">파이썬 빈칸 채우기</span>
+        <span class="qc-desc" style="display:block">코드의 빈칸에 알맞은 낱말을 골라 가장 기본 문법을 익힘.</span>
+        <span class="qc-tags"><span class="qc-diff">난이도 <span class="st">★~★★</span></span><span>10문제</span><span>3지 선다</span><span>힌트 항상 보기</span></span>
+      </span>
+      <span class="qc-go" aria-hidden="true">›</span>
+    </button>
+    <button class="quiz-card" data-quiz="basics" data-title="2단계 · 파이썬 첫걸음 퀴즈" type="button">
+      <span class="qc-icon" style="background:#f8eaf0">🐍</span>
+      <span class="qc-body">
+        <span class="qc-step">2단계 · 개념 넓히기</span>
+        <span class="qc-title" style="display:block">파이썬 첫걸음 퀴즈</span>
+        <span class="qc-desc" style="display:block">파이썬이 무엇인지부터 반복문까지 차근차근 정리함.</span>
+        <span class="qc-tags"><span class="qc-diff">난이도 <span class="st">★~★★★</span></span><span>30문제</span><span>3지 선다</span><span>틀린 문제 다시 풀기</span></span>
+      </span>
+      <span class="qc-go" aria-hidden="true">›</span>
+    </button>
+    <button class="quiz-card" data-quiz="ifq" data-title="3단계 · 파이썬 선택문 퀴즈" type="button">
+      <span class="qc-icon" style="background:#e8f3ee">🔀</span>
+      <span class="qc-body">
+        <span class="qc-step">3단계 · 도전하기</span>
+        <span class="qc-title" style="display:block">파이썬 선택문 퀴즈</span>
+        <span class="qc-desc" style="display:block">if · elif · else 코드의 실행 결과를 맞히고 순위를 겨룸.</span>
+        <span class="qc-tags"><span class="qc-diff">난이도 <span class="st">★★~★★★</span></span><span>5문제</span><span>4지 선다</span><span>이름 입력 · 순위</span></span>
+      </span>
+      <span class="qc-go" aria-hidden="true">›</span>
+    </button>
+  </div>
+  <footer><a class="home-link" href="index.html">← 전체 퀴즈 모음</a><br>고등학교 정보 · 알고리즘과 프로그래밍<span class="credit">by Make a long term memory</span></footer>
+</main>
+
+<div id="player" class="hidden">
+  <div class="bar">
+    <button class="back" id="backBtn" type="button">← 목록</button>
+    <span class="bar-title" id="barTitle"></span>
+  </div>
+  <div class="frames" id="frames"></div>
+</div>
+
+<script type="text/plain" id="src-ox"><!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파이썬 OX 퀴즈</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+  /* KoPubWorld 돋움체 (문화체육관광부·한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:400;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Medium'),local('KoPubWorldDotumMedium'),local('KoPubWorld돋움체 Medium'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff') format('woff')}
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:700;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Bold'),local('KoPubWorldDotumBold'),local('KoPubWorld돋움체 Bold'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff') format('woff')}
+</style>
+<style>
+  /* calm-palette */ /* contrast-v2 */
+  :root{
+    --font:'KoPubWorld Dotum','KoPubWorld돋움체','KoPub돋움체','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    --ink:#33303c; --ink-soft:#686472; --line:#efeaf3;
+    --pink:#d6557d; --pink-deep:#bd426e; --yellow:#d3b981; --lav:#bfb4e4;
+    --good:#397256; --good-bg:#eaf3ee; --bad:#b85768; --bad-bg:#faeef1; --code-bg:#2d2d39;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);background-color:#faf7f1;
+    background-image:linear-gradient(160deg,#f7f2e8 0%,#fbf2f6 50%,#eef5f9 100%);
+    background-size:100% 100%;background-attachment:fixed;
+    display:flex;justify-content:center;align-items:flex-start;padding:28px 16px 48px;line-height:1.4;letter-spacing:-0.01em;
+  }
+  .app{width:100%;max-width:680px}
+  .hidden{display:none !important}
+  .top{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:0 4px}
+  .mascot{flex:none;font-size:2.3rem;width:62px;height:62px;border-radius:20px;background:#ffffff;display:grid;place-items:center;border:2.2px solid #bcb7c4;box-shadow:none;animation:bob 2.6s ease-in-out infinite}
+  h1{font-family:var(--font);font-weight:700;font-size:1.75rem;line-height:1.25}
+  h1 .accent{color:var(--pink-deep)}
+  .top p{color:var(--ink-soft);font-size:.95rem}
+  .card{background:#ffffff;border-radius:28px;padding:28px;border:none;box-shadow:0 8px 0 #ddd7e6,0 20px 40px rgba(105,92,121,.12)}
+  .card.enter{animation:pop .35s ease}
+  .btn{font-family:var(--font);font-weight:700;font-size:1.15rem;border:none;border-radius:999px;padding:13px 28px;cursor:pointer;background:var(--pink);color:#ffffff;box-shadow:0 5px 0 var(--pink-deep);transition:transform .08s,box-shadow .08s,filter .15s}
+  .btn:hover{filter:brightness(1.04)}
+  .btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--pink-deep)}
+  .btn.sub{background:#6e5dd7;box-shadow:0 5px 0 #5d4dbe}
+  .btn.sub:active{box-shadow:0 2px 0 #5d4dbe}
+  .btn:focus-visible,.choice:focus-visible,.hint-btn:focus-visible{outline:3px solid var(--lav);outline-offset:3px}
+
+  /* 시작 */
+  #start{text-align:center}
+  .hero{font-size:4.4rem;display:inline-block;animation:bob 2.6s ease-in-out infinite}
+  #start h2{font-family:var(--font);font-weight:700;font-size:1.6rem;margin-top:6px}
+  .intro{color:var(--ink-soft);margin:6px 0 18px;word-break:keep-all}
+  .stage-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:460px;margin:0 auto 22px;text-align:left}
+  .stage-list li{background:#f7f2e6;border:none;border-radius:16px;padding:10px 12px;display:flex;gap:10px;align-items:center}
+  .stage-list .sn{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--font);font-weight:700;background:#f8eaf0}
+  .stage-list small{display:block;color:var(--ink-soft);font-size:.92rem;line-height:1.2}
+  .stage-list b{font-family:var(--font);font-weight:700}
+
+  /* 진행 */
+  .status{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+  .progress-text{font-family:var(--font);font-weight:700;font-size:1.15rem;color:var(--ink-soft)}
+  .progress-text b{font-weight:800;color:var(--pink-deep);font-size:1.4rem}
+  .score-badge{font-family:var(--font);font-weight:500;font-size:.82rem;color:var(--ink-soft);background:#ffffff;border:1px solid #ddd7e6;border-radius:999px;padding:2px 10px;white-space:nowrap}
+  .score-badge b,.score-badge #score{font-weight:700;color:var(--ink)}
+  .score-badge .sb-star{color:#efb72d;margin-right:2px}
+  .score-badge.bump{animation:bump .45s ease}
+  .bar{height:12px;border-radius:999px;background:#f2eef7;overflow:hidden;margin-bottom:18px}
+  .bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--yellow));border-radius:999px;transition:width .4s ease}
+  .tag{display:inline-block;font-family:var(--font);font-weight:700;font-size:.9rem;padding:3px 12px;border-radius:999px}
+  .question{font-family:var(--font);font-weight:700;font-size:1.32rem;line-height:1.5;margin:10px 0 4px;word-break:keep-all}
+  .question .qn{color:var(--pink-deep);margin-right:4px}
+  code{font-family:'Nanum Gothic Coding',Consolas,monospace;font-size:.95em;background:#f6f4fa;color:#5a4f7e;padding:1px 6px;border-radius:6px}
+  pre.code{position:relative;background:var(--code-bg);color:#f5f3fc;border-radius:18px;padding:38px 18px 16px;margin:14px 0 4px;font-family:'Nanum Gothic Coding',Consolas,monospace;font-size:1.02rem;line-height:1.7;overflow-x:auto}
+  pre.code::before{content:"";position:absolute;top:14px;left:18px;width:10px;height:10px;border-radius:50%;background:#d6557d;box-shadow:16px 0 0 #d3b981,32px 0 0 #a4cdc0}
+  pre.code::after{content:"python";position:absolute;top:8px;right:16px;font-size:.78rem;color:#a5a4b8}
+  .t-kw{color:#e6b7cd;font-weight:700}.t-str{color:#e1d2a8}.t-num{color:#b7dbe6}.t-fn{color:#c0dcb4}.t-com{color:#9796aa;font-style:italic}
+
+  /* 힌트 버튼 */
+  .hint-row{display:flex;justify-content:flex-end;margin:12px 0 10px}
+  .hint-btn{font-family:var(--font);font-weight:700;font-size:1rem;background:#f6f3e5;color:#635223;border:2px solid #ddd7e6;border-radius:999px;padding:6px 16px;cursor:pointer;box-shadow:0 3px 0 #ddd7e6}
+  .hint-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #ddd7e6}
+  .hint-btn:disabled{opacity:.5;cursor:default}
+  .hint-box{background:#faf7ef;border:2px solid #ddd7e6;border-radius:16px;padding:10px 14px;margin-bottom:12px;word-break:keep-all;animation:pop .3s ease}
+  .hint-box b{font-family:var(--font);font-weight:700;color:#725d28}
+
+  /* 보기 */
+  .choices{display:grid;gap:12px}
+  .choice{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fdfcf9;border:2.5px solid #ddd7e6;border-radius:18px;padding:13px 14px;font:inherit;font-size:1.08rem;color:var(--ink);cursor:pointer;box-shadow:0 4px 0 #ddd7e6;transition:transform .12s,box-shadow .12s,border-color .12s,background .2s,opacity .2s}
+  .choice:hover:not(:disabled){border-color:#c9c2d5;transform:translateY(-2px);box-shadow:0 6px 0 #c9c2d5}
+  .choice:disabled{cursor:default}
+  .choice .num{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--font);font-weight:700;font-size:1.05rem}
+  .choice:nth-child(1) .num{background:#ddd7e6}.choice:nth-child(2) .num{background:#ddd7e6}.choice:nth-child(3) .num{background:#ddd7e6}
+  .choice .label{flex:1;min-width:0;word-break:keep-all}
+  .choice .mark{flex:none;font-size:1.3rem;font-weight:700;width:22px;text-align:center}
+  .choice.correct{background:var(--good-bg);border-color:#ddd7e6;box-shadow:0 4px 0 #ddd7e6}
+  .choice.correct .num{background:var(--good);color:#ffffff}.choice.correct .mark{color:var(--good)}
+  .choice.wrong{background:var(--bad-bg);border-color:#ddd7e6;box-shadow:0 4px 0 #ddd7e6}
+  .choice.wrong .num{background:var(--bad);color:#ffffff}.choice.wrong .mark{color:var(--bad)}
+  .choice.shake{animation:shake .4s ease}
+  .choice.dim{opacity:.5}
+
+  .feedback{margin-top:18px;border-radius:18px;padding:14px 18px;border:2.5px solid;font-size:1.02rem;word-break:keep-all;animation:pop .3s ease}
+  .feedback.good{background:var(--good-bg);border-color:#ddd7e6;color:#1f3b2d}
+  .feedback.bad{background:var(--bad-bg);border-color:#ddd7e6;color:#592f36}
+  .fb-title{font-family:var(--font);font-weight:700;font-size:1.25rem;margin-bottom:4px}
+  .fb-sub{font-size:.92rem;opacity:.85;margin-bottom:6px}
+  .explain{background:#ffffff;border-radius:14px;padding:10px 14px;margin-top:8px;color:var(--ink);border:2px solid #ddd7e6}
+  .explain b{font-family:var(--font);font-weight:700;color:var(--good)}
+  .actions{display:flex;justify-content:flex-end;margin-top:18px}
+
+  /* 결과 */
+  #result{text-align:center}
+  .trophy{font-size:4.4rem;display:inline-block;animation:bob 2.6s ease-in-out infinite}
+  #result h2{font-family:var(--font);font-weight:700;font-size:1.6rem}
+  .final-score{font-family:var(--font);font-weight:700;font-size:4rem;line-height:1.1;color:var(--pink-deep);margin:8px 0 2px}
+  .final-score small{font-size:1.5rem;color:var(--ink-soft)}
+  .final-msg{font-size:1.1rem;margin:6px 0 18px;word-break:keep-all}
+  .stage-result{list-style:none;display:grid;gap:8px;max-width:460px;margin:0 auto 22px;text-align:left}
+  .stage-result li{display:flex;align-items:center;gap:10px;background:#fbfafd;border:2px solid #ddd7e6;border-radius:14px;padding:9px 14px}
+  .stage-result .nm{flex:1}
+  .stage-result .meter{width:90px;height:10px;border-radius:999px;background:#f2eef7;overflow:hidden}
+  .stage-result .meter span{display:block;height:100%;background:var(--good)}
+  .stage-result .ct{font-family:var(--font);font-weight:700;width:44px;text-align:right}
+  .wrong-list{font-size:.92rem;color:var(--ink-soft);margin:-8px 0 20px;word-break:keep-all}
+  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  footer{text-align:center;color:var(--ink-soft);font-size:.85rem;margin-top:22px}
+
+  .particle{position:fixed;pointer-events:none;font-size:20px;z-index:50;animation:fly .9s ease-out forwards;color:#efb72d;font-family:var(--font)}
+  @keyframes fly{0%{transform:translate(-50%,-50%) scale(.6);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.15) rotate(var(--rot));opacity:0}}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+  @keyframes pop{from{transform:translateY(8px) scale(.98);opacity:.3}to{transform:none;opacity:1}}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+  @media (max-width:560px){
+    body{padding:18px 16px 36px}
+    .card{padding:20px 16px;border-radius:22px}
+    h1{font-size:1.4rem}
+    .mascot{width:52px;height:52px;font-size:1.9rem;border-radius:16px}
+    .question{font-size:1.16rem}
+    pre.code{font-size:.92rem;padding:36px 14px 14px}
+    .stage-list{grid-template-columns:1fr}
+    .final-score{font-size:3.3rem}
+  }
+
+  /* ---------- 좌측 정렬 ---------- */
+  #start,#result,footer{text-align:left}
+  .stage-list,.rules,.name-form,.file-panel,.stage-result,.ranking,.review{margin-left:0;margin-right:0;max-width:none}
+  .name-form label{padding-left:0}
+  .review,.result-actions{justify-content:flex-start}
+  .final-score,.final-msg,.final-time,.wrong-list{text-align:left}
+
+  /* ---------- OX 버튼 ---------- */
+  .choices{grid-template-columns:1fr 1fr !important;gap:14px}
+  .choice{position:relative;flex-direction:column;justify-content:center;min-height:120px;padding:10px}
+  .choice .num{display:none}
+  .choice .label{flex:none;font-size:3.6rem;font-weight:800;line-height:1;text-align:center;font-family:var(--font)}
+  .choice:nth-child(1) .label{color:#415e75}
+  .choice:nth-child(2) .label{color:#a9515f}
+  .choice.correct .label,.choice.wrong .label{color:inherit}
+  .choice .mark{position:absolute;top:10px;right:14px}
+  .question{font-size:1.3rem}
+  @media (max-width:560px){ .choice{min-height:96px} .choice .label{font-size:3rem} }
+  /* 힌트 항상 보이기 */
+  .hint-row{display:none}
+  .hint-box{margin-top:12px}
+  /* 행간: 문제 112%, 힌트 130% (KoPub 기준) */
+  .question{line-height:1.12 !important}
+  .hint-box,.hint-box p,.hint-always{line-height:1.3 !important}
+  /* ---------- 난이도 표시 (문제 맨 아래, 노란 별만) ---------- */
+  .diff-row{display:flex;align-items:center;gap:8px;margin-top:22px;padding-top:12px;border-top:1px solid #ddd7e6;font-size:.85rem;color:var(--ink-soft)}
+  .diff-row:empty{display:none}
+  .diff-row .stars{font-size:1.15rem;letter-spacing:2px;color:#efb72d;line-height:1}
+  .diff-row .stars .off{color:#cac3cf}
+  .diff-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:.88rem;color:var(--ink-soft);margin:0 0 18px}
+  .diff-legend .it{display:inline-flex;align-items:center;gap:4px}
+  .diff-legend .st{color:#efb72d;letter-spacing:1px}
+  .credit{display:block;margin-top:6px;font-weight:700;color:var(--ink);letter-spacing:.01em}
+  /* PC에서 진행 표시·단계 배지·알아두기 제목 키우기 */
+  @media (min-width:561px){
+    .progress-text{font-size:1.25rem}
+    .progress-text b{font-size:1.55rem}
+    .tag{font-size:1rem;padding:4px 14px}
+    .concept .ct{font-size:1.02rem;margin-bottom:4px}
+  }
+  .ox-hero{display:flex;gap:.18em;line-height:1}
+  .ox-hero svg{width:1em;height:1em;display:block}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="mascot" aria-hidden="true">🐍</div>
+    <div>
+      <h1>파이썬 <span class="accent">OX</span> 퀴즈</h1>
+      <p>파이썬은 어디에, 왜 쓰일까? 15문제로 워밍업!</p>
+    </div>
+  </header>
+
+  <!-- 시작 -->
+  <section id="start" class="card">
+    <div class="hero ox-hero" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><linearGradient id="gO" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f27d97"/><stop offset="1" stop-color="#c63d5d"/></linearGradient></defs><circle cx="50" cy="50" r="33" fill="none" stroke="url(#gO)" stroke-width="17"/><path d="M27 38 A28 28 0 0 1 45 22" fill="none" stroke="#ffffff" stroke-opacity=".45" stroke-width="5" stroke-linecap="round"/></svg><svg viewBox="0 0 100 100"><defs><linearGradient id="gX" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b7896"/><stop offset="1" stop-color="#323a52"/></linearGradient></defs><path d="M24 24 L76 76 M76 24 L24 76" fill="none" stroke="url(#gX)" stroke-width="17" stroke-linecap="round"/><path d="M27 32 L37 42 M68 32 L60 40" fill="none" stroke="#ffffff" stroke-opacity=".4" stroke-width="5" stroke-linecap="round"/></svg></div>
+    <h2>맞으면 O, 틀리면 X!</h2>
+    <p class="intro">파이썬이 <b>이름의 뜻과 역사, 특징, 쓰이는 분야</b>를 알아봄. 문제마다 <b>💡 힌트</b>가 함께 보임.<br>틀려도 힌트를 보고 다시 고를 수 있음.</p>
+    <ul class="stage-list" id="stageList"></ul>
+    <div class="diff-legend"><span>난이도</span><span class="it"><span class="st">★</span>쉬움</span><span class="it"><span class="st">★★</span>보통</span><span class="it"><span class="st">★★★</span>어려움</span></div>
+    <button class="btn" id="startBtn" type="button">시작하기 ▶</button>
+  </section>
+
+  <!-- 문제 -->
+  <section id="quiz" class="card hidden">
+    <div class="status">
+      <div class="progress-text"><b id="qNum">1</b> / <span id="qTotal">15</span> 번째 문제</div>
+      <div class="score-badge" id="scoreBadge"><span class="sb-star">★</span><span id="score">0</span>개 정답</div>
+    </div>
+    <div class="bar"><span id="bar"></span></div>
+    <span class="tag" id="qStage"></span>
+    <h2 class="question" id="qText"></h2>
+    <pre class="code hidden" id="qCode"></pre>
+    <div class="hint-row"><button class="hint-btn" id="hintBtn" type="button">💡 힌트 보기</button></div>
+    <div class="hint-box hidden" id="hintBox"></div>
+    <div class="choices" id="choices"></div>
+    <div class="feedback hidden" id="feedback" aria-live="polite"></div>
+    <div class="actions"><button class="btn hidden" id="nextBtn" type="button">다음 문제 ▶</button></div>
+    <div class="diff-row" id="qDiff"></div>
+  </section>
+
+  <!-- 결과 -->
+  <section id="result" class="card hidden">
+    <div class="trophy" id="resultEmoji" aria-hidden="true">🏆</div>
+    <h2 id="resultTitle">퀴즈 끝! 수고 많았음</h2>
+    <div class="final-score"><span id="finalScore">0</span><small> / <span id="finalTotal">15</span>개</small></div>
+    <p class="final-msg" id="finalMsg"></p>
+    <ul class="stage-result" id="stageResult"></ul>
+    <p class="wrong-list" id="wrongList"></p>
+    <div class="result-actions">
+      <button class="btn" id="retryWrongBtn" type="button">❗ 틀린 문제만 다시 풀기</button>
+      <button class="btn sub" id="retryAllBtn" type="button">🔄 처음부터 다시 풀기</button>
+    </div>
+  </section>
+
+  <footer>파이썬 워밍업 · OX 15문제<span class="credit">by Make a long term memory</span></footer>
+</div>
+
+<script>
+/* 단계 정보 */
+const STAGES = [
+  { name: "특징과 문법",    color: ["#e8f3ee", "#2f5946"] },
+  { name: "활용 분야와 환경", color: ["#f8eaf0", "#94536d"] },
+  { name: "이름과 역사",    color: ["#ede4cd", "#635223"] }
+];
+
+/* 문제 30개
+   s: 단계 번호(0부터), c: 보기 3개, a: 정답 위치(0부터)
+   `백틱` 안의 글자는 코드 모양으로 보여요 */
+const Q = [
+  { s:2, q:"파이썬(Python)이라는 이름은 영국의 코미디 프로그램 <b>'몬티 파이썬'</b>에서 따왔다.", c:["O","X"], a:0,
+    h:"파이썬은 '비단뱀'이라는 뜻도 있지만, 만든 사람이 즐겨 보던 TV 프로그램 이름이기도 해요.",
+    e:"맞아요! 만든 사람이 좋아하던 영국 코미디 '몬티 파이썬의 날아다니는 서커스(Monty Python's Flying Circus)'에서 이름을 따왔어요. 로고의 뱀은 나중에 붙은 그림이에요." },
+  { s:2, q:"파이썬은 네덜란드의 프로그래머 <b>귀도 반 로섬</b>이 만들었다.", c:["O","X"], a:0,
+    h:"파이썬은 1989년 크리스마스 휴가에 네덜란드의 프로그래머 귀도 반 로섬(Guido van Rossum)이 취미로 만들기 시작한 언어예요.",
+    e:"맞아요! 귀도 반 로섬(Guido van Rossum)이 1989년 말부터 만들기 시작해 1991년에 처음 공개했어요." },
+  { s:2, q:"파이썬은 <b>전문 개발자만</b> 쓸 수 있도록 어렵게 만든 언어다.", c:["O","X"], a:1,
+    h:"파이썬을 만든 귀도 반 로섬은 '모두를 위한 프로그래밍(Computer Programming for Everybody)'을 목표로 내세웠어요.",
+    e:"파이썬은 <b>개발자가 아닌 사람도</b> 쉽게 읽고 쓸 수 있도록 만든 언어예요. 만든 사람 귀도 반 로섬은 1999년에 '모두를 위한 프로그래밍'을 목표로 내세웠어요. 그래서 디자이너, 과학자, 기획자처럼 개발자가 아닌 사람들도 데이터 정리나 반복 작업 자동화에 파이썬을 많이 써요. 디자인과 학생인 여러분도 충분히 배울 수 있어요!" },
+  { s:0, q:"파이썬은 문법이 간결하고 읽기 쉬워서 <b>처음 프로그래밍을 배울 때</b> 많이 쓰인다.", c:["O","X"], a:0,
+    h:"학교 정보 수업에서 왜 파이썬을 많이 배울까요?",
+    e:"맞아요! 파이썬은 영어 문장처럼 읽기 쉬운 문법 덕분에 입문용 언어로 가장 많이 쓰여요." },
+  { s:1, q:"파이썬 코드는 HTML처럼 <b>웹 브라우저에 그대로 넣으면</b> 바로 실행된다.", c:["O","X"], a:1,
+    h:"파이썬 코드를 실행하려면 컴퓨터에 파이썬을 설치하거나, 구글 코랩처럼 파이썬을 실행해 주는 서비스를 써야 해요. 웹 브라우저는 HTML을 읽는 프로그램이에요.",
+    e:"파이썬은 코드를 읽어 실행해 주는 <b>파이썬 실행 환경(인터프리터)</b>이 필요해요. 컴퓨터에 설치하거나, 코랩처럼 파이썬 실행 환경을 갖춘 웹 서비스를 이용해요." },
+  { s:1, q:"파이썬은 <b>데이터 분석, 인공지능</b> 같은 분야에서 널리 쓰인다.", c:["O","X"], a:0,
+    h:"요즘 인공지능을 만드는 사람들이 가장 많이 쓰는 언어가 무엇일까요?",
+    e:"맞아요! 파이썬은 데이터를 다루는 도구(라이브러리)가 풍부해서 데이터 분석, 인공지능, 과학 계산에 널리 쓰여요." },
+  { s:0, q:"파이썬은 <b>들여쓰기</b>로 코드의 묶음(블록)을 구분한다.", c:["O","X"], a:0,
+    h:"파이썬에서는 if문 아래에서 실행할 줄을 스페이스 4칸 들여 써요. 이 들여쓰기는 어떤 역할을 할까요?",
+    e:"맞아요! C나 자바 같은 많은 언어는 중괄호 `{ }`로 묶음을 표시하지만, 파이썬은 들여쓰기로 구분해요. 들여쓰기가 틀리면 오류가 나요." },
+  { s:1, q:"파이썬은 <b>유료 프로그램</b>이라 돈을 내야 쓸 수 있다.", c:["O","X"], a:1,
+    h:"파이썬은 공식 홈페이지(python.org)에서 누구나 내려받을 수 있는 오픈 소스(만든 코드를 모두에게 공개한) 언어예요.",
+    e:"파이썬은 누구나 <b>무료</b>로 내려받아 쓸 수 있는 오픈 소스 언어예요. 그래서 학교와 회사에서 부담 없이 쓰여요." },
+  { s:0, q:"파이썬은 <b>대문자와 소문자를 구별하지 않는다</b>.", c:["O","X"], a:1,
+    h:"컴퓨터는 글자를 아주 정확하게 비교해요. 파이썬에서 `print`는 실행되지만 `Print`라고 쓰면 오류가 나요.",
+    e:"파이썬은 대문자와 소문자를 <b>구별해요</b>. `print`는 되지만 `Print`는 오류가 나요. 변수 `age`와 `Age`도 서로 다른 변수예요." },
+  { s:0, q:"파이썬은 코드를 한 줄씩 읽어 바로 실행하는 <b>인터프리터 방식</b>의 언어다.", c:["O","X"], a:0,
+    h:"파이썬 셸(>>>)에서는 코드 한 줄을 입력하고 Enter를 치면 바로 결과가 나와요.",
+    e:"맞아요! 파이썬은 인터프리터가 코드를 해석해서 바로 실행해요. 셸에서는 한 줄씩 입력하자마자 결과를 볼 수 있어서 배우기 좋아요. (파일로 실행할 때는 먼저 전체 문법을 한 번 검사한 뒤 위에서부터 차례로 실행해요.)" },
+  { s:0, q:"파이썬에서 `#`으로 시작하는 줄은 <b>실행되는 명령</b>이다.", c:["O","X"], a:1,
+    h:"`#` 뒤에 쓴 내용을 '주석'이라고 해요. 주석은 사람이 읽으라고 남기는 메모예요.",
+    e:"`#` 뒤는 <b>주석</b>이에요. 사람이 읽으라고 남기는 메모라서 컴퓨터는 실행하지 않아요." },
+  { s:1, q:"파이썬은 웹 서비스, <b>업무 자동화</b>, 로봇 제어 등 다양한 분야에 쓰인다.", c:["O","X"], a:0,
+    h:"반복되는 엑셀 정리나 파일 이름 바꾸기 같은 일을 컴퓨터에게 맡길 수 있을까요?",
+    e:"맞아요! 파이썬은 웹 서비스 개발, 반복 업무 자동화, 로봇·센서 제어(라즈베리파이) 등 정말 여러 분야에서 쓰여요." },
+  { s:1, q:"파이썬으로는 <b>그림이나 게임</b>을 만들 수 없다.", c:["O","X"], a:1,
+    h:"파이썬에는 거북이가 움직이며 선을 그리는 `turtle`이라는 도구가 기본으로 들어 있어요.",
+    e:"파이썬으로도 그림과 게임을 만들 수 있어요. `turtle`로 그림을 그리고, `pygame` 같은 도구로 게임을 만들어요." },
+  { s:2, q:"지금 학교와 회사에서 주로 쓰는 파이썬은 <b>파이썬 3</b> 버전이다.", c:["O","X"], a:0,
+    h:"예전 버전인 파이썬 2는 2020년에 지원이 끝났어요.",
+    e:"맞아요! 지금은 파이썬 3를 써요. 파이썬 2는 2020년에 공식 지원이 끝났어요." },
+  { s:0, q:"파이썬 코드를 저장하는 파일의 확장자는 <b>.html</b>이다.", c:["O","X"], a:1,
+    h:"파일 확장자는 파일 이름 끝의 점(.) 뒤 글자예요. 파이썬(Python)의 앞 두 글자와 관련이 있어요.",
+    e:"파이썬 파일은 `hello.py`처럼 <b>.py</b>로 끝나요. `.html`은 웹페이지 파일이에요." }
+];
+
+/* 문제별 난이도 (1: ★ 쉬움, 2: ★★ 보통, 3: ★★★ 어려움) — 문제 순서와 같아요 */
+const DIFF = [1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1];
+const DIFF_LABEL = ["", "쉬움", "보통", "어려움"];
+function setDiff(d){
+  const el = document.getElementById("qDiff");
+  if (!el) return;
+  if (!d){ el.innerHTML = ""; return; }
+  el.innerHTML = `<span class="dl">난이도</span><span class="stars" aria-hidden="true">${"★".repeat(d)}<span class="off">${"☆".repeat(3 - d)}</span></span>`;
+  el.setAttribute("aria-label", `난이도 별 ${d}개 (${DIFF_LABEL[d]})`);
+}
+
+/* 도우미 */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+// 문제 글 속 <u> 밑줄만 허용하고 나머지는 안전하게 표시
+const fmt = s => esc(s).replace(/&lt;(\/?)(u|b)&gt;/g,"<$1$2>").replace(/`([^`]+)`/g,"<code>$1</code>");
+function highlight(code){
+  const re = /("[^"\n]*"|'[^'\n]*')|(#.*$)|\b(if|elif|else|for|in|and|or|not|True|False)\b|\b(print|input|int|range|str)\b|\b(\d+)\b/gm;
+  let out = "", last = 0, m;
+  while ((m = re.exec(code))){
+    out += esc(code.slice(last, m.index));
+    if (m[1]) out += `<span class="t-str">${esc(m[1])}</span>`;
+    else if (m[2]) out += `<span class="t-com">${esc(m[2])}</span>`;
+    else if (m[3]) out += `<span class="t-kw">${m[3]}</span>`;
+    else if (m[4]) out += `<span class="t-fn">${m[4]}</span>`;
+    else if (m[5]) out += `<span class="t-num">${m[5]}</span>`;
+    last = re.lastIndex;
+  }
+  return out + esc(code.slice(last));
+}
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function burst(x, y, n = 12){
+  if (reduceMotion) return;
+  const em = ["★","✦","★","✧","★"];
+  for (let i = 0; i < n; i++){
+    const s = document.createElement("span");
+    s.className = "particle"; s.textContent = em[i % em.length];
+    const ang = Math.random() * Math.PI * 2, d = 60 + Math.random() * 90;
+    s.style.left = x + "px"; s.style.top = y + "px";
+    s.style.setProperty("--dx", Math.cos(ang) * d + "px");
+    s.style.setProperty("--dy", Math.sin(ang) * d - 30 + "px");
+    s.style.setProperty("--rot", (Math.random() * 240 - 120) + "deg");
+    document.body.appendChild(s); setTimeout(() => s.remove(), 1000);
+  }
+}
+function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function restartAnim(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+
+/* 시작 화면의 단계 목록 */
+$("stageList").innerHTML = STAGES.map((st, i) => {
+  const n = Q.filter(q => q.s === i).length;
+  const first = Q.findIndex(q => q.s === i) + 1;
+  return `<li><span class="sn" style="background:${st.color[1]};color:#ffffff">${i + 1}</span>` +
+         `<div><b>${st.name}</b><small>${n}문제</small></div></li>`;
+}).join("");
+
+/* 상태 */
+let order = [];      // 이번에 풀 문제 번호들
+let pos = 0;         // order 안에서의 위치
+let correct = 0;
+let tries = 0;
+let locked = false;
+let firstTry = {};   // 문제번호 → 첫 시도에 맞혔는지
+
+function showScreen(id){
+  ["start","quiz","result"].forEach(s => $(s).classList.toggle("hidden", s !== id));
+  window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+}
+
+function startRound(list){
+  order = list; pos = 0; correct = 0; firstTry = {};
+  $("score").textContent = 0;
+  $("qTotal").textContent = order.length;
+  showScreen("quiz");
+  render();
+}
+
+function render(){
+  const qi = order[pos], q = Q[qi], st = STAGES[q.s];
+  tries = 0; locked = false;
+  $("qNum").textContent = pos + 1;
+  $("bar").style.width = (pos / order.length * 100) + "%";
+  const tag = $("qStage");
+  tag.textContent = `${st.name}`;
+  tag.style.background = st.color[0]; tag.style.color = st.color[1];
+  setDiff(DIFF[qi]);
+  $("qText").innerHTML = `<span class="qn">${qi + 1}.</span>${fmt(q.q)}`;
+  if (q.code){ $("qCode").innerHTML = highlight(q.code); $("qCode").classList.remove("hidden"); }
+  else $("qCode").classList.add("hidden");
+
+  $("hintBtn").disabled = false;
+  $("hintBox").classList.remove("hidden");
+  $("hintBox").innerHTML = `<b>💡 힌트</b><br>${fmt(q.h)}`;
+
+  const box = $("choices"); box.innerHTML = "";
+  q.c.map((_, i) => i).forEach((ci, k) => {
+    const t = q.c[ci];
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "choice";
+    b.innerHTML = `<span class="num">${"①②③"[k]}</span><span class="label">${fmt(t)}</span><span class="mark" aria-hidden="true"></span>`;
+    b.addEventListener("click", () => choose(b, ci));
+    box.appendChild(b);
+  });
+
+  $("feedback").className = "feedback hidden"; $("feedback").innerHTML = "";
+  const next = $("nextBtn");
+  next.classList.add("hidden");
+  next.textContent = pos === order.length - 1 ? "결과 보기 🏁" : "다음 문제 ▶";
+  restartAnim($("quiz"), "enter");
+}
+
+function showHint(){
+  $("hintBox").classList.remove("hidden");
+  $("hintBtn").disabled = true;
+}
+
+function choose(btn, ci){
+  if (locked || btn.disabled) return;
+  const qi = order[pos], q = Q[qi], fb = $("feedback");
+  tries++;
+  if (ci === q.a){
+    locked = true;
+    btn.classList.add("correct"); btn.querySelector(".mark").textContent = "✔";
+    document.querySelectorAll(".choice").forEach(b => {
+      b.disabled = true;
+      if (b !== btn && !b.classList.contains("wrong")) b.classList.add("dim");
+    });
+    let title, sub = "";
+    if (tries === 1){
+      firstTry[qi] = true; correct++;
+      $("score").textContent = correct; restartAnim($("scoreBadge"), "bump");
+      title = "🎉 정답!";
+    } else {
+      title = "👍 정답! 힌트를 보고 찾아냄";
+      sub = `<div class="fb-sub">한 번에 맞히지 못한 문제는 '틀린 문제'로 기록됨. 나중에 다시 풀어 보기!</div>`;
+    }
+    fb.className = "feedback good";
+    fb.innerHTML = `<div class="fb-title">${title}</div>${sub}<div class="explain"><b>✏️ 해설</b><br>${fmt(q.e)}</div>`;
+    const r = btn.getBoundingClientRect(); burst(r.left + 30, r.top + r.height / 2);
+    $("bar").style.width = ((pos + 1) / order.length * 100) + "%";
+    const next = $("nextBtn"); next.classList.remove("hidden");
+    next.focus({ preventScroll: true });
+    next.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+  } else {
+    if (tries === 1) firstTry[qi] = false;
+    btn.classList.add("wrong"); btn.disabled = true; btn.querySelector(".mark").textContent = "✖";
+    restartAnim(btn, "shake");
+    showHint();
+    fb.className = "feedback bad";
+    fb.innerHTML = `<div class="fb-title">😢 아쉬움, 오답!</div>위의 <b>💡 힌트</b>를 다시 읽고 다른 보기를 골라 보기.`;
+    restartAnim(fb, "feedback");
+    $("hintBox").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+  }
+}
+
+function next(){
+  if (pos < order.length - 1){ pos++; render(); window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); }
+  else showResult();
+}
+
+let lastWrong = [];
+function showResult(){
+  const total = order.length;
+  $("finalScore").textContent = correct;
+  $("finalTotal").textContent = total;
+  const rate = correct / total;
+  let emoji, msg;
+  if (rate === 1){ emoji = "🏆"; msg = "모두 한 번에 맞힘! 파이썬을 잘 이해하고 있음 🐍✨"; }
+  else if (rate >= 0.8){ emoji = "🥳"; msg = "아주 잘했음! 틀린 문제만 한 번 더 보면 완벽함."; }
+  else if (rate >= 0.5){ emoji = "🌱"; msg = "좋음! 힌트와 해설을 떠올리며 틀린 문제를 다시 풀어 보기."; }
+  else { emoji = "💪"; msg = "처음엔 누구나 어려움. 틀린 문제를 다시 풀면 금방 익숙해짐!"; }
+  $("resultEmoji").textContent = emoji;
+  $("finalMsg").textContent = msg;
+  $("resultTitle").textContent = total === Q.length ? "퀴즈 끝! 수고 많았음" : "다시 풀기 끝! 수고 많았음";
+
+  // 단계별 결과
+  $("stageResult").innerHTML = STAGES.map((st, i) => {
+    const ids = order.filter(qi => Q[qi].s === i);
+    if (!ids.length) return "";
+    const ok = ids.filter(qi => firstTry[qi]).length;
+    return `<li><span class="nm">${st.name}</span>` +
+           `<span class="meter"><span style="width:${ok / ids.length * 100}%"></span></span>` +
+           `<span class="ct">${ok}/${ids.length}</span></li>`;
+  }).join("");
+
+  lastWrong = order.filter(qi => !firstTry[qi]);
+  $("wrongList").textContent = lastWrong.length
+    ? `다시 볼 문제: ${lastWrong.map(qi => qi + 1 + "번").join(", ")}`
+    : "틀린 문제 없음! 🎉";
+  $("retryWrongBtn").classList.toggle("hidden", !lastWrong.length);
+
+  showScreen("result");
+  if (rate === 1) setTimeout(() => burst(window.innerWidth / 2, window.innerHeight / 3, 24), 400);
+}
+
+/* 이벤트 */
+$("startBtn").addEventListener("click", () => startRound(Q.map((_, i) => i)));
+$("retryAllBtn").addEventListener("click", () => startRound(Q.map((_, i) => i)));
+$("retryWrongBtn").addEventListener("click", () => startRound(lastWrong.slice()));
+$("hintBtn").addEventListener("click", showHint);
+$("nextBtn").addEventListener("click", next);
+document.addEventListener("keydown", e => {
+  if ($("quiz").classList.contains("hidden")) return;
+  const k = e.key.toLowerCase();
+  if (k === "o" || k === "x"){ const b = document.querySelectorAll(".choice")[k === "o" ? 0 : 1]; if (b && !b.disabled) b.click(); return; }
+  if (["1","2","3"].includes(e.key)){
+    const b = document.querySelectorAll(".choice")[Number(e.key) - 1];
+    if (b && !b.disabled) b.click();
+  } else if (e.key === "h" || e.key === "H"){ if (!$("hintBtn").disabled) showHint(); }
+});
+<\/script>
+</body>
+</html>
+</script><script type="text/plain" id="src-blank"><!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파이썬 빈칸 채우기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+  /* KoPubWorld 돋움체 (문화체육관광부·한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:400;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Medium'),local('KoPubWorldDotumMedium'),local('KoPubWorld돋움체 Medium'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff') format('woff')}
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:700;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Bold'),local('KoPubWorldDotumBold'),local('KoPubWorld돋움체 Bold'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff') format('woff')}
+</style>
+<style>
+  /* calm-palette */ /* contrast-v2 */
+  :root{
+    --font:'KoPubWorld Dotum','KoPubWorld돋움체','KoPub돋움체','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    --mono:'Nanum Gothic Coding',Consolas,'D2Coding',monospace;
+    --ink:#33303c; --ink-soft:#686472; --line:#efeaf3;
+    --pink:#d6557d; --pink-deep:#bd426e; --yellow:#d3b981; --lav:#bfb4e4;
+    --good:#397256; --good-bg:#eaf3ee; --bad:#b85768; --bad-bg:#faeef1; --code-bg:#2d2d39;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{
+    font-family:var(--font);color:var(--ink);background-color:#faf7f1;
+    background-image:linear-gradient(160deg,#f7f2e8 0%,#fbf2f6 50%,#eef5f9 100%);
+    background-size:100% 100%;background-attachment:fixed;
+    display:flex;justify-content:center;align-items:flex-start;padding:28px 16px 48px;
+    line-height:1.4;letter-spacing:-0.01em;
+  }
+  .app{width:100%;max-width:680px}
+  .hidden{display:none !important}
+  b,strong{font-weight:700}
+
+  .top{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:0 4px}
+  .mascot{flex:none;font-size:2.3rem;width:62px;height:62px;border-radius:20px;background:#ffffff;display:grid;place-items:center;border:2.2px solid #bcb7c4;box-shadow:none;animation:bob 2.6s ease-in-out infinite}
+  h1{font-weight:800;font-size:1.7rem;line-height:1.25}
+  h1 .accent{color:var(--pink-deep)}
+  .top p{color:var(--ink-soft);font-size:.95rem}
+
+  .card{background:#ffffff;border-radius:28px;padding:28px;border:none;box-shadow:0 8px 0 #ddd7e6,0 20px 40px rgba(105,92,121,.12)}
+  .card.enter{animation:pop .35s ease}
+
+  .btn{font-family:var(--font);font-weight:700;font-size:1.08rem;border:none;border-radius:999px;padding:12px 26px;cursor:pointer;background:var(--pink);color:#ffffff;box-shadow:0 5px 0 var(--pink-deep);transition:transform .08s,box-shadow .08s,filter .15s}
+  .btn:hover{filter:brightness(1.04)}
+  .btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--pink-deep)}
+  .btn.sub{background:#6e5dd7;box-shadow:0 5px 0 #5d4dbe}
+  .btn.sub:active{box-shadow:0 2px 0 #5d4dbe}
+  .btn.ghost{background:#ffffff;color:var(--ink);border:2px solid #ddd7e6;box-shadow:0 4px 0 #ddd7e6}
+  .btn.ghost:active{box-shadow:0 1px 0 #ddd7e6}
+  .btn:focus-visible,.hint-btn:focus-visible{outline:3px solid var(--lav);outline-offset:3px}
+
+  /* 시작 */
+  .hero{font-size:4rem;display:inline-block;animation:bob 2.6s ease-in-out infinite}
+  #start h2{font-weight:800;font-size:1.5rem;margin:4px 0 6px}
+  .intro{color:var(--ink-soft);margin-bottom:18px}
+  .how{list-style:none;display:grid;gap:10px;margin-bottom:22px}
+  .how li{background:#f7f2e6;border:none;border-radius:16px;padding:10px 14px;display:flex;gap:10px;align-items:center}
+  .how li span{font-size:1.2rem}
+  .topics{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+  .topics span{font-size:.85rem;font-weight:500;background:#f6f4fa;color:#5a4f7e;border-radius:999px;padding:3px 10px}
+
+  /* 진행 */
+  .status{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+  .progress-text{font-weight:700;font-size:1.1rem;color:var(--ink-soft)}
+  .progress-text b{color:var(--pink-deep);font-size:1.35rem;font-weight:800}
+  .score-badge{font-family:var(--font);font-weight:500;font-size:.82rem;color:var(--ink-soft);background:#ffffff;border:1px solid #ddd7e6;border-radius:999px;padding:2px 10px;white-space:nowrap}
+  .score-badge b,.score-badge #score{font-weight:700;color:var(--ink)}
+  .score-badge .sb-star{color:#efb72d;margin-right:2px}
+  .score-badge.bump{animation:bump .45s ease}
+  .steps{display:flex;gap:6px;margin-bottom:18px}
+  .dot{flex:1;height:10px;border-radius:999px;background:#f2eef7;transition:background .3s}
+  .dot.current{background:var(--lav);animation:pulse 1.4s ease-in-out infinite}
+  .dot.good{background:var(--good)}
+  .dot.bad{background:var(--bad)}
+
+  .tag{display:inline-block;font-weight:700;font-size:.85rem;padding:3px 12px;border-radius:999px;background:#ecf3f9;color:#415e75}
+  .concept{margin:12px 0 14px;background:#f9fbfc;border:2px solid #ddd7e6;border-radius:16px;padding:10px 14px;font-size:.98rem}
+  .concept .ct{font-weight:700;color:#415e75;font-size:.9rem;display:block;margin-bottom:2px}
+  .question{font-weight:700;font-size:1.25rem;line-height:1.5}
+  .question .qn{color:var(--pink-deep);margin-right:4px}
+  code{font-family:var(--mono);font-size:.95em;background:#f6f4fa;color:#5a4f7e;padding:1px 6px;border-radius:6px}
+
+  pre.code{position:relative;background:var(--code-bg);color:#f5f3fc;border-radius:18px;padding:38px 18px 18px;margin:14px 0 10px;font-family:var(--mono);font-size:1.08rem;line-height:2;overflow-x:auto;white-space:pre}
+  pre.code::before{content:"";position:absolute;top:14px;left:18px;width:10px;height:10px;border-radius:50%;background:#d6557d;box-shadow:16px 0 0 #d3b981,32px 0 0 #a4cdc0}
+  pre.code::after{content:"python";position:absolute;top:8px;right:16px;font-size:.78rem;color:#a5a4b8}
+  .t-kw{color:#e6b7cd;font-weight:700}.t-str{color:#e1d2a8}.t-num{color:#b7dbe6}.t-fn{color:#c0dcb4}.t-com{color:#9796aa;font-style:italic}
+  .choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+  .choice{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:#fdfcf9;border:2.5px solid #ddd7e6;border-radius:18px;padding:12px 14px;font:inherit;color:var(--ink);cursor:pointer;box-shadow:0 4px 0 #ddd7e6;min-height:60px;transition:transform .12s,box-shadow .12s,border-color .12s,background .2s,opacity .2s}
+  .choice:hover:not(:disabled){border-color:#c9c2d5;transform:translateY(-2px);box-shadow:0 6px 0 #c9c2d5}
+  .choice:disabled{cursor:default}
+  .choice:focus-visible{outline:3px solid var(--lav);outline-offset:3px}
+  .choice .num{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700}
+  .choice:nth-child(1) .num{background:#ddd7e6}.choice:nth-child(2) .num{background:#ddd7e6}.choice:nth-child(3) .num{background:#ddd7e6}
+  .choice .word{flex:1;min-width:0;font-family:var(--mono);font-weight:700;font-size:1.15rem;white-space:pre}
+  .choice .mark{flex:none;font-weight:700;font-size:1.2rem}
+  .choice.correct{background:var(--good-bg);border-color:#ddd7e6;box-shadow:0 4px 0 #ddd7e6}
+  .choice.correct .num{background:var(--good);color:#ffffff}.choice.correct .mark{color:var(--good)}
+  .choice.wrong{background:var(--bad-bg);border-color:#ddd7e6;box-shadow:0 4px 0 #ddd7e6}
+  .choice.wrong .num{background:var(--bad);color:#ffffff}.choice.wrong .mark{color:var(--bad)}
+  .choice.dim{opacity:.5}
+  .choice.shake{animation:shake .4s ease}
+  .blank{
+    font-family:var(--mono);font-size:1.05rem;font-weight:700;color:var(--ink);
+    background:#f1ebd6;border:2.5px solid #ddd7e6;border-radius:10px;
+    display:inline-block;min-width:3.2em;text-align:center;padding:0 10px;margin:0 2px;vertical-align:middle;line-height:1.7;
+    transition:border-color .15s, background .2s, box-shadow .15s;
+  }
+  .blank.ok{background:var(--good-bg);border-color:#ddd7e6;color:#1f3b2d}
+  .blank.no{background:var(--bad-bg);border-color:#ddd7e6}
+  .blank.shake{animation:shake .4s ease}
+  .blank.empty{color:#6f6036}
+
+  .output{background:#f9f8fa;border:2px solid #ddd7e6;border-radius:14px;padding:8px 14px;font-size:.95rem;margin-bottom:6px}
+  .output .ol{font-size:.82rem;font-weight:700;color:var(--ink-soft);margin-right:8px}
+  .output .ol{display:block}
+  .output pre{display:block;font-family:var(--mono);font-weight:700;white-space:pre-wrap;line-height:1.6}
+
+  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+  .hint-btn{font-family:var(--font);font-weight:700;font-size:.98rem;background:#f6f3e5;color:#635223;border:2px solid #ddd7e6;border-radius:999px;padding:9px 16px;cursor:pointer;box-shadow:0 3px 0 #ddd7e6}
+  .hint-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #ddd7e6}
+  .hint-btn:disabled{opacity:.5;cursor:default}
+  .row .spacer{flex:1}
+  .keyhint{font-size:.82rem;color:var(--ink-soft)}
+
+  .hint-box{background:#faf7ef;border:2px solid #ddd7e6;border-radius:16px;padding:10px 14px;margin-top:14px;animation:pop .3s ease}
+  .hint-box b{color:#725d28}
+  .hint-box p+p{margin-top:6px}
+
+  .feedback{margin-top:14px;border-radius:18px;padding:14px 18px;border:2.5px solid;animation:pop .3s ease}
+  .feedback.good{background:var(--good-bg);border-color:#ddd7e6;color:#1f3b2d}
+  .feedback.bad{background:var(--bad-bg);border-color:#ddd7e6;color:#592f36}
+  .fb-title{font-weight:800;font-size:1.15rem;margin-bottom:4px}
+  .fb-sub{font-size:.92rem;opacity:.9}
+  .explain{background:#ffffff;border-radius:14px;padding:10px 14px;margin-top:8px;color:var(--ink);border:2px solid #ddd7e6}
+  .explain b{color:var(--good)}
+  .actions{display:flex;justify-content:flex-end;margin-top:16px}
+
+  /* 결과 */
+  .trophy{font-size:4rem;display:inline-block;animation:bob 2.6s ease-in-out infinite}
+  #result h2{font-weight:800;font-size:1.5rem}
+  .final-score{font-weight:800;font-size:3.6rem;line-height:1.1;color:var(--pink-deep);margin:8px 0 2px}
+  .final-score small{font-size:1.4rem;color:var(--ink-soft);font-weight:700}
+  .final-msg{font-size:1.05rem;margin:6px 0 16px}
+  .review{list-style:none;display:grid;gap:6px;margin-bottom:22px}
+  .review li{display:flex;align-items:center;gap:10px;background:#fbfafd;border:2px solid #ddd7e6;border-radius:14px;padding:8px 14px}
+  .review .rn{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#f1edf9;font-weight:700;font-size:.9rem}
+  .review .rt{flex:1;min-width:0}
+  .review .ra{font-family:var(--mono);font-weight:700;color:#5a4f7e}
+  .review .rr{font-weight:700;white-space:nowrap}
+  .review .rr.ok{color:var(--good)} .review .rr.no{color:var(--bad)}
+  .result-actions{display:flex;gap:12px;flex-wrap:wrap}
+  footer{color:var(--ink-soft);font-size:.85rem;margin-top:22px;padding-left:4px}
+
+  .particle{position:fixed;pointer-events:none;font-size:20px;z-index:50;animation:fly .9s ease-out forwards;color:#efb72d;font-family:var(--font)}
+  @keyframes fly{0%{transform:translate(-50%,-50%) scale(.6);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.15) rotate(var(--rot));opacity:0}}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+  @keyframes pop{from{transform:translateY(8px) scale(.98);opacity:.3}to{transform:none;opacity:1}}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+  @media (max-width:560px){
+    body{padding:18px 16px 36px}
+    .card{padding:20px 16px;border-radius:22px}
+    h1{font-size:1.4rem}
+    .mascot{width:52px;height:52px;font-size:1.9rem;border-radius:16px}
+    .question{font-size:1.1rem}
+    pre.code{font-size:.98rem;padding:36px 14px 14px}
+    .final-score{font-size:3rem}
+    .keyhint{display:none}
+    .choices{grid-template-columns:1fr}
+  }
+  /* 힌트 항상 보이기 */
+  #hintBtn{display:none}
+  /* 행간: 문제 112%, 힌트 130% (KoPub 기준) */
+  .question{line-height:1.12 !important}
+  .hint-box,.hint-box p,.hint-always{line-height:1.3 !important}
+  /* ---------- 난이도 표시 (문제 맨 아래, 노란 별만) ---------- */
+  .diff-row{display:flex;align-items:center;gap:8px;margin-top:22px;padding-top:12px;border-top:1px solid #ddd7e6;font-size:.85rem;color:var(--ink-soft)}
+  .diff-row:empty{display:none}
+  .diff-row .stars{font-size:1.15rem;letter-spacing:2px;color:#efb72d;line-height:1}
+  .diff-row .stars .off{color:#cac3cf}
+  .diff-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:.88rem;color:var(--ink-soft);margin:0 0 18px}
+  .diff-legend .it{display:inline-flex;align-items:center;gap:4px}
+  .diff-legend .st{color:#efb72d;letter-spacing:1px}
+  .credit{display:block;margin-top:6px;font-weight:700;color:var(--ink);letter-spacing:.01em}
+  /* PC에서 진행 표시·단계 배지·알아두기 제목 키우기 */
+  @media (min-width:561px){
+    .progress-text{font-size:1.25rem}
+    .progress-text b{font-size:1.55rem}
+    .tag{font-size:1rem;padding:4px 14px}
+    .concept .ct{font-size:1.02rem;margin-bottom:4px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="mascot" aria-hidden="true">🐍</div>
+    <div>
+      <h1>파이썬 <span class="accent">빈칸 채우기</span></h1>
+      <p>가장 기본부터, 빈칸에 알맞은 낱말을 골라 익힘!</p>
+    </div>
+  </header>
+
+  <!-- 시작 -->
+  <section id="start" class="card">
+    <div class="hero" aria-hidden="true">✏️</div>
+    <h2>코드의 빈칸을 채워 볼까요?</h2>
+    <p class="intro">파이썬을 몰라도 괜찮음. 문제마다 <b>알아두기</b> 설명과 <b>💡 힌트</b>가 함께 보임.</p>
+    <ul class="how">
+      <li><span>👆</span><div>아래 <b>보기 3개</b> 중에서 노란 빈칸에 알맞은 낱말을 고르면 됨</div></li>
+      <li><span>💡</span><div>문제마다 <b>힌트</b>가 항상 함께 보임. 힌트를 읽고 차근차근 고르면 됨</div></li>
+      <li><span>🔁</span><div>틀린 보기는 빨갛게 표시되고, 남은 보기 중에서 다시 고를 수 있음</div></li>
+    </ul>
+    <div class="topics" id="topics"></div>
+    <div class="diff-legend"><span>난이도</span><span class="it"><span class="st">★</span>쉬움</span><span class="it"><span class="st">★★</span>보통</span><span class="it"><span class="st">★★★</span>어려움</span></div>
+    <button class="btn" id="startBtn" type="button">시작하기 ▶</button>
+  </section>
+
+  <!-- 문제 -->
+  <section id="quiz" class="card hidden">
+    <div class="status">
+      <div class="progress-text"><b id="qNum">1</b> / <span id="qTotal">10</span> 번째 문제</div>
+      <div class="score-badge" id="scoreBadge"><span class="sb-star">★</span><span id="score">0</span>개 정답</div>
+    </div>
+    <div class="steps" id="steps" aria-hidden="true"></div>
+
+    <span class="tag" id="qTopic"></span>
+    <div class="concept"><span class="ct">📘 알아두기</span><span id="qConcept"></span></div>
+    <h2 class="question" id="qText"></h2>
+    <pre class="code" id="qCode"></pre>
+    <div class="output" id="qOut"><span class="ol">▶ 실행 결과</span><pre id="qOutText"></pre></div>
+
+    <div class="choices" id="choices"></div>
+    <div class="row">
+      <button class="hint-btn" id="hintBtn" type="button">💡 힌트 보기</button>
+      <span class="spacer"></span>
+      <span class="keyhint">키보드 1·2·3으로도 고를 수 있음</span>
+    </div>
+
+    <div class="hint-box hidden" id="hintBox"></div>
+    <div class="feedback hidden" id="feedback" aria-live="polite"></div>
+    <div class="actions"><button class="btn hidden" id="nextBtn" type="button">다음 문제 ▶</button></div>
+    <div class="diff-row" id="qDiff"></div>
+  </section>
+
+  <!-- 결과 -->
+  <section id="result" class="card hidden">
+    <div class="trophy" id="resultEmoji" aria-hidden="true">🏆</div>
+    <h2 id="resultTitle">빈칸 채우기 끝! 수고 많았음</h2>
+    <div class="final-score"><span id="finalScore">0</span><small> / <span id="finalTotal">10</span>개</small></div>
+    <p class="final-msg" id="finalMsg"></p>
+    <ul class="review" id="review"></ul>
+    <div class="result-actions">
+      <button class="btn" id="retryWrongBtn" type="button">❗ 틀린 문제만 다시 풀기</button>
+      <button class="btn sub" id="retryAllBtn" type="button">🔄 처음부터 다시 풀기</button>
+    </div>
+  </section>
+
+  <footer>파이썬 기초 · 빈칸 채우기 10문제 · 3지 선다<span class="credit">by Make a long term memory</span></footer>
+</div>
+
+<script>
+/* =========================================================
+   문제 데이터
+   - code 안의 ___ 자리가 빈칸이 됩니다
+   - opts: 보기 3개 (첫 번째가 정답, 화면에서는 순서를 섞어요)
+   - h   : 힌트 (1단계, 2단계)
+   - `백틱` 안 글자는 코드 모양으로 보여요
+   ========================================================= */
+const Q = [
+  { topic:"화면에 출력하기",
+    concept:"컴퓨터에게 \"화면에 보여 줘!\"라고 시키는 명령어가 있어요. 괄호 `( )` 안에 보여 줄 내용을 넣어요.",
+    q:"화면에 안녕하세요를 출력하려고 해요. 빈칸에 들어갈 명령어는?",
+    code:'___("안녕하세요")', out:"안녕하세요", opts:["print","Print","show"],
+    h:["'인쇄하다, 출력하다'라는 뜻의 영어 단어예요.","파이썬은 대문자와 소문자를 구별해요. 명령어는 모두 소문자로 써요."],
+    e:"`print`는 괄호 안의 내용을 화면에 보여 줘요. 파이썬은 대소문자를 구별해서 `Print`라고 쓰면 오류가 나요." },
+
+  { topic:"문자열",
+    concept:"글자(문자열)는 반드시 따옴표 `\" \"` 또는 `' '`로 감싸야 해요. 그래야 컴퓨터가 '이건 글자구나' 하고 알아요.",
+    q:"실행 결과가 파이썬이 되도록 빈칸을 채워 보세요.",
+    code:"print(___)", out:"파이썬", opts:['"파이썬"',"파이썬","(파이썬)"],
+    h:["글자 앞뒤를 무언가로 감싸야 해요.","괄호 `( )`는 명령어에 값을 넘기는 자리예요. 이 값이 '글자'라는 표시는 따로 해 줘야 해요."],
+    e:"`\"파이썬\"`처럼 따옴표로 감싸야 글자로 인식돼요. 따옴표 없이 `파이썬`만 쓰면 컴퓨터는 이름(변수)인 줄 알고 오류를 내요." },
+
+  { topic:"계산하기",
+    concept:"파이썬은 계산기처럼 쓸 수 있어요. 더하기 `+`, 빼기 `-`, 곱하기 `*`, 나누기 `/`를 써요.",
+    q:"실행 결과가 7이 되도록 계산 기호를 채워 보세요.",
+    code:"print(3 ___ 4)", out:"7", opts:["+","-","*"],
+    h:["3과 4로 7을 만들려면 어떤 계산을 해야 할까요?","수학의 '더하기' 기호와 똑같아요."],
+    e:"`3 + 4`를 계산해서 `7`이 출력돼요. 숫자에는 따옴표를 붙이지 않아요." },
+
+  { topic:"곱하기",
+    concept:"파이썬에서 곱하기는 수학의 × 대신 별표 `*`를 써요. (키보드 숫자 8 위에 있어요)",
+    q:"실행 결과가 12가 되도록 계산 기호를 채워 보세요.",
+    code:"print(3 ___ 4)", out:"12", opts:["*","x","×"],
+    h:["3과 4로 12를 만들려면 곱해야 해요. 그런데 ×는 키보드에 없어요.","알파벳 `x`는 컴퓨터가 글자(변수 이름)로 읽어요. 키보드로 칠 수 있는 계산 기호를 골라요."],
+    e:"파이썬의 곱하기 기호는 `*`예요. `3 * 4`는 `12`가 돼요." },
+
+  { topic:"변수에 저장하기",
+    concept:"변수는 값을 담아 두는 '이름표 붙은 상자'예요. `상자이름 = 값` 모양으로 써요.",
+    q:"age라는 상자에 17을 저장하려고 해요. 빈칸에 들어갈 기호는?",
+    code:"age ___ 17\nprint(age)", out:"17", opts:["=","==",":"],
+    h:["'오른쪽 값을 왼쪽 상자에 넣어라'라는 뜻의 기호 하나예요.","등호가 두 개인 `==`는 '같은지 비교'할 때 써요. 지금은 비교가 아니라 저장해야 해요."],
+    e:"`=`는 '같다'가 아니라 '저장하라(대입)'라는 뜻이에요. age에 17이 저장되고, `print(age)`로 꺼내 보면 `17`이 나와요." },
+
+  { topic:"변수 꺼내 쓰기",
+    concept:"변수에 저장한 값을 쓰려면 변수 이름을 그대로 써요. 이때 따옴표를 붙이면 안 돼요!",
+    q:"실행 결과가 민지가 되도록 빈칸을 채워 보세요.",
+    code:'name = "민지"\nprint(___)', out:"민지", opts:["name",'"name"',"민지"],
+    h:["첫 번째 줄에서 \"민지\"를 어떤 상자에 담았나요?","상자(변수)를 꺼낼 때는 따옴표 없이 이름만 써요."],
+    e:"`print(name)`처럼 변수 이름을 쓰면 안에 든 값 `민지`가 출력돼요. `print(\"name\")`이라고 쓰면 글자 name이 그대로 나와요." },
+
+  { topic:"주석",
+    concept:"코드에 사람만 읽는 '메모'를 남길 수 있어요. 이것을 주석이라고 하고, 컴퓨터는 주석을 실행하지 않아요.",
+    q:"첫 줄이 실행되지 않는 메모가 되도록 맨 앞에 기호를 채워 보세요.",
+    code:'___ 인사말을 출력하는 코드\nprint("반가워요")', out:"반가워요", opts:["#","//","!"],
+    h:["SNS에서 해시태그를 달 때 쓰는 기호예요.","이 기호 뒤에 쓴 내용은 그 줄 끝까지 모두 메모가 돼요. 컴퓨터는 읽지 않고 넘어가요."],
+    e:"`#` 뒤에 쓴 내용은 주석이라서 실행되지 않아요. 그래서 `반가워요`만 출력돼요." },
+
+  { topic:"입력받기",
+    concept:"사용자에게 키보드로 값을 입력받을 수 있어요. 괄호 안의 글자는 입력 전에 보여 줄 안내 문구예요.",
+    q:"이름을 입력받아 name에 저장하려고 해요. 빈칸에 들어갈 명령어는?",
+    code:'name = ___("이름: ")\nprint(name, "님 안녕하세요")', out:"이름: 민지\n민지 님 안녕하세요", opts:["input","print","int"],
+    h:["'입력'을 뜻하는 영어 단어예요.","print는 출력, int는 정수로 바꾸기예요. 남은 하나는?"],
+    e:"`input()`은 키보드로 입력한 값을 받아 와요. 입력한 '민지'가 name에 저장돼서 인사말이 출력돼요." },
+
+  { topic:"숫자로 바꾸기",
+    concept:"`input()`으로 받은 값은 숫자를 입력해도 '글자'예요. 계산하려면 정수(integer)로 바꿔 줘야 해요.",
+    q:"입력받은 나이에 1을 더하려고 해요. 빈칸에 들어갈 명령어는?",
+    code:'age = ___(input("나이: "))\nprint(age + 1)', out:"나이: 17\n18", opts:["int","str","input"],
+    h:["'정수'를 뜻하는 영어 integer를 줄인 말이에요.","str은 글자(string)로 바꾸는 명령이에요. 숫자로 바꾸려면?"],
+    e:"`int()`로 감싸면 글자 \"17\"이 숫자 17로 바뀌어서 `age + 1`을 계산할 수 있어요. 바꾸지 않으면 글자와 숫자를 더할 수 없어 오류가 나요." },
+
+  { topic:"조건 비교",
+    concept:"`if`는 '만약 ~라면'이라는 뜻으로, 뒤의 조건이 참일 때만 아래 줄을 실행해요. 두 값이 같은지 비교할 때는 `==`(등호 두 개)를 써요. 등호 하나 `=`는 저장이라서 비교에 쓸 수 없어요.",
+    q:"입력한 답이 7과 같으면 정답!을 출력하려고 해요. 빈칸에 들어갈 기호는?",
+    code:'answer = int(input("3 + 4 = "))\nif answer ___ 7:\n    print("정답!")', out:"3 + 4 = 7\n정답!", opts:["==","=","!="],
+    h:["'같은지 비교'하는 기호예요. 저장하는 기호 `=`와는 달라요.","`!=`는 '같지 않다'라는 뜻이에요. 우리는 '같으면' 정답을 출력해야 해요."],
+    e:"`==`는 두 값이 같으면 True(참)가 돼요. answer가 7이면 조건이 참이라서 `정답!`이 출력돼요." }
+];
+
+/* 문제별 난이도 (1: ★ 쉬움, 2: ★★ 보통, 3: ★★★ 어려움) — 문제 순서와 같아요 */
+const DIFF = [1, 2, 1, 1, 2, 2, 1, 1, 2, 2];
+const DIFF_LABEL = ["", "쉬움", "보통", "어려움"];
+function setDiff(d){
+  const el = document.getElementById("qDiff");
+  if (!el) return;
+  if (!d){ el.innerHTML = ""; return; }
+  el.innerHTML = `<span class="dl">난이도</span><span class="stars" aria-hidden="true">${"★".repeat(d)}<span class="off">${"☆".repeat(3 - d)}</span></span>`;
+  el.setAttribute("aria-label", `난이도 별 ${d}개 (${DIFF_LABEL[d]})`);
+}
+
+/* 도우미 */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const fmt = s => esc(s).replace(/`([^`]+)`/g,"<code>$1</code>");
+function highlight(code){
+  const re = /("[^"\n]*"|'[^'\n]*')|(#.*$)|\b(if|elif|else|for|in|and|or|not|True|False)\b|\b(print|input|int|range|str)\b|\b(\d+)\b/gm;
+  let out = "", last = 0, m;
+  while ((m = re.exec(code))){
+    out += esc(code.slice(last, m.index));
+    if (m[1]) out += `<span class="t-str">${esc(m[1])}</span>`;
+    else if (m[2]) out += `<span class="t-com">${esc(m[2])}</span>`;
+    else if (m[3]) out += `<span class="t-kw">${m[3]}</span>`;
+    else if (m[4]) out += `<span class="t-fn">${m[4]}</span>`;
+    else if (m[5]) out += `<span class="t-num">${m[5]}</span>`;
+    last = re.lastIndex;
+  }
+  return out + esc(code.slice(last));
+}
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function burst(x, y, n = 12){
+  if (reduceMotion) return;
+  const em = ["★","✦","★","✧","★"];
+  for (let i = 0; i < n; i++){
+    const s = document.createElement("span");
+    s.className = "particle"; s.textContent = em[i % em.length];
+    const a = Math.random() * Math.PI * 2, d = 60 + Math.random() * 90;
+    s.style.left = x + "px"; s.style.top = y + "px";
+    s.style.setProperty("--dx", Math.cos(a) * d + "px");
+    s.style.setProperty("--dy", Math.sin(a) * d - 30 + "px");
+    s.style.setProperty("--rot", (Math.random() * 240 - 120) + "deg");
+    document.body.appendChild(s); setTimeout(() => s.remove(), 1000);
+  }
+}
+function restartAnim(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+
+$("topics").innerHTML = Q.map((q, i) => `<span>${i + 1}. ${esc(q.topic)}</span>`).join("");
+
+/* 상태 */
+let order = [], pos = 0, correct = 0, wrongCount = 0, hintLevel = 0, done = false;
+let result = {};   // 문제번호 → true(한 번에 맞힘) / false
+
+function showScreen(id){
+  ["start","quiz","result"].forEach(s => $(s).classList.toggle("hidden", s !== id));
+  window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+}
+function startRound(list){
+  order = list; pos = 0; correct = 0; result = {};
+  $("score").textContent = 0;
+  $("qTotal").textContent = order.length;
+  showScreen("quiz"); render();
+}
+function renderSteps(){
+  $("steps").innerHTML = order.map((qi, i) => {
+    let c = "dot";
+    if (result[qi] === true) c += " good";
+    else if (result[qi] === false) c += " bad";
+    else if (i === pos) c += " current";
+    return `<span class="${c}"></span>`;
+  }).join("");
+}
+function blankEl(){ return document.querySelector("#qCode .blank"); }
+function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function render(){
+  const qi = order[pos], q = Q[qi];
+  wrongCount = 0; hintLevel = 0; done = false;
+  $("qNum").textContent = pos + 1;
+  $("qTopic").textContent = q.topic;
+  setDiff(DIFF[qi]);
+  $("qConcept").innerHTML = fmt(q.concept);
+  $("qText").innerHTML = `<span class="qn">${qi + 1}.</span>${fmt(q.q)}`;
+  const parts = q.code.split("___");
+  $("qCode").innerHTML = highlight(parts[0]) + `<span class="blank empty" aria-label="빈칸">?</span>` + highlight(parts[1] || "");
+  $("qOutText").textContent = q.out;
+
+  const box = $("choices"); box.innerHTML = "";
+  shuffle(q.opts.map((_, i) => i)).forEach((oi, k) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "choice";
+    b.innerHTML = `<span class="num">${k + 1}</span><span class="word">${esc(q.opts[oi])}</span><span class="mark" aria-hidden="true"></span>`;
+    b.addEventListener("click", () => choose(b, oi));
+    box.appendChild(b);
+  });
+
+  $("hintBox").innerHTML = q.h.map((h, i) => `<p><b>💡 힌트 ${i + 1}</b> ${fmt(h)}</p>`).join("");
+  $("hintBox").classList.remove("hidden");
+  hintLevel = q.h.length;
+  $("hintBtn").disabled = false; $("hintBtn").textContent = "💡 힌트 보기";
+  $("feedback").className = "feedback hidden"; $("feedback").innerHTML = "";
+  const next = $("nextBtn");
+  next.classList.add("hidden");
+  next.textContent = pos === order.length - 1 ? "결과 보기 🏁" : "다음 문제 ▶";
+  renderSteps();
+  restartAnim($("quiz"), "enter");
+}
+
+function showHint(){
+  const q = Q[order[pos]];
+  if (hintLevel >= q.h.length) return;
+  hintLevel++;
+  const box = $("hintBox");
+  box.innerHTML = q.h.slice(0, hintLevel).map((h, i) => `<p><b>💡 힌트 ${i + 1}</b> ${fmt(h)}</p>`).join("");
+  box.classList.remove("hidden");
+  restartAnim(box, "hint-box");
+  if (hintLevel >= q.h.length){ $("hintBtn").disabled = true; $("hintBtn").textContent = "💡 힌트 모두 봄"; }
+  else $("hintBtn").textContent = "💡 힌트 하나 더";
+}
+
+// 자주 하는 실수에 맞춘 한마디
+function mistakeNote(q, pick){
+  const ans = q.opts[0];
+  if (pick.toLowerCase() === ans.toLowerCase()) return "거의 다 왔어요! 파이썬은 <b>대문자와 소문자</b>를 구별해요.";
+  if (/^["']/.test(ans) && !/^["']/.test(pick)) return "글자(문자열)는 앞뒤를 무언가로 감싸야 해요.";
+  if (/^["']/.test(pick) && !/^["']/.test(ans)) return "따옴표를 붙이면 변수가 아니라 글자 그대로가 돼요.";
+  if (pick === "==" && ans === "=") return "<code>==</code>는 '같은지 비교'예요. 저장할 때는 다른 기호를 써요.";
+  if (pick === "=" && ans === "==") return "<code>=</code>는 '저장'이에요. 같은지 비교할 때는 다른 기호를 써요.";
+  if (pick === "//") return "<code>//</code>는 다른 언어(C, 자바스크립트)의 주석이에요. 파이썬은 달라요.";
+  if (pick === "x" || pick === "×") return "파이썬 키보드 곱하기 기호는 따로 있어요.";
+  return "힌트를 읽고 남은 보기 중에서 다시 고르기.";
+}
+
+function choose(btn, oi){
+  if (done || btn.disabled) return;
+  const qi = order[pos], q = Q[qi], fb = $("feedback"), blank = blankEl();
+  if (oi === 0){
+    btn.classList.add("correct"); btn.querySelector(".mark").textContent = "✔";
+    finish(btn);
+  } else {
+    wrongCount++;
+    if (wrongCount === 1) result[qi] = false;
+    btn.classList.add("wrong"); btn.disabled = true; btn.querySelector(".mark").textContent = "✖";
+    restartAnim(btn, "shake");
+    blank.textContent = q.opts[oi]; blank.classList.remove("empty"); blank.classList.add("no");
+    restartAnim(blank, "shake");
+    setTimeout(() => { if (!done){ blank.textContent = "?"; blank.classList.remove("no"); blank.classList.add("empty"); } }, 900);
+    fb.className = "feedback bad";
+    fb.innerHTML = `<div class="fb-title">😢 아쉬움, 다시 골라 보기!</div><div class="fb-sub">${mistakeNote(q, q.opts[oi])}</div>`;
+    restartAnim(fb, "feedback");
+    if (hintLevel < wrongCount && hintLevel < q.h.length) showHint();
+    renderSteps();
+  }
+}
+
+function finish(btn){
+  const qi = order[pos], q = Q[qi], blank = blankEl(), fb = $("feedback");
+  done = true;
+  blank.textContent = q.opts[0];
+  blank.classList.remove("empty", "no"); blank.classList.add("ok");
+  document.querySelectorAll(".choice").forEach(b => {
+    b.disabled = true;
+    if (b !== btn && !b.classList.contains("wrong")) b.classList.add("dim");
+  });
+  let title, sub = "";
+  if (wrongCount === 0){
+    result[qi] = true; correct++;
+    $("score").textContent = correct; restartAnim($("scoreBadge"), "bump");
+    title = "🎉 정답!";
+    const r = blank.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2);
+  } else {
+    result[qi] = false;
+    title = "👍 정답! 힌트를 보고 해냄";
+    sub = `<div class="fb-sub">한 번에 맞히지 못한 문제는 나중에 '틀린 문제만 다시 풀기'로 복습할 수 있음.</div>`;
+  }
+  fb.className = "feedback good";
+  fb.innerHTML = `<div class="fb-title">${title}</div>${sub}<div class="explain"><b>✏️ 해설</b><br>${fmt(q.e)}</div>`;
+  const next = $("nextBtn"); next.classList.remove("hidden");
+  next.focus({ preventScroll: true });
+  next.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+  renderSteps();
+}
+
+function nextQ(){
+  if (pos < order.length - 1){ pos++; render(); window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); }
+  else showResult();
+}
+
+let lastWrong = [];
+function showResult(){
+  const total = order.length;
+  $("finalScore").textContent = correct;
+  $("finalTotal").textContent = total;
+  const rate = correct / total;
+  let emoji, msg;
+  if (rate === 1){ emoji = "🏆"; msg = "모두 한 번에 맞힘! 파이썬 기초가 탄탄함 🐍✨"; }
+  else if (rate >= 0.7){ emoji = "🥳"; msg = "잘했음! 틀린 문제만 한 번 더 써 보면 완벽함."; }
+  else if (rate >= 0.4){ emoji = "🌱"; msg = "좋은 출발! 해설을 떠올리며 틀린 문제를 다시 풀어 보기."; }
+  else { emoji = "💪"; msg = "처음엔 누구나 낯섦. 직접 써 보는 게 가장 빨리 느는 방법!"; }
+  $("resultEmoji").textContent = emoji;
+  $("finalMsg").textContent = msg;
+  $("resultTitle").textContent = total === Q.length ? "빈칸 채우기 끝! 수고 많았음" : "다시 풀기 끝! 수고 많았음";
+  $("review").innerHTML = order.map(qi => {
+    const ok = result[qi] === true;
+    return `<li><span class="rn">${qi + 1}</span><span class="rt">${esc(Q[qi].topic)} · 정답 <span class="ra">${esc(Q[qi].opts[0])}</span></span>` +
+           `<span class="rr ${ok ? "ok" : "no"}">${ok ? "⭕" : "❌"}</span></li>`;
+  }).join("");
+  lastWrong = order.filter(qi => result[qi] !== true);
+  $("retryWrongBtn").classList.toggle("hidden", !lastWrong.length);
+  showScreen("result");
+  if (rate === 1) setTimeout(() => burst(window.innerWidth / 2, window.innerHeight / 3, 24), 400);
+}
+
+$("startBtn").addEventListener("click", () => startRound(Q.map((_, i) => i)));
+$("retryAllBtn").addEventListener("click", () => startRound(Q.map((_, i) => i)));
+$("retryWrongBtn").addEventListener("click", () => startRound(lastWrong.slice()));
+$("hintBtn").addEventListener("click", showHint);
+$("nextBtn").addEventListener("click", nextQ);
+document.addEventListener("keydown", e => {
+  if ($("quiz").classList.contains("hidden")) return;
+  if (["1","2","3"].includes(e.key)){
+    const b = document.querySelectorAll(".choice")[Number(e.key) - 1];
+    if (b && !b.disabled) b.click();
+  }
+});
+<\/script>
+</body>
+</html>
+</script><script type="text/plain" id="src-basics"><!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파이썬 첫걸음 퀴즈</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+  /* KoPubWorld 돋움체 (문화체육관광부·한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:400;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Medium'),local('KoPubWorldDotumMedium'),local('KoPubWorld돋움체 Medium'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff') format('woff')}
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:700;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Bold'),local('KoPubWorldDotumBold'),local('KoPubWorld돋움체 Bold'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff') format('woff')}
+</style>
+<style>
+  /* calm-palette */ /* contrast-v2 */
+  :root{
+    --font:'KoPubWorld Dotum','KoPubWorld돋움체','KoPub돋움체','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    --ink:#33303c; --ink-soft:#686472; --line:#efeaf3;
+    --pink:#d6557d; --pink-deep:#bd426e; --yellow:#d3b981; --lav:#bfb4e4;
+    --good:#397256; --good-bg:#eaf3ee; --bad:#b85768; --bad-bg:#faeef1; --code-bg:#2d2d39;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);background-color:#faf7f1;
+    background-image:linear-gradient(160deg,#f7f2e8 0%,#fbf2f6 50%,#eef5f9 100%);
+    background-size:100% 100%;background-attachment:fixed;
+    display:flex;justify-content:center;align-items:flex-start;padding:28px 16px 48px;line-height:1.4;letter-spacing:-0.01em;
+  }
+  .app{width:100%;max-width:680px}
+  .hidden{display:none !important}
+  .top{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:0 4px}
+  .mascot{flex:none;font-size:2.3rem;width:62px;height:62px;border-radius:20px;background:#ffffff;display:grid;place-items:center;border:2.2px solid #bcb7c4;box-shadow:none;animation:bob 2.6s ease-in-out infinite}
+  h1{font-family:var(--font);font-weight:700;font-size:1.75rem;line-height:1.25}
+  h1 .accent{color:var(--pink-deep)}
+  .top p{color:var(--ink-soft);font-size:.95rem}
+  .card{background:#ffffff;border-radius:28px;padding:28px;border:none;box-shadow:0 8px 0 #ddd7e6,0 20px 40px rgba(105,92,121,.12)}
+  .card.enter{animation:pop .35s ease}
+  .btn{font-family:var(--font);font-weight:700;font-size:1.15rem;border:none;border-radius:999px;padding:13px 28px;cursor:pointer;background:var(--pink);color:#ffffff;box-shadow:0 5px 0 var(--pink-deep);transition:transform .08s,box-shadow .08s,filter .15s}
+  .btn:hover{filter:brightness(1.04)}
+  .btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--pink-deep)}
+  .btn.sub{background:#6e5dd7;box-shadow:0 5px 0 #5d4dbe}
+  .btn.sub:active{box-shadow:0 2px 0 #5d4dbe}
+  .btn:focus-visible,.choice:focus-visible,.hint-btn:focus-visible{outline:3px solid var(--lav);outline-offset:3px}
+
+  /* 시작 */
+  #start{text-align:center}
+  .hero{font-size:4.4rem;display:inline-block;animation:bob 2.6s ease-in-out infinite}
+  #start h2{font-family:var(--font);font-weight:700;font-size:1.6rem;margin-top:6px}
+  .intro{color:var(--ink-soft);margin:6px 0 18px;word-break:keep-all}
+  .stage-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:460px;margin:0 auto 22px;text-align:left}
+  .stage-list li{background:#f7f2e6;border:none;border-radius:16px;padding:10px 12px;display:flex;gap:10px;align-items:center}
+  .stage-list .sn{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--font);font-weight:700;background:#f8eaf0}
+  .stage-list small{display:block;color:var(--ink-soft);font-size:.92rem;line-height:1.2}
+  .stage-list b{font-family:var(--font);font-weight:700}
+
+  /* 진행 */
+  .status{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+  .progress-text{font-family:var(--font);font-weight:700;font-size:1.15rem;color:var(--ink-soft)}
+  .progress-text b{font-weight:800;color:var(--pink-deep);font-size:1.4rem}
+  .score-badge{font-family:var(--font);font-weight:500;font-size:.82rem;color:var(--ink-soft);background:#ffffff;border:1px solid #ddd7e6;border-radius:999px;padding:2px 10px;white-space:nowrap}
+  .score-badge b,.score-badge #score{font-weight:700;color:var(--ink)}
+  .score-badge .sb-star{color:#efb72d;margin-right:2px}
+  .score-badge.bump{animation:bump .45s ease}
+  .bar{height:12px;border-radius:999px;background:#f2eef7;overflow:hidden;margin-bottom:18px}
+  .bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--yellow));border-radius:999px;transition:width .4s ease}
+  .tag{display:inline-block;font-family:var(--font);font-weight:700;font-size:.9rem;padding:3px 12px;border-radius:999px}
+  .question{font-family:var(--font);font-weight:700;font-size:1.32rem;line-height:1.5;margin:10px 0 4px;word-break:keep-all}
+  .question .qn{color:var(--pink-deep);margin-right:4px}
+  code{font-family:'Nanum Gothic Coding',Consolas,monospace;font-size:.95em;background:#f6f4fa;color:#5a4f7e;padding:1px 6px;border-radius:6px}
+  pre.code{position:relative;background:var(--code-bg);color:#f5f3fc;border-radius:18px;padding:38px 18px 16px;margin:14px 0 4px;font-family:'Nanum Gothic Coding',Consolas,monospace;font-size:1.02rem;line-height:1.7;overflow-x:auto}
+  pre.code::before{content:"";position:absolute;top:14px;left:18px;width:10px;height:10px;border-radius:50%;background:#d6557d;box-shadow:16px 0 0 #d3b981,32px 0 0 #a4cdc0}
+  pre.code::after{content:"python";position:absolute;top:8px;right:16px;font-size:.78rem;color:#a5a4b8}
+  .t-kw{color:#e6b7cd;font-weight:700}.t-str{color:#e1d2a8}.t-num{color:#b7dbe6}.t-fn{color:#c0dcb4}.t-com{color:#9796aa;font-style:italic}
+
+  /* 힌트 버튼 */
+  .hint-row{display:flex;justify-content:flex-end;margin:12px 0 10px}
+  .hint-btn{font-family:var(--font);font-weight:700;font-size:1rem;background:#f6f3e5;color:#635223;border:2px solid #ddd7e6;border-radius:999px;padding:6px 16px;cursor:pointer;box-shadow:0 3px 0 #ddd7e6}
+  .hint-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #ddd7e6}
+  .hint-btn:disabled{opacity:.5;cursor:default}
+  .hint-box{background:#faf7ef;border:2px solid #ddd7e6;border-radius:16px;padding:10px 14px;margin-bottom:12px;word-break:keep-all;animation:pop .3s ease}
+  .hint-box b{font-family:var(--font);font-weight:700;color:#725d28}
+
+  /* 보기 */
+  .choices{display:grid;gap:12px}
+  .choice{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fdfcf9;border:2.5px solid #ddd7e6;border-radius:18px;padding:13px 14px;font:inherit;font-size:1.08rem;color:var(--ink);cursor:pointer;box-shadow:0 4px 0 #ddd7e6;transition:transform .12s,box-shadow .12s,border-color .12s,background .2s,opacity .2s}
+  .choice:hover:not(:disabled){border-color:#c9c2d5;transform:translateY(-2px);box-shadow:0 6px 0 #c9c2d5}
+  .choice:disabled{cursor:default}
+  .choice .num{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--font);font-weight:700;font-size:1.05rem}
+  .choice:nth-child(1) .num{background:#ddd7e6}.choice:nth-child(2) .num{background:#ddd7e6}.choice:nth-child(3) .num{background:#ddd7e6}
+  .choice .label{flex:1;min-width:0;word-break:keep-all}
+  .choice .mark{flex:none;font-size:1.3rem;font-weight:700;width:22px;text-align:center}
+  .choice.correct{background:var(--good-bg);border-color:#ddd7e6;box-shadow:0 4px 0 #ddd7e6}
+  .choice.correct .num{background:var(--good);color:#ffffff}.choice.correct .mark{color:var(--good)}
+  .choice.wrong{background:var(--bad-bg);border-color:#ddd7e6;box-shadow:0 4px 0 #ddd7e6}
+  .choice.wrong .num{background:var(--bad);color:#ffffff}.choice.wrong .mark{color:var(--bad)}
+  .choice.shake{animation:shake .4s ease}
+  .choice.dim{opacity:.5}
+
+  .feedback{margin-top:18px;border-radius:18px;padding:14px 18px;border:2.5px solid;font-size:1.02rem;word-break:keep-all;animation:pop .3s ease}
+  .feedback.good{background:var(--good-bg);border-color:#ddd7e6;color:#1f3b2d}
+  .feedback.bad{background:var(--bad-bg);border-color:#ddd7e6;color:#592f36}
+  .fb-title{font-family:var(--font);font-weight:700;font-size:1.25rem;margin-bottom:4px}
+  .fb-sub{font-size:.92rem;opacity:.85;margin-bottom:6px}
+  .explain{background:#ffffff;border-radius:14px;padding:10px 14px;margin-top:8px;color:var(--ink);border:2px solid #ddd7e6}
+  .explain b{font-family:var(--font);font-weight:700;color:var(--good)}
+  .actions{display:flex;justify-content:flex-end;margin-top:18px}
+
+  /* 결과 */
+  #result{text-align:center}
+  .trophy{font-size:4.4rem;display:inline-block;animation:bob 2.6s ease-in-out infinite}
+  #result h2{font-family:var(--font);font-weight:700;font-size:1.6rem}
+  .final-score{font-family:var(--font);font-weight:700;font-size:4rem;line-height:1.1;color:var(--pink-deep);margin:8px 0 2px}
+  .final-score small{font-size:1.5rem;color:var(--ink-soft)}
+  .final-msg{font-size:1.1rem;margin:6px 0 18px;word-break:keep-all}
+  .stage-result{list-style:none;display:grid;gap:8px;max-width:460px;margin:0 auto 22px;text-align:left}
+  .stage-result li{display:flex;align-items:center;gap:10px;background:#fbfafd;border:2px solid #ddd7e6;border-radius:14px;padding:9px 14px}
+  .stage-result .nm{flex:1}
+  .stage-result .meter{width:90px;height:10px;border-radius:999px;background:#f2eef7;overflow:hidden}
+  .stage-result .meter span{display:block;height:100%;background:var(--good)}
+  .stage-result .ct{font-family:var(--font);font-weight:700;width:44px;text-align:right}
+  .wrong-list{font-size:.92rem;color:var(--ink-soft);margin:-8px 0 20px;word-break:keep-all}
+  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  footer{text-align:center;color:var(--ink-soft);font-size:.85rem;margin-top:22px}
+
+  .particle{position:fixed;pointer-events:none;font-size:20px;z-index:50;animation:fly .9s ease-out forwards;color:#efb72d;font-family:var(--font)}
+  @keyframes fly{0%{transform:translate(-50%,-50%) scale(.6);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.15) rotate(var(--rot));opacity:0}}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+  @keyframes pop{from{transform:translateY(8px) scale(.98);opacity:.3}to{transform:none;opacity:1}}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+  @media (max-width:560px){
+    body{padding:18px 16px 36px}
+    .card{padding:20px 16px;border-radius:22px}
+    h1{font-size:1.4rem}
+    .mascot{width:52px;height:52px;font-size:1.9rem;border-radius:16px}
+    .question{font-size:1.16rem}
+    pre.code{font-size:.92rem;padding:36px 14px 14px}
+    .stage-list{grid-template-columns:1fr}
+    .final-score{font-size:3.3rem}
+  }
+
+  /* ---------- 좌측 정렬 ---------- */
+  #start,#result,footer{text-align:left}
+  .stage-list,.rules,.name-form,.file-panel,.stage-result,.ranking,.review{margin-left:0;margin-right:0;max-width:none}
+  .name-form label{padding-left:0}
+  .review,.result-actions{justify-content:flex-start}
+  .final-score,.final-msg,.final-time,.wrong-list{text-align:left}
+  /* 힌트 항상 보이기 */
+  .hint-row{display:none}
+  .hint-box{margin-top:12px}
+  /* 행간: 문제 112%, 힌트 130% (KoPub 기준) */
+  .question{line-height:1.12 !important}
+  .hint-box,.hint-box p,.hint-always{line-height:1.3 !important}
+  /* ---------- 난이도 표시 (문제 맨 아래, 노란 별만) ---------- */
+  .diff-row{display:flex;align-items:center;gap:8px;margin-top:22px;padding-top:12px;border-top:1px solid #ddd7e6;font-size:.85rem;color:var(--ink-soft)}
+  .diff-row:empty{display:none}
+  .diff-row .stars{font-size:1.15rem;letter-spacing:2px;color:#efb72d;line-height:1}
+  .diff-row .stars .off{color:#cac3cf}
+  .diff-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:.88rem;color:var(--ink-soft);margin:0 0 18px}
+  .diff-legend .it{display:inline-flex;align-items:center;gap:4px}
+  .diff-legend .st{color:#efb72d;letter-spacing:1px}
+  .credit{display:block;margin-top:6px;font-weight:700;color:var(--ink);letter-spacing:.01em}
+  /* PC에서 진행 표시·단계 배지·알아두기 제목 키우기 */
+  @media (min-width:561px){
+    .progress-text{font-size:1.25rem}
+    .progress-text b{font-size:1.55rem}
+    .tag{font-size:1rem;padding:4px 14px}
+    .concept .ct{font-size:1.02rem;margin-bottom:4px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="mascot" aria-hidden="true">🐍</div>
+    <div>
+      <h1>파이썬 <span class="accent">첫걸음</span> 퀴즈</h1>
+      <p>파이썬이 뭔지부터 반복문까지, 30문제로 차근차근!</p>
+    </div>
+  </header>
+
+  <!-- 시작 -->
+  <section id="start" class="card">
+    <div class="hero" aria-hidden="true">🐍</div>
+    <h2>파이썬, 처음이어도 괜찮음!</h2>
+    <p class="intro">문제마다 <b>💡 힌트</b>가 함께 보임.<br>틀려도 힌트를 보고 다시 고를 수 있음.</p>
+    <ul class="stage-list" id="stageList"></ul>
+    <div class="diff-legend"><span>난이도</span><span class="it"><span class="st">★</span>쉬움</span><span class="it"><span class="st">★★</span>보통</span><span class="it"><span class="st">★★★</span>어려움</span></div>
+    <button class="btn" id="startBtn" type="button">시작하기 ▶</button>
+  </section>
+
+  <!-- 문제 -->
+  <section id="quiz" class="card hidden">
+    <div class="status">
+      <div class="progress-text"><b id="qNum">1</b> / <span id="qTotal">30</span> 번째 문제</div>
+      <div class="score-badge" id="scoreBadge"><span class="sb-star">★</span><span id="score">0</span>개 정답</div>
+    </div>
+    <div class="bar"><span id="bar"></span></div>
+    <span class="tag" id="qStage"></span>
+    <h2 class="question" id="qText"></h2>
+    <pre class="code hidden" id="qCode"></pre>
+    <div class="hint-row"><button class="hint-btn" id="hintBtn" type="button">💡 힌트 보기</button></div>
+    <div class="hint-box hidden" id="hintBox"></div>
+    <div class="choices" id="choices"></div>
+    <div class="feedback hidden" id="feedback" aria-live="polite"></div>
+    <div class="actions"><button class="btn hidden" id="nextBtn" type="button">다음 문제 ▶</button></div>
+    <div class="diff-row" id="qDiff"></div>
+  </section>
+
+  <!-- 결과 -->
+  <section id="result" class="card hidden">
+    <div class="trophy" id="resultEmoji" aria-hidden="true">🏆</div>
+    <h2 id="resultTitle">퀴즈 끝! 수고 많았음</h2>
+    <div class="final-score"><span id="finalScore">0</span><small> / <span id="finalTotal">30</span>개</small></div>
+    <p class="final-msg" id="finalMsg"></p>
+    <ul class="stage-result" id="stageResult"></ul>
+    <p class="wrong-list" id="wrongList"></p>
+    <div class="result-actions">
+      <button class="btn" id="retryWrongBtn" type="button">❗ 틀린 문제만 다시 풀기</button>
+      <button class="btn sub" id="retryAllBtn" type="button">🔄 처음부터 다시 풀기</button>
+    </div>
+  </section>
+
+  <footer>처음 시작하는 파이썬 · 30문제 · 3지 선다형<span class="credit">by Make a long term memory</span></footer>
+</div>
+
+<script>
+/* 단계 정보 */
+const STAGES = [
+  { name: "파이썬이란?",      color: ["#f8eaf0", "#94536d"] },
+  { name: "화면에 출력하기",  color: ["#ede4cd", "#635223"] },
+  { name: "데이터와 계산",    color: ["#e8f3ee", "#2f5946"] },
+  { name: "변수와 입력",      color: ["#ecf3f9", "#415e75"] },
+  { name: "조건에 따라 실행", color: ["#f2eef9", "#66599c"] },
+  { name: "반복하기",         color: ["#f7eee8", "#7a513a"] }
+];
+
+/* 문제 30개
+   s: 단계 번호(0부터), c: 보기 3개, a: 정답 위치(0부터)
+   `백틱` 안의 글자는 코드 모양으로 보여요 */
+const Q = [
+  // 1단계
+  { s:0, q:"파이썬(Python)은 무엇일까요?", c:["프로그래밍 언어","운영체제","웹 브라우저"], a:0,
+    h:"사람이 컴퓨터에게 일을 시킬 때 쓰는 '언어'의 한 종류예요.", e:"파이썬은 컴퓨터에게 명령을 내릴 때 쓰는 프로그래밍 언어예요." },
+  { s:0, q:"프로그래밍 언어는 무엇을 하는 데 쓰일까요?", c:["사람끼리 대화할 때","컴퓨터에게 할 일을 명령할 때","그림을 그릴 때"], a:1,
+    h:"'프로그램'은 컴퓨터가 따라 하는 명령의 순서예요.", e:"프로그래밍 언어로 컴퓨터가 할 일을 순서대로 적어서 명령해요." },
+  { s:0, q:"파이썬의 특징이 <u>아닌</u> 것은?", c:["문법이 간단해서 읽기 쉽다","무료로 쓸 수 있다","영어를 잘해야만 쓸 수 있다"], a:2,
+    h:"파이썬은 처음 배우는 사람에게 많이 추천되는 언어예요.", e:"영어를 잘 몰라도 충분히 배울 수 있어요. 파이썬은 쉽고 무료라서 인기가 많아요." },
+  { s:0, q:"파이썬으로 할 수 <u>없는</u> 일은?", c:["데이터 분석","인공지능 만들기","CPU 같은 컴퓨터 부품 만들기"], a:2,
+    h:"파이썬은 '소프트웨어'를 만드는 도구예요.", e:"파이썬은 프로그램(소프트웨어)을 만들어요. 부품 같은 하드웨어는 만들 수 없어요." },
+  { s:0, q:"파이썬 코드를 한 줄씩 읽어서 바로 실행해 주는 프로그램은?", c:["인터프리터","스캐너","프린터"], a:0,
+    h:"'통역사(interpreter)'처럼 내 코드를 컴퓨터 말로 바로바로 옮겨 줘요.", e:"인터프리터가 코드를 한 줄씩 해석해서 바로 실행해 줘요." },
+  // 2단계
+  { s:1, q:"화면에 글자를 보여 주는 명령어는?", c:["`print`","`show`","`write`"], a:0,
+    h:"'인쇄하다'라는 뜻의 영어 단어예요.", e:"`print()` 괄호 안에 넣은 내용이 화면에 출력돼요." },
+  { s:1, q:"올바르게 쓴 코드는?", c:['`print("안녕")`',"`print(안녕)`",'`Print("안녕")`'], a:0,
+    h:"글자는 따옴표 안에 넣어요. 그리고 파이썬은 대문자와 소문자를 구별해요.", e:"②는 따옴표가 없고, ③은 `P`가 대문자라서 오류가 나요." },
+  { s:1, q:"다음 코드의 결과는?", code:"print(3 + 4)", c:["`7`","`3 + 4`","`34`"], a:0,
+    h:"따옴표가 없으면 숫자로 보고 계산해요.", e:"숫자 3과 4를 더해서 `7`이 출력돼요." },
+  { s:1, q:"다음 코드의 결과는?", code:'print("3 + 4")', c:["`7`","`3 + 4`","오류 발생"], a:1,
+    h:"따옴표 안에 있으면 계산하지 않고 글자 그대로 보여 줘요.", e:"따옴표 안은 글자라서 `3 + 4`가 그대로 출력돼요." },
+  { s:1, q:"코드에서 `#` 뒤에 쓴 내용은 어떻게 될까요?", c:["실행되지 않는 설명(주석)이 된다","곱하기를 한다","화면에 출력된다"], a:0,
+    h:"사람이 읽으라고 남기는 '메모'예요.", e:"`#` 뒤는 주석이에요. 컴퓨터는 무시하고 실행하지 않아요." },
+  // 3단계
+  { s:2, q:'`"hello"`처럼 따옴표로 감싼 데이터를 무엇이라 할까요?', c:["문자열","정수","실수"], a:0,
+    h:"글자들이 줄줄이 이어진 것이에요.", e:"따옴표로 감싼 글자 데이터를 문자열(string)이라고 해요." },
+  { s:2, q:"`3.14`는 어떤 종류의 데이터일까요?", c:["정수","실수","문자열"], a:1,
+    h:"소수점이 있는 수예요.", e:"소수점이 있는 수는 실수(float), 없는 수는 정수(int)예요." },
+  { s:2, q:"다음 코드의 결과는?", code:"print(10 // 3)", c:["`3`","`3.333...`","`1`"], a:0,
+    h:"`//`는 나눗셈의 '몫'만 구해요.", e:"10 ÷ 3의 몫은 3이에요." },
+  { s:2, q:"다음 코드의 결과는?", code:"print(10 % 3)", c:["`3`","`1`","`0`"], a:1,
+    h:"`%`는 나눗셈의 '나머지'를 구해요.", e:"10 ÷ 3 = 3 … 1이라서 나머지는 1이에요." },
+  { s:2, q:"다음 코드의 결과는?", code:"print(2 ** 3)", c:["`6`","`8`","`9`"], a:1,
+    h:"`**`는 거듭제곱이에요. 2를 3번 곱해요.", e:"2 × 2 × 2 = 8이에요." },
+  { s:2, q:"다음 코드의 결과는?", code:'print("3" + "4")', c:["`7`","`34`","오류 발생"], a:1,
+    h:"글자끼리 `+`를 하면 이어 붙여요.", e:"\"3\"과 \"4\"는 글자라서 이어 붙인 `34`가 출력돼요." },
+  // 4단계
+  { s:3, q:"`x = 5`의 뜻은?", c:["x와 5가 같은지 비교한다","x라는 상자에 5를 저장한다","5라는 상자에 x를 저장한다"], a:1,
+    h:"파이썬의 `=`는 '같다'가 아니라 '오른쪽 값을 왼쪽에 넣어라'예요.", e:"`=`는 대입(저장)이에요. x라는 변수에 5가 저장돼요." },
+  { s:3, q:"변수 이름으로 쓸 수 <u>없는</u> 것은?", c:["`score`","`my_age`","`1st`"], a:2,
+    h:"변수 이름은 숫자로 시작할 수 없어요.", e:"`1st`처럼 숫자로 시작하는 이름은 쓸 수 없어요." },
+  { s:3, q:"다음 코드의 결과는?", code:"x = 3\nx = x + 2\nprint(x)", c:["`3`","`5`","`2`"], a:1,
+    h:"오른쪽(3 + 2)을 먼저 계산하고, 그 결과를 다시 x에 넣어요.", e:"x에 3 + 2 = 5가 다시 저장돼서 `5`가 출력돼요." },
+  { s:3, q:"다음 코드의 결과는?", code:"a = 10\nb = a\na = 20\nprint(b)", c:["`10`","`20`","`30`"], a:0,
+    h:"`b = a`를 실행한 그 순간의 a 값이 b에 들어가요. 나중에 a가 바뀌어도 b는 그대로예요.", e:"b에는 그때의 값 10이 들어가 있어요." },
+  { s:3, q:"`input()`으로 입력받은 값은 어떤 종류일까요?", c:["항상 문자열","항상 정수","입력한 내용에 따라 자동으로 정해진다"], a:0,
+    h:"숫자를 입력해도 컴퓨터는 일단 '글자'로 받아요.", e:"`input()`은 항상 문자열로 받아요. 숫자로 쓰려면 바꿔 줘야 해요." },
+  { s:3, q:"입력받은 값을 정수로 바꾸는 올바른 코드는?", c:["`int(input())`","`str(input())`","`input(int)`"], a:0,
+    h:"바꾸고 싶은 값을 `int( )`의 괄호 안에 넣어서 감싸요. `int`는 정수(integer)의 줄임말이에요.", e:"`int()`로 감싸면 입력받은 글자가 정수로 바뀌어요." },
+  // 5단계
+  { s:4, q:"다음 코드의 결과는?", code:"print(7 == 7)", c:["`True`","`False`","`7`"], a:0,
+    h:"`==`는 두 값이 같은지 비교하고, 같으면 True(참)를 돌려줘요.", e:"7과 7은 같으니까 `True`예요." },
+  { s:4, q:"'같지 않다'를 나타내는 기호는?", c:["`!=`","`<>`","`=!`"], a:0,
+    h:"느낌표(!)는 '아니다'라는 뜻으로 쓰여요. 느낌표가 앞에 와요.", e:"`!=`는 두 값이 다르면 True예요." },
+  { s:4, q:"다음 코드의 결과는?", code:"print(5 > 3 and 2 > 4)", c:["`True`","`False`","오류 발생"], a:1,
+    h:"`and`는 양쪽이 '모두' 참이어야 True예요.", e:"5 > 3은 참이지만 2 > 4가 거짓이라 전체가 `False`예요." },
+  { s:4, q:"`if` 줄 끝에 꼭 붙여야 하는 기호는?", c:["`;`","`:`","`.`"], a:1,
+    h:"`if`, `else`, `for` 줄은 모두 같은 기호로 끝나요. 점 두 개가 위아래로 놓인 기호예요.", e:"콜론(`:`)을 붙이고, 다음 줄은 들여쓰기를 해요." },
+  { s:4, q:"다음 코드의 결과는?", code:'n = 7\nif n % 2 == 0:\n    print("짝수")\nelse:\n    print("홀수")', c:["`짝수`","`홀수`","오류 발생"], a:1,
+    h:"7을 2로 나눈 나머지가 0인지 먼저 계산해 보세요.", e:"7 % 2는 1이라 조건이 거짓이에요. 그래서 else 쪽의 `홀수`가 출력돼요." },
+  // 6단계
+  { s:5, q:"`range(1, 6)`이 만드는 수는?", c:["1, 2, 3, 4, 5, 6","1, 2, 3, 4, 5","0, 1, 2, 3, 4, 5"], a:1,
+    h:"끝 숫자는 포함하지 않아요.", e:"`range(1, 6)`은 1부터 시작해서 6 바로 앞(5)까지 만들어요." },
+  { s:5, q:"다음 코드는 \"안녕\"을 몇 번 출력할까요?", code:'for i in range(3):\n    print("안녕")', c:["2번","3번","4번"], a:1,
+    h:"`range(3)`은 0, 1, 2를 만들어요. 몇 개인지 세어 보세요.", e:"0, 1, 2로 3번 반복해서 3번 출력돼요." },
+  { s:5, q:"다음 코드의 결과는?", code:"total = 0\nfor i in range(1, 5):\n    total = total + i\nprint(total)", c:["`10`","`15`","`4`"], a:0,
+    h:"`range(1, 5)`는 1, 2, 3, 4예요. 이 수들을 total에 하나씩 더해요.", e:"1 + 2 + 3 + 4 = 10이에요." }
+];
+
+/* 문제별 난이도 (1: ★ 쉬움, 2: ★★ 보통, 3: ★★★ 어려움) — 문제 순서와 같아요 */
+const DIFF = [1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 2, 2, 2, 1, 1, 2, 3, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3];
+const DIFF_LABEL = ["", "쉬움", "보통", "어려움"];
+function setDiff(d){
+  const el = document.getElementById("qDiff");
+  if (!el) return;
+  if (!d){ el.innerHTML = ""; return; }
+  el.innerHTML = `<span class="dl">난이도</span><span class="stars" aria-hidden="true">${"★".repeat(d)}<span class="off">${"☆".repeat(3 - d)}</span></span>`;
+  el.setAttribute("aria-label", `난이도 별 ${d}개 (${DIFF_LABEL[d]})`);
+}
+
+/* 도우미 */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+// 문제 글 속 <u> 밑줄만 허용하고 나머지는 안전하게 표시
+const fmt = s => esc(s).replace(/&lt;u&gt;/g,"<u>").replace(/&lt;\/u&gt;/g,"</u>").replace(/`([^`]+)`/g,"<code>$1</code>");
+function highlight(code){
+  const re = /("[^"\n]*"|'[^'\n]*')|(#.*$)|\b(if|elif|else|for|in|and|or|not|True|False)\b|\b(print|input|int|range|str)\b|\b(\d+)\b/gm;
+  let out = "", last = 0, m;
+  while ((m = re.exec(code))){
+    out += esc(code.slice(last, m.index));
+    if (m[1]) out += `<span class="t-str">${esc(m[1])}</span>`;
+    else if (m[2]) out += `<span class="t-com">${esc(m[2])}</span>`;
+    else if (m[3]) out += `<span class="t-kw">${m[3]}</span>`;
+    else if (m[4]) out += `<span class="t-fn">${m[4]}</span>`;
+    else if (m[5]) out += `<span class="t-num">${m[5]}</span>`;
+    last = re.lastIndex;
+  }
+  return out + esc(code.slice(last));
+}
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function burst(x, y, n = 12){
+  if (reduceMotion) return;
+  const em = ["★","✦","★","✧","★"];
+  for (let i = 0; i < n; i++){
+    const s = document.createElement("span");
+    s.className = "particle"; s.textContent = em[i % em.length];
+    const ang = Math.random() * Math.PI * 2, d = 60 + Math.random() * 90;
+    s.style.left = x + "px"; s.style.top = y + "px";
+    s.style.setProperty("--dx", Math.cos(ang) * d + "px");
+    s.style.setProperty("--dy", Math.sin(ang) * d - 30 + "px");
+    s.style.setProperty("--rot", (Math.random() * 240 - 120) + "deg");
+    document.body.appendChild(s); setTimeout(() => s.remove(), 1000);
+  }
+}
+function restartAnim(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+
+/* 시작 화면의 단계 목록 */
+$("stageList").innerHTML = STAGES.map((st, i) => {
+  const n = Q.filter(q => q.s === i).length;
+  const first = Q.findIndex(q => q.s === i) + 1;
+  return `<li><span class="sn" style="background:${st.color[1]};color:#ffffff">${i + 1}</span>` +
+         `<div><b>${st.name}</b><small>${first}~${first + n - 1}번 · ${n}문제</small></div></li>`;
+}).join("");
+
+/* 상태 */
+let order = [];      // 이번에 풀 문제 번호들
+let pos = 0;         // order 안에서의 위치
+let correct = 0;
+let tries = 0;
+let locked = false;
+let firstTry = {};   // 문제번호 → 첫 시도에 맞혔는지
+
+function showScreen(id){
+  ["start","quiz","result"].forEach(s => $(s).classList.toggle("hidden", s !== id));
+  window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+}
+
+function startRound(list){
+  order = list; pos = 0; correct = 0; firstTry = {};
+  $("score").textContent = 0;
+  $("qTotal").textContent = order.length;
+  showScreen("quiz");
+  render();
+}
+
+function render(){
+  const qi = order[pos], q = Q[qi], st = STAGES[q.s];
+  tries = 0; locked = false;
+  $("qNum").textContent = pos + 1;
+  $("bar").style.width = (pos / order.length * 100) + "%";
+  const tag = $("qStage");
+  tag.textContent = `${q.s + 1}단계 · ${st.name}`;
+  tag.style.background = st.color[0]; tag.style.color = st.color[1];
+  setDiff(DIFF[qi]);
+  $("qText").innerHTML = `<span class="qn">${qi + 1}.</span>${fmt(q.q)}`;
+  if (q.code){ $("qCode").innerHTML = highlight(q.code); $("qCode").classList.remove("hidden"); }
+  else $("qCode").classList.add("hidden");
+
+  $("hintBtn").disabled = false;
+  $("hintBox").classList.remove("hidden");
+  $("hintBox").innerHTML = `<b>💡 힌트</b><br>${fmt(q.h)}`;
+
+  const box = $("choices"); box.innerHTML = "";
+  q.c.forEach((t, ci) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "choice";
+    b.innerHTML = `<span class="num">${"①②③"[ci]}</span><span class="label">${fmt(t)}</span><span class="mark" aria-hidden="true"></span>`;
+    b.addEventListener("click", () => choose(b, ci));
+    box.appendChild(b);
+  });
+
+  $("feedback").className = "feedback hidden"; $("feedback").innerHTML = "";
+  const next = $("nextBtn");
+  next.classList.add("hidden");
+  next.textContent = pos === order.length - 1 ? "결과 보기 🏁" : "다음 문제 ▶";
+  restartAnim($("quiz"), "enter");
+}
+
+function showHint(){
+  $("hintBox").classList.remove("hidden");
+  $("hintBtn").disabled = true;
+}
+
+function choose(btn, ci){
+  if (locked || btn.disabled) return;
+  const qi = order[pos], q = Q[qi], fb = $("feedback");
+  tries++;
+  if (ci === q.a){
+    locked = true;
+    btn.classList.add("correct"); btn.querySelector(".mark").textContent = "✔";
+    document.querySelectorAll(".choice").forEach(b => {
+      b.disabled = true;
+      if (b !== btn && !b.classList.contains("wrong")) b.classList.add("dim");
+    });
+    let title, sub = "";
+    if (tries === 1){
+      firstTry[qi] = true; correct++;
+      $("score").textContent = correct; restartAnim($("scoreBadge"), "bump");
+      title = "🎉 정답!";
+    } else {
+      title = "👍 정답! 힌트를 보고 찾아냄";
+      sub = `<div class="fb-sub">한 번에 맞히지 못한 문제는 '틀린 문제'로 기록됨. 나중에 다시 풀어 보기!</div>`;
+    }
+    fb.className = "feedback good";
+    fb.innerHTML = `<div class="fb-title">${title}</div>${sub}<div class="explain"><b>✏️ 해설</b><br>${fmt(q.e)}</div>`;
+    const r = btn.getBoundingClientRect(); burst(r.left + 30, r.top + r.height / 2);
+    $("bar").style.width = ((pos + 1) / order.length * 100) + "%";
+    const next = $("nextBtn"); next.classList.remove("hidden");
+    next.focus({ preventScroll: true });
+    next.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+  } else {
+    if (tries === 1) firstTry[qi] = false;
+    btn.classList.add("wrong"); btn.disabled = true; btn.querySelector(".mark").textContent = "✖";
+    restartAnim(btn, "shake");
+    showHint();
+    fb.className = "feedback bad";
+    fb.innerHTML = `<div class="fb-title">😢 아쉬움, 오답!</div>위의 <b>💡 힌트</b>를 다시 읽고 다른 보기를 골라 보기.`;
+    restartAnim(fb, "feedback");
+    $("hintBox").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+  }
+}
+
+function next(){
+  if (pos < order.length - 1){ pos++; render(); window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); }
+  else showResult();
+}
+
+let lastWrong = [];
+function showResult(){
+  const total = order.length;
+  $("finalScore").textContent = correct;
+  $("finalTotal").textContent = total;
+  const rate = correct / total;
+  let emoji, msg;
+  if (rate === 1){ emoji = "🏆"; msg = "모두 한 번에 맞힘! 파이썬 첫걸음 완벽 통과! 🐍✨"; }
+  else if (rate >= 0.8){ emoji = "🥳"; msg = "아주 잘했음! 틀린 문제만 한 번 더 보면 완벽함."; }
+  else if (rate >= 0.5){ emoji = "🌱"; msg = "좋음! 힌트와 해설을 떠올리며 틀린 문제를 다시 풀어 보기."; }
+  else { emoji = "💪"; msg = "처음엔 누구나 어려움. 틀린 문제를 다시 풀면 금방 익숙해짐!"; }
+  $("resultEmoji").textContent = emoji;
+  $("finalMsg").textContent = msg;
+  $("resultTitle").textContent = total === Q.length ? "퀴즈 끝! 수고 많았음" : "다시 풀기 끝! 수고 많았음";
+
+  // 단계별 결과
+  $("stageResult").innerHTML = STAGES.map((st, i) => {
+    const ids = order.filter(qi => Q[qi].s === i);
+    if (!ids.length) return "";
+    const ok = ids.filter(qi => firstTry[qi]).length;
+    return `<li><span class="nm">${i + 1}단계 · ${st.name}</span>` +
+           `<span class="meter"><span style="width:${ok / ids.length * 100}%"></span></span>` +
+           `<span class="ct">${ok}/${ids.length}</span></li>`;
+  }).join("");
+
+  lastWrong = order.filter(qi => !firstTry[qi]);
+  $("wrongList").textContent = lastWrong.length
+    ? `다시 볼 문제: ${lastWrong.map(qi => qi + 1 + "번").join(", ")}`
+    : "틀린 문제 없음! 🎉";
+  $("retryWrongBtn").classList.toggle("hidden", !lastWrong.length);
+
+  showScreen("result");
+  if (rate === 1) setTimeout(() => burst(window.innerWidth / 2, window.innerHeight / 3, 24), 400);
+}
+
+/* 이벤트 */
+$("startBtn").addEventListener("click", () => startRound(Q.map((_, i) => i)));
+$("retryAllBtn").addEventListener("click", () => startRound(Q.map((_, i) => i)));
+$("retryWrongBtn").addEventListener("click", () => startRound(lastWrong.slice()));
+$("hintBtn").addEventListener("click", showHint);
+$("nextBtn").addEventListener("click", next);
+document.addEventListener("keydown", e => {
+  if ($("quiz").classList.contains("hidden")) return;
+  if (["1","2","3"].includes(e.key)){
+    const b = document.querySelectorAll(".choice")[Number(e.key) - 1];
+    if (b && !b.disabled) b.click();
+  } else if (e.key === "h" || e.key === "H"){ if (!$("hintBtn").disabled) showHint(); }
+});
+<\/script>
+</body>
+</html>
+</script><script type="text/plain" id="src-ifq"><!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파이썬 선택문 퀴즈</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+  /* KoPubWorld 돋움체 (문화체육관광부·한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:400;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Medium'),local('KoPubWorldDotumMedium'),local('KoPubWorld돋움체 Medium'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff') format('woff')}
+  @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:700;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
+    src:local('KoPubWorldDotum Bold'),local('KoPubWorldDotumBold'),local('KoPubWorld돋움체 Bold'),
+        url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff') format('woff')}
+</style>
+<style>
+  /* calm-palette */ /* contrast-v2 */
+  :root{
+    --font:'KoPubWorld Dotum','KoPubWorld돋움체','KoPub돋움체','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    --ink:#33303c;
+    --ink-soft:#686472;
+    --card:#ffffff;
+    --line:#efeaf3;
+    --pink:#d6557d;
+    --pink-deep:#bd426e;
+    --yellow:#d3b981;
+    --lav:#bfb4e4;
+    --good:#397256;
+    --good-bg:#eaf3ee;
+    --bad:#b85768;
+    --bad-bg:#faeef1;
+    --code-bg:#2d2d39;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background-color:#faf7f1;
+    background-image:
+      linear-gradient(160deg,#f7f2e8 0%,#fbf2f6 50%,#eef5f9 100%);
+    background-size:100% 100%;
+    background-attachment:fixed;
+    display:flex;justify-content:center;align-items:flex-start;
+    padding:28px 16px 48px;
+    line-height:1.4;letter-spacing:-0.01em;
+  }
+  .app{width:100%;max-width:700px}
+  .hidden{display:none !important}
+  .jua{font-family:var(--font);font-weight:700}
+
+  /* ---------- 헤더 ---------- */
+  .top{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:0 4px}
+  .mascot{
+    flex:none;font-size:2.3rem;width:62px;height:62px;border-radius:20px;
+    background:#ffffff;display:grid;place-items:center;
+    border:2.2px solid #bcb7c4;box-shadow:none;
+    animation:bob 2.6s ease-in-out infinite;
+  }
+  h1{font-family:var(--font);font-weight:700;font-size:1.75rem;line-height:1.25}
+  h1 .accent{color:var(--pink-deep)}
+  .top p{color:var(--ink-soft);font-size:.95rem}
+
+  /* ---------- 카드 ---------- */
+  .card{
+    background:var(--card);border-radius:28px;padding:28px;
+    border:none;
+    box-shadow:0 8px 0 #ddd7e6, 0 20px 40px rgba(105,92,121,.12);
+  }
+  .card.enter{animation:pop .35s ease}
+
+  /* ---------- 버튼 ---------- */
+  .btn{
+    font-family:var(--font);font-weight:700;font-size:1.15rem;
+    border:none;border-radius:999px;padding:13px 28px;cursor:pointer;
+    background:var(--pink);color:#ffffff;
+    box-shadow:0 5px 0 var(--pink-deep);
+    transition:transform .08s, box-shadow .08s, filter .15s;
+  }
+  .btn:hover{filter:brightness(1.04)}
+  .btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--pink-deep)}
+  .btn.sub{background:#6e5dd7;box-shadow:0 5px 0 #5d4dbe}
+  .btn.sub:active{box-shadow:0 2px 0 #5d4dbe}
+  .btn.small{font-size:.95rem;padding:8px 16px;box-shadow:0 3px 0 var(--pink-deep)}
+  .btn.small.sub{box-shadow:0 3px 0 #5d4dbe}
+  .btn.small.plain{background:#ffffff;color:var(--ink);border:2px solid #ddd7e6;box-shadow:0 3px 0 #ddd7e6}
+  .btn:focus-visible,.choice:focus-visible{outline:3px solid var(--lav);outline-offset:3px}
+
+  /* ---------- 시작 화면 ---------- */
+  #start{text-align:center}
+  .hero{font-size:4.4rem;display:inline-block;animation:bob 2.6s ease-in-out infinite}
+  #start h2{font-family:var(--font);font-weight:700;font-size:1.6rem;margin-top:6px}
+  .rules{list-style:none;margin:18px auto 22px;max-width:450px;display:grid;gap:10px;text-align:left}
+  .rules li{
+    background:#f7f2e6;border:none;border-radius:16px;
+    padding:10px 14px;display:flex;gap:10px;align-items:center;word-break:keep-all;
+  }
+  .rules li span{font-size:1.25rem}
+
+  .name-form{max-width:450px;margin:0 auto;text-align:left}
+  .name-form label{display:block;font-family:var(--font);font-weight:700;font-size:1.15rem;margin-bottom:8px;padding-left:6px}
+  .name-row{display:flex;gap:10px}
+  .name-row input{
+    flex:1;min-width:0;font:inherit;font-size:1.1rem;padding:12px 18px;border-radius:999px;
+    border:2.5px solid #ddd7e6;background:#ffffff;color:var(--ink);outline:none;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .name-row input:focus{border-color:var(--lav);box-shadow:0 0 0 4px #f2eef9}
+  .name-row input.invalid{border-color:var(--bad);animation:shake .4s}
+  .name-row .btn{flex:none}
+  .name-error{color:var(--bad);font-size:.92rem;margin-top:6px;padding-left:8px}
+
+  /* 순위 파일 패널 */
+  .file-panel{
+    max-width:450px;margin:22px auto 0;text-align:left;
+    background:#f9fbfc;border:2px solid #ddd7e6;border-radius:18px;padding:12px 14px;
+    font-size:.93rem;
+  }
+  .file-panel .fp-title{font-family:var(--font);font-weight:700;font-size:1rem;color:#415e75;margin-bottom:2px}
+  .file-panel .fp-msg{color:var(--ink-soft);word-break:keep-all}
+  .file-panel .fp-msg b{color:var(--ink)}
+  .fp-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .fp-actions:empty{display:none}
+
+  /* ---------- 진행 상태 ---------- */
+  .status{display:flex;justify-content:space-between;align-items:center;gap:8px 10px;margin-bottom:10px;flex-wrap:wrap}
+  .progress-text{font-family:var(--font);font-weight:700;font-size:1.15rem;color:var(--ink-soft)}
+  .progress-text b{font-weight:800;color:var(--pink-deep);font-size:1.4rem}
+  .status-right{display:flex;gap:8px;align-items:center}
+  .player-chip{font-family:var(--font);font-weight:500;font-size:.82rem;color:var(--ink-soft);background:#ffffff;border:1px solid #ddd7e6;border-radius:999px;padding:2px 10px;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .score-badge{font-family:var(--font);font-weight:500;font-size:.82rem;color:var(--ink-soft);background:#ffffff;border:1px solid #ddd7e6;border-radius:999px;padding:2px 10px;white-space:nowrap}
+  .score-badge b,.score-badge #score{font-weight:700;color:var(--ink)}
+  .score-badge .sb-star{color:#efb72d;margin-right:2px}
+  .score-badge.bump{animation:bump .45s ease}
+  .steps{display:flex;gap:8px;margin-bottom:20px}
+  .dot{flex:1;height:10px;border-radius:999px;background:#f2eef7;transition:background .3s}
+  .dot.current{background:var(--lav);animation:pulse 1.4s ease-in-out infinite}
+  .dot.good{background:var(--good)}
+  .dot.bad{background:var(--bad)}
+
+  /* ---------- 문제 ---------- */
+  .tag{
+    display:inline-block;font-family:var(--font);font-weight:700;font-size:.9rem;
+    padding:3px 12px;border-radius:999px;background:#f2f4fb;color:#5d6199;
+  }
+  .tag[data-type="조건식"]{background:#ecf3f9;color:#415e75}
+  .tag[data-type="단순 선택문"]{background:#e8f3ee;color:#2f5946}
+  .tag[data-type="다중 선택문"]{background:#faeef3;color:#94536d}
+  .question{font-family:var(--font);font-weight:700;font-size:1.32rem;line-height:1.5;margin:10px 0 4px;word-break:keep-all}
+  code{
+    font-family:'Nanum Gothic Coding',Consolas,monospace;font-size:.92em;
+    background:#f6f4fa;color:#5a4f7e;padding:1px 6px;border-radius:6px;
+  }
+
+  pre.code{
+    position:relative;
+    background:var(--code-bg);color:#f5f3fc;border-radius:18px;
+    padding:38px 18px 16px;margin:14px 0 18px;
+    font-family:'Nanum Gothic Coding',Consolas,monospace;font-size:1.02rem;line-height:1.7;
+    overflow-x:auto;
+  }
+  pre.code::before{
+    content:"";position:absolute;top:14px;left:18px;width:10px;height:10px;border-radius:50%;
+    background:#d6557d;box-shadow:16px 0 0 #d3b981, 32px 0 0 #a4cdc0;
+  }
+  pre.code::after{
+    content:"python";position:absolute;top:8px;right:16px;
+    font-size:.78rem;color:#a5a4b8;letter-spacing:.5px;
+  }
+  .t-kw{color:#e6b7cd;font-weight:700}
+  .t-str{color:#e1d2a8}
+  .t-num{color:#b7dbe6}
+  .t-fn{color:#c0dcb4}
+  .t-com{color:#9796aa;font-style:italic}
+
+  /* ---------- 보기 (2 x 2) ---------- */
+  .choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .choice{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    background:#fdfcf9;border:2.5px solid #ddd7e6;border-radius:18px;
+    padding:14px 14px;font:inherit;font-size:1.08rem;color:var(--ink);cursor:pointer;
+    box-shadow:0 4px 0 #ddd7e6;min-height:64px;
+    transition:transform .12s, box-shadow .12s, border-color .12s, background .2s, opacity .2s;
+  }
+  .choice:hover:not(:disabled){border-color:#c9c2d5;transform:translateY(-2px);box-shadow:0 6px 0 #c9c2d5}
+  .choice:disabled{cursor:default}
+  .choice .num{
+    flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;
+    font-family:var(--font);font-weight:700;font-size:1.05rem;color:var(--ink);
+  }
+  .choice:nth-child(1) .num{background:#ddd7e6}
+  .choice:nth-child(2) .num{background:#ddd7e6}
+  .choice:nth-child(3) .num{background:#ddd7e6}
+  .choice:nth-child(4) .num{background:#ddd7e6}
+  .choice .label{flex:1;min-width:0;word-break:keep-all}
+  .choice .label.out{font-family:'Nanum Gothic Coding',Consolas,monospace;white-space:pre;font-size:1.05rem}
+  .choice .mark{flex:none;font-size:1.3rem;font-weight:700;width:22px;text-align:center}
+
+  .choice.correct{background:var(--good-bg);border-color:#ddd7e6;box-shadow:0 4px 0 #ddd7e6}
+  .choice.correct .num{background:var(--good);color:#ffffff}
+  .choice.correct .mark{color:var(--good)}
+  .choice.wrong{background:var(--bad-bg);border-color:#ddd7e6;box-shadow:0 4px 0 #ddd7e6}
+  .choice.wrong .num{background:var(--bad);color:#ffffff}
+  .choice.wrong .mark{color:var(--bad)}
+  .choice.shake{animation:shake .4s ease}
+  .choice.dim{opacity:.5}
+
+  /* ---------- 피드백 ---------- */
+  .feedback{
+    margin-top:18px;border-radius:18px;padding:14px 18px;
+    border:2.5px solid;font-size:1.02rem;word-break:keep-all;
+    animation:pop .3s ease;
+  }
+  .feedback.good{background:var(--good-bg);border-color:#ddd7e6;color:#1f3b2d}
+  .feedback.bad{background:var(--bad-bg);border-color:#ddd7e6;color:#592f36}
+  .fb-title{font-family:var(--font);font-weight:700;font-size:1.25rem;margin-bottom:4px}
+  .fb-sub{font-size:.92rem;opacity:.85;margin-bottom:6px}
+  .hint,.explain{background:#ffffff;border-radius:14px;padding:10px 14px;margin-top:8px;color:var(--ink)}
+  .hint{border:2px solid #ddd7e6}
+  .hint b{font-family:var(--font);font-weight:700;color:#856c2e}
+  .explain{border:2px solid #ddd7e6}
+  .explain b{font-family:var(--font);font-weight:700;color:var(--good)}
+  .retry-note{margin-top:8px;font-family:var(--font);font-weight:700}
+
+  .actions{display:flex;justify-content:flex-end;margin-top:18px}
+
+  /* ---------- 결과 화면 ---------- */
+  #result{text-align:center}
+  .trophy{font-size:4.4rem;display:inline-block;animation:bob 2.6s ease-in-out infinite}
+  #result h2{font-family:var(--font);font-weight:700;font-size:1.6rem;word-break:keep-all}
+  .final-score{font-family:var(--font);font-weight:700;font-size:4rem;line-height:1.1;color:var(--pink-deep);margin:8px 0 2px}
+  .final-score small{font-size:1.5rem;color:var(--ink-soft)}
+  .final-time{color:var(--ink-soft);font-size:.98rem}
+  .final-msg{font-size:1.1rem;margin:6px 0 12px;word-break:keep-all}
+  .review{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+  .review .chip{font-family:var(--font);font-weight:700;padding:3px 12px;border-radius:999px;border:2px solid;font-size:.95rem}
+  .chip.ok{background:var(--good-bg);border-color:#ddd7e6;color:var(--good)}
+  .chip.no{background:var(--bad-bg);border-color:#ddd7e6;color:var(--bad)}
+
+  .ranking{
+    background:#fcf9f3;border:2.5px solid #ddd7e6;border-radius:22px;padding:16px;
+    margin:0 auto 22px;max-width:500px;text-align:left;
+  }
+  .rank-head{display:flex;justify-content:space-between;align-items:baseline;gap:4px 8px;margin-bottom:10px;flex-wrap:wrap}
+  .rank-head h3{font-family:var(--font);font-weight:700;font-size:1.35rem}
+  .rank-sub{font-family:var(--font);font-weight:700;color:var(--pink-deep);font-size:1.05rem}
+  .best-note{font-size:.9rem;background:#ffffff;border-radius:12px;padding:8px 12px;margin-bottom:10px;border:2px solid #ddd7e6;word-break:keep-all}
+  .rank-cols{display:flex;gap:10px;padding:0 14px 4px;font-size:.8rem;color:var(--ink-soft)}
+  .rank-cols .c-rk{width:34px;text-align:center}
+  .rank-cols .c-nm{flex:1}
+  .rank-cols .c-sc{width:46px;text-align:right}
+  .rank-cols .c-tm{width:62px;text-align:right}
+  .rank-list{list-style:none;display:grid;gap:6px;max-height:330px;overflow-y:auto;padding:2px;position:relative}
+  .rank-list li{display:flex;align-items:center;gap:10px;background:#ffffff;border:2px solid #ddd7e6;border-radius:14px;padding:7px 12px}
+  .rank-list li.me{background:#fcf3f7;border-color:#ddd7e6;box-shadow:0 3px 0 #ddd7e6}
+  .rank-list li.empty{justify-content:center;color:var(--ink-soft)}
+  .rk{flex:none;width:34px;text-align:center;font-family:var(--font);font-weight:700;font-size:1.1rem;color:var(--ink-soft)}
+  .rk.medal{font-size:1.35rem}
+  .rn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .me-badge{font-family:var(--font);font-weight:700;font-size:.75rem;background:var(--pink);color:#ffffff;border-radius:999px;padding:1px 8px;margin-left:6px}
+  .rs{width:46px;text-align:right;font-family:var(--font);font-weight:700;color:var(--pink-deep);white-space:nowrap}
+  .rt{width:62px;text-align:right;font-size:.85rem;color:var(--ink-soft);white-space:nowrap}
+  .save-box{margin-top:12px;font-size:.88rem;color:var(--ink-soft);word-break:keep-all}
+  .save-box.ok{color:#2f5946}
+  .save-box.warn{color:#71473f}
+  .save-box .fp-actions{margin-top:8px}
+
+  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  footer{text-align:center;color:var(--ink-soft);font-size:.85rem;margin-top:22px}
+
+  /* ---------- 효과 ---------- */
+  .particle{
+    position:fixed;pointer-events:none;font-size:20px;z-index:50;
+    animation:fly .9s ease-out forwards;
+  ;color:#efb72d;font-family:var(--font)}
+  @keyframes fly{
+    0%{transform:translate(-50%,-50%) scale(.6);opacity:1}
+    100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.15) rotate(var(--rot));opacity:0}
+  }
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+  @keyframes pop{from{transform:translateY(8px) scale(.98);opacity:.3}to{transform:none;opacity:1}}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important}
+  }
+  @media (max-width:560px){
+    body{padding:18px 16px 36px}
+    .card{padding:20px 16px;border-radius:22px}
+    h1{font-size:1.4rem}
+    .mascot{width:52px;height:52px;font-size:1.9rem;border-radius:16px}
+    .question{font-size:1.16rem}
+    pre.code{font-size:.92rem;padding:36px 14px 14px}
+    .choices{grid-template-columns:1fr}
+    .choice{min-height:56px;padding:11px 12px}
+    .final-score{font-size:3.3rem}
+    .ranking{padding:12px}
+    .player-chip{max-width:120px}
+  }
+  @media (max-width:400px){
+    .name-row{flex-direction:column}
+    .name-row .btn{width:100%}
+  }
+
+  /* ---------- 좌측 정렬 ---------- */
+  #start,#result,footer{text-align:left}
+  .stage-list,.rules,.name-form,.file-panel,.stage-result,.ranking,.review{margin-left:0;margin-right:0;max-width:none}
+  .name-form label{padding-left:0}
+  .review,.result-actions{justify-content:flex-start}
+  .final-score,.final-msg,.final-time,.wrong-list{text-align:left}
+  /* 힌트 항상 보이기 */
+  .hint-always{background:#faf7ef;border:2px solid #ddd7e6;border-radius:16px;padding:10px 14px;margin:-4px 0 16px;word-break:keep-all}
+  .hint-always b{font-weight:700;color:#725d28}
+  /* 행간: 문제 112%, 힌트 130% (KoPub 기준) */
+  .question{line-height:1.12 !important}
+  .hint-box,.hint-box p,.hint-always{line-height:1.3 !important}
+  /* ---------- 난이도 표시 (문제 맨 아래, 노란 별만) ---------- */
+  .diff-row{display:flex;align-items:center;gap:8px;margin-top:22px;padding-top:12px;border-top:1px solid #ddd7e6;font-size:.85rem;color:var(--ink-soft)}
+  .diff-row:empty{display:none}
+  .diff-row .stars{font-size:1.15rem;letter-spacing:2px;color:#efb72d;line-height:1}
+  .diff-row .stars .off{color:#cac3cf}
+  .diff-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:.88rem;color:var(--ink-soft);margin:0 0 18px}
+  .diff-legend .it{display:inline-flex;align-items:center;gap:4px}
+  .diff-legend .st{color:#efb72d;letter-spacing:1px}
+  .credit{display:block;margin-top:6px;font-weight:700;color:var(--ink);letter-spacing:.01em}
+  /* PC에서 진행 표시·단계 배지·알아두기 제목 키우기 */
+  @media (min-width:561px){
+    .progress-text{font-size:1.25rem}
+    .progress-text b{font-size:1.55rem}
+    .tag{font-size:1rem;padding:4px 14px}
+    .concept .ct{font-size:1.02rem;margin-bottom:4px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="top">
+    <div class="mascot" aria-hidden="true">🐍</div>
+    <div>
+      <h1>파이썬 <span class="accent">선택문</span> 퀴즈</h1>
+      <p>if · elif · else 를 정복해 보기!</p>
+    </div>
+  </header>
+
+  <!-- 시작 화면 -->
+  <section id="start" class="card">
+    <div class="hero" aria-hidden="true">🐍</div>
+    <h2>선택문 퀴즈에 도전해 볼까요?</h2>
+    <ul class="rules">
+      <li><span>📝</span><div>코드를 보고 <b>실행 결과</b>를 고르는 <b>5문제</b></div></li>
+      <li><span style="color:#efb72d">★</span><div>처음 고른 답이 정답이면 <b>10점</b>! 문제마다 <b>힌트</b>가 함께 보임</div></li>
+      <li><span>🏆</span><div>다 풀면 <b>최종 순위</b>가 나옴 (점수가 같으면 더 빨리 푼 사람이 위!)</div></li>
+    </ul>
+
+    <div class="diff-legend"><span>난이도</span><span class="it"><span class="st">★</span>쉬움</span><span class="it"><span class="st">★★</span>보통</span><span class="it"><span class="st">★★★</span>어려움</span></div>
+    <div class="name-form" id="nameForm">
+      <label for="nameInput">이름을 입력하세요</label>
+      <div class="name-row">
+        <input id="nameInput" type="text" maxlength="12" placeholder="예: 3번 김미림" autocomplete="off">
+        <button class="btn" type="button" id="startBtn">시작하기 ▶</button>
+      </div>
+      <p class="name-error hidden" id="nameError">이름을 입력해야 시작할 수 있음!</p>
+    </div>
+
+    <div class="file-panel" id="filePanel">
+      <div class="fp-title">📁 순위 파일 (선생님용)</div>
+      <div class="fp-msg" id="fpMsg"></div>
+      <div class="fp-actions" id="fpActions"></div>
+    </div>
+  </section>
+
+  <!-- 문제 화면 -->
+  <section id="quiz" class="card hidden">
+    <div class="status">
+      <div class="progress-text"><b id="qNum">1</b> / <span id="qTotal">5</span> 번째 문제</div>
+      <div class="status-right">
+        <span class="player-chip">🙋 <span id="playerName"></span></span>
+        <div class="score-badge" id="scoreBadge"><span class="sb-star">★</span><span id="score">0</span>점</div>
+      </div>
+    </div>
+    <div class="steps" id="steps" aria-hidden="true"></div>
+
+    <span class="tag" id="qType">조건식</span>
+    <h2 class="question" id="qText"></h2>
+    <pre class="code" id="qCode"></pre>
+    <div class="hint-always" id="hintAlways"></div>
+
+    <div class="choices" id="choices"></div>
+
+    <div class="feedback hidden" id="feedback" aria-live="polite"></div>
+    <div class="actions">
+      <button class="btn hidden" id="nextBtn" type="button">다음 문제 ▶</button>
+    </div>
+    <div class="diff-row" id="qDiff"></div>
+  </section>
+
+  <!-- 결과 화면 -->
+  <section id="result" class="card hidden">
+    <div class="trophy" id="resultEmoji" aria-hidden="true">🏆</div>
+    <h2><span id="resultName"></span>님, 퀴즈 끝!</h2>
+    <div class="final-score"><span id="finalScore">0</span><small> / <span id="maxScore">50</span>점</small></div>
+    <p class="final-time" id="finalTime"></p>
+    <p class="final-msg" id="finalMsg"></p>
+    <div class="review" id="review"></div>
+
+    <div class="ranking">
+      <div class="rank-head">
+        <h3>🏆 최종 순위</h3>
+        <span class="rank-sub" id="rankSub"></span>
+      </div>
+      <p class="best-note hidden" id="bestNote"></p>
+      <div class="rank-cols" aria-hidden="true"><span class="c-rk">순위</span><span class="c-nm">이름</span><span class="c-sc">점수</span><span class="c-tm">걸린 시간</span></div>
+      <ol class="rank-list" id="rankList"></ol>
+      <div class="save-box" id="saveBox" aria-live="polite"></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn" id="retryBtn" type="button">🔄 다시 풀기</button>
+      <button class="btn sub" id="nextPlayerBtn" type="button">👤 다음 사람 풀기</button>
+    </div>
+  </section>
+
+  <footer>고등학교 정보 · 알고리즘과 프로그래밍 · 선택 구조<span class="credit">by Make a long term memory</span></footer>
+</div>
+
+<!-- 파일 자동 저장을 지원하지 않는 브라우저용 -->
+<input type="file" id="fileInput" accept=".txt,text/plain" class="hidden">
+
+<script>
+/* =========================================================
+   문제 데이터 (모두 "실행 결과 고르기" 형식)
+   - answer : choices 배열에서 정답의 위치(0부터 시작)
+   - 힌트/해설 속 `백틱`은 코드 모양으로 표시됩니다
+   ========================================================= */
+const QUESTIONS = [
+  {
+    type: "조건식",
+    code: "a = 10\nb = 3\nprint(a % b == 1 and a < b)",
+    choices: ["True", "False", "1", "오류 발생"],
+    answer: 1,
+    hint: "`%`는 나눈 나머지를 구해요. 그리고 `and`는 양쪽 조건이 모두 True일 때만 True가 돼요!",
+    explain: "`10 % 3`은 1이라서 `a % b == 1`은 True예요. 하지만 `a < b`(10 < 3)는 False! `and`는 둘 다 참이어야 하므로 결과는 False예요."
+  },
+  {
+    type: "조건식",
+    code: "age = 19\nprint(age >= 13 and age <= 19)",
+    choices: ["True", "False", "19", "오류 발생"],
+    answer: 0,
+    hint: "`<=`는 '작거나 같다'라는 뜻이에요. 19는 19보다 작거나 같을까요?",
+    explain: "`19 >= 13`은 True, `19 <= 19`도 True예요(`<=`는 같은 값도 포함해요). 두 조건이 모두 참이니 `and`의 결과는 True!"
+  },
+  {
+    type: "단순 선택문",
+    code: 'score = 75\nif score >= 80:\n    print("합격")\nprint("끝")',
+    choices: ["합격", "끝", "합격\n끝", "오류 발생"],
+    answer: 1,
+    hint: "먼저 `score >= 80`이 참인지 확인해 보세요. 그리고 `print(\"끝\")`은 if문 안에 있을까요, 밖에 있을까요? 들여쓰기를 살펴보세요!",
+    explain: "`75 >= 80`은 False라서 들여쓰기된 `print(\"합격\")`은 건너뛰어요. 들여쓰기가 없는 `print(\"끝\")`은 if문 밖에 있어서 항상 실행돼요."
+  },
+  {
+    type: "다중 선택문",
+    code: 'score = 85\nif score >= 90:\n    print("A")\nelse if score >= 80:\n    print("B")\nelse:\n    print("C")',
+    choices: ["A", "B", "C", "오류 발생"],
+    answer: 3,
+    hint: "파이썬에서는 '그렇지 않고 만약 ~라면'을 `elif`(else if를 줄인 말)라고 붙여 써요. 코드에 쓰인 `else if`와 비교해 보세요.",
+    explain: "파이썬은 `else if`가 아니라 `elif`를 써요. `else` 뒤에는 바로 `:`가 와야 해서 문법 오류(SyntaxError)가 나요. 파이썬은 파일을 실행하기 전에 문법부터 검사하기 때문에 첫 줄을 포함해 한 줄도 실행되지 않아요."
+  },
+  {
+    type: "다중 선택문",
+    code: 'temp = 30\nif temp >= 20:\n    print("따뜻해요")\nelif temp >= 28:\n    print("더워요")\nelse:\n    print("추워요")',
+    choices: ["따뜻해요", "더워요", "따뜻해요\n더워요", "추워요"],
+    answer: 0,
+    hint: "if-elif-else 구조에서는 참인 조건을 '처음' 만나면 그 블록만 실행하고, 나머지는 모두 건너뛰어요.",
+    explain: "`30 >= 20`이 먼저 True가 되어 \"따뜻해요\"만 출력돼요. `30 >= 28`도 참이지만, 이미 앞에서 참인 조건을 만났기 때문에 검사하지 않아요."
+  }
+];
+
+/* 문제별 난이도 (1: ★ 쉬움, 2: ★★ 보통, 3: ★★★ 어려움) — 문제 순서와 같아요 */
+const DIFF = [3, 2, 2, 3, 3];
+const DIFF_LABEL = ["", "쉬움", "보통", "어려움"];
+function setDiff(d){
+  const el = document.getElementById("qDiff");
+  if (!el) return;
+  if (!d){ el.innerHTML = ""; return; }
+  el.innerHTML = `<span class="dl">난이도</span><span class="stars" aria-hidden="true">${"★".repeat(d)}<span class="off">${"☆".repeat(3 - d)}</span></span>`;
+  el.setAttribute("aria-label", `난이도 별 ${d}개 (${DIFF_LABEL[d]})`);
+}
+
+const POINT = 10;
+const DEFAULT_QUESTION = "다음 코드의 실행 결과는?";
+const DEFAULT_FILE_NAME = "if퀴즈_순위.txt";
+
+/* ---------- 도우미 함수 ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const fmt = s => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
+
+function highlight(code){
+  const re = /("[^"\n]*"|'[^'\n]*')|(#.*$)|\b(if|elif|else|and|or|not|True|False)\b|\b(print|input|int)\b|\b(\d+)\b/gm;
+  let out = "", last = 0, m;
+  while ((m = re.exec(code))){
+    out += esc(code.slice(last, m.index));
+    if (m[1]) out += `<span class="t-str">${esc(m[1])}</span>`;
+    else if (m[2]) out += `<span class="t-com">${esc(m[2])}</span>`;
+    else if (m[3]) out += `<span class="t-kw">${m[3]}</span>`;
+    else if (m[4]) out += `<span class="t-fn">${m[4]}</span>`;
+    else if (m[5]) out += `<span class="t-num">${m[5]}</span>`;
+    last = re.lastIndex;
+  }
+  return out + esc(code.slice(last));
+}
+
+function shuffle(arr){
+  for (let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function fmtTime(sec){
+  sec = Math.max(0, Math.round(sec));
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return m ? `${m}분 ${s}초` : `${s}초`;
+}
+
+function nowText(){
+  const d = new Date(), p = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function burst(x, y, n = 12){
+  if (reduceMotion) return;
+  const emojis = ["★", "✦", "★", "✧", "★"];
+  for (let i = 0; i < n; i++){
+    const s = document.createElement("span");
+    s.className = "particle";
+    s.textContent = emojis[i % emojis.length];
+    const ang = Math.random() * Math.PI * 2;
+    const dist = 60 + Math.random() * 90;
+    s.style.left = x + "px";
+    s.style.top = y + "px";
+    s.style.setProperty("--dx", Math.cos(ang) * dist + "px");
+    s.style.setProperty("--dy", Math.sin(ang) * dist - 30 + "px");
+    s.style.setProperty("--rot", (Math.random() * 240 - 120) + "deg");
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 1000);
+  }
+}
+
+function restartAnim(el, cls){
+  el.classList.remove(cls);
+  void el.offsetWidth;
+  el.classList.add(cls);
+}
+
+/* =========================================================
+   순위 텍스트 파일
+   형식(탭으로 구분, 한 줄에 한 명):
+   순위  이름  점수  걸린시간(초)  푼 날짜
+   ========================================================= */
+let IN_FRAME = false;
+try{ IN_FRAME = window.self !== window.top && !window.top.location.href; }catch(e){ IN_FRAME = true; }  // 다른 사이트(미리보기) 안에 있을 때만 true
+// 미리보기 창(다른 페이지 안)에서는 파일 선택 창을 열 수 없어서 자동 저장을 끕니다
+const FS_OK = !IN_FRAME && "showOpenFilePicker" in window && "showSaveFilePicker" in window;
+let fileHandle = null;        // 연결된 순위 파일 (크롬·엣지)
+let rememberedHandle = null;  // 지난번에 연결했던 파일
+let fallbackText = null;      // 파일 자동 저장이 안 되는 브라우저: 불러온 내용
+let fallbackName = DEFAULT_FILE_NAME;
+let fileCount = null;         // 파일에 있는 기록 수
+
+function parseRanking(text){
+  const list = [];
+  String(text || "").replace(/^﻿/, "").split(/\r?\n/).forEach(line => {
+    if (!line.trim() || line.trim().startsWith("#")) return;
+    const cols = line.split("\t");
+    if (cols.length < 4) return;
+    const name = cols[1].trim();
+    const score = parseInt(cols[2], 10);
+    const time = parseInt(cols[3], 10);
+    if (!name || isNaN(score) || isNaN(time)) return;
+    list.push({ name, score, time, date: (cols[4] || "").trim() });
+  });
+  return sortRanking(list);
+}
+
+function sortRanking(list){
+  return list.sort((a, b) => b.score - a.score || a.time - b.time || a.date.localeCompare(b.date));
+}
+
+function serializeRanking(list){
+  const lines = [
+    "# 파이썬 선택문 퀴즈 순위 (퀴즈가 자동으로 업데이트하는 파일입니다)",
+    "# 순위\t이름\t점수\t걸린시간(초)\t푼 날짜"
+  ];
+  sortRanking(list).forEach((r, i) => lines.push([i + 1, r.name, r.score, r.time, r.date].join("\t")));
+  return "﻿" + lines.join("\r\n") + "\r\n";
+}
+
+// 이번 기록을 목록과 비교해서 반영 (같은 이름은 최고 기록만 남김)
+function mergeRecord(list, rec){
+  const old = list.find(r => r.name === rec.name);
+  let isBest = true, prev = null;
+  if (!old){
+    list.push({ ...rec });
+  } else if (rec.score > old.score || (rec.score === old.score && rec.time < old.time)){
+    prev = { ...old };
+    Object.assign(old, rec);
+  } else {
+    isBest = false;
+    prev = { ...old };
+  }
+  sortRanking(list);
+  return { list, isBest, prev };
+}
+
+/* 파일 핸들 기억하기 (IndexedDB) */
+function idbOpen(){
+  return new Promise((res, rej) => {
+    const r = indexedDB.open("if-quiz-ranking", 1);
+    r.onupgradeneeded = () => r.result.createObjectStore("h");
+    r.onsuccess = () => res(r.result);
+    r.onerror = () => rej(r.error);
+  });
+}
+async function idbSet(v){
+  try{
+    const db = await idbOpen();
+    await new Promise((res, rej) => {
+      const tx = db.transaction("h", "readwrite");
+      tx.objectStore("h").put(v, "file");
+      tx.oncomplete = res; tx.onerror = () => rej(tx.error);
+    });
+  }catch(e){}
+}
+async function idbGet(){
+  try{
+    const db = await idbOpen();
+    return await new Promise(res => {
+      const q = db.transaction("h", "readonly").objectStore("h").get("file");
+      q.onsuccess = () => res(q.result || null);
+      q.onerror = () => res(null);
+    });
+  }catch(e){ return null; }
+}
+
+async function ensurePermission(h){
+  const opt = { mode: "readwrite" };
+  if (h.queryPermission && await h.queryPermission(opt) === "granted") return true;
+  if (h.requestPermission) return (await h.requestPermission(opt)) === "granted";
+  return true;
+}
+
+async function readFileText(){
+  const f = await fileHandle.getFile();
+  return await f.text();
+}
+async function writeFileText(text){
+  const w = await fileHandle.createWritable();
+  await w.write(text);
+  await w.close();
+}
+
+const PICK_TYPES = [{ description: "순위 텍스트 파일", accept: { "text/plain": [".txt"] } }];
+
+async function useHandle(h){
+  if (!await ensurePermission(h)) throw new Error("파일을 저장할 권한을 받지 못함.");
+  fileHandle = h;
+  rememberedHandle = h;
+  idbSet(h);
+  const text = await readFileText();
+  const list = parseRanking(text);
+  if (!text.trim()) await writeFileText(serializeRanking(list));  // 새 파일이면 머리글 기록
+  fileCount = list.length;
+}
+
+async function fileAction(act){
+  try{
+    if (act === "open"){
+      const [h] = await window.showOpenFilePicker({ types: PICK_TYPES, multiple: false });
+      await useHandle(h);
+    } else if (act === "create"){
+      const h = await window.showSaveFilePicker({ suggestedName: DEFAULT_FILE_NAME, types: PICK_TYPES });
+      await useHandle(h);
+    } else if (act === "reconnect" && rememberedHandle){
+      await useHandle(rememberedHandle);
+    } else if (act === "load"){
+      $("fileInput").click();
+      return;
+    } else if (act === "download"){
+      downloadRanking();
+      return;
+    } else if (act === "save"){
+      // 저장 다시 시도
+    }
+  }catch(e){
+    if (e && e.name === "AbortError") return;   // 사용자가 창을 닫음
+    const m = "⚠️ 순위 파일을 여는 중 문제가 생김. (" + esc(e && e.message ? e.message : e) + ")";
+    if (!$("result").classList.contains("hidden")){ $("saveBox").className = "save-box warn"; $("saveBox").innerHTML = m + `<div class="fp-actions">${fileButtons(["open", "create"])}</div>`; }
+    else { $("fpMsg").innerHTML = m; }
+    return;
+  }
+  renderFilePanel();
+  if (!$("result").classList.contains("hidden")) await syncRanking();
+}
+
+// 파일 자동 저장을 지원하지 않는 브라우저: 파일 불러오기
+$("fileInput").addEventListener("change", async e => {
+  const f = e.target.files && e.target.files[0];
+  if (!f) return;
+  fallbackText = await f.text();
+  fallbackName = f.name || DEFAULT_FILE_NAME;
+  fileCount = parseRanking(fallbackText).length;
+  e.target.value = "";
+  renderFilePanel();
+  if (!$("result").classList.contains("hidden")) await syncRanking();
+});
+
+function downloadRanking(){
+  const text = fallbackText !== null ? fallbackText : serializeRanking([]);
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = fallbackName;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+function fileButtons(acts){
+  const label = {
+    open: "📂 기존 파일 열기",
+    create: "📝 새 파일 만들기",
+    reconnect: rememberedHandle ? `🔗 '${esc(rememberedHandle.name)}' 다시 연결` : "",
+    load: "📂 순위 파일 불러오기",
+    download: "💾 순위 파일 저장(다운로드)",
+    save: "💾 다시 저장하기"
+  };
+  return acts.filter(a => label[a]).map(a =>
+    `<button type="button" class="btn small ${a === "open" || a === "load" || a === "reconnect" ? "" : "plain"}" data-file-act="${a}">${label[a]}</button>`
+  ).join("");
+}
+
+function renderFilePanel(){
+  const msg = $("fpMsg"), acts = $("fpActions");
+  if (FS_OK){
+    if (fileHandle){
+      msg.innerHTML = `✅ <b>${esc(fileHandle.name)}</b> 파일에 순위를 저장하는 중` +
+        (fileCount !== null ? ` (지금 ${fileCount}명 기록)` : "") + ".";
+      acts.innerHTML = fileButtons(["open", "create"]);
+    } else {
+      msg.innerHTML = "학생들이 풀기 전에 순위를 저장할 <b>텍스트 파일(.txt)</b>을 연결해 주기. 처음이면 <b>새 파일 만들기</b>, 이어서 쓰려면 <b>기존 파일 열기</b>를 누르면 됨.";
+      acts.innerHTML = fileButtons(rememberedHandle ? ["reconnect", "open", "create"] : ["open", "create"]);
+    }
+  } else if (IN_FRAME){
+    msg.innerHTML = "지금은 <b>미리보기 화면</b>이라 순위 파일을 저장할 수 없음. 퀴즈와 순위 화면은 확인할 수 있음. 실제 수업에서는 파일을 내려받아 <b>크롬이나 엣지</b>로 열어 주기.";
+    acts.innerHTML = "";
+    return;
+  } else {
+    if (fallbackText !== null){
+      msg.innerHTML = `✅ <b>${esc(fallbackName)}</b> 파일을 불러옴` + (fileCount !== null ? ` (지금 ${fileCount}명 기록)` : "") +
+        ". 이 브라우저는 자동 저장이 안 돼서, 끝나면 결과 화면에서 <b>다운로드</b>로 저장해 주기.";
+    } else {
+      msg.innerHTML = "이 브라우저는 파일 자동 저장을 지원하지 않음(크롬·엣지 권장). 기존 순위 파일이 있으면 <b>불러오기</b>를 눌러 주기.";
+    }
+    acts.innerHTML = fileButtons(["load"]);
+  }
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-file-act]");
+  if (b) fileAction(b.dataset.fileAct);
+});
+
+/* ---------- 상태 ---------- */
+let playerName = "";
+let startTime = 0;
+let current = 0;
+let score = 0;
+let tries = 0;
+let locked = false;
+let results = [];          // true: 첫 시도 정답, false: 첫 시도 오답, null: 아직 안 품
+let pendingRecord = null;  // 아직 파일에 저장하지 못한 이번 기록
+let lastRecord = null;     // 이번 기록 (순위에서 '나' 표시용)
+let lastMerge = null;
+
+/* ---------- 화면 전환 ---------- */
+function showScreen(id){
+  ["start", "quiz", "result"].forEach(s => $(s).classList.toggle("hidden", s !== id));
+  window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+}
+
+function startFromName(){
+  const name = $("nameInput").value.replace(/[\t\r\n]/g, " ").replace(/\s+/g, " ").trim().slice(0, 12);
+  if (!name){
+    $("nameError").classList.remove("hidden");
+    restartAnim($("nameInput"), "invalid");
+    $("nameInput").focus();
+    return;
+  }
+  $("nameError").classList.add("hidden");
+  $("nameInput").classList.remove("invalid");
+  playerName = name;
+  startQuiz();
+}
+$("startBtn").addEventListener("click", startFromName);
+$("nameInput").addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.isComposing){ e.preventDefault(); startFromName(); }
+});
+
+function startQuiz(){
+  current = 0;
+  score = 0;
+  results = QUESTIONS.map(() => null);
+  $("score").textContent = 0;
+  $("qTotal").textContent = QUESTIONS.length;
+  $("playerName").textContent = playerName;
+  startTime = Date.now();
+  showScreen("quiz");
+  renderQuestion();
+}
+
+function renderSteps(){
+  $("steps").innerHTML = QUESTIONS.map((_, i) => {
+    let c = "dot";
+    if (results[i] === true) c += " good";
+    else if (results[i] === false) c += " bad";
+    else if (i === current) c += " current";
+    return `<span class="${c}"></span>`;
+  }).join("");
+}
+
+function renderQuestion(){
+  const q = QUESTIONS[current];
+  tries = 0;
+  locked = false;
+
+  $("qNum").textContent = current + 1;
+  $("qType").textContent = q.type;
+  $("qType").dataset.type = q.type;
+  setDiff(DIFF[current]);
+  $("qText").innerHTML = fmt(q.question || DEFAULT_QUESTION);
+  $("qCode").innerHTML = highlight(q.code);
+  $("hintAlways").innerHTML = `<b>💡 힌트</b><br>${fmt(q.hint)}`;
+
+  const box = $("choices");
+  box.innerHTML = "";
+  shuffle(q.choices.map((_, i) => i)).forEach((ci, pos) => {
+    const t = q.choices[ci];
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "choice";
+    b.innerHTML =
+      `<span class="num">${pos + 1}</span>` +
+      `<span class="label${t === "오류 발생" ? "" : " out"}">${esc(t)}</span>` +
+      `<span class="mark" aria-hidden="true"></span>`;
+    b.addEventListener("click", () => choose(b, ci));
+    box.appendChild(b);
+  });
+
+  const fb = $("feedback");
+  fb.className = "feedback hidden";
+  fb.innerHTML = "";
+
+  const next = $("nextBtn");
+  next.classList.add("hidden");
+  next.textContent = current === QUESTIONS.length - 1 ? "결과 보기 🏁" : "다음 문제 ▶";
+
+  renderSteps();
+  restartAnim($("quiz"), "enter");
+}
+
+function choose(btn, ci){
+  if (locked || btn.disabled) return;
+  const q = QUESTIONS[current];
+  const fb = $("feedback");
+  tries++;
+
+  if (ci === q.answer){
+    locked = true;
+    btn.classList.add("correct");
+    btn.querySelector(".mark").textContent = "✔";
+    document.querySelectorAll(".choice").forEach(b => {
+      b.disabled = true;
+      if (b !== btn && !b.classList.contains("wrong")) b.classList.add("dim");
+    });
+
+    let title, sub = "";
+    if (tries === 1){
+      score += POINT;
+      results[current] = true;
+      $("score").textContent = score;
+      restartAnim($("scoreBadge"), "bump");
+      title = `🎉 정답! +${POINT}점`;
+    } else {
+      title = "👍 정답! 힌트를 보고 찾아냄";
+      sub = `<div class="fb-sub">첫 번째 시도가 아니라서 이번 문제는 0점.</div>`;
+    }
+    fb.className = "feedback good";
+    fb.innerHTML =
+      `<div class="fb-title">${title}</div>${sub}` +
+      `<div class="explain"><b>✏️ 해설</b><br>${fmt(q.explain)}</div>`;
+
+    const r = btn.getBoundingClientRect();
+    burst(r.left + 30, r.top + r.height / 2);
+
+    const next = $("nextBtn");
+    next.classList.remove("hidden");
+    next.focus({ preventScroll: true });
+    next.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+  } else {
+    btn.classList.add("wrong");
+    btn.disabled = true;
+    btn.querySelector(".mark").textContent = "✖";
+    restartAnim(btn, "shake");
+    if (tries === 1) results[current] = false;
+
+    fb.className = "feedback bad";
+    fb.innerHTML =
+      `<div class="fb-title">😢 아쉬움, 오답!</div>` +
+      `<div class="retry-note">위의 💡 힌트를 다시 읽고 다른 보기를 골라 보기!</div>`;
+    restartAnim(fb, "feedback");
+    fb.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+  }
+  renderSteps();
+}
+
+function nextQuestion(){
+  if (current < QUESTIONS.length - 1){
+    current++;
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  } else {
+    showResult();
+  }
+}
+
+/* ---------- 결과 & 순위 ---------- */
+function showResult(){
+  const max = QUESTIONS.length * POINT;
+  const sec = Math.max(1, Math.round((Date.now() - startTime) / 1000));
+  $("maxScore").textContent = max;
+  $("resultName").textContent = playerName;
+  $("finalTime").textContent = `걸린 시간 ${fmtTime(sec)}`;
+
+  let emoji, msg;
+  if (score === max){ emoji = "🏆"; msg = "완벽함! 이제 선택문 마스터! 🐍✨"; }
+  else if (score >= max * 0.6){ emoji = "🥳"; msg = "잘했음! 조금만 더 하면 만점."; }
+  else if (score > 0){ emoji = "🌱"; msg = "좋은 시작! 힌트를 떠올리며 한 번 더 풀어 보기."; }
+  else { emoji = "💪"; msg = "괜찮음! 다시 풀다 보면 실력이 쑥쑥 늘 것!"; }
+  $("resultEmoji").textContent = emoji;
+  $("finalMsg").textContent = msg;
+
+  $("review").innerHTML = QUESTIONS.map((q, i) => {
+    const ok = results[i] === true;
+    return `<span class="chip ${ok ? "ok" : "no"}">${i + 1}번 ${ok ? "⭕" : "❌"}</span>`;
+  }).join("");
+
+  lastRecord = { name: playerName, score, time: sec, date: nowText() };
+  pendingRecord = { ...lastRecord };
+  lastMerge = null;
+
+  showScreen("result");
+
+  const el = $("finalScore");
+  if (reduceMotion || score === 0){
+    el.textContent = score;
+  } else {
+    let v = 0;
+    el.textContent = 0;
+    const step = () => {
+      v = Math.min(score, v + 1);
+      el.textContent = v;
+      if (v < score) setTimeout(step, 28);
+    };
+    step();
+  }
+
+  if (score === max){
+    setTimeout(() => {
+      burst(window.innerWidth / 2, window.innerHeight / 3, 24);
+      setTimeout(() => burst(window.innerWidth / 2, window.innerHeight / 3, 24), 350);
+    }, 400);
+  }
+
+  syncRanking();
+}
+
+// 텍스트 파일에서 목록을 불러와 이번 기록과 비교 → 저장 → 순위 출력
+async function syncRanking(){
+  const box = $("saveBox");
+  $("rankList").innerHTML = `<li class="empty">순위 파일을 불러오는 중…</li>`;
+
+  if (FS_OK && fileHandle){
+    try{
+      if (!await ensurePermission(fileHandle)) throw new Error("파일 저장 권한이 없음.");
+      let list = parseRanking(await readFileText());
+      if (pendingRecord){
+        lastMerge = mergeRecord(list, pendingRecord);
+        list = lastMerge.list;
+        await writeFileText(serializeRanking(list));
+        pendingRecord = null;
+      }
+      fileCount = list.length;
+      renderRanking(list);
+      box.className = "save-box ok";
+      box.innerHTML = `💾 <b>${esc(fileHandle.name)}</b> 파일에서 순위를 불러와 비교하고, 이번 기록까지 저장함.`;
+      renderFilePanel();
+    }catch(e){
+      renderRanking(null);
+      box.className = "save-box warn";
+      box.innerHTML = `⚠️ 순위 파일을 읽거나 저장하지 못함. (${esc(e && e.message ? e.message : e)})` +
+        `<div class="fp-actions">${fileButtons(["save", "open", "create"])}</div>`;
+    }
+    return;
+  }
+
+  if (FS_OK){
+    renderRanking(null);
+    box.className = "save-box warn";
+    box.innerHTML = "⚠️ 순위 파일이 연결되지 않아 순위를 불러올 수 없음. 파일을 연결하면 이번 기록도 바로 저장됨." +
+      `<div class="fp-actions">${fileButtons(rememberedHandle ? ["reconnect", "open", "create"] : ["open", "create"])}</div>`;
+    return;
+  }
+
+  // 자동 저장을 지원하지 않는 브라우저
+  let list = parseRanking(fallbackText || "");
+  if (pendingRecord){
+    lastMerge = mergeRecord(list, pendingRecord);
+    list = lastMerge.list;
+    fallbackText = serializeRanking(list);
+    pendingRecord = null;
+  }
+  fileCount = list.length;
+  renderRanking(list);
+  box.className = "save-box warn";
+  if (IN_FRAME){ box.innerHTML = "ℹ️ 미리보기 화면이라 순위는 이 창에만 임시로 보임. 파일을 내려받아 크롬·엣지로 열면 텍스트 파일에 저장됨."; renderFilePanel(); return; }
+  box.innerHTML = "⚠️ 이 브라우저는 파일 자동 저장이 안 됨. 아래 버튼으로 순위 파일을 저장해 두고, 다음에 <b>불러오기</b>로 이어서 쓰면 됨." +
+    `<div class="fp-actions">${fileButtons(["download"])}</div>`;
+  renderFilePanel();
+}
+
+function renderRanking(list){
+  const ul = $("rankList");
+  const note = $("bestNote");
+  note.classList.add("hidden");
+
+  if (!list){
+    ul.innerHTML = `<li class="empty">순위 파일을 연결하면 순위가 나타남</li>`;
+    $("rankSub").textContent = "";
+    return;
+  }
+  if (!list.length){
+    ul.innerHTML = `<li class="empty">아직 기록 없음</li>`;
+    $("rankSub").textContent = "";
+    return;
+  }
+
+  const me = lastRecord ? lastRecord.name : null;
+  const medals = ["🥇", "🥈", "🥉"];
+  ul.innerHTML = list.map((r, i) => {
+    const isMe = r.name === me;
+    return `<li class="${isMe ? "me" : ""}">` +
+      `<span class="rk ${i < 3 ? "medal" : ""}">${i < 3 ? medals[i] : i + 1}</span>` +
+      `<span class="rn">${esc(r.name)}${isMe ? '<span class="me-badge">나</span>' : ""}</span>` +
+      `<span class="rs">${r.score}점</span>` +
+      `<span class="rt">${fmtTime(r.time)}</span></li>`;
+  }).join("");
+
+  const myIdx = list.findIndex(r => r.name === me);
+  $("rankSub").textContent = myIdx >= 0 ? `전체 ${list.length}명 중 ${myIdx + 1}등!` : `전체 ${list.length}명`;
+
+  if (lastMerge && !lastMerge.isBest && lastMerge.prev){
+    note.innerHTML = `이번 기록: <b>${lastRecord.score}점 · ${fmtTime(lastRecord.time)}</b> → ` +
+      `순위에는 최고 기록(${lastMerge.prev.score}점 · ${fmtTime(lastMerge.prev.time)})이 남아 있음.`;
+    note.classList.remove("hidden");
+  } else if (lastMerge && lastMerge.isBest && lastMerge.prev){
+    note.innerHTML = `🎊 최고 기록 갱신! (이전 ${lastMerge.prev.score}점 · ${fmtTime(lastMerge.prev.time)})`;
+    note.classList.remove("hidden");
+  }
+
+  const meEl = ul.querySelector("li.me");
+  if (meEl) ul.scrollTop = meEl.offsetTop - ul.clientHeight / 2 + meEl.offsetHeight / 2;
+}
+
+/* ---------- 이벤트 ---------- */
+$("nextBtn").addEventListener("click", nextQuestion);
+$("retryBtn").addEventListener("click", startQuiz);
+$("nextPlayerBtn").addEventListener("click", () => {
+  $("nameInput").value = "";
+  showScreen("start");
+  renderFilePanel();
+  $("nameInput").focus({ preventScroll: true });
+});
+
+// 키보드 1~4로 보기 선택
+document.addEventListener("keydown", e => {
+  if ($("quiz").classList.contains("hidden")) return;
+  if (["1", "2", "3", "4"].includes(e.key)){
+    const b = document.querySelectorAll(".choice")[Number(e.key) - 1];
+    if (b && !b.disabled) b.click();
+  }
+});
+
+// 처음 열 때: 지난번 파일 기억해 두기
+(async () => {
+  try{ renderFilePanel(); }catch(e){}
+  if (FS_OK){
+    const h = await idbGet();
+    if (h && h.getFile){
+      rememberedHandle = h;
+      try{
+        if (h.queryPermission && await h.queryPermission({ mode: "readwrite" }) === "granted"){
+          fileHandle = h;
+          fileCount = parseRanking(await readFileText()).length;
+        }
+      }catch(e){ fileHandle = null; }
+      renderFilePanel();
+    }
+  }
+  if (window.matchMedia("(pointer: fine)").matches) $("nameInput").focus({ preventScroll: true });
+})();
+<\/script>
+</body>
+</html>
+</script>
+<script>
+const frames = {};
+function openQuiz(key, title){
+  if (!frames[key]){
+    const f = document.createElement("iframe");
+    f.title = title;
+    f.srcdoc = document.getElementById("src-" + key).textContent.replace(/<\\\/script/g, "<" + "/script");
+    document.getElementById("frames").appendChild(f);
+    frames[key] = f;
+  }
+  Object.entries(frames).forEach(([k, f]) => f.classList.toggle("hidden", k !== key));
+  document.getElementById("barTitle").textContent = title;
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("player").classList.remove("hidden");
+  frames[key].focus();
+  try{ history.replaceState(null, "", "#" + key); }catch(e){}
+}
+function backToMenu(){
+  document.getElementById("player").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+  try{ history.replaceState(null, "", location.pathname + location.search); }catch(e){}
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll(".quiz-card").forEach(b =>
+  b.addEventListener("click", () => openQuiz(b.dataset.quiz, b.dataset.title)));
+document.getElementById("backBtn").addEventListener("click", backToMenu);
+// 주소 끝에 #blank, #basics, #ifq 를 붙이면 그 퀴즈가 바로 열려요
+const start = location.hash.slice(1);
+const card = document.querySelector(`.quiz-card[data-quiz="${start}"]`);
+if (card) openQuiz(card.dataset.quiz, card.dataset.title);
+</script>
+</body>
+</html>
