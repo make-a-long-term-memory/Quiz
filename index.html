@@ -162,7 +162,8 @@
   function jget(store, k, d){ try{ var v = store.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
   function jset(store, k, v){ try{ store.setItem(k, JSON.stringify(v)); }catch(e){} }
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  function student(){ var s = jget(sessionStorage, "mirim-student", null); return s && s.cls ? s : null; }
+  var KEEP = 3 * 60 * 60 * 1000;  // 학번은 이 기기에 3시간 동안 기억해요(실습실 PC를 다음 시간에 다른 학생이 쓸 수 있어서)
+  function student(){ var s = jget(localStorage, "mirim-student", null); return s && s.cls && Date.now() - (s.at || 0) < KEEP ? s : null; }
   function key(st){ return st.id + "|" + st.name; }
   function label(st){ return st.label || st.id; }
   function results(id){ return jget(localStorage, "mirim-results", {})[id] || {}; }
@@ -201,7 +202,7 @@
         if (!name){ err.textContent = "이름을 입력하자."; box.querySelector(".ms-name").focus(); return; }
         var g = gc.charAt(0), c = gc.charAt(1);
         var id = gc + (n < 10 ? "0" : "") + n, lb = g + "학년 " + c + "반 " + n + "번";
-        jset(sessionStorage, "mirim-student", { id: id, grade: +g, cls: +c, num: +n, label: lb, name: name });
+        jset(localStorage, "mirim-student", { id: id, grade: +g, cls: +c, num: +n, label: lb, name: name, at: Date.now() });
         editing = false;
         var ni = document.getElementById("nameInput");
         if (ni) ni.value = (lb + " " + name).slice(0, 12);
@@ -214,6 +215,8 @@
   function renderWho(){
     var box = whoBox(); if (!box) return;
     var st = student();
+    if (st && !editing && cfg.hideWhenSet){ box.style.display = "none"; return; }
+    box.style.display = "";
     if (st && !editing){
       box.classList.add("set");
       box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(label(st)) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
