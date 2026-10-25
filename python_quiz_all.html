@@ -343,7 +343,7 @@
   .ox-hero{display:flex;gap:.18em;line-height:1}
   .ox-hero svg{width:1em;height:1em;display:block}
   /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 배경과 비슷한 톤의 조금 어두운 원 + 짙은 글자(가. 나. 다.) */
-  .stage-list .sn{width:36px;height:36px;background:#ebe3d0;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1}
+  .stage-list .sn{width:36px;height:36px;background:#ebe3d0;color:#5b5243;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1;padding-left:3px}
 </style>
 </head>
 <body>
@@ -513,7 +513,7 @@ const ROMAN = ["가.","나.","다.","라.","마.","바.","사.","아.","자.","�
 $("stageList").innerHTML = STAGES.map((st, i) => {
   const n = Q.filter(q => q.s === i).length;
   const first = Q.findIndex(q => q.s === i) + 1;
-  return `<li><span class="sn" data-n="${ROMAN[i].length}" style="color:${st.color[1]}">${ROMAN[i]}</span>` +
+  return `<li><span class="sn">${ROMAN[i]}</span>` +
          `<div><b>${st.name}</b><small>${n}문제</small></div></li>`;
 }).join("");
 
@@ -1431,7 +1431,7 @@ document.addEventListener("keydown", e => {
     .concept .ct{font-size:1.02rem;margin-bottom:4px}
   }
   /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 배경과 비슷한 톤의 조금 어두운 원 + 짙은 글자(가. 나. 다.) */
-  .stage-list .sn{width:36px;height:36px;background:#ebe3d0;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1}
+  .stage-list .sn{width:36px;height:36px;background:#ebe3d0;color:#5b5243;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1;padding-left:3px}
 </style>
 </head>
 <body>
@@ -1624,7 +1624,7 @@ const ROMAN = ["가.","나.","다.","라.","마.","바.","사.","아.","자.","�
 $("stageList").innerHTML = STAGES.map((st, i) => {
   const n = Q.filter(q => q.s === i).length;
   const first = Q.findIndex(q => q.s === i) + 1;
-  return `<li><span class="sn" data-n="${ROMAN[i].length}" style="color:${st.color[1]}">${ROMAN[i]}</span>` +
+  return `<li><span class="sn">${ROMAN[i]}</span>` +
          `<div><b>${st.name}</b><small>${first}~${first + n - 1}번 · ${n}문제</small></div></li>`;
 }).join("");
 
