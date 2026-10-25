@@ -85,16 +85,16 @@
   .home-link{display:inline-block;margin-bottom:6px;font-weight:700;color:var(--ink);text-decoration:none;border-bottom:1.5px solid #ddd7e6}
   .home-link:hover{border-color:#c9c2d5}
   /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
-  .ms-who{background:#ffffff;border-radius:20px;padding:12px 14px;margin:0 0 18px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
+  .ms-who{background:#ffffff;border-radius:28px;padding:22px 28px 24px;margin:0 0 20px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
   .ms-who.set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px 8px 14px;box-shadow:none;border:2px solid #ddd7e6;width:max-content;max-width:100%}
   .ms-who-me{font-size:.95rem;color:#686472}
   .ms-who-me b{color:#33303c}
   .ms-edit{font:inherit;font-size:.82rem;font-weight:700;color:#5a4f7e;background:#f6f4fa;border:none;border-radius:999px;padding:3px 12px;cursor:pointer}
-  .ms-who-t{display:block;font-weight:800;font-size:1.02rem;margin-bottom:8px;color:#33303c}
+  .ms-who-t{display:block;font-weight:800;font-size:1.02rem;margin-bottom:12px;color:#33303c}
   .ms-who-row{display:flex;gap:8px;flex-wrap:wrap}
   .ms-who select,.ms-who input{font:inherit;font-size:1rem;padding:9px 12px;border-radius:14px;border:2px solid #ddd7e6;background:#ffffff;color:#33303c;min-width:0}
-  .ms-who select{flex:0 0 7.2em}
-  .ms-who input{flex:1 1 8em}
+  .ms-who select,.ms-who input{flex:1 1 0}
+  @media (max-width:560px){ .ms-who{padding:18px 16px 20px;border-radius:22px} }
   .ms-who select:focus,.ms-who input:focus{outline:3px solid #bfb4e4;outline-offset:1px}
   .ms-who .ms-btn{padding:9px 20px;font-size:1rem}
   .ms-who .ms-err{color:#b25d6c;font-size:.88rem;margin-top:6px}
@@ -382,16 +382,16 @@
   /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 배경과 비슷한 톤의 조금 어두운 원 + 짙은 글자(가. 나. 다.) */
   .stage-list .sn{width:36px;height:36px;background:#ebe3d0;color:#5b5243;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1;padding-left:3px}
   /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
-  .ms-who{background:#ffffff;border-radius:20px;padding:12px 14px;margin:0 0 18px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
+  .ms-who{background:#ffffff;border-radius:28px;padding:22px 28px 24px;margin:0 0 20px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
   .ms-who.set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px 8px 14px;box-shadow:none;border:2px solid #ddd7e6;width:max-content;max-width:100%}
   .ms-who-me{font-size:.95rem;color:#686472}
   .ms-who-me b{color:#33303c}
   .ms-edit{font:inherit;font-size:.82rem;font-weight:700;color:#5a4f7e;background:#f6f4fa;border:none;border-radius:999px;padding:3px 12px;cursor:pointer}
-  .ms-who-t{display:block;font-weight:800;font-size:1.02rem;margin-bottom:8px;color:#33303c}
+  .ms-who-t{display:block;font-weight:800;font-size:1.02rem;margin-bottom:12px;color:#33303c}
   .ms-who-row{display:flex;gap:8px;flex-wrap:wrap}
   .ms-who select,.ms-who input{font:inherit;font-size:1rem;padding:9px 12px;border-radius:14px;border:2px solid #ddd7e6;background:#ffffff;color:#33303c;min-width:0}
-  .ms-who select{flex:0 0 7.2em}
-  .ms-who input{flex:1 1 8em}
+  .ms-who select,.ms-who input{flex:1 1 0}
+  @media (max-width:560px){ .ms-who{padding:18px 16px 20px;border-radius:22px} }
   .ms-who select:focus,.ms-who input:focus{outline:3px solid #bfb4e4;outline-offset:1px}
   .ms-who .ms-btn{padding:9px 20px;font-size:1rem}
   .ms-who .ms-err{color:#b25d6c;font-size:.88rem;margin-top:6px}
@@ -1150,16 +1150,16 @@ MirimScore.init({"areas": [], "accent": "#d6557d", "deep": "#bd426e", "whoAfter"
     .concept .ct{font-size:1.02rem;margin-bottom:4px}
   }
   /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
-  .ms-who{background:#ffffff;border-radius:20px;padding:12px 14px;margin:0 0 18px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
+  .ms-who{background:#ffffff;border-radius:28px;padding:22px 28px 24px;margin:0 0 20px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
   .ms-who.set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px 8px 14px;box-shadow:none;border:2px solid #ddd7e6;width:max-content;max-width:100%}
   .ms-who-me{font-size:.95rem;color:#686472}
   .ms-who-me b{color:#33303c}
   .ms-edit{font:inherit;font-size:.82rem;font-weight:700;color:#5a4f7e;background:#f6f4fa;border:none;border-radius:999px;padding:3px 12px;cursor:pointer}
-  .ms-who-t{display:block;font-weight:800;font-size:1.02rem;margin-bottom:8px;color:#33303c}
+  .ms-who-t{display:block;font-weight:800;font-size:1.02rem;margin-bottom:12px;color:#33303c}
   .ms-who-row{display:flex;gap:8px;flex-wrap:wrap}
   .ms-who select,.ms-who input{font:inherit;font-size:1rem;padding:9px 12px;border-radius:14px;border:2px solid #ddd7e6;background:#ffffff;color:#33303c;min-width:0}
-  .ms-who select{flex:0 0 7.2em}
-  .ms-who input{flex:1 1 8em}
+  .ms-who select,.ms-who input{flex:1 1 0}
+  @media (max-width:560px){ .ms-who{padding:18px 16px 20px;border-radius:22px} }
   .ms-who select:focus,.ms-who input:focus{outline:3px solid #bfb4e4;outline-offset:1px}
   .ms-who .ms-btn{padding:9px 20px;font-size:1rem}
   .ms-who .ms-err{color:#b25d6c;font-size:.88rem;margin-top:6px}
@@ -1944,16 +1944,16 @@ MirimScore.init({"areas": [], "accent": "#d6557d", "deep": "#bd426e", "whoAfter"
   /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 배경과 비슷한 톤의 조금 어두운 원 + 짙은 글자(가. 나. 다.) */
   .stage-list .sn{width:36px;height:36px;background:#ebe3d0;color:#5b5243;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1;padding-left:3px}
   /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
-  .ms-who{background:#ffffff;border-radius:20px;padding:12px 14px;margin:0 0 18px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
+  .ms-who{background:#ffffff;border-radius:28px;padding:22px 28px 24px;margin:0 0 20px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
   .ms-who.set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px 8px 14px;box-shadow:none;border:2px solid #ddd7e6;width:max-content;max-width:100%}
   .ms-who-me{font-size:.95rem;color:#686472}
   .ms-who-me b{color:#33303c}
   .ms-edit{font:inherit;font-size:.82rem;font-weight:700;color:#5a4f7e;background:#f6f4fa;border:none;border-radius:999px;padding:3px 12px;cursor:pointer}
-  .ms-who-t{display:block;font-weight:800;font-size:1.02rem;margin-bottom:8px;color:#33303c}
+  .ms-who-t{display:block;font-weight:800;font-size:1.02rem;margin-bottom:12px;color:#33303c}
   .ms-who-row{display:flex;gap:8px;flex-wrap:wrap}
   .ms-who select,.ms-who input{font:inherit;font-size:1rem;padding:9px 12px;border-radius:14px;border:2px solid #ddd7e6;background:#ffffff;color:#33303c;min-width:0}
-  .ms-who select{flex:0 0 7.2em}
-  .ms-who input{flex:1 1 8em}
+  .ms-who select,.ms-who input{flex:1 1 0}
+  @media (max-width:560px){ .ms-who{padding:18px 16px 20px;border-radius:22px} }
   .ms-who select:focus,.ms-who input:focus{outline:3px solid #bfb4e4;outline-offset:1px}
   .ms-who .ms-btn{padding:9px 20px;font-size:1rem}
   .ms-who .ms-err{color:#b25d6c;font-size:.88rem;margin-top:6px}
@@ -2870,16 +2870,16 @@ MirimScore.init({"areas": [], "accent": "#d6557d", "deep": "#bd426e", "whoAfter"
     .concept .ct{font-size:1.02rem;margin-bottom:4px}
   }
   /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
-  .ms-who{background:#ffffff;border-radius:20px;padding:12px 14px;margin:0 0 18px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
+  .ms-who{background:#ffffff;border-radius:28px;padding:22px 28px 24px;margin:0 0 20px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
   .ms-who.set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px 8px 14px;box-shadow:none;border:2px solid #ddd7e6;width:max-content;max-width:100%}
   .ms-who-me{font-size:.95rem;color:#686472}
   .ms-who-me b{color:#33303c}
   .ms-edit{font:inherit;font-size:.82rem;font-weight:700;color:#5a4f7e;background:#f6f4fa;border:none;border-radius:999px;padding:3px 12px;cursor:pointer}
-  .ms-who-t{display:block;font-weight:800;font-size:1.02rem;margin-bottom:8px;color:#33303c}
+  .ms-who-t{display:block;font-weight:800;font-size:1.02rem;margin-bottom:12px;color:#33303c}
   .ms-who-row{display:flex;gap:8px;flex-wrap:wrap}
   .ms-who select,.ms-who input{font:inherit;font-size:1rem;padding:9px 12px;border-radius:14px;border:2px solid #ddd7e6;background:#ffffff;color:#33303c;min-width:0}
-  .ms-who select{flex:0 0 7.2em}
-  .ms-who input{flex:1 1 8em}
+  .ms-who select,.ms-who input{flex:1 1 0}
+  @media (max-width:560px){ .ms-who{padding:18px 16px 20px;border-radius:22px} }
   .ms-who select:focus,.ms-who input:focus{outline:3px solid #bfb4e4;outline-offset:1px}
   .ms-who .ms-btn{padding:9px 20px;font-size:1rem}
   .ms-who .ms-err{color:#b25d6c;font-size:.88rem;margin-top:6px}
