@@ -763,13 +763,14 @@ document.addEventListener("keydown", e => {
     html:   { label: "HTML",    quizzes: [["ox", "HTML OX", 15], ["blank", "HTML 빈칸 채우기", 10], ["basics", "HTML 첫걸음", 20], ["layout", "CSS 레이아웃", 30]] },
     python: { label: "파이썬",  quizzes: [["ox", "파이썬 OX", 15], ["blank", "파이썬 빈칸 채우기", 10], ["basics", "파이썬 첫걸음", 30], ["ifq", "파이썬 선택문", 5]] }
   };
-  var CLASSES = [["15", "1학년 5반"], ["16", "1학년 6반"], ["25", "2학년 5반"], ["26", "2학년 6반"]];
   var cfg = {}, MSG = {};
 
   function jget(store, k, d){ try{ var v = store.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
   function jset(store, k, v){ try{ store.setItem(k, JSON.stringify(v)); }catch(e){} }
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  function student(){ return jget(sessionStorage, "mirim-student", null); }
+  function student(){ var s = jget(sessionStorage, "mirim-student", null); return s && s.grade ? s : null; }
+  function key(st){ return st.id + "|" + st.name; }
+  function label(st){ return st.label || st.id; }
   function results(id){ return jget(localStorage, "mirim-results", {})[id] || {}; }
   function sentCount(id, area){ var s = jget(localStorage, "mirim-sent", {}); return (s[id] && s[id][area]) || 0; }
   function setSent(id, area, n){ var s = jget(localStorage, "mirim-sent", {}); s[id] = s[id] || {}; s[id][area] = n; jset(localStorage, "mirim-sent", s); }
@@ -786,13 +787,7 @@ document.addEventListener("keydown", e => {
 
   /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
   var editing = false;
-  function idOptions(){
-    return CLASSES.map(function(k){
-      var o = "";
-      for (var i = 1; i <= 18; i++){ var id = k[0] + (i < 10 ? "0" : "") + i; o += '<option value="' + id + '">' + id + "</option>"; }
-      return '<optgroup label="' + k[1] + '">' + o + "</optgroup>";
-    }).join("");
-  }
+  function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
   function whoBox(){
     var box = document.querySelector(".ms-who");
     if (!box){
@@ -804,14 +799,16 @@ document.addEventListener("keydown", e => {
       box.addEventListener("click", function(e){ if (e.target.closest(".ms-edit")){ editing = true; renderWho(); focusWho(); } });
       box.addEventListener("submit", function(e){
         e.preventDefault();
-        var id = box.querySelector(".ms-id").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
+        var g = box.querySelector(".ms-grade").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!id){ err.textContent = "학번을 골라야 함."; box.querySelector(".ms-id").focus(); return; }
+        if (!g){ err.textContent = "학년을 골라야 함."; box.querySelector(".ms-grade").focus(); return; }
+        if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
         if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
-        jset(sessionStorage, "mirim-student", { id: id, name: name });
+        var id = g + "-" + (n < 10 ? "0" : "") + n, lb = g + "학년 " + n + "번";
+        jset(sessionStorage, "mirim-student", { id: id, grade: +g, num: +n, label: lb, name: name });
         editing = false;
         var ni = document.getElementById("nameInput");
-        if (ni) ni.value = (id + " " + name).slice(0, 12);
+        if (ni) ni.value = (lb + " " + name).slice(0, 12);
         render();
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       });
@@ -823,18 +820,19 @@ document.addEventListener("keydown", e => {
     var st = student();
     if (st && !editing){
       box.classList.add("set");
-      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(st.id) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
+      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(label(st)) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
       return;
     }
     box.classList.remove("set");
-    box.innerHTML = '<form><b class="ms-who-t">학번과 이름을 입력하세요</b>' +
-      '<div class="ms-who-row"><select class="ms-id" aria-label="학번"><option value="">학번</option>' + idOptions() + "</select>" +
+    box.innerHTML = '<form><b class="ms-who-t">학년, 번호, 이름을 입력하세요</b>' +
+      '<div class="ms-who-row"><select class="ms-grade" aria-label="학년"><option value="">학년</option>' + nums(1, 3, "학년") + "</select>" +
+      '<select class="ms-num" aria-label="번호"><option value="">번호</option>' + nums(1, 20, "번") + "</select>" +
       '<input class="ms-name" maxlength="10" autocomplete="off" placeholder="이름" aria-label="이름">' +
       '<button class="ms-btn" type="submit">확인</button></div>' +
       '<p class="ms-err"></p></form>';
-    if (st){ box.querySelector(".ms-id").value = st.id; box.querySelector(".ms-name").value = st.name; }
+    if (st && st.grade){ box.querySelector(".ms-grade").value = st.grade; box.querySelector(".ms-num").value = st.num; box.querySelector(".ms-name").value = st.name; }
   }
-  function focusWho(){ var b = document.querySelector(".ms-who"); if (b){ var f = b.querySelector(".ms-id"); if (f){ f.focus(); b.scrollIntoView({ block: "center", behavior: "smooth" }); } } }
+  function focusWho(){ var b = document.querySelector(".ms-who"); if (b){ var f = b.querySelector(".ms-grade"); if (f){ f.focus(); b.scrollIntoView({ block: "center", behavior: "smooth" }); } } }
   function openGate(){ editing = !!student(); renderWho(); focusWho(); }
 
   /* ---------- 점수 모아 보기 ---------- */
@@ -855,8 +853,8 @@ document.addEventListener("keydown", e => {
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학번과 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
-      var s = summary(st.id, area), left = Math.max(0, LIMIT - sentCount(st.id, area));
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
         '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
@@ -870,24 +868,24 @@ document.addEventListener("keydown", e => {
   function send(area, panel){
     var st = student();
     if (!st){ openGate(); return; }
-    var s = summary(st.id, area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
-    var left = LIMIT - sentCount(st.id, area);
+    var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
+    var left = LIMIT - sentCount(key(st), area);
     var url = window.SCORE_URL;
     if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않음. 선생님께 알려 주기."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = st.id + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
+    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
             (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어감." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됨.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
     msg.textContent = "보내는 중…";
     function say(text){ MSG[area] = text; msg.textContent = text; }
-    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
+    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, grade: st.grade, num: st.num, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(st.id, area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
-        else if (d && d.error === "limit"){ setSent(st.id, area, LIMIT); say("이미 3번 모두 보냈음."); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈음."); }
         else { say("⚠️ 보내지 못함: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
       })
@@ -914,7 +912,7 @@ document.addEventListener("keydown", e => {
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학번과 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 번호, 이름을 입력해야 시작할 수 있음.";
           focusWho();
         }, true);
       }
@@ -930,7 +928,7 @@ MirimScore.init({"areas": [], "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter"
 (function(){
   var AREA = "html", KEY = "ox";
   function stu(){ try{ return JSON.parse(sessionStorage.getItem("mirim-student") || "null"); }catch(e){ return null; } }
-  if (KEY === "ifq"){ var s0 = stu(), ni = document.getElementById("nameInput"); if (s0 && ni && !ni.value) ni.value = (s0.id + " " + s0.name).slice(0, 12); }
+  if (KEY === "ifq"){ var s0 = stu(), ni = document.getElementById("nameInput"); if (s0 && s0.grade && ni && !ni.value) ni.value = (s0.label + " " + s0.name).slice(0, 12); }
   if (typeof showResult !== "function") return;
   var orig = showResult;
   showResult = function(){
@@ -940,7 +938,7 @@ MirimScore.init({"areas": [], "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter"
       if (typeof QUESTIONS !== "undefined" && typeof POINT !== "undefined"){ c = score / POINT; t = QUESTIONS.length; }
       else { full = order.length === Q.length; c = correct; t = Q.length; }
       if (full){
-        var s = stu(), id = s ? s.id : "guest";
+        var s = stu(), id = s && s.grade ? s.id + "|" + s.name : "guest";
         var all = JSON.parse(localStorage.getItem("mirim-results") || "{}");
         all[id] = all[id] || {}; all[id][AREA] = all[id][AREA] || {};
         all[id][AREA][KEY] = { c: c, t: t, at: Date.now() };
@@ -1596,13 +1594,14 @@ document.addEventListener("keydown", e => {
     html:   { label: "HTML",    quizzes: [["ox", "HTML OX", 15], ["blank", "HTML 빈칸 채우기", 10], ["basics", "HTML 첫걸음", 20], ["layout", "CSS 레이아웃", 30]] },
     python: { label: "파이썬",  quizzes: [["ox", "파이썬 OX", 15], ["blank", "파이썬 빈칸 채우기", 10], ["basics", "파이썬 첫걸음", 30], ["ifq", "파이썬 선택문", 5]] }
   };
-  var CLASSES = [["15", "1학년 5반"], ["16", "1학년 6반"], ["25", "2학년 5반"], ["26", "2학년 6반"]];
   var cfg = {}, MSG = {};
 
   function jget(store, k, d){ try{ var v = store.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
   function jset(store, k, v){ try{ store.setItem(k, JSON.stringify(v)); }catch(e){} }
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  function student(){ return jget(sessionStorage, "mirim-student", null); }
+  function student(){ var s = jget(sessionStorage, "mirim-student", null); return s && s.grade ? s : null; }
+  function key(st){ return st.id + "|" + st.name; }
+  function label(st){ return st.label || st.id; }
   function results(id){ return jget(localStorage, "mirim-results", {})[id] || {}; }
   function sentCount(id, area){ var s = jget(localStorage, "mirim-sent", {}); return (s[id] && s[id][area]) || 0; }
   function setSent(id, area, n){ var s = jget(localStorage, "mirim-sent", {}); s[id] = s[id] || {}; s[id][area] = n; jset(localStorage, "mirim-sent", s); }
@@ -1619,13 +1618,7 @@ document.addEventListener("keydown", e => {
 
   /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
   var editing = false;
-  function idOptions(){
-    return CLASSES.map(function(k){
-      var o = "";
-      for (var i = 1; i <= 18; i++){ var id = k[0] + (i < 10 ? "0" : "") + i; o += '<option value="' + id + '">' + id + "</option>"; }
-      return '<optgroup label="' + k[1] + '">' + o + "</optgroup>";
-    }).join("");
-  }
+  function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
   function whoBox(){
     var box = document.querySelector(".ms-who");
     if (!box){
@@ -1637,14 +1630,16 @@ document.addEventListener("keydown", e => {
       box.addEventListener("click", function(e){ if (e.target.closest(".ms-edit")){ editing = true; renderWho(); focusWho(); } });
       box.addEventListener("submit", function(e){
         e.preventDefault();
-        var id = box.querySelector(".ms-id").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
+        var g = box.querySelector(".ms-grade").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!id){ err.textContent = "학번을 골라야 함."; box.querySelector(".ms-id").focus(); return; }
+        if (!g){ err.textContent = "학년을 골라야 함."; box.querySelector(".ms-grade").focus(); return; }
+        if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
         if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
-        jset(sessionStorage, "mirim-student", { id: id, name: name });
+        var id = g + "-" + (n < 10 ? "0" : "") + n, lb = g + "학년 " + n + "번";
+        jset(sessionStorage, "mirim-student", { id: id, grade: +g, num: +n, label: lb, name: name });
         editing = false;
         var ni = document.getElementById("nameInput");
-        if (ni) ni.value = (id + " " + name).slice(0, 12);
+        if (ni) ni.value = (lb + " " + name).slice(0, 12);
         render();
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       });
@@ -1656,18 +1651,19 @@ document.addEventListener("keydown", e => {
     var st = student();
     if (st && !editing){
       box.classList.add("set");
-      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(st.id) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
+      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(label(st)) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
       return;
     }
     box.classList.remove("set");
-    box.innerHTML = '<form><b class="ms-who-t">학번과 이름을 입력하세요</b>' +
-      '<div class="ms-who-row"><select class="ms-id" aria-label="학번"><option value="">학번</option>' + idOptions() + "</select>" +
+    box.innerHTML = '<form><b class="ms-who-t">학년, 번호, 이름을 입력하세요</b>' +
+      '<div class="ms-who-row"><select class="ms-grade" aria-label="학년"><option value="">학년</option>' + nums(1, 3, "학년") + "</select>" +
+      '<select class="ms-num" aria-label="번호"><option value="">번호</option>' + nums(1, 20, "번") + "</select>" +
       '<input class="ms-name" maxlength="10" autocomplete="off" placeholder="이름" aria-label="이름">' +
       '<button class="ms-btn" type="submit">확인</button></div>' +
       '<p class="ms-err"></p></form>';
-    if (st){ box.querySelector(".ms-id").value = st.id; box.querySelector(".ms-name").value = st.name; }
+    if (st && st.grade){ box.querySelector(".ms-grade").value = st.grade; box.querySelector(".ms-num").value = st.num; box.querySelector(".ms-name").value = st.name; }
   }
-  function focusWho(){ var b = document.querySelector(".ms-who"); if (b){ var f = b.querySelector(".ms-id"); if (f){ f.focus(); b.scrollIntoView({ block: "center", behavior: "smooth" }); } } }
+  function focusWho(){ var b = document.querySelector(".ms-who"); if (b){ var f = b.querySelector(".ms-grade"); if (f){ f.focus(); b.scrollIntoView({ block: "center", behavior: "smooth" }); } } }
   function openGate(){ editing = !!student(); renderWho(); focusWho(); }
 
   /* ---------- 점수 모아 보기 ---------- */
@@ -1688,8 +1684,8 @@ document.addEventListener("keydown", e => {
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학번과 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
-      var s = summary(st.id, area), left = Math.max(0, LIMIT - sentCount(st.id, area));
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
         '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
@@ -1703,24 +1699,24 @@ document.addEventListener("keydown", e => {
   function send(area, panel){
     var st = student();
     if (!st){ openGate(); return; }
-    var s = summary(st.id, area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
-    var left = LIMIT - sentCount(st.id, area);
+    var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
+    var left = LIMIT - sentCount(key(st), area);
     var url = window.SCORE_URL;
     if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않음. 선생님께 알려 주기."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = st.id + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
+    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
             (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어감." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됨.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
     msg.textContent = "보내는 중…";
     function say(text){ MSG[area] = text; msg.textContent = text; }
-    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
+    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, grade: st.grade, num: st.num, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(st.id, area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
-        else if (d && d.error === "limit"){ setSent(st.id, area, LIMIT); say("이미 3번 모두 보냈음."); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈음."); }
         else { say("⚠️ 보내지 못함: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
       })
@@ -1747,7 +1743,7 @@ document.addEventListener("keydown", e => {
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학번과 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 번호, 이름을 입력해야 시작할 수 있음.";
           focusWho();
         }, true);
       }
@@ -1763,7 +1759,7 @@ MirimScore.init({"areas": [], "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter"
 (function(){
   var AREA = "html", KEY = "blank";
   function stu(){ try{ return JSON.parse(sessionStorage.getItem("mirim-student") || "null"); }catch(e){ return null; } }
-  if (KEY === "ifq"){ var s0 = stu(), ni = document.getElementById("nameInput"); if (s0 && ni && !ni.value) ni.value = (s0.id + " " + s0.name).slice(0, 12); }
+  if (KEY === "ifq"){ var s0 = stu(), ni = document.getElementById("nameInput"); if (s0 && s0.grade && ni && !ni.value) ni.value = (s0.label + " " + s0.name).slice(0, 12); }
   if (typeof showResult !== "function") return;
   var orig = showResult;
   showResult = function(){
@@ -1773,7 +1769,7 @@ MirimScore.init({"areas": [], "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter"
       if (typeof QUESTIONS !== "undefined" && typeof POINT !== "undefined"){ c = score / POINT; t = QUESTIONS.length; }
       else { full = order.length === Q.length; c = correct; t = Q.length; }
       if (full){
-        var s = stu(), id = s ? s.id : "guest";
+        var s = stu(), id = s && s.grade ? s.id + "|" + s.name : "guest";
         var all = JSON.parse(localStorage.getItem("mirim-results") || "{}");
         all[id] = all[id] || {}; all[id][AREA] = all[id][AREA] || {};
         all[id][AREA][KEY] = { c: c, t: t, at: Date.now() };
@@ -2350,13 +2346,14 @@ document.addEventListener("keydown", e => {
     html:   { label: "HTML",    quizzes: [["ox", "HTML OX", 15], ["blank", "HTML 빈칸 채우기", 10], ["basics", "HTML 첫걸음", 20], ["layout", "CSS 레이아웃", 30]] },
     python: { label: "파이썬",  quizzes: [["ox", "파이썬 OX", 15], ["blank", "파이썬 빈칸 채우기", 10], ["basics", "파이썬 첫걸음", 30], ["ifq", "파이썬 선택문", 5]] }
   };
-  var CLASSES = [["15", "1학년 5반"], ["16", "1학년 6반"], ["25", "2학년 5반"], ["26", "2학년 6반"]];
   var cfg = {}, MSG = {};
 
   function jget(store, k, d){ try{ var v = store.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
   function jset(store, k, v){ try{ store.setItem(k, JSON.stringify(v)); }catch(e){} }
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  function student(){ return jget(sessionStorage, "mirim-student", null); }
+  function student(){ var s = jget(sessionStorage, "mirim-student", null); return s && s.grade ? s : null; }
+  function key(st){ return st.id + "|" + st.name; }
+  function label(st){ return st.label || st.id; }
   function results(id){ return jget(localStorage, "mirim-results", {})[id] || {}; }
   function sentCount(id, area){ var s = jget(localStorage, "mirim-sent", {}); return (s[id] && s[id][area]) || 0; }
   function setSent(id, area, n){ var s = jget(localStorage, "mirim-sent", {}); s[id] = s[id] || {}; s[id][area] = n; jset(localStorage, "mirim-sent", s); }
@@ -2373,13 +2370,7 @@ document.addEventListener("keydown", e => {
 
   /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
   var editing = false;
-  function idOptions(){
-    return CLASSES.map(function(k){
-      var o = "";
-      for (var i = 1; i <= 18; i++){ var id = k[0] + (i < 10 ? "0" : "") + i; o += '<option value="' + id + '">' + id + "</option>"; }
-      return '<optgroup label="' + k[1] + '">' + o + "</optgroup>";
-    }).join("");
-  }
+  function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
   function whoBox(){
     var box = document.querySelector(".ms-who");
     if (!box){
@@ -2391,14 +2382,16 @@ document.addEventListener("keydown", e => {
       box.addEventListener("click", function(e){ if (e.target.closest(".ms-edit")){ editing = true; renderWho(); focusWho(); } });
       box.addEventListener("submit", function(e){
         e.preventDefault();
-        var id = box.querySelector(".ms-id").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
+        var g = box.querySelector(".ms-grade").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!id){ err.textContent = "학번을 골라야 함."; box.querySelector(".ms-id").focus(); return; }
+        if (!g){ err.textContent = "학년을 골라야 함."; box.querySelector(".ms-grade").focus(); return; }
+        if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
         if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
-        jset(sessionStorage, "mirim-student", { id: id, name: name });
+        var id = g + "-" + (n < 10 ? "0" : "") + n, lb = g + "학년 " + n + "번";
+        jset(sessionStorage, "mirim-student", { id: id, grade: +g, num: +n, label: lb, name: name });
         editing = false;
         var ni = document.getElementById("nameInput");
-        if (ni) ni.value = (id + " " + name).slice(0, 12);
+        if (ni) ni.value = (lb + " " + name).slice(0, 12);
         render();
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       });
@@ -2410,18 +2403,19 @@ document.addEventListener("keydown", e => {
     var st = student();
     if (st && !editing){
       box.classList.add("set");
-      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(st.id) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
+      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(label(st)) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
       return;
     }
     box.classList.remove("set");
-    box.innerHTML = '<form><b class="ms-who-t">학번과 이름을 입력하세요</b>' +
-      '<div class="ms-who-row"><select class="ms-id" aria-label="학번"><option value="">학번</option>' + idOptions() + "</select>" +
+    box.innerHTML = '<form><b class="ms-who-t">학년, 번호, 이름을 입력하세요</b>' +
+      '<div class="ms-who-row"><select class="ms-grade" aria-label="학년"><option value="">학년</option>' + nums(1, 3, "학년") + "</select>" +
+      '<select class="ms-num" aria-label="번호"><option value="">번호</option>' + nums(1, 20, "번") + "</select>" +
       '<input class="ms-name" maxlength="10" autocomplete="off" placeholder="이름" aria-label="이름">' +
       '<button class="ms-btn" type="submit">확인</button></div>' +
       '<p class="ms-err"></p></form>';
-    if (st){ box.querySelector(".ms-id").value = st.id; box.querySelector(".ms-name").value = st.name; }
+    if (st && st.grade){ box.querySelector(".ms-grade").value = st.grade; box.querySelector(".ms-num").value = st.num; box.querySelector(".ms-name").value = st.name; }
   }
-  function focusWho(){ var b = document.querySelector(".ms-who"); if (b){ var f = b.querySelector(".ms-id"); if (f){ f.focus(); b.scrollIntoView({ block: "center", behavior: "smooth" }); } } }
+  function focusWho(){ var b = document.querySelector(".ms-who"); if (b){ var f = b.querySelector(".ms-grade"); if (f){ f.focus(); b.scrollIntoView({ block: "center", behavior: "smooth" }); } } }
   function openGate(){ editing = !!student(); renderWho(); focusWho(); }
 
   /* ---------- 점수 모아 보기 ---------- */
@@ -2442,8 +2436,8 @@ document.addEventListener("keydown", e => {
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학번과 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
-      var s = summary(st.id, area), left = Math.max(0, LIMIT - sentCount(st.id, area));
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
         '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
@@ -2457,24 +2451,24 @@ document.addEventListener("keydown", e => {
   function send(area, panel){
     var st = student();
     if (!st){ openGate(); return; }
-    var s = summary(st.id, area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
-    var left = LIMIT - sentCount(st.id, area);
+    var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
+    var left = LIMIT - sentCount(key(st), area);
     var url = window.SCORE_URL;
     if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않음. 선생님께 알려 주기."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = st.id + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
+    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
             (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어감." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됨.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
     msg.textContent = "보내는 중…";
     function say(text){ MSG[area] = text; msg.textContent = text; }
-    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
+    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, grade: st.grade, num: st.num, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(st.id, area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
-        else if (d && d.error === "limit"){ setSent(st.id, area, LIMIT); say("이미 3번 모두 보냈음."); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈음."); }
         else { say("⚠️ 보내지 못함: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
       })
@@ -2501,7 +2495,7 @@ document.addEventListener("keydown", e => {
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학번과 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 번호, 이름을 입력해야 시작할 수 있음.";
           focusWho();
         }, true);
       }
@@ -2517,7 +2511,7 @@ MirimScore.init({"areas": [], "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter"
 (function(){
   var AREA = "html", KEY = "basics";
   function stu(){ try{ return JSON.parse(sessionStorage.getItem("mirim-student") || "null"); }catch(e){ return null; } }
-  if (KEY === "ifq"){ var s0 = stu(), ni = document.getElementById("nameInput"); if (s0 && ni && !ni.value) ni.value = (s0.id + " " + s0.name).slice(0, 12); }
+  if (KEY === "ifq"){ var s0 = stu(), ni = document.getElementById("nameInput"); if (s0 && s0.grade && ni && !ni.value) ni.value = (s0.label + " " + s0.name).slice(0, 12); }
   if (typeof showResult !== "function") return;
   var orig = showResult;
   showResult = function(){
@@ -2527,7 +2521,7 @@ MirimScore.init({"areas": [], "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter"
       if (typeof QUESTIONS !== "undefined" && typeof POINT !== "undefined"){ c = score / POINT; t = QUESTIONS.length; }
       else { full = order.length === Q.length; c = correct; t = Q.length; }
       if (full){
-        var s = stu(), id = s ? s.id : "guest";
+        var s = stu(), id = s && s.grade ? s.id + "|" + s.name : "guest";
         var all = JSON.parse(localStorage.getItem("mirim-results") || "{}");
         all[id] = all[id] || {}; all[id][AREA] = all[id][AREA] || {};
         all[id][AREA][KEY] = { c: c, t: t, at: Date.now() };
@@ -3810,13 +3804,14 @@ document.addEventListener("keydown", e => {
     html:   { label: "HTML",    quizzes: [["ox", "HTML OX", 15], ["blank", "HTML 빈칸 채우기", 10], ["basics", "HTML 첫걸음", 20], ["layout", "CSS 레이아웃", 30]] },
     python: { label: "파이썬",  quizzes: [["ox", "파이썬 OX", 15], ["blank", "파이썬 빈칸 채우기", 10], ["basics", "파이썬 첫걸음", 30], ["ifq", "파이썬 선택문", 5]] }
   };
-  var CLASSES = [["15", "1학년 5반"], ["16", "1학년 6반"], ["25", "2학년 5반"], ["26", "2학년 6반"]];
   var cfg = {}, MSG = {};
 
   function jget(store, k, d){ try{ var v = store.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
   function jset(store, k, v){ try{ store.setItem(k, JSON.stringify(v)); }catch(e){} }
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  function student(){ return jget(sessionStorage, "mirim-student", null); }
+  function student(){ var s = jget(sessionStorage, "mirim-student", null); return s && s.grade ? s : null; }
+  function key(st){ return st.id + "|" + st.name; }
+  function label(st){ return st.label || st.id; }
   function results(id){ return jget(localStorage, "mirim-results", {})[id] || {}; }
   function sentCount(id, area){ var s = jget(localStorage, "mirim-sent", {}); return (s[id] && s[id][area]) || 0; }
   function setSent(id, area, n){ var s = jget(localStorage, "mirim-sent", {}); s[id] = s[id] || {}; s[id][area] = n; jset(localStorage, "mirim-sent", s); }
@@ -3833,13 +3828,7 @@ document.addEventListener("keydown", e => {
 
   /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
   var editing = false;
-  function idOptions(){
-    return CLASSES.map(function(k){
-      var o = "";
-      for (var i = 1; i <= 18; i++){ var id = k[0] + (i < 10 ? "0" : "") + i; o += '<option value="' + id + '">' + id + "</option>"; }
-      return '<optgroup label="' + k[1] + '">' + o + "</optgroup>";
-    }).join("");
-  }
+  function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
   function whoBox(){
     var box = document.querySelector(".ms-who");
     if (!box){
@@ -3851,14 +3840,16 @@ document.addEventListener("keydown", e => {
       box.addEventListener("click", function(e){ if (e.target.closest(".ms-edit")){ editing = true; renderWho(); focusWho(); } });
       box.addEventListener("submit", function(e){
         e.preventDefault();
-        var id = box.querySelector(".ms-id").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
+        var g = box.querySelector(".ms-grade").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!id){ err.textContent = "학번을 골라야 함."; box.querySelector(".ms-id").focus(); return; }
+        if (!g){ err.textContent = "학년을 골라야 함."; box.querySelector(".ms-grade").focus(); return; }
+        if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
         if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
-        jset(sessionStorage, "mirim-student", { id: id, name: name });
+        var id = g + "-" + (n < 10 ? "0" : "") + n, lb = g + "학년 " + n + "번";
+        jset(sessionStorage, "mirim-student", { id: id, grade: +g, num: +n, label: lb, name: name });
         editing = false;
         var ni = document.getElementById("nameInput");
-        if (ni) ni.value = (id + " " + name).slice(0, 12);
+        if (ni) ni.value = (lb + " " + name).slice(0, 12);
         render();
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       });
@@ -3870,18 +3861,19 @@ document.addEventListener("keydown", e => {
     var st = student();
     if (st && !editing){
       box.classList.add("set");
-      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(st.id) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
+      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(label(st)) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
       return;
     }
     box.classList.remove("set");
-    box.innerHTML = '<form><b class="ms-who-t">학번과 이름을 입력하세요</b>' +
-      '<div class="ms-who-row"><select class="ms-id" aria-label="학번"><option value="">학번</option>' + idOptions() + "</select>" +
+    box.innerHTML = '<form><b class="ms-who-t">학년, 번호, 이름을 입력하세요</b>' +
+      '<div class="ms-who-row"><select class="ms-grade" aria-label="학년"><option value="">학년</option>' + nums(1, 3, "학년") + "</select>" +
+      '<select class="ms-num" aria-label="번호"><option value="">번호</option>' + nums(1, 20, "번") + "</select>" +
       '<input class="ms-name" maxlength="10" autocomplete="off" placeholder="이름" aria-label="이름">' +
       '<button class="ms-btn" type="submit">확인</button></div>' +
       '<p class="ms-err"></p></form>';
-    if (st){ box.querySelector(".ms-id").value = st.id; box.querySelector(".ms-name").value = st.name; }
+    if (st && st.grade){ box.querySelector(".ms-grade").value = st.grade; box.querySelector(".ms-num").value = st.num; box.querySelector(".ms-name").value = st.name; }
   }
-  function focusWho(){ var b = document.querySelector(".ms-who"); if (b){ var f = b.querySelector(".ms-id"); if (f){ f.focus(); b.scrollIntoView({ block: "center", behavior: "smooth" }); } } }
+  function focusWho(){ var b = document.querySelector(".ms-who"); if (b){ var f = b.querySelector(".ms-grade"); if (f){ f.focus(); b.scrollIntoView({ block: "center", behavior: "smooth" }); } } }
   function openGate(){ editing = !!student(); renderWho(); focusWho(); }
 
   /* ---------- 점수 모아 보기 ---------- */
@@ -3902,8 +3894,8 @@ document.addEventListener("keydown", e => {
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학번과 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
-      var s = summary(st.id, area), left = Math.max(0, LIMIT - sentCount(st.id, area));
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
         '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
@@ -3917,24 +3909,24 @@ document.addEventListener("keydown", e => {
   function send(area, panel){
     var st = student();
     if (!st){ openGate(); return; }
-    var s = summary(st.id, area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
-    var left = LIMIT - sentCount(st.id, area);
+    var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
+    var left = LIMIT - sentCount(key(st), area);
     var url = window.SCORE_URL;
     if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않음. 선생님께 알려 주기."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = st.id + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
+    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
             (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어감." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됨.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
     msg.textContent = "보내는 중…";
     function say(text){ MSG[area] = text; msg.textContent = text; }
-    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
+    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, grade: st.grade, num: st.num, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(st.id, area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
-        else if (d && d.error === "limit"){ setSent(st.id, area, LIMIT); say("이미 3번 모두 보냈음."); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈음."); }
         else { say("⚠️ 보내지 못함: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
       })
@@ -3961,7 +3953,7 @@ document.addEventListener("keydown", e => {
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학번과 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 번호, 이름을 입력해야 시작할 수 있음.";
           focusWho();
         }, true);
       }
@@ -3977,7 +3969,7 @@ MirimScore.init({"areas": [], "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter"
 (function(){
   var AREA = "html", KEY = "layout";
   function stu(){ try{ return JSON.parse(sessionStorage.getItem("mirim-student") || "null"); }catch(e){ return null; } }
-  if (KEY === "ifq"){ var s0 = stu(), ni = document.getElementById("nameInput"); if (s0 && ni && !ni.value) ni.value = (s0.id + " " + s0.name).slice(0, 12); }
+  if (KEY === "ifq"){ var s0 = stu(), ni = document.getElementById("nameInput"); if (s0 && s0.grade && ni && !ni.value) ni.value = (s0.label + " " + s0.name).slice(0, 12); }
   if (typeof showResult !== "function") return;
   var orig = showResult;
   showResult = function(){
@@ -3987,7 +3979,7 @@ MirimScore.init({"areas": [], "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter"
       if (typeof QUESTIONS !== "undefined" && typeof POINT !== "undefined"){ c = score / POINT; t = QUESTIONS.length; }
       else { full = order.length === Q.length; c = correct; t = Q.length; }
       if (full){
-        var s = stu(), id = s ? s.id : "guest";
+        var s = stu(), id = s && s.grade ? s.id + "|" + s.name : "guest";
         var all = JSON.parse(localStorage.getItem("mirim-results") || "{}");
         all[id] = all[id] || {}; all[id][AREA] = all[id][AREA] || {};
         all[id][AREA][KEY] = { c: c, t: t, at: Date.now() };
@@ -4046,13 +4038,14 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
     html:   { label: "HTML",    quizzes: [["ox", "HTML OX", 15], ["blank", "HTML 빈칸 채우기", 10], ["basics", "HTML 첫걸음", 20], ["layout", "CSS 레이아웃", 30]] },
     python: { label: "파이썬",  quizzes: [["ox", "파이썬 OX", 15], ["blank", "파이썬 빈칸 채우기", 10], ["basics", "파이썬 첫걸음", 30], ["ifq", "파이썬 선택문", 5]] }
   };
-  var CLASSES = [["15", "1학년 5반"], ["16", "1학년 6반"], ["25", "2학년 5반"], ["26", "2학년 6반"]];
   var cfg = {}, MSG = {};
 
   function jget(store, k, d){ try{ var v = store.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
   function jset(store, k, v){ try{ store.setItem(k, JSON.stringify(v)); }catch(e){} }
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  function student(){ return jget(sessionStorage, "mirim-student", null); }
+  function student(){ var s = jget(sessionStorage, "mirim-student", null); return s && s.grade ? s : null; }
+  function key(st){ return st.id + "|" + st.name; }
+  function label(st){ return st.label || st.id; }
   function results(id){ return jget(localStorage, "mirim-results", {})[id] || {}; }
   function sentCount(id, area){ var s = jget(localStorage, "mirim-sent", {}); return (s[id] && s[id][area]) || 0; }
   function setSent(id, area, n){ var s = jget(localStorage, "mirim-sent", {}); s[id] = s[id] || {}; s[id][area] = n; jset(localStorage, "mirim-sent", s); }
@@ -4069,13 +4062,7 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
 
   /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
   var editing = false;
-  function idOptions(){
-    return CLASSES.map(function(k){
-      var o = "";
-      for (var i = 1; i <= 18; i++){ var id = k[0] + (i < 10 ? "0" : "") + i; o += '<option value="' + id + '">' + id + "</option>"; }
-      return '<optgroup label="' + k[1] + '">' + o + "</optgroup>";
-    }).join("");
-  }
+  function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
   function whoBox(){
     var box = document.querySelector(".ms-who");
     if (!box){
@@ -4087,14 +4074,16 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
       box.addEventListener("click", function(e){ if (e.target.closest(".ms-edit")){ editing = true; renderWho(); focusWho(); } });
       box.addEventListener("submit", function(e){
         e.preventDefault();
-        var id = box.querySelector(".ms-id").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
+        var g = box.querySelector(".ms-grade").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!id){ err.textContent = "학번을 골라야 함."; box.querySelector(".ms-id").focus(); return; }
+        if (!g){ err.textContent = "학년을 골라야 함."; box.querySelector(".ms-grade").focus(); return; }
+        if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
         if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
-        jset(sessionStorage, "mirim-student", { id: id, name: name });
+        var id = g + "-" + (n < 10 ? "0" : "") + n, lb = g + "학년 " + n + "번";
+        jset(sessionStorage, "mirim-student", { id: id, grade: +g, num: +n, label: lb, name: name });
         editing = false;
         var ni = document.getElementById("nameInput");
-        if (ni) ni.value = (id + " " + name).slice(0, 12);
+        if (ni) ni.value = (lb + " " + name).slice(0, 12);
         render();
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       });
@@ -4106,18 +4095,19 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
     var st = student();
     if (st && !editing){
       box.classList.add("set");
-      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(st.id) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
+      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(label(st)) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
       return;
     }
     box.classList.remove("set");
-    box.innerHTML = '<form><b class="ms-who-t">학번과 이름을 입력하세요</b>' +
-      '<div class="ms-who-row"><select class="ms-id" aria-label="학번"><option value="">학번</option>' + idOptions() + "</select>" +
+    box.innerHTML = '<form><b class="ms-who-t">학년, 번호, 이름을 입력하세요</b>' +
+      '<div class="ms-who-row"><select class="ms-grade" aria-label="학년"><option value="">학년</option>' + nums(1, 3, "학년") + "</select>" +
+      '<select class="ms-num" aria-label="번호"><option value="">번호</option>' + nums(1, 20, "번") + "</select>" +
       '<input class="ms-name" maxlength="10" autocomplete="off" placeholder="이름" aria-label="이름">' +
       '<button class="ms-btn" type="submit">확인</button></div>' +
       '<p class="ms-err"></p></form>';
-    if (st){ box.querySelector(".ms-id").value = st.id; box.querySelector(".ms-name").value = st.name; }
+    if (st && st.grade){ box.querySelector(".ms-grade").value = st.grade; box.querySelector(".ms-num").value = st.num; box.querySelector(".ms-name").value = st.name; }
   }
-  function focusWho(){ var b = document.querySelector(".ms-who"); if (b){ var f = b.querySelector(".ms-id"); if (f){ f.focus(); b.scrollIntoView({ block: "center", behavior: "smooth" }); } } }
+  function focusWho(){ var b = document.querySelector(".ms-who"); if (b){ var f = b.querySelector(".ms-grade"); if (f){ f.focus(); b.scrollIntoView({ block: "center", behavior: "smooth" }); } } }
   function openGate(){ editing = !!student(); renderWho(); focusWho(); }
 
   /* ---------- 점수 모아 보기 ---------- */
@@ -4138,8 +4128,8 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학번과 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
-      var s = summary(st.id, area), left = Math.max(0, LIMIT - sentCount(st.id, area));
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
         '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
@@ -4153,24 +4143,24 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
   function send(area, panel){
     var st = student();
     if (!st){ openGate(); return; }
-    var s = summary(st.id, area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
-    var left = LIMIT - sentCount(st.id, area);
+    var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
+    var left = LIMIT - sentCount(key(st), area);
     var url = window.SCORE_URL;
     if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않음. 선생님께 알려 주기."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = st.id + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
+    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
             (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어감." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됨.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
     msg.textContent = "보내는 중…";
     function say(text){ MSG[area] = text; msg.textContent = text; }
-    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
+    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, grade: st.grade, num: st.num, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(st.id, area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
-        else if (d && d.error === "limit"){ setSent(st.id, area, LIMIT); say("이미 3번 모두 보냈음."); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈음."); }
         else { say("⚠️ 보내지 못함: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
       })
@@ -4197,7 +4187,7 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학번과 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 번호, 이름을 입력해야 시작할 수 있음.";
           focusWho();
         }, true);
       }
