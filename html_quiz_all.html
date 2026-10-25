@@ -349,10 +349,8 @@
   .ox-hero{display:flex;gap:.18em;line-height:1}
   .ox-hero svg{width:1em;height:1em;display:block}
   .globe{width:1em;height:1em;display:block}
-  /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 밝은 원 + 짙은 로마 숫자 */
-  .stage-list .sn{width:38px;height:38px;background:#fffdf9;border:none;box-shadow:none;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:.9rem;letter-spacing:-.03em;line-height:1}
-  .stage-list .sn[data-n="4"]{font-size:.74rem}
-  .stage-list .sn[data-n="5"]{font-size:.62rem}
+  /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 배경과 비슷한 톤의 조금 어두운 원 + 짙은 글자(가. 나. 다.) */
+  .stage-list .sn{width:36px;height:36px;background:#ebe3d0;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1}
 </style>
 </head>
 <body>
@@ -518,7 +516,7 @@ function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floo
 function restartAnim(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
 
 /* 시작 화면의 단계 목록 */
-const ROMAN = ["I.","II.","III.","IV.","V.","VI.","VII.","VIII.","IX.","X."];
+const ROMAN = ["가.","나.","다.","라.","마.","바.","사.","아.","자.","차."];
 $("stageList").innerHTML = STAGES.map((st, i) => {
   const n = Q.filter(q => q.s === i).length;
   const first = Q.findIndex(q => q.s === i) + 1;
@@ -1464,10 +1462,8 @@ document.addEventListener("keydown", e => {
     .concept .ct{font-size:1.02rem;margin-bottom:4px}
   }
   .globe{width:1em;height:1em;display:block}
-  /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 밝은 원 + 짙은 로마 숫자 */
-  .stage-list .sn{width:38px;height:38px;background:#fffdf9;border:none;box-shadow:none;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:.9rem;letter-spacing:-.03em;line-height:1}
-  .stage-list .sn[data-n="4"]{font-size:.74rem}
-  .stage-list .sn[data-n="5"]{font-size:.62rem}
+  /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 배경과 비슷한 톤의 조금 어두운 원 + 짙은 글자(가. 나. 다.) */
+  .stage-list .sn{width:36px;height:36px;background:#ebe3d0;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1}
 </style>
 </head>
 <body>
@@ -1635,7 +1631,7 @@ function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floo
 function restartAnim(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
 
 /* 시작 화면의 단계 목록 */
-const ROMAN = ["I.","II.","III.","IV.","V.","VI.","VII.","VIII.","IX.","X."];
+const ROMAN = ["가.","나.","다.","라.","마.","바.","사.","아.","자.","차."];
 $("stageList").innerHTML = STAGES.map((st, i) => {
   const n = Q.filter(q => q.s === i).length;
   const first = Q.findIndex(q => q.s === i) + 1;
@@ -2005,10 +2001,8 @@ document.addEventListener("keydown", e => {
     .pv-wrap{grid-template-columns:1fr}
     .stage-list{grid-template-columns:1fr}
   }
-  /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 밝은 원 + 짙은 로마 숫자 */
-  .stage-list .sn{width:38px;height:38px;background:#fffdf9;border:none;box-shadow:none;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:.9rem;letter-spacing:-.03em;line-height:1}
-  .stage-list .sn[data-n="4"]{font-size:.74rem}
-  .stage-list .sn[data-n="5"]{font-size:.62rem}
+  /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 배경과 비슷한 톤의 조금 어두운 원 + 짙은 글자(가. 나. 다.) */
+  .stage-list .sn{width:36px;height:36px;background:#ebe3d0;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1}
 </style>
 </head>
 <body>
@@ -2855,7 +2849,7 @@ function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floo
 function restartAnim(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
 
 /* 시작 화면의 단계 목록 */
-const ROMAN = ["I.","II.","III.","IV.","V.","VI.","VII.","VIII.","IX.","X."];
+const ROMAN = ["가.","나.","다.","라.","마.","바.","사.","아.","자.","차."];
 $("stageList").innerHTML = STAGES.map((st, i) => {
   const n = Q.filter(q => q.s === i).length;
   const first = Q.findIndex(q => q.s === i) + 1;
