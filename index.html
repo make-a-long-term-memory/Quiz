@@ -16,7 +16,7 @@
         url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Bold.woff') format('woff')}
   :root{
     --font:'KoPubWorld Dotum','KoPubWorld돋움체','KoPub돋움체','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
-    --ink:#33303c; --ink-soft:#686472; --accent:#5d4dbe; --line:#c9cff1; --line-hover:#b2b9ea;
+    --ink:#33303c; --ink-soft:#686472; --accent:#5d4dbe; --line:#b6bdec; --line-hover:#9aa2e2;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
@@ -64,7 +64,7 @@
     .go{display:none}
   }
   .globe{width:1em;height:1em;display:block}
-  /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
+  /* ---------- 학번, 이름 입력과 점수 보내기 ---------- */
   .ms-who{background:#ffffff;border-radius:28px;padding:22px 28px 24px;margin:0 0 20px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
   .ms-who.set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px 8px 14px;box-shadow:none;border:2px solid #ddd7e6;width:max-content;max-width:100%}
   .ms-who-me{font-size:.95rem;color:#686472}
@@ -150,10 +150,12 @@
   .ms-panel{box-shadow:none;border:2px solid #ddd7e6}
   .card .ms-panel{border:none}
   .guide{box-shadow:none !important;border:2px solid #ddd7e6 !important}
-  /* 첫 화면: 테두리·그림자를 블루 바이올렛으로 */
-  .mascot{border-color:#a9b0e2 !important}
-  .ms-who,.ms-panel,.guide,.ms-who select,.ms-who input{border-color:#c9cff1 !important}
-  .ms-sum li{border-bottom-color:#e3e6f8}
+  /* 첫 화면: 테두리, 그림자를 블루 바이올렛으로 */
+  .mascot{border-color:#959ddb !important}
+  .ms-who,.ms-panel,.guide,.ms-who select,.ms-who input{border-color:#b6bdec !important}
+  .set{box-shadow:0 6px 0 #b2b9ea}
+  .set:active{box-shadow:0 3px 0 #b2b9ea}
+  .ms-sum li{border-bottom-color:#d9ddf6}
 </style>
 </head>
 <body>
@@ -163,7 +165,7 @@
     <div>
       <span class="eyebrow">고등학생을 위한</span>
       <h1>IT 상식 &amp; <span class="accent">기초 코딩</span> 퀴즈</h1>
-      <p>인터넷과 IT 서비스 · HTML과 CSS · 파이썬</p>
+      <p>인터넷과 IT 서비스, HTML과 CSS, 파이썬</p>
     </div>
   </header>
   <div class="guide">풀고 싶은 묶음을 골라 보자. 묶음마다 <b>워밍업부터 차례대로</b> 풀어 보자. 모든 문제에 힌트가 함께 보입니다.</div>
@@ -179,12 +181,12 @@
       <span class="go" aria-hidden="true">›</span>
     </a>
     <a class="set" href="html_quiz_all.html">
-      <span class="ic" style="background:#ecf3f9" aria-hidden="true"><svg class="globe" viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="globeShade" cx="36%" cy="30%" r="75%"><stop offset="0" stop-color="#a9d2f7"/><stop offset=".5" stop-color="#4e90da"/><stop offset="1" stop-color="#26579f"/></radialGradient></defs><circle cx="32" cy="32" r="27" fill="url(#globeShade)"/><g fill="none" stroke="#ffffff" stroke-width="3"><ellipse cx="32" cy="32" rx="11" ry="27"/><path d="M5 32H59M8.5 19H55.5M8.5 45H55.5M32 5V59"/></g></svg></span>
+      <span class="ic" style="background:#ecf3f9" aria-hidden="true"><svg class="globe" viewBox="0 0 64 64" aria-hidden="true"><defs><clipPath id="gC"><circle cx="32" cy="32" r="27"/></clipPath><clipPath id="gE"><ellipse cx="32" cy="32" rx="11" ry="27"/></clipPath></defs><g clip-path="url(#gC)"><rect x="5" y="5" width="27" height="14" fill="#b3d8f8"/><rect x="32" y="5" width="27" height="14" fill="#5595dc"/><rect x="5" y="19" width="27" height="13" fill="#8fbeed"/><rect x="32" y="19" width="27" height="13" fill="#427ec8"/><rect x="5" y="32" width="27" height="13" fill="#6ba5e3"/><rect x="32" y="32" width="27" height="13" fill="#3368b1"/><rect x="5" y="45" width="27" height="14" fill="#4b8cd6"/><rect x="32" y="45" width="27" height="14" fill="#24529a"/></g><g clip-path="url(#gE)"><rect x="21" y="5" width="11" height="14" fill="#94c2ef"/><rect x="32" y="5" width="11" height="14" fill="#74abe5"/><rect x="21" y="19" width="11" height="13" fill="#70a8e4"/><rect x="32" y="19" width="11" height="13" fill="#5092db"/><rect x="21" y="32" width="11" height="13" fill="#4d8fd9"/><rect x="32" y="32" width="11" height="13" fill="#407bc5"/><rect x="21" y="45" width="11" height="14" fill="#3e78c2"/><rect x="32" y="45" width="11" height="14" fill="#3165ae"/></g><g fill="none" stroke="#ffffff" stroke-width="3"><ellipse cx="32" cy="32" rx="11" ry="27"/><path d="M5 32H59M8.5 19H55.5M8.5 45H55.5M32 5V59"/></g></svg></span>
       <span class="bd">
         <span class="kicker" style="color:#406ba1">웹페이지 만들기</span>
-        <span class="tt">HTML · CSS 퀴즈</span>
+        <span class="tt">HTML, CSS 퀴즈</span>
         <span class="ds">태그와 문서 구조, 시안을 웹으로 옮기는 CSS 레이아웃까지</span>
-        <span class="tags"><span>퀴즈 4개</span><span>75문제</span><span>휴대폰·PC 미리보기</span></span>
+        <span class="tags"><span>퀴즈 4개</span><span>75문제</span><span>휴대폰, PC 미리보기</span></span>
       </span>
       <span class="go" aria-hidden="true">›</span>
     </a>
@@ -193,8 +195,8 @@
       <span class="bd">
         <span class="kicker" style="color:#bd426e">프로그래밍 기초</span>
         <span class="tt">파이썬 기초 퀴즈</span>
-        <span class="ds">파이썬이 무엇인지부터 조건문·반복문까지</span>
-        <span class="tags"><span>퀴즈 4개</span><span>60문제</span><span>OX · 빈칸 · 선택문 순위</span></span>
+        <span class="ds">파이썬이 무엇인지부터 조건문, 반복문까지</span>
+        <span class="tags"><span>퀴즈 4개</span><span>60문제</span><span>OX, 빈칸, 선택문 순위</span></span>
       </span>
       <span class="go" aria-hidden="true">›</span>
     </a>
@@ -204,7 +206,7 @@
 <script src="score-config.js"></script>
 <script>
 /* mirim-score-v1 */
-/* 학번·이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
+/* 학번, 이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
 (function(){
   var LIMIT = 3;
   var AREAS = {
@@ -232,10 +234,10 @@
       if (x){ c += x.c; done++; parts.push(q[1] + " " + x.c + "/" + x.t); rows.push([q[1], x.c + " / " + x.t, true]); }
       else { parts.push(q[1] + " 미응시"); rows.push([q[1], "아직 안 풀었습니다", false]); }
     });
-    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(" · "), rows: rows };
+    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(", "), rows: rows };
   }
 
-  /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
+  /* ---------- 학번, 이름 입력 (제목 아래 칸) ---------- */
   var editing = false, savedAt = 0;
   var GC = ["15", "16", "25", "26", "35", "36"];
   function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
@@ -309,25 +311,25 @@
     }
     var st = student();
     if (cfg.compact){
-      // 첫 화면·목차: 영역별 한 줄 요약만
+      // 첫 화면, 목차: 영역별 한 줄 요약만
       wrap.innerHTML = '<section class="ms-panel compact"><h3>📊 내 점수</h3>' + (st ?
         '<ul class="ms-sum">' + cfg.areas.map(function(area){
           var s = summary(key(st), area), n = AREAS[area].quizzes.length;
-          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제 · 퀴즈 " + s.done + "/" + n + "</small></li>";
+          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제, 퀴즈 " + s.done + "/" + n + "</small></li>";
         }).join("") + "</ul>" : '<p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p>') + "</section>";
       return;
     }
     var area = cfg.areas[0], A = AREAS[area];
-    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
+    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수, ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
     var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
     var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
     var m = MSG.text || "";
     var kind = /^✅/.test(m) ? "ok" : /^⚠️/.test(m) ? "fail" : m ? "wait" : "";
     wrap.innerHTML = '<section class="ms-panel">' +
       (qi && m ? '<p class="ms-status ' + kind + '" role="status">' + esc(m) + "</p>" : "") +
-      "<h3>📊 내 점수 · " + A.label + "</h3>" +
+      "<h3>📊 내 점수, " + A.label + "</h3>" +
       '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
-      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제, 100점 환산 <b>" + s.score + "점</b></div>" +
       (qi ? '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
         '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
       "</section>";
@@ -366,7 +368,7 @@
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + " · 이 퀴즈 3번 중 " + d.count + "번째)"); }
+        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + ", 이 퀴즈 3번 중 " + d.count + "번째)"); }
         else if (d && d.error === "limit"){ setSent(key(st), sk, LIMIT); setMsg("이 퀴즈는 3번 모두 전송했습니다."); }
         else setMsg("⚠️ 전송하지 못했습니다: " + ((d && d.error) || "알 수 없는 오류"), true);
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");

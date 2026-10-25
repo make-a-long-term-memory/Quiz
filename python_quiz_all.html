@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style>
-  /* KoPubWorld 돋움체 (문화체육관광부·한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
+  /* KoPubWorld 돋움체 (문화체육관광부, 한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
   @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:400;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
     src:local('KoPubWorldDotum Medium'),local('KoPubWorldDotumMedium'),local('KoPubWorld돋움체 Medium'),
         url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff') format('woff')}
@@ -86,7 +86,7 @@
   }
   .home-link{display:inline-block;margin-bottom:6px;font-weight:700;color:var(--ink);text-decoration:none;border-bottom:1.5px solid #ddd7e6}
   .home-link:hover{border-color:#c9c2d5}
-  /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
+  /* ---------- 학번, 이름 입력과 점수 보내기 ---------- */
   .ms-who{background:#ffffff;border-radius:28px;padding:22px 28px 24px;margin:0 0 20px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
   .ms-who.set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px 8px 14px;box-shadow:none;border:2px solid #ddd7e6;width:max-content;max-width:100%}
   .ms-who-me{font-size:.95rem;color:#686472}
@@ -188,48 +188,48 @@
   </header>
   <div class="guide">파이썬이 처음이라면 <b>워밍업 OX 퀴즈</b>로 시작해서 <b>1단계부터 차례대로</b> 풀어 보자. 모든 문제에 힌트가 함께 보입니다. 퀴즈를 풀다가 <b>← 첫 페이지로 이동</b>을 눌러도 푼 내용은 그대로 남아 있습니다.</div>
   <div class="list">
-    <button class="quiz-card" data-quiz="ox" data-title="워밍업 · 파이썬 OX 퀴즈" type="button">
+    <button class="quiz-card" data-quiz="ox" data-title="워밍업, 파이썬 OX 퀴즈" type="button">
       <span class="qc-icon" style="background:#e8f3ee">⭕</span>
       <span class="qc-body">
-        <span class="qc-step">워밍업 · 시작하기 전에</span>
+        <span class="qc-step">워밍업, 시작하기 전에</span>
         <span class="qc-title" style="display:block">파이썬 OX 퀴즈</span>
         <span class="qc-desc" style="display:block">파이썬의 이름과 역사, 특징과 문법, 활용 분야를 O, X로 알아보자.</span>
         <span class="qc-tags"><span class="qc-diff">난이도 <span class="st">★~★★</span></span><span>15문제</span><span>O / X</span><span>힌트 항상 보기</span></span>
       </span>
       <span class="qc-go" aria-hidden="true">›</span>
     </button>
-    <button class="quiz-card" data-quiz="blank" data-title="1단계 · 파이썬 빈칸 채우기" type="button">
+    <button class="quiz-card" data-quiz="blank" data-title="1단계, 파이썬 빈칸 채우기" type="button">
       <span class="qc-icon" style="background:#ede4cd">✏️</span>
       <span class="qc-body">
-        <span class="qc-step">1단계 · 기초 다지기</span>
+        <span class="qc-step">1단계, 기초 다지기</span>
         <span class="qc-title" style="display:block">파이썬 빈칸 채우기</span>
         <span class="qc-desc" style="display:block">코드의 빈칸에 알맞은 낱말을 골라 가장 기본 문법을 익히자.</span>
         <span class="qc-tags"><span class="qc-diff">난이도 <span class="st">★~★★</span></span><span>10문제</span><span>3지 선다</span><span>힌트 항상 보기</span></span>
       </span>
       <span class="qc-go" aria-hidden="true">›</span>
     </button>
-    <button class="quiz-card" data-quiz="basics" data-title="2단계 · 파이썬 첫걸음 퀴즈" type="button">
+    <button class="quiz-card" data-quiz="basics" data-title="2단계, 파이썬 첫걸음 퀴즈" type="button">
       <span class="qc-icon" style="background:#f8eaf0">🐍</span>
       <span class="qc-body">
-        <span class="qc-step">2단계 · 개념 넓히기</span>
+        <span class="qc-step">2단계, 개념 넓히기</span>
         <span class="qc-title" style="display:block">파이썬 첫걸음 퀴즈</span>
         <span class="qc-desc" style="display:block">파이썬이 무엇인지부터 반복문까지 차근차근 정리하자.</span>
         <span class="qc-tags"><span class="qc-diff">난이도 <span class="st">★~★★★</span></span><span>30문제</span><span>3지 선다</span><span>틀린 문제 다시 풀기</span></span>
       </span>
       <span class="qc-go" aria-hidden="true">›</span>
     </button>
-    <button class="quiz-card" data-quiz="ifq" data-title="3단계 · 파이썬 선택문 퀴즈" type="button">
+    <button class="quiz-card" data-quiz="ifq" data-title="3단계, 파이썬 선택문 퀴즈" type="button">
       <span class="qc-icon" style="background:#e8f3ee">🔀</span>
       <span class="qc-body">
-        <span class="qc-step">3단계 · 도전하기</span>
+        <span class="qc-step">3단계, 도전하기</span>
         <span class="qc-title" style="display:block">파이썬 선택문 퀴즈</span>
-        <span class="qc-desc" style="display:block">if · elif · else 코드의 실행 결과를 맞히고 순위를 겨뤄 보자.</span>
-        <span class="qc-tags"><span class="qc-diff">난이도 <span class="st">★★~★★★</span></span><span>5문제</span><span>4지 선다</span><span>이름 입력 · 순위</span></span>
+        <span class="qc-desc" style="display:block">if, elif, else 코드의 실행 결과를 맞히고 순위를 겨뤄 보자.</span>
+        <span class="qc-tags"><span class="qc-diff">난이도 <span class="st">★★~★★★</span></span><span>5문제</span><span>4지 선다</span><span>이름 입력, 순위</span></span>
       </span>
       <span class="qc-go" aria-hidden="true">›</span>
     </button>
   </div>
-  <footer><a class="home-link" href="index.html">← 전체 퀴즈 모음</a><br>고등학교 정보 · 알고리즘과 프로그래밍<a class="credit" href="https://www.instagram.com/Make.a.long.term.memory" target="_blank" rel="noopener">by Make a long term memory</a></footer>
+  <footer><a class="home-link" href="index.html">← 전체 퀴즈 모음</a><br>고등학교 정보, 알고리즘과 프로그래밍<a class="credit" href="https://www.instagram.com/Make.a.long.term.memory" target="_blank" rel="noopener">by Make a long term memory</a></footer>
 </main>
 
 <div id="player" class="hidden">
@@ -251,7 +251,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style>
-  /* KoPubWorld 돋움체 (문화체육관광부·한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
+  /* KoPubWorld 돋움체 (문화체육관광부, 한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
   @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:400;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
     src:local('KoPubWorldDotum Medium'),local('KoPubWorldDotumMedium'),local('KoPubWorld돋움체 Medium'),
         url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff') format('woff')}
@@ -423,7 +423,7 @@
   .diff-legend .it{display:inline-flex;align-items:center;gap:4px}
   .diff-legend .st{color:#efb72d;letter-spacing:1px}
   .credit{display:block;margin-top:6px;font-weight:700;color:var(--ink);letter-spacing:.01em}
-  /* PC에서 진행 표시·단계 배지·알아두기 제목 키우기 */
+  /* PC에서 진행 표시, 단계 배지, 알아두기 제목 키우기 */
   @media (min-width:561px){
     .progress-text{font-size:1.25rem}
     .progress-text b{font-size:1.55rem}
@@ -434,7 +434,7 @@
   .ox-hero svg{width:1em;height:1em;display:block}
   /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 배경과 비슷한 톤의 조금 어두운 원 + 짙은 글자(가. 나. 다.) */
   .stage-list .sn{width:36px;height:36px;background:#ebe3d0;color:#5b5243;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1;padding-left:3px}
-  /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
+  /* ---------- 학번, 이름 입력과 점수 보내기 ---------- */
   .ms-who{background:#ffffff;border-radius:28px;padding:22px 28px 24px;margin:0 0 20px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
   .ms-who.set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px 8px 14px;box-shadow:none;border:2px solid #ddd7e6;width:max-content;max-width:100%}
   .ms-who-me{font-size:.95rem;color:#686472}
@@ -583,7 +583,7 @@
     </div>
   </section>
 
-  <footer>파이썬 워밍업 · OX 15문제<a class="credit" href="https://www.instagram.com/Make.a.long.term.memory" target="_blank" rel="noopener">by Make a long term memory</a></footer>
+  <footer>파이썬 워밍업, OX 15문제<a class="credit" href="https://www.instagram.com/Make.a.long.term.memory" target="_blank" rel="noopener">by Make a long term memory</a></footer>
 </div>
 
 <script>
@@ -633,7 +633,7 @@ const Q = [
     e:"`#` 뒤는 <b>주석</b>이에요. 사람이 읽으라고 남기는 메모라서 컴퓨터는 실행하지 않아요." },
   { s:1, q:"파이썬은 웹 서비스, <b>업무 자동화</b>, 로봇 제어 등 다양한 분야에 쓰인다.", c:["O","X"], a:0,
     h:"반복되는 엑셀 정리나 파일 이름 바꾸기 같은 일을 컴퓨터에게 맡길 수 있을까요?",
-    e:"맞아요! 파이썬은 웹 서비스 개발, 반복 업무 자동화, 로봇·센서 제어(라즈베리파이) 등 정말 여러 분야에서 쓰여요." },
+    e:"맞아요! 파이썬은 웹 서비스 개발, 반복 업무 자동화, 로봇, 센서 제어(라즈베리파이) 등 정말 여러 분야에서 쓰여요." },
   { s:1, q:"파이썬으로는 <b>그림이나 게임</b>을 만들 수 없다.", c:["O","X"], a:1,
     h:"파이썬에는 거북이가 움직이며 선을 그리는 `turtle`이라는 도구가 기본으로 들어 있어요.",
     e:"파이썬으로도 그림과 게임을 만들 수 있어요. `turtle`로 그림을 그리고, `pygame` 같은 도구로 게임을 만들어요." },
@@ -860,7 +860,7 @@ document.addEventListener("keydown", e => {
 <script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
-/* 학번·이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
+/* 학번, 이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
 (function(){
   var LIMIT = 3;
   var AREAS = {
@@ -888,10 +888,10 @@ document.addEventListener("keydown", e => {
       if (x){ c += x.c; done++; parts.push(q[1] + " " + x.c + "/" + x.t); rows.push([q[1], x.c + " / " + x.t, true]); }
       else { parts.push(q[1] + " 미응시"); rows.push([q[1], "아직 안 풀었습니다", false]); }
     });
-    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(" · "), rows: rows };
+    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(", "), rows: rows };
   }
 
-  /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
+  /* ---------- 학번, 이름 입력 (제목 아래 칸) ---------- */
   var editing = false, savedAt = 0;
   var GC = ["15", "16", "25", "26", "35", "36"];
   function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
@@ -965,25 +965,25 @@ document.addEventListener("keydown", e => {
     }
     var st = student();
     if (cfg.compact){
-      // 첫 화면·목차: 영역별 한 줄 요약만
+      // 첫 화면, 목차: 영역별 한 줄 요약만
       wrap.innerHTML = '<section class="ms-panel compact"><h3>📊 내 점수</h3>' + (st ?
         '<ul class="ms-sum">' + cfg.areas.map(function(area){
           var s = summary(key(st), area), n = AREAS[area].quizzes.length;
-          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제 · 퀴즈 " + s.done + "/" + n + "</small></li>";
+          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제, 퀴즈 " + s.done + "/" + n + "</small></li>";
         }).join("") + "</ul>" : '<p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p>') + "</section>";
       return;
     }
     var area = cfg.areas[0], A = AREAS[area];
-    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
+    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수, ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
     var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
     var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
     var m = MSG.text || "";
     var kind = /^✅/.test(m) ? "ok" : /^⚠️/.test(m) ? "fail" : m ? "wait" : "";
     wrap.innerHTML = '<section class="ms-panel">' +
       (qi && m ? '<p class="ms-status ' + kind + '" role="status">' + esc(m) + "</p>" : "") +
-      "<h3>📊 내 점수 · " + A.label + "</h3>" +
+      "<h3>📊 내 점수, " + A.label + "</h3>" +
       '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
-      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제, 100점 환산 <b>" + s.score + "점</b></div>" +
       (qi ? '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
         '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
       "</section>";
@@ -1022,7 +1022,7 @@ document.addEventListener("keydown", e => {
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + " · 이 퀴즈 3번 중 " + d.count + "번째)"); }
+        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + ", 이 퀴즈 3번 중 " + d.count + "번째)"); }
         else if (d && d.error === "limit"){ setSent(key(st), sk, LIMIT); setMsg("이 퀴즈는 3번 모두 전송했습니다."); }
         else setMsg("⚠️ 전송하지 못했습니다: " + ((d && d.error) || "알 수 없는 오류"), true);
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
@@ -1089,7 +1089,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업 · 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"], "current": true}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계 · 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"]}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계 · 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"]}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계 · 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"]}]}, "quiz": "ox"});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업, 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"], "current": true}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계, 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"]}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계, 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"]}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계, 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"]}]}, "quiz": "ox"});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -1132,7 +1132,7 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style>
-  /* KoPubWorld 돋움체 (문화체육관광부·한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
+  /* KoPubWorld 돋움체 (문화체육관광부, 한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
   @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:400;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
     src:local('KoPubWorldDotum Medium'),local('KoPubWorldDotumMedium'),local('KoPubWorld돋움체 Medium'),
         url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff') format('woff')}
@@ -1315,14 +1315,14 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
   .diff-legend .it{display:inline-flex;align-items:center;gap:4px}
   .diff-legend .st{color:#efb72d;letter-spacing:1px}
   .credit{display:block;margin-top:6px;font-weight:700;color:var(--ink);letter-spacing:.01em}
-  /* PC에서 진행 표시·단계 배지·알아두기 제목 키우기 */
+  /* PC에서 진행 표시, 단계 배지, 알아두기 제목 키우기 */
   @media (min-width:561px){
     .progress-text{font-size:1.25rem}
     .progress-text b{font-size:1.55rem}
     .tag{font-size:1rem;padding:4px 14px}
     .concept .ct{font-size:1.02rem;margin-bottom:4px}
   }
-  /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
+  /* ---------- 학번, 이름 입력과 점수 보내기 ---------- */
   .ms-who{background:#ffffff;border-radius:28px;padding:22px 28px 24px;margin:0 0 20px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
   .ms-who.set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px 8px 14px;box-shadow:none;border:2px solid #ddd7e6;width:max-content;max-width:100%}
   .ms-who-me{font-size:.95rem;color:#686472}
@@ -1463,7 +1463,7 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
     <div class="row">
       <button class="hint-btn" id="hintBtn" type="button">💡 힌트 보기</button>
       <span class="spacer"></span>
-      <span class="keyhint">키보드 1·2·3으로도 고를 수 있습니다</span>
+      <span class="keyhint">키보드 1, 2, 3으로도 고를 수 있습니다</span>
     </div>
 
     <div class="hint-box hidden" id="hintBox"></div>
@@ -1484,7 +1484,7 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
     </div>
   </section>
 
-  <footer>파이썬 기초 · 빈칸 채우기 10문제 · 3지 선다<a class="credit" href="https://www.instagram.com/Make.a.long.term.memory" target="_blank" rel="noopener">by Make a long term memory</a></footer>
+  <footer>파이썬 기초, 빈칸 채우기 10문제, 3지 선다<a class="credit" href="https://www.instagram.com/Make.a.long.term.memory" target="_blank" rel="noopener">by Make a long term memory</a></footer>
 </div>
 
 <script>
@@ -1770,7 +1770,7 @@ function showResult(){
   $("resultTitle").textContent = total === Q.length ? "빈칸 채우기 끝! 수고했습니다" : "다시 풀기 끝! 수고했습니다";
   $("review").innerHTML = order.map(qi => {
     const ok = result[qi] === true;
-    return `<li><span class="rn">${qi + 1}</span><span class="rt">${esc(Q[qi].topic)} · 정답 <span class="ra">${esc(Q[qi].opts[0])}</span></span>` +
+    return `<li><span class="rn">${qi + 1}</span><span class="rt">${esc(Q[qi].topic)}, 정답 <span class="ra">${esc(Q[qi].opts[0])}</span></span>` +
            `<span class="rr ${ok ? "ok" : "no"}">${ok ? "⭕" : "❌"}</span></li>`;
   }).join("");
   lastWrong = order.filter(qi => result[qi] !== true);
@@ -1795,7 +1795,7 @@ document.addEventListener("keydown", e => {
 <script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
-/* 학번·이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
+/* 학번, 이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
 (function(){
   var LIMIT = 3;
   var AREAS = {
@@ -1823,10 +1823,10 @@ document.addEventListener("keydown", e => {
       if (x){ c += x.c; done++; parts.push(q[1] + " " + x.c + "/" + x.t); rows.push([q[1], x.c + " / " + x.t, true]); }
       else { parts.push(q[1] + " 미응시"); rows.push([q[1], "아직 안 풀었습니다", false]); }
     });
-    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(" · "), rows: rows };
+    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(", "), rows: rows };
   }
 
-  /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
+  /* ---------- 학번, 이름 입력 (제목 아래 칸) ---------- */
   var editing = false, savedAt = 0;
   var GC = ["15", "16", "25", "26", "35", "36"];
   function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
@@ -1900,25 +1900,25 @@ document.addEventListener("keydown", e => {
     }
     var st = student();
     if (cfg.compact){
-      // 첫 화면·목차: 영역별 한 줄 요약만
+      // 첫 화면, 목차: 영역별 한 줄 요약만
       wrap.innerHTML = '<section class="ms-panel compact"><h3>📊 내 점수</h3>' + (st ?
         '<ul class="ms-sum">' + cfg.areas.map(function(area){
           var s = summary(key(st), area), n = AREAS[area].quizzes.length;
-          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제 · 퀴즈 " + s.done + "/" + n + "</small></li>";
+          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제, 퀴즈 " + s.done + "/" + n + "</small></li>";
         }).join("") + "</ul>" : '<p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p>') + "</section>";
       return;
     }
     var area = cfg.areas[0], A = AREAS[area];
-    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
+    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수, ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
     var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
     var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
     var m = MSG.text || "";
     var kind = /^✅/.test(m) ? "ok" : /^⚠️/.test(m) ? "fail" : m ? "wait" : "";
     wrap.innerHTML = '<section class="ms-panel">' +
       (qi && m ? '<p class="ms-status ' + kind + '" role="status">' + esc(m) + "</p>" : "") +
-      "<h3>📊 내 점수 · " + A.label + "</h3>" +
+      "<h3>📊 내 점수, " + A.label + "</h3>" +
       '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
-      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제, 100점 환산 <b>" + s.score + "점</b></div>" +
       (qi ? '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
         '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
       "</section>";
@@ -1957,7 +1957,7 @@ document.addEventListener("keydown", e => {
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + " · 이 퀴즈 3번 중 " + d.count + "번째)"); }
+        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + ", 이 퀴즈 3번 중 " + d.count + "번째)"); }
         else if (d && d.error === "limit"){ setSent(key(st), sk, LIMIT); setMsg("이 퀴즈는 3번 모두 전송했습니다."); }
         else setMsg("⚠️ 전송하지 못했습니다: " + ((d && d.error) || "알 수 없는 오류"), true);
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
@@ -2024,7 +2024,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업 · 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"]}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계 · 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"], "current": true}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계 · 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"]}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계 · 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"]}]}, "quiz": "blank"});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업, 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"]}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계, 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"], "current": true}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계, 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"]}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계, 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"]}]}, "quiz": "blank"});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -2067,7 +2067,7 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style>
-  /* KoPubWorld 돋움체 (문화체육관광부·한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
+  /* KoPubWorld 돋움체 (문화체육관광부, 한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
   @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:400;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
     src:local('KoPubWorldDotum Medium'),local('KoPubWorldDotumMedium'),local('KoPubWorld돋움체 Medium'),
         url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff') format('woff')}
@@ -2227,7 +2227,7 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
   .diff-legend .it{display:inline-flex;align-items:center;gap:4px}
   .diff-legend .st{color:#efb72d;letter-spacing:1px}
   .credit{display:block;margin-top:6px;font-weight:700;color:var(--ink);letter-spacing:.01em}
-  /* PC에서 진행 표시·단계 배지·알아두기 제목 키우기 */
+  /* PC에서 진행 표시, 단계 배지, 알아두기 제목 키우기 */
   @media (min-width:561px){
     .progress-text{font-size:1.25rem}
     .progress-text b{font-size:1.55rem}
@@ -2236,7 +2236,7 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
   }
   /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 배경과 비슷한 톤의 조금 어두운 원 + 짙은 글자(가. 나. 다.) */
   .stage-list .sn{width:36px;height:36px;background:#ebe3d0;color:#5b5243;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1;padding-left:3px}
-  /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
+  /* ---------- 학번, 이름 입력과 점수 보내기 ---------- */
   .ms-who{background:#ffffff;border-radius:28px;padding:22px 28px 24px;margin:0 0 20px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
   .ms-who.set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px 8px 14px;box-shadow:none;border:2px solid #ddd7e6;width:max-content;max-width:100%}
   .ms-who-me{font-size:.95rem;color:#686472}
@@ -2385,7 +2385,7 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
     </div>
   </section>
 
-  <footer>처음 시작하는 파이썬 · 30문제 · 3지 선다형<a class="credit" href="https://www.instagram.com/Make.a.long.term.memory" target="_blank" rel="noopener">by Make a long term memory</a></footer>
+  <footer>처음 시작하는 파이썬, 30문제, 3지 선다형<a class="credit" href="https://www.instagram.com/Make.a.long.term.memory" target="_blank" rel="noopener">by Make a long term memory</a></footer>
 </div>
 
 <script>
@@ -2524,7 +2524,7 @@ $("stageList").innerHTML = STAGES.map((st, i) => {
   const n = Q.filter(q => q.s === i).length;
   const first = Q.findIndex(q => q.s === i) + 1;
   return `<li><span class="sn">${ROMAN[i]}</span>` +
-         `<div><b>${st.name}</b><small>${first}~${first + n - 1}번 · ${n}문제</small></div></li>`;
+         `<div><b>${st.name}</b><small>${first}~${first + n - 1}번, ${n}문제</small></div></li>`;
 }).join("");
 
 /* 상태 */
@@ -2554,7 +2554,7 @@ function render(){
   $("qNum").textContent = pos + 1;
   $("bar").style.width = (pos / order.length * 100) + "%";
   const tag = $("qStage");
-  tag.textContent = `${q.s + 1}단계 · ${st.name}`;
+  tag.textContent = `${q.s + 1}단계, ${st.name}`;
   tag.style.background = st.color[0]; tag.style.color = st.color[1];
   setDiff(DIFF[qi]);
   $("qText").innerHTML = `<span class="qn">${qi + 1}.</span>${fmt(q.q)}`;
@@ -2650,7 +2650,7 @@ function showResult(){
     const ids = order.filter(qi => Q[qi].s === i);
     if (!ids.length) return "";
     const ok = ids.filter(qi => firstTry[qi]).length;
-    return `<li><span class="nm">${i + 1}단계 · ${st.name}</span>` +
+    return `<li><span class="nm">${i + 1}단계, ${st.name}</span>` +
            `<span class="meter"><span style="width:${ok / ids.length * 100}%"></span></span>` +
            `<span class="ct">${ok}/${ids.length}</span></li>`;
   }).join("");
@@ -2682,7 +2682,7 @@ document.addEventListener("keydown", e => {
 <script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
-/* 학번·이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
+/* 학번, 이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
 (function(){
   var LIMIT = 3;
   var AREAS = {
@@ -2710,10 +2710,10 @@ document.addEventListener("keydown", e => {
       if (x){ c += x.c; done++; parts.push(q[1] + " " + x.c + "/" + x.t); rows.push([q[1], x.c + " / " + x.t, true]); }
       else { parts.push(q[1] + " 미응시"); rows.push([q[1], "아직 안 풀었습니다", false]); }
     });
-    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(" · "), rows: rows };
+    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(", "), rows: rows };
   }
 
-  /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
+  /* ---------- 학번, 이름 입력 (제목 아래 칸) ---------- */
   var editing = false, savedAt = 0;
   var GC = ["15", "16", "25", "26", "35", "36"];
   function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
@@ -2787,25 +2787,25 @@ document.addEventListener("keydown", e => {
     }
     var st = student();
     if (cfg.compact){
-      // 첫 화면·목차: 영역별 한 줄 요약만
+      // 첫 화면, 목차: 영역별 한 줄 요약만
       wrap.innerHTML = '<section class="ms-panel compact"><h3>📊 내 점수</h3>' + (st ?
         '<ul class="ms-sum">' + cfg.areas.map(function(area){
           var s = summary(key(st), area), n = AREAS[area].quizzes.length;
-          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제 · 퀴즈 " + s.done + "/" + n + "</small></li>";
+          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제, 퀴즈 " + s.done + "/" + n + "</small></li>";
         }).join("") + "</ul>" : '<p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p>') + "</section>";
       return;
     }
     var area = cfg.areas[0], A = AREAS[area];
-    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
+    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수, ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
     var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
     var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
     var m = MSG.text || "";
     var kind = /^✅/.test(m) ? "ok" : /^⚠️/.test(m) ? "fail" : m ? "wait" : "";
     wrap.innerHTML = '<section class="ms-panel">' +
       (qi && m ? '<p class="ms-status ' + kind + '" role="status">' + esc(m) + "</p>" : "") +
-      "<h3>📊 내 점수 · " + A.label + "</h3>" +
+      "<h3>📊 내 점수, " + A.label + "</h3>" +
       '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
-      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제, 100점 환산 <b>" + s.score + "점</b></div>" +
       (qi ? '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
         '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
       "</section>";
@@ -2844,7 +2844,7 @@ document.addEventListener("keydown", e => {
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + " · 이 퀴즈 3번 중 " + d.count + "번째)"); }
+        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + ", 이 퀴즈 3번 중 " + d.count + "번째)"); }
         else if (d && d.error === "limit"){ setSent(key(st), sk, LIMIT); setMsg("이 퀴즈는 3번 모두 전송했습니다."); }
         else setMsg("⚠️ 전송하지 못했습니다: " + ((d && d.error) || "알 수 없는 오류"), true);
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
@@ -2911,7 +2911,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업 · 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"]}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계 · 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"]}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계 · 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"], "current": true}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계 · 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"]}]}, "quiz": "basics"});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업, 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"]}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계, 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"]}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계, 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"], "current": true}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계, 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"]}]}, "quiz": "basics"});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -2954,7 +2954,7 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style>
-  /* KoPubWorld 돋움체 (문화체육관광부·한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
+  /* KoPubWorld 돋움체 (문화체육관광부, 한국출판인회의, 무료 서체) — 컴퓨터에 설치돼 있으면 그것을, 없으면 CDN에서 받아 써요 */
   @font-face{font-family:'KoPubWorld Dotum';font-style:normal;font-weight:400;font-display:swap;ascent-override:88%;descent-override:24%;line-gap-override:0%;
     src:local('KoPubWorldDotum Medium'),local('KoPubWorldDotumMedium'),local('KoPubWorld돋움체 Medium'),
         url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/fonts/KoPubWorld-Dotum-Medium.woff') format('woff')}
@@ -3275,14 +3275,14 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
   .diff-legend .it{display:inline-flex;align-items:center;gap:4px}
   .diff-legend .st{color:#efb72d;letter-spacing:1px}
   .credit{display:block;margin-top:6px;font-weight:700;color:var(--ink);letter-spacing:.01em}
-  /* PC에서 진행 표시·단계 배지·알아두기 제목 키우기 */
+  /* PC에서 진행 표시, 단계 배지, 알아두기 제목 키우기 */
   @media (min-width:561px){
     .progress-text{font-size:1.25rem}
     .progress-text b{font-size:1.55rem}
     .tag{font-size:1rem;padding:4px 14px}
     .concept .ct{font-size:1.02rem;margin-bottom:4px}
   }
-  /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
+  /* ---------- 학번, 이름 입력과 점수 보내기 ---------- */
   .ms-who{background:#ffffff;border-radius:28px;padding:22px 28px 24px;margin:0 0 20px;box-shadow:0 5px 0 #ddd7e6;font-family:var(--font);text-align:left;word-break:keep-all}
   .ms-who.set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px 8px 14px;box-shadow:none;border:2px solid #ddd7e6;width:max-content;max-width:100%}
   .ms-who-me{font-size:.95rem;color:#686472}
@@ -3386,7 +3386,7 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
     <div class="mascot" aria-hidden="true">🐍</div>
     <div>
       <h1>파이썬 <span class="accent">선택문</span> 퀴즈</h1>
-      <p>if · elif · else 를 정복해 보자!</p>
+      <p>if, elif, else 를 정복해 보자!</p>
     </div>
   </header>
 
@@ -3468,7 +3468,7 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
     </div>
   </section>
 
-  <footer>고등학교 정보 · 알고리즘과 프로그래밍 · 선택 구조<a class="credit" href="https://www.instagram.com/Make.a.long.term.memory" target="_blank" rel="noopener">by Make a long term memory</a></footer>
+  <footer>고등학교 정보, 알고리즘과 프로그래밍, 선택 구조<a class="credit" href="https://www.instagram.com/Make.a.long.term.memory" target="_blank" rel="noopener">by Make a long term memory</a></footer>
 </div>
 
 <!-- 파일 자동 저장을 지원하지 않는 브라우저용 -->
@@ -3613,7 +3613,7 @@ let IN_FRAME = false;
 try{ IN_FRAME = window.self !== window.top && !window.top.location.href; }catch(e){ IN_FRAME = true; }  // 다른 사이트(미리보기) 안에 있을 때만 true
 // 미리보기 창(다른 페이지 안)에서는 파일 선택 창을 열 수 없어서 자동 저장을 끕니다
 const FS_OK = !IN_FRAME && "showOpenFilePicker" in window && "showSaveFilePicker" in window;
-let fileHandle = null;        // 연결된 순위 파일 (크롬·엣지)
+let fileHandle = null;        // 연결된 순위 파일 (크롬, 엣지)
 let rememberedHandle = null;  // 지난번에 연결했던 파일
 let fallbackText = null;      // 파일 자동 저장이 안 되는 브라우저: 불러온 내용
 let fallbackName = DEFAULT_FILE_NAME;
@@ -3811,7 +3811,7 @@ function renderFilePanel(){
       msg.innerHTML = `✅ <b>${esc(fallbackName)}</b> 파일을 불러왔습니다` + (fileCount !== null ? ` (지금 ${fileCount}명 기록)` : "") +
         ". 이 브라우저는 자동 저장이 안 돼서, 끝나면 결과 화면에서 <b>다운로드</b>로 저장하자.";
     } else {
-      msg.innerHTML = "이 브라우저는 파일 자동 저장을 지원하지 않습니다(크롬·엣지 권장). 기존 순위 파일이 있으면 <b>불러오기</b>를 누르자.";
+      msg.innerHTML = "이 브라우저는 파일 자동 저장을 지원하지 않습니다(크롬, 엣지 권장). 기존 순위 파일이 있으면 <b>불러오기</b>를 누르자.";
     }
     acts.innerHTML = fileButtons(["load"]);
   }
@@ -4084,7 +4084,7 @@ async function syncRanking(){
   fileCount = list.length;
   renderRanking(list);
   box.className = "save-box warn";
-  if (IN_FRAME){ box.innerHTML = "ℹ️ 미리보기 화면이라 순위는 이 창에만 임시로 보입니다. 파일을 내려받아 크롬·엣지로 열면 텍스트 파일에 저장됩니다."; renderFilePanel(); return; }
+  if (IN_FRAME){ box.innerHTML = "ℹ️ 미리보기 화면이라 순위는 이 창에만 임시로 보입니다. 파일을 내려받아 크롬, 엣지로 열면 텍스트 파일에 저장됩니다."; renderFilePanel(); return; }
   box.innerHTML = "⚠️ 이 브라우저는 파일 자동 저장이 안 됩니다. 아래 버튼으로 순위 파일을 저장해 두고, 다음에 <b>불러오기</b>로 이어서 쓰면 됩니다." +
     `<div class="fp-actions">${fileButtons(["download"])}</div>`;
   renderFilePanel();
@@ -4121,11 +4121,11 @@ function renderRanking(list){
   $("rankSub").textContent = myIdx >= 0 ? `전체 ${list.length}명 중 ${myIdx + 1}등!` : `전체 ${list.length}명`;
 
   if (lastMerge && !lastMerge.isBest && lastMerge.prev){
-    note.innerHTML = `이번 기록: <b>${lastRecord.score}점 · ${fmtTime(lastRecord.time)}</b> → ` +
-      `순위에는 최고 기록(${lastMerge.prev.score}점 · ${fmtTime(lastMerge.prev.time)})이 남아 있습니다.`;
+    note.innerHTML = `이번 기록: <b>${lastRecord.score}점, ${fmtTime(lastRecord.time)}</b> → ` +
+      `순위에는 최고 기록(${lastMerge.prev.score}점, ${fmtTime(lastMerge.prev.time)})이 남아 있습니다.`;
     note.classList.remove("hidden");
   } else if (lastMerge && lastMerge.isBest && lastMerge.prev){
-    note.innerHTML = `🎊 최고 기록 갱신! (이전 ${lastMerge.prev.score}점 · ${fmtTime(lastMerge.prev.time)})`;
+    note.innerHTML = `🎊 최고 기록 갱신! (이전 ${lastMerge.prev.score}점, ${fmtTime(lastMerge.prev.time)})`;
     note.classList.remove("hidden");
   }
 
@@ -4174,7 +4174,7 @@ document.addEventListener("keydown", e => {
 <script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
-/* 학번·이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
+/* 학번, 이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
 (function(){
   var LIMIT = 3;
   var AREAS = {
@@ -4202,10 +4202,10 @@ document.addEventListener("keydown", e => {
       if (x){ c += x.c; done++; parts.push(q[1] + " " + x.c + "/" + x.t); rows.push([q[1], x.c + " / " + x.t, true]); }
       else { parts.push(q[1] + " 미응시"); rows.push([q[1], "아직 안 풀었습니다", false]); }
     });
-    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(" · "), rows: rows };
+    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(", "), rows: rows };
   }
 
-  /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
+  /* ---------- 학번, 이름 입력 (제목 아래 칸) ---------- */
   var editing = false, savedAt = 0;
   var GC = ["15", "16", "25", "26", "35", "36"];
   function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
@@ -4279,25 +4279,25 @@ document.addEventListener("keydown", e => {
     }
     var st = student();
     if (cfg.compact){
-      // 첫 화면·목차: 영역별 한 줄 요약만
+      // 첫 화면, 목차: 영역별 한 줄 요약만
       wrap.innerHTML = '<section class="ms-panel compact"><h3>📊 내 점수</h3>' + (st ?
         '<ul class="ms-sum">' + cfg.areas.map(function(area){
           var s = summary(key(st), area), n = AREAS[area].quizzes.length;
-          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제 · 퀴즈 " + s.done + "/" + n + "</small></li>";
+          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제, 퀴즈 " + s.done + "/" + n + "</small></li>";
         }).join("") + "</ul>" : '<p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p>') + "</section>";
       return;
     }
     var area = cfg.areas[0], A = AREAS[area];
-    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
+    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수, ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
     var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
     var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
     var m = MSG.text || "";
     var kind = /^✅/.test(m) ? "ok" : /^⚠️/.test(m) ? "fail" : m ? "wait" : "";
     wrap.innerHTML = '<section class="ms-panel">' +
       (qi && m ? '<p class="ms-status ' + kind + '" role="status">' + esc(m) + "</p>" : "") +
-      "<h3>📊 내 점수 · " + A.label + "</h3>" +
+      "<h3>📊 내 점수, " + A.label + "</h3>" +
       '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
-      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제, 100점 환산 <b>" + s.score + "점</b></div>" +
       (qi ? '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
         '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
       "</section>";
@@ -4336,7 +4336,7 @@ document.addEventListener("keydown", e => {
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + " · 이 퀴즈 3번 중 " + d.count + "번째)"); }
+        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + ", 이 퀴즈 3번 중 " + d.count + "번째)"); }
         else if (d && d.error === "limit"){ setSent(key(st), sk, LIMIT); setMsg("이 퀴즈는 3번 모두 전송했습니다."); }
         else setMsg("⚠️ 전송하지 못했습니다: " + ((d && d.error) || "알 수 없는 오류"), true);
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
@@ -4403,7 +4403,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업 · 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"]}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계 · 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"]}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계 · 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"]}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계 · 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"], "current": true}]}, "quiz": "ifq"});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업, 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"]}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계, 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"]}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계, 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"]}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계, 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"], "current": true}]}, "quiz": "ifq"});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -4470,7 +4470,7 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
 <script src="score-config.js"></script>
 <script>
 /* mirim-score-v1 */
-/* 학번·이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
+/* 학번, 이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
 (function(){
   var LIMIT = 3;
   var AREAS = {
@@ -4498,10 +4498,10 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
       if (x){ c += x.c; done++; parts.push(q[1] + " " + x.c + "/" + x.t); rows.push([q[1], x.c + " / " + x.t, true]); }
       else { parts.push(q[1] + " 미응시"); rows.push([q[1], "아직 안 풀었습니다", false]); }
     });
-    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(" · "), rows: rows };
+    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(", "), rows: rows };
   }
 
-  /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
+  /* ---------- 학번, 이름 입력 (제목 아래 칸) ---------- */
   var editing = false, savedAt = 0;
   var GC = ["15", "16", "25", "26", "35", "36"];
   function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
@@ -4575,25 +4575,25 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
     }
     var st = student();
     if (cfg.compact){
-      // 첫 화면·목차: 영역별 한 줄 요약만
+      // 첫 화면, 목차: 영역별 한 줄 요약만
       wrap.innerHTML = '<section class="ms-panel compact"><h3>📊 내 점수</h3>' + (st ?
         '<ul class="ms-sum">' + cfg.areas.map(function(area){
           var s = summary(key(st), area), n = AREAS[area].quizzes.length;
-          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제 · 퀴즈 " + s.done + "/" + n + "</small></li>";
+          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제, 퀴즈 " + s.done + "/" + n + "</small></li>";
         }).join("") + "</ul>" : '<p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p>') + "</section>";
       return;
     }
     var area = cfg.areas[0], A = AREAS[area];
-    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
+    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수, ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
     var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
     var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
     var m = MSG.text || "";
     var kind = /^✅/.test(m) ? "ok" : /^⚠️/.test(m) ? "fail" : m ? "wait" : "";
     wrap.innerHTML = '<section class="ms-panel">' +
       (qi && m ? '<p class="ms-status ' + kind + '" role="status">' + esc(m) + "</p>" : "") +
-      "<h3>📊 내 점수 · " + A.label + "</h3>" +
+      "<h3>📊 내 점수, " + A.label + "</h3>" +
       '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
-      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제, 100점 환산 <b>" + s.score + "점</b></div>" +
       (qi ? '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
         '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
       "</section>";
@@ -4632,7 +4632,7 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + " · 이 퀴즈 3번 중 " + d.count + "번째)"); }
+        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + ", 이 퀴즈 3번 중 " + d.count + "번째)"); }
         else if (d && d.error === "limit"){ setSent(key(st), sk, LIMIT); setMsg("이 퀴즈는 3번 모두 전송했습니다."); }
         else setMsg("⚠️ 전송하지 못했습니다: " + ((d && d.error) || "알 수 없는 오류"), true);
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
