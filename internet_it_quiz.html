@@ -290,7 +290,7 @@
     <div>
       <span class="eyebrow">고등학생을 위한</span>
       <h1>인터넷과 <span class="accent">IT 서비스</span> 퀴즈</h1>
-      <p>홈페이지가 만들어지고, 공개되고, 분석되기까지 30문제로 알아봄</p>
+      <p>홈페이지가 만들어지고, 공개되고, 분석되기까지 30문제로 알아보자</p>
     </div>
   </header>
 
@@ -298,7 +298,7 @@
   <section id="start" class="card">
     <div class="hero" aria-hidden="true">🛰️</div>
     <h2>내 홈페이지는 어떻게 세상에 나갈까요?</h2>
-    <p class="intro">인터넷과 서버, IP 주소와 도메인, 깃허브와 워드프레스, 홈페이지를 만들어 공개하는 과정, 구글 애널리틱스까지 차근차근 알아봄. 문제마다 <b>알아두기</b>와 <b>💡 힌트</b>가 함께 보이고, 틀려도 남은 보기 중에서 다시 고를 수 있음.</p>
+    <p class="intro">인터넷과 서버, IP 주소와 도메인, 깃허브와 워드프레스, 홈페이지를 만들어 공개하는 과정, 구글 애널리틱스까지 차근차근 알아보자. 문제마다 <b>알아두기</b>와 <b>💡 힌트</b>가 함께 보이고, 틀려도 남은 보기 중에서 다시 고를 수 있습니다.</p>
     <ul class="stage-list" id="stageList"></ul>
     <div class="diff-legend"><span>난이도</span><span class="it"><span class="st">★</span>쉬움</span><span class="it"><span class="st">★★</span>보통</span><span class="it"><span class="st">★★★</span>어려움</span></div>
     <button class="btn" id="startBtn" type="button">시작하기 ▶</button>
@@ -318,7 +318,7 @@
     <div class="fig hidden" id="qFig"></div>
 
     <div class="choices" id="choices"></div>
-    <p class="keyhint">키보드 1·2·3으로도 고를 수 있음</p>
+    <p class="keyhint">키보드 1·2·3으로도 고를 수 있습니다</p>
 
     <div class="hint-box" id="hintBox"></div>
     <div class="feedback hidden" id="feedback" aria-live="polite"></div>
@@ -329,7 +329,7 @@
   <!-- 결과 -->
   <section id="result" class="card hidden">
     <div class="trophy" id="resultEmoji" aria-hidden="true">🏆</div>
-    <h2 id="resultTitle">퀴즈 끝! 수고 많았음</h2>
+    <h2 id="resultTitle">퀴즈 끝! 수고했습니다</h2>
     <div class="final-score"><span id="finalScore">0</span><small> / <span id="finalTotal">30</span>개</small></div>
     <p class="final-msg" id="finalMsg"></p>
     <ul class="stage-result" id="stageResult"></ul>
@@ -864,9 +864,9 @@ function choose(btn, oi){
   if (wrongCount === 1) result[qi] = false;
   btn.classList.add("wrong"); btn.disabled = true; btn.querySelector(".mark").textContent = "✖";
   restartAnim(btn, "shake");
-  const note = q.m && q.m[oi - 1] ? fmt(q.m[oi - 1]) : "힌트를 읽고 남은 보기 중에서 다시 고르기.";
+  const note = q.m && q.m[oi - 1] ? fmt(q.m[oi - 1]) : "힌트를 읽고 남은 보기 중에서 다시 골라 보자.";
   fb.className = "feedback bad";
-  fb.innerHTML = `<div class="fb-title">😢 아쉬움, 다시 골라 보기!</div><div class="fb-sub">${note}</div>`;
+  fb.innerHTML = `<div class="fb-title">😢 아쉽지만 다시 골라 보자!</div><div class="fb-sub">${note}</div>`;
   restartAnim(fb, "feedback");
   fb.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
 }
@@ -886,8 +886,8 @@ function finish(btn){
     const r = btn.getBoundingClientRect(); burst(r.left + 30, r.top + r.height / 2);
   } else {
     result[qi] = false;
-    title = "👍 정답! 힌트를 보고 해냄";
-    sub = `<div class="fb-sub">한 번에 맞히지 못한 문제는 나중에 '틀린 문제만 다시 풀기'로 복습할 수 있음.</div>`;
+    title = "👍 정답! 힌트를 보고 해냈습니다";
+    sub = `<div class="fb-sub">한 번에 맞히지 못한 문제는 나중에 '틀린 문제만 다시 풀기'로 복습할 수 있습니다.</div>`;
   }
   fb.className = "feedback good";
   fb.innerHTML = `<div class="fb-title">${title}</div>${sub}<div class="explain"><b>✏️ 해설</b><br>${fmt(q.e)}</div>`;
@@ -909,13 +909,13 @@ function showResult(){
   $("finalTotal").textContent = total;
   const rate = correct / total;
   let emoji, msg;
-  if (rate === 1){ emoji = "🏆"; msg = "모두 한 번에 맞힘! 홈페이지를 만들고 세상에 공개할 준비 완료 🛰️✨"; }
-  else if (rate >= 0.7){ emoji = "🥳"; msg = "잘했음! 틀린 문제만 한 번 더 보면 완벽함."; }
-  else if (rate >= 0.4){ emoji = "🌱"; msg = "좋은 출발! 알아두기와 해설을 다시 읽으며 틀린 문제를 다시 풀어 보기."; }
-  else { emoji = "💪"; msg = "처음 듣는 낱말이 많았음. 틀린 문제를 다시 풀면 금방 익숙해짐!"; }
+  if (rate === 1){ emoji = "🏆"; msg = "모두 한 번에 맞혔습니다! 홈페이지를 만들고 세상에 공개할 준비 완료 🛰️✨"; }
+  else if (rate >= 0.7){ emoji = "🥳"; msg = "잘했습니다! 틀린 문제만 한 번 더 보면 완벽합니다."; }
+  else if (rate >= 0.4){ emoji = "🌱"; msg = "좋은 출발! 알아두기와 해설을 다시 읽으며 틀린 문제를 다시 풀어 보자."; }
+  else { emoji = "💪"; msg = "처음 듣는 낱말이 많았을 거예요. 틀린 문제를 다시 풀면 금방 익숙해집니다!"; }
   $("resultEmoji").textContent = emoji;
   $("finalMsg").textContent = msg;
-  $("resultTitle").textContent = total === Q.length ? "퀴즈 끝! 수고 많았음" : "다시 풀기 끝! 수고 많았음";
+  $("resultTitle").textContent = total === Q.length ? "퀴즈 끝! 수고했습니다" : "다시 풀기 끝! 수고했습니다";
 
   $("stageResult").innerHTML = STAGES.map((st, i) => {
     const ids = order.filter(qi => Q[qi].s === i);
@@ -929,7 +929,7 @@ function showResult(){
   lastWrong = order.filter(qi => result[qi] !== true);
   $("wrongList").textContent = lastWrong.length
     ? `다시 볼 문제: ${lastWrong.map(qi => `${qi + 1}번 ${Q[qi].topic}`).join(", ")}`
-    : "틀린 문제 없음! 🎉";
+    : "틀린 문제가 없습니다! 🎉";
   $("retryWrongBtn").classList.toggle("hidden", !lastWrong.length);
   showScreen("result");
   if (rate === 1) setTimeout(() => burst(window.innerWidth / 2, window.innerHeight / 3, 24), 400);
@@ -976,7 +976,7 @@ document.addEventListener("keydown", e => {
     A.quizzes.forEach(function(q){
       var x = r[q[0]]; t += q[2];
       if (x){ c += x.c; done++; parts.push(q[1] + " " + x.c + "/" + x.t); rows.push([q[1], x.c + " / " + x.t, true]); }
-      else { parts.push(q[1] + " 미응시"); rows.push([q[1], "아직 안 풂", false]); }
+      else { parts.push(q[1] + " 미응시"); rows.push([q[1], "아직 안 풀었습니다", false]); }
     });
     return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(" · "), rows: rows };
   }
@@ -998,9 +998,9 @@ document.addEventListener("keydown", e => {
         e.preventDefault();
         var gc = box.querySelector(".ms-gc").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!gc){ err.textContent = "학년, 반을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
-        if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
-        if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
+        if (!gc){ err.textContent = "학년, 반을 고르자."; box.querySelector(".ms-gc").focus(); return; }
+        if (!n){ err.textContent = "번호를 고르자."; box.querySelector(".ms-num").focus(); return; }
+        if (!name){ err.textContent = "이름을 입력하자."; box.querySelector(".ms-name").focus(); return; }
         var g = gc.charAt(0), c = gc.charAt(1);
         var id = gc + (n < 10 ? "0" : "") + n, lb = g + "학년 " + c + "반 " + n + "번";
         jset(sessionStorage, "mirim-student", { id: id, grade: +g, cls: +c, num: +n, label: lb, name: name });
@@ -1051,15 +1051,15 @@ document.addEventListener("keydown", e => {
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p><p class="ms-msg"></p></section>';
       var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
         '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
         '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
         '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
-        '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈음") + "</span></div>" +
-        '<p class="ms-msg">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있음.")) + "</p></section>";
+        '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
+        '<p class="ms-msg">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
     }).join("");
   }
 
@@ -1069,11 +1069,11 @@ document.addEventListener("keydown", e => {
     var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
     var left = LIMIT - sentCount(key(st), area);
     var url = window.SCORE_URL;
-    if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않음. 선생님께 알려 주기."; return; }
+    if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
     var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
-            (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어감." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됨.";
+            (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
     msg.textContent = "보내는 중…";
@@ -1082,12 +1082,12 @@ document.addEventListener("keydown", e => {
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
-        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈음."); }
-        else { say("⚠️ 보내지 못함: " + ((d && d.error) || "알 수 없는 오류")); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냈습니다 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
+        else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
       })
-      .catch(function(){ say("⚠️ 보내지 못함. 인터넷 연결을 확인하고 다시 눌러 보기."); btn.disabled = false; });
+      .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
   }
 
   function render(){ renderWho(); renderPanels(); }
@@ -1110,7 +1110,7 @@ document.addEventListener("keydown", e => {
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학년, 반, 번호, 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 반, 번호, 이름을 입력하자.";
           focusWho();
         }, true);
       }

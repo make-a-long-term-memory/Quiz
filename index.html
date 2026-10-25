@@ -111,7 +111,7 @@
       <p>인터넷과 IT 서비스 · HTML과 CSS · 파이썬</p>
     </div>
   </header>
-  <div class="guide">풀고 싶은 묶음을 고르면 됨. 묶음마다 <b>워밍업부터 차례대로</b> 풀어 보면 좋음. 모든 문제에 힌트가 함께 보임.</div>
+  <div class="guide">풀고 싶은 묶음을 골라 보자. 묶음마다 <b>워밍업부터 차례대로</b> 풀어 보자. 모든 문제에 힌트가 함께 보입니다.</div>
   <nav class="list" aria-label="퀴즈 묶음">
     <a class="set" href="internet_it_quiz.html">
       <span class="ic" style="background:#e6f3ef" aria-hidden="true">🛰️</span>
@@ -174,7 +174,7 @@
     A.quizzes.forEach(function(q){
       var x = r[q[0]]; t += q[2];
       if (x){ c += x.c; done++; parts.push(q[1] + " " + x.c + "/" + x.t); rows.push([q[1], x.c + " / " + x.t, true]); }
-      else { parts.push(q[1] + " 미응시"); rows.push([q[1], "아직 안 풂", false]); }
+      else { parts.push(q[1] + " 미응시"); rows.push([q[1], "아직 안 풀었습니다", false]); }
     });
     return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(" · "), rows: rows };
   }
@@ -196,9 +196,9 @@
         e.preventDefault();
         var gc = box.querySelector(".ms-gc").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!gc){ err.textContent = "학년, 반을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
-        if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
-        if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
+        if (!gc){ err.textContent = "학년, 반을 고르자."; box.querySelector(".ms-gc").focus(); return; }
+        if (!n){ err.textContent = "번호를 고르자."; box.querySelector(".ms-num").focus(); return; }
+        if (!name){ err.textContent = "이름을 입력하자."; box.querySelector(".ms-name").focus(); return; }
         var g = gc.charAt(0), c = gc.charAt(1);
         var id = gc + (n < 10 ? "0" : "") + n, lb = g + "학년 " + c + "반 " + n + "번";
         jset(sessionStorage, "mirim-student", { id: id, grade: +g, cls: +c, num: +n, label: lb, name: name });
@@ -249,15 +249,15 @@
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p><p class="ms-msg"></p></section>';
       var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
         '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
         '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
         '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
-        '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈음") + "</span></div>" +
-        '<p class="ms-msg">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있음.")) + "</p></section>";
+        '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
+        '<p class="ms-msg">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
     }).join("");
   }
 
@@ -267,11 +267,11 @@
     var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
     var left = LIMIT - sentCount(key(st), area);
     var url = window.SCORE_URL;
-    if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않음. 선생님께 알려 주기."; return; }
+    if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
     var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
-            (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어감." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됨.";
+            (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
     msg.textContent = "보내는 중…";
@@ -280,12 +280,12 @@
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
-        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈음."); }
-        else { say("⚠️ 보내지 못함: " + ((d && d.error) || "알 수 없는 오류")); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냈습니다 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
+        else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
       })
-      .catch(function(){ say("⚠️ 보내지 못함. 인터넷 연결을 확인하고 다시 눌러 보기."); btn.disabled = false; });
+      .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
   }
 
   function render(){ renderWho(); renderPanels(); }
@@ -308,7 +308,7 @@
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학년, 반, 번호, 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 반, 번호, 이름을 입력하자.";
           focusWho();
         }, true);
       }
