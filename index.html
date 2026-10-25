@@ -295,6 +295,7 @@
         else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
         else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
+        if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
       .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
   }

@@ -754,6 +754,7 @@ document.addEventListener("keydown", e => {
   } else if (e.key === "h" || e.key === "H"){ if (!$("hintBtn").disabled) showHint(); }
 });
 <\/script>
+<script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
 /* 학번·이름 입력 + 영역별 점수 모아 보기 + 구글 시트로 점수 보내기(영역마다 3번) */
@@ -898,6 +899,7 @@ document.addEventListener("keydown", e => {
         else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
         else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
+        if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
       .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
   }
@@ -931,7 +933,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": [], "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -1580,6 +1582,7 @@ document.addEventListener("keydown", e => {
   }
 });
 <\/script>
+<script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
 /* 학번·이름 입력 + 영역별 점수 모아 보기 + 구글 시트로 점수 보내기(영역마다 3번) */
@@ -1724,6 +1727,7 @@ document.addEventListener("keydown", e => {
         else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
         else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
+        if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
       .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
   }
@@ -1757,7 +1761,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": [], "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -2358,6 +2362,7 @@ document.addEventListener("keydown", e => {
   } else if (e.key === "h" || e.key === "H"){ if (!$("hintBtn").disabled) showHint(); }
 });
 <\/script>
+<script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
 /* 학번·이름 입력 + 영역별 점수 모아 보기 + 구글 시트로 점수 보내기(영역마다 3번) */
@@ -2502,6 +2507,7 @@ document.addEventListener("keydown", e => {
         else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
         else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
+        if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
       .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
   }
@@ -2535,7 +2541,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": [], "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -3741,6 +3747,7 @@ document.addEventListener("keydown", e => {
   if (window.matchMedia("(pointer: fine)").matches) $("nameInput").focus({ preventScroll: true });
 })();
 <\/script>
+<script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
 /* 학번·이름 입력 + 영역별 점수 모아 보기 + 구글 시트로 점수 보내기(영역마다 3번) */
@@ -3885,6 +3892,7 @@ document.addEventListener("keydown", e => {
         else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
         else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
+        if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
       .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
   }
@@ -3918,7 +3926,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": [], "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -4127,6 +4135,7 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
         else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
         else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
+        if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
       .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
   }
