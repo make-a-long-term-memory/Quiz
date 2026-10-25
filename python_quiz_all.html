@@ -120,6 +120,29 @@
   #result .result-actions .btn{background:none !important;color:var(--ink-soft) !important;box-shadow:none !important;border:none !important;padding:4px 0;font-size:.98rem;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
   #result .result-actions .btn:hover{color:var(--ink) !important;filter:none}
   #result .result-actions .btn:active{transform:none}
+  .ms-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ms-card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:#33303c;cursor:pointer;background:#ffffff;border:2px solid #ddd7e6;border-radius:18px;padding:12px 14px;box-shadow:0 4px 0 #ddd7e6;transition:transform .12s,box-shadow .12s,border-color .12s}
+  .ms-card:hover:not(:disabled){transform:translateY(-2px);border-color:#c9c2d5;box-shadow:0 6px 0 #c9c2d5}
+  .ms-card:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ms-card.cur{opacity:.45;filter:grayscale(1);cursor:default;box-shadow:none;background:#f6f5f8}
+  .ms-ic{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:1.45rem}
+  .ms-ic .globe{width:1em;height:1em;display:block}
+  .ms-cb{flex:1;min-width:0;display:grid;gap:1px}
+  .ms-cb small{font-size:.75rem;font-weight:700;color:#686472}
+  .ms-cb b{font-size:1rem;font-weight:800;line-height:1.3}
+  .ms-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+  .ms-tags>span{font-size:.72rem;font-weight:700;border-radius:999px;padding:1px 8px;background:#f6f4fa;color:#5a4f7e}
+  .ms-tags .st{color:#efb72d;letter-spacing:1px}
+  .ms-go{flex:none;color:#bfb4e4;font-weight:800;font-size:1.2rem}
+  @media (max-width:560px){ .ms-cards{grid-template-columns:1fr} }
+  .ms-panel.compact{padding:14px 18px}
+  .ms-sum{list-style:none;display:grid}
+  .ms-sum li{display:grid;grid-template-columns:5.2em auto 1fr;align-items:baseline;gap:10px;padding:6px 0;border-bottom:1px solid #eeeaf2}
+  .ms-sum li:last-child{border-bottom:none}
+  .ms-sum span{color:#686472;font-weight:700}
+  .ms-sum b{font-size:1.1rem;font-weight:800}
+  .ms-sum small{color:#8a8594;font-size:.85rem;text-align:right}
+  .ms-act{margin-top:6px}
   .ms-wrap{display:grid;gap:14px;margin-top:18px}
   .ms-panel{background:#ffffff;border-radius:22px;padding:16px 18px;box-shadow:0 6px 0 #ddd7e6;text-align:left;word-break:keep-all}
   .ms-panel h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
@@ -434,6 +457,29 @@
   #result .result-actions .btn{background:none !important;color:var(--ink-soft) !important;box-shadow:none !important;border:none !important;padding:4px 0;font-size:.98rem;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
   #result .result-actions .btn:hover{color:var(--ink) !important;filter:none}
   #result .result-actions .btn:active{transform:none}
+  .ms-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ms-card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:#33303c;cursor:pointer;background:#ffffff;border:2px solid #ddd7e6;border-radius:18px;padding:12px 14px;box-shadow:0 4px 0 #ddd7e6;transition:transform .12s,box-shadow .12s,border-color .12s}
+  .ms-card:hover:not(:disabled){transform:translateY(-2px);border-color:#c9c2d5;box-shadow:0 6px 0 #c9c2d5}
+  .ms-card:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ms-card.cur{opacity:.45;filter:grayscale(1);cursor:default;box-shadow:none;background:#f6f5f8}
+  .ms-ic{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:1.45rem}
+  .ms-ic .globe{width:1em;height:1em;display:block}
+  .ms-cb{flex:1;min-width:0;display:grid;gap:1px}
+  .ms-cb small{font-size:.75rem;font-weight:700;color:#686472}
+  .ms-cb b{font-size:1rem;font-weight:800;line-height:1.3}
+  .ms-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+  .ms-tags>span{font-size:.72rem;font-weight:700;border-radius:999px;padding:1px 8px;background:#f6f4fa;color:#5a4f7e}
+  .ms-tags .st{color:#efb72d;letter-spacing:1px}
+  .ms-go{flex:none;color:#bfb4e4;font-weight:800;font-size:1.2rem}
+  @media (max-width:560px){ .ms-cards{grid-template-columns:1fr} }
+  .ms-panel.compact{padding:14px 18px}
+  .ms-sum{list-style:none;display:grid}
+  .ms-sum li{display:grid;grid-template-columns:5.2em auto 1fr;align-items:baseline;gap:10px;padding:6px 0;border-bottom:1px solid #eeeaf2}
+  .ms-sum li:last-child{border-bottom:none}
+  .ms-sum span{color:#686472;font-weight:700}
+  .ms-sum b{font-size:1.1rem;font-weight:800}
+  .ms-sum small{color:#8a8594;font-size:.85rem;text-align:right}
+  .ms-act{margin-top:6px}
   .ms-wrap{display:grid;gap:14px;margin-top:18px}
   .ms-panel{background:#ffffff;border-radius:22px;padding:16px 18px;box-shadow:0 6px 0 #ddd7e6;text-align:left;word-break:keep-all}
   .ms-panel h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
@@ -783,7 +829,7 @@ document.addEventListener("keydown", e => {
 <script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
-/* 학번·이름 입력 + 영역별 점수 모아 보기 + 구글 시트로 점수 보내기(영역마다 3번) */
+/* 학번·이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
 (function(){
   var LIMIT = 3;
   var AREAS = {
@@ -873,6 +919,8 @@ document.addEventListener("keydown", e => {
   function openGate(){ editing = !!student(); renderWho(); focusWho(); }
 
   /* ---------- 점수 모아 보기 ---------- */
+  function quizInfo(area, k){ var q = AREAS[area].quizzes.filter(function(x){ return x[0] === k; })[0]; return q ? { key: q[0], label: q[1], total: q[2] } : null; }
+  function sendKey(area, k){ return area + ":" + k; }
   function renderPanels(){
     var wrap = document.querySelector(".ms-wrap");
     if (!wrap){
@@ -882,60 +930,77 @@ document.addEventListener("keydown", e => {
       wrap = document.createElement("div");
       wrap.className = "ms-wrap";
       if (before) before.insertAdjacentElement("beforebegin", wrap); else anchor.insertAdjacentElement("afterend", wrap);
-      wrap.addEventListener("click", function(e){
-        var b = e.target.closest(".ms-send");
-        if (b) send(b.dataset.area, b.closest(".ms-panel"));
-      });
+      wrap.addEventListener("click", function(e){ if (e.target.closest(".ms-send")) send(); });
     }
     var st = student();
-    wrap.innerHTML = cfg.areas.map(function(area){
-      var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p><p class="ms-msg"></p></section>';
-      var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
-      return '<section class="ms-panel" data-area="' + area + '">' +
-        "<h3>📊 내 점수 · " + A.label + "</h3>" +
-        '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
-        '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
-        '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
-        '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
-        '<p class="ms-msg' + (/^✅/.test(MSG[area] || "") ? " ok" : "") + '">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
-    }).join("");
+    if (cfg.compact){
+      // 첫 화면·목차: 영역별 한 줄 요약만
+      wrap.innerHTML = '<section class="ms-panel compact"><h3>📊 내 점수</h3>' + (st ?
+        '<ul class="ms-sum">' + cfg.areas.map(function(area){
+          var s = summary(key(st), area), n = AREAS[area].quizzes.length;
+          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제 · 퀴즈 " + s.done + "/" + n + "</small></li>";
+        }).join("") + "</ul>" : '<p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p>') + "</section>";
+      return;
+    }
+    var area = cfg.areas[0], A = AREAS[area];
+    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
+    var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
+    var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
+    var m = MSG.text || "";
+    wrap.innerHTML = '<section class="ms-panel">' +
+      "<h3>📊 내 점수 · " + A.label + "</h3>" +
+      '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
+      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+      (qi ? '<p class="ms-msg' + (/^✅/.test(m) ? " ok" : "") + '">' + esc(m) + "</p>" +
+        '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
+        '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
+      "</section>";
   }
 
-  function send(area, panel){
-    var st = student();
-    if (!st){ openGate(); return; }
-    var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
-    var left = LIMIT - sentCount(key(st), area);
-    var url = window.SCORE_URL;
-    if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
-    if (left <= 0 || !s.done) return;
-    var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까요?" +
-            (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
-    if (!window.confirm(q)) return;
-    btn.disabled = true;
-    msg.textContent = "보내는 중…";
-    function say(text){ MSG[area] = text; msg.textContent = text; }
-    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, grade: st.grade, cls: st.cls, num: st.num, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
+  /* 퀴즈를 끝까지 풀면 3초 뒤 자동 전송 */
+  var timer = null;
+  function setMsg(text, fail){ MSG = { text: text, fail: !!fail }; renderPanels(); }
+  function countdown(){
+    clearInterval(timer);
+    var st = student(), area = cfg.areas[0], qi = cfg.quiz && quizInfo(area, cfg.quiz);
+    if (!qi) return;
+    if (!st){ setMsg("학년, 반, 번호, 이름을 입력해야 전송됩니다.", false); return; }
+    if (!window.SCORE_URL){ setMsg("⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자.", false); return; }
+    if (LIMIT - sentCount(key(st), sendKey(area, qi.key)) <= 0){ setMsg("이 퀴즈는 3번 모두 전송했습니다.", false); return; }
+    var n = 3;
+    setMsg(n + "초 후에 전송됩니다.");
+    timer = setInterval(function(){
+      n--;
+      if (n > 0) setMsg(n + "초 후에 전송됩니다.");
+      else { clearInterval(timer); send(); }
+    }, 1000);
+  }
+  function send(){
+    var st = student(), area = cfg.areas[0], A = AREAS[area], qi = cfg.quiz && quizInfo(area, cfg.quiz);
+    if (!st || !qi || !window.SCORE_URL) return;
+    var sk = sendKey(area, qi.key);
+    if (LIMIT - sentCount(key(st), sk) <= 0) return;
+    var x = (results(key(st))[area] || {})[qi.key];
+    if (!x) return;
+    var s = summary(key(st), area);
+    setMsg("전송하는 중…");
+    fetch(window.SCORE_URL, { method: "POST", body: JSON.stringify({
+      id: st.id, grade: st.grade, cls: st.cls, num: st.num, name: st.name, area: A.label, quiz: qi.label,
+      correct: x.c, total: x.t, score: Math.round(x.c / x.t * 100), areaScore: s.score, detail: s.detail }) })
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 전송되었습니다. (" + hm + " · 3번 중 " + d.count + "번째)"); }
-        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
-        else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
-        renderPanels();
+        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + " · 이 퀴즈 3번 중 " + d.count + "번째)"); }
+        else if (d && d.error === "limit"){ setSent(key(st), sk, LIMIT); setMsg("이 퀴즈는 3번 모두 전송했습니다."); }
+        else setMsg("⚠️ 전송하지 못했습니다: " + ((d && d.error) || "알 수 없는 오류"), true);
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
-      .catch(function(){ say("⚠️ 보내지 못했습니다. 잠시 뒤 다시 눌러 보자. 계속 안 되면 선생님께 알리자."); btn.disabled = false; });
+      .catch(function(){ setMsg("⚠️ 전송하지 못했습니다. 아래 버튼으로 다시 보내 보자. 계속 안 되면 선생님께 알리자.", true); });
   }
 
-  /* ---------- 결과 화면: 다음 퀴즈·다른 퀴즈로 가기 ---------- */
+  /* ---------- 결과 화면: 이 파트의 퀴즈 목록 (방금 푼 퀴즈는 흐리게) ---------- */
   function go(item){
-    if (item.key){
-      if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*");
-      return;
-    }
+    if (item.key){ if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*"); return; }
     var url = new URL(item.href, document.baseURI).href;
     try{ window.top.location.href = url; }catch(e){ window.location.href = url; }
   }
@@ -945,16 +1010,16 @@ document.addEventListener("keydown", e => {
     if (!before) return;
     var nav = document.createElement("div");
     nav.className = "ms-nav";
-    var items = [];
-    var html = "";
-    if (cfg.nav.next){ items.push(cfg.nav.next); html += '<button type="button" class="ms-btn ms-next" data-i="0">' + esc(cfg.nav.next.label) + " ▶</button>"; }
-    if (cfg.nav.others && cfg.nav.others.length){
-      html += '<p class="ms-nav-t">' + esc(cfg.nav.othersTitle || "다른 퀴즈 고르기") + '</p><div class="ms-nav-list">';
-      cfg.nav.others.forEach(function(o){ items.push(o); html += '<button type="button" class="ms-btn ms-other" data-i="' + (items.length - 1) + '">' + esc(o.label) + "</button>"; });
-      html += "</div>";
-    }
-    nav.innerHTML = html;
-    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b) go(items[+b.dataset.i]); });
+    var items = cfg.nav.items;
+    nav.innerHTML = '<p class="ms-nav-t">' + esc(cfg.nav.title) + '</p><div class="ms-cards">' + items.map(function(it, i){
+      var cur = it.current;
+      return '<button type="button" class="ms-card' + (cur ? " cur" : "") + '" data-i="' + i + '"' + (cur ? " disabled" : "") + ">" +
+        '<span class="ms-ic" style="background:' + it.bg + '" aria-hidden="true">' + it.icon + "</span>" +
+        '<span class="ms-cb"><small>' + esc(cur ? "방금 푼 퀴즈" : it.step) + "</small><b>" + esc(it.title) + "</b>" +
+        '<span class="ms-tags">' + it.tags.map(function(g){ return "<span>" + g + "</span>"; }).join("") + "</span></span>" +
+        (cur ? "" : '<span class="ms-go" aria-hidden="true">›</span>') + "</button>";
+    }).join("") + "</div>";
+    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b && !b.disabled) go(items[+b.dataset.i]); });
     before.insertAdjacentElement("beforebegin", nav);
   }
 
@@ -988,11 +1053,11 @@ document.addEventListener("keydown", e => {
         }, true);
       }
     },
-    onResult: function(){ renderPanels(); },
+    onResult: function(){ MSG = {}; renderPanels(); countdown(); },
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"next": {"key": "blank", "label": "다음 퀴즈 · 파이썬 빈칸 채우기"}, "othersTitle": "이 파트의 다른 퀴즈", "others": [{"key": "blank", "label": "파이썬 빈칸 채우기"}, {"key": "basics", "label": "파이썬 첫걸음"}, {"key": "ifq", "label": "파이썬 선택문"}]}});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업 · 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"], "current": true}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계 · 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"]}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계 · 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"]}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계 · 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"]}]}, "quiz": "ox"});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -1261,6 +1326,29 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
   #result .result-actions .btn{background:none !important;color:var(--ink-soft) !important;box-shadow:none !important;border:none !important;padding:4px 0;font-size:.98rem;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
   #result .result-actions .btn:hover{color:var(--ink) !important;filter:none}
   #result .result-actions .btn:active{transform:none}
+  .ms-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ms-card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:#33303c;cursor:pointer;background:#ffffff;border:2px solid #ddd7e6;border-radius:18px;padding:12px 14px;box-shadow:0 4px 0 #ddd7e6;transition:transform .12s,box-shadow .12s,border-color .12s}
+  .ms-card:hover:not(:disabled){transform:translateY(-2px);border-color:#c9c2d5;box-shadow:0 6px 0 #c9c2d5}
+  .ms-card:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ms-card.cur{opacity:.45;filter:grayscale(1);cursor:default;box-shadow:none;background:#f6f5f8}
+  .ms-ic{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:1.45rem}
+  .ms-ic .globe{width:1em;height:1em;display:block}
+  .ms-cb{flex:1;min-width:0;display:grid;gap:1px}
+  .ms-cb small{font-size:.75rem;font-weight:700;color:#686472}
+  .ms-cb b{font-size:1rem;font-weight:800;line-height:1.3}
+  .ms-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+  .ms-tags>span{font-size:.72rem;font-weight:700;border-radius:999px;padding:1px 8px;background:#f6f4fa;color:#5a4f7e}
+  .ms-tags .st{color:#efb72d;letter-spacing:1px}
+  .ms-go{flex:none;color:#bfb4e4;font-weight:800;font-size:1.2rem}
+  @media (max-width:560px){ .ms-cards{grid-template-columns:1fr} }
+  .ms-panel.compact{padding:14px 18px}
+  .ms-sum{list-style:none;display:grid}
+  .ms-sum li{display:grid;grid-template-columns:5.2em auto 1fr;align-items:baseline;gap:10px;padding:6px 0;border-bottom:1px solid #eeeaf2}
+  .ms-sum li:last-child{border-bottom:none}
+  .ms-sum span{color:#686472;font-weight:700}
+  .ms-sum b{font-size:1.1rem;font-weight:800}
+  .ms-sum small{color:#8a8594;font-size:.85rem;text-align:right}
+  .ms-act{margin-top:6px}
   .ms-wrap{display:grid;gap:14px;margin-top:18px}
   .ms-panel{background:#ffffff;border-radius:22px;padding:16px 18px;box-shadow:0 6px 0 #ddd7e6;text-align:left;word-break:keep-all}
   .ms-panel h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
@@ -1657,7 +1745,7 @@ document.addEventListener("keydown", e => {
 <script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
-/* 학번·이름 입력 + 영역별 점수 모아 보기 + 구글 시트로 점수 보내기(영역마다 3번) */
+/* 학번·이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
 (function(){
   var LIMIT = 3;
   var AREAS = {
@@ -1747,6 +1835,8 @@ document.addEventListener("keydown", e => {
   function openGate(){ editing = !!student(); renderWho(); focusWho(); }
 
   /* ---------- 점수 모아 보기 ---------- */
+  function quizInfo(area, k){ var q = AREAS[area].quizzes.filter(function(x){ return x[0] === k; })[0]; return q ? { key: q[0], label: q[1], total: q[2] } : null; }
+  function sendKey(area, k){ return area + ":" + k; }
   function renderPanels(){
     var wrap = document.querySelector(".ms-wrap");
     if (!wrap){
@@ -1756,60 +1846,77 @@ document.addEventListener("keydown", e => {
       wrap = document.createElement("div");
       wrap.className = "ms-wrap";
       if (before) before.insertAdjacentElement("beforebegin", wrap); else anchor.insertAdjacentElement("afterend", wrap);
-      wrap.addEventListener("click", function(e){
-        var b = e.target.closest(".ms-send");
-        if (b) send(b.dataset.area, b.closest(".ms-panel"));
-      });
+      wrap.addEventListener("click", function(e){ if (e.target.closest(".ms-send")) send(); });
     }
     var st = student();
-    wrap.innerHTML = cfg.areas.map(function(area){
-      var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p><p class="ms-msg"></p></section>';
-      var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
-      return '<section class="ms-panel" data-area="' + area + '">' +
-        "<h3>📊 내 점수 · " + A.label + "</h3>" +
-        '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
-        '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
-        '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
-        '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
-        '<p class="ms-msg' + (/^✅/.test(MSG[area] || "") ? " ok" : "") + '">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
-    }).join("");
+    if (cfg.compact){
+      // 첫 화면·목차: 영역별 한 줄 요약만
+      wrap.innerHTML = '<section class="ms-panel compact"><h3>📊 내 점수</h3>' + (st ?
+        '<ul class="ms-sum">' + cfg.areas.map(function(area){
+          var s = summary(key(st), area), n = AREAS[area].quizzes.length;
+          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제 · 퀴즈 " + s.done + "/" + n + "</small></li>";
+        }).join("") + "</ul>" : '<p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p>') + "</section>";
+      return;
+    }
+    var area = cfg.areas[0], A = AREAS[area];
+    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
+    var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
+    var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
+    var m = MSG.text || "";
+    wrap.innerHTML = '<section class="ms-panel">' +
+      "<h3>📊 내 점수 · " + A.label + "</h3>" +
+      '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
+      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+      (qi ? '<p class="ms-msg' + (/^✅/.test(m) ? " ok" : "") + '">' + esc(m) + "</p>" +
+        '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
+        '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
+      "</section>";
   }
 
-  function send(area, panel){
-    var st = student();
-    if (!st){ openGate(); return; }
-    var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
-    var left = LIMIT - sentCount(key(st), area);
-    var url = window.SCORE_URL;
-    if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
-    if (left <= 0 || !s.done) return;
-    var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까요?" +
-            (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
-    if (!window.confirm(q)) return;
-    btn.disabled = true;
-    msg.textContent = "보내는 중…";
-    function say(text){ MSG[area] = text; msg.textContent = text; }
-    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, grade: st.grade, cls: st.cls, num: st.num, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
+  /* 퀴즈를 끝까지 풀면 3초 뒤 자동 전송 */
+  var timer = null;
+  function setMsg(text, fail){ MSG = { text: text, fail: !!fail }; renderPanels(); }
+  function countdown(){
+    clearInterval(timer);
+    var st = student(), area = cfg.areas[0], qi = cfg.quiz && quizInfo(area, cfg.quiz);
+    if (!qi) return;
+    if (!st){ setMsg("학년, 반, 번호, 이름을 입력해야 전송됩니다.", false); return; }
+    if (!window.SCORE_URL){ setMsg("⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자.", false); return; }
+    if (LIMIT - sentCount(key(st), sendKey(area, qi.key)) <= 0){ setMsg("이 퀴즈는 3번 모두 전송했습니다.", false); return; }
+    var n = 3;
+    setMsg(n + "초 후에 전송됩니다.");
+    timer = setInterval(function(){
+      n--;
+      if (n > 0) setMsg(n + "초 후에 전송됩니다.");
+      else { clearInterval(timer); send(); }
+    }, 1000);
+  }
+  function send(){
+    var st = student(), area = cfg.areas[0], A = AREAS[area], qi = cfg.quiz && quizInfo(area, cfg.quiz);
+    if (!st || !qi || !window.SCORE_URL) return;
+    var sk = sendKey(area, qi.key);
+    if (LIMIT - sentCount(key(st), sk) <= 0) return;
+    var x = (results(key(st))[area] || {})[qi.key];
+    if (!x) return;
+    var s = summary(key(st), area);
+    setMsg("전송하는 중…");
+    fetch(window.SCORE_URL, { method: "POST", body: JSON.stringify({
+      id: st.id, grade: st.grade, cls: st.cls, num: st.num, name: st.name, area: A.label, quiz: qi.label,
+      correct: x.c, total: x.t, score: Math.round(x.c / x.t * 100), areaScore: s.score, detail: s.detail }) })
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 전송되었습니다. (" + hm + " · 3번 중 " + d.count + "번째)"); }
-        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
-        else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
-        renderPanels();
+        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + " · 이 퀴즈 3번 중 " + d.count + "번째)"); }
+        else if (d && d.error === "limit"){ setSent(key(st), sk, LIMIT); setMsg("이 퀴즈는 3번 모두 전송했습니다."); }
+        else setMsg("⚠️ 전송하지 못했습니다: " + ((d && d.error) || "알 수 없는 오류"), true);
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
-      .catch(function(){ say("⚠️ 보내지 못했습니다. 잠시 뒤 다시 눌러 보자. 계속 안 되면 선생님께 알리자."); btn.disabled = false; });
+      .catch(function(){ setMsg("⚠️ 전송하지 못했습니다. 아래 버튼으로 다시 보내 보자. 계속 안 되면 선생님께 알리자.", true); });
   }
 
-  /* ---------- 결과 화면: 다음 퀴즈·다른 퀴즈로 가기 ---------- */
+  /* ---------- 결과 화면: 이 파트의 퀴즈 목록 (방금 푼 퀴즈는 흐리게) ---------- */
   function go(item){
-    if (item.key){
-      if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*");
-      return;
-    }
+    if (item.key){ if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*"); return; }
     var url = new URL(item.href, document.baseURI).href;
     try{ window.top.location.href = url; }catch(e){ window.location.href = url; }
   }
@@ -1819,16 +1926,16 @@ document.addEventListener("keydown", e => {
     if (!before) return;
     var nav = document.createElement("div");
     nav.className = "ms-nav";
-    var items = [];
-    var html = "";
-    if (cfg.nav.next){ items.push(cfg.nav.next); html += '<button type="button" class="ms-btn ms-next" data-i="0">' + esc(cfg.nav.next.label) + " ▶</button>"; }
-    if (cfg.nav.others && cfg.nav.others.length){
-      html += '<p class="ms-nav-t">' + esc(cfg.nav.othersTitle || "다른 퀴즈 고르기") + '</p><div class="ms-nav-list">';
-      cfg.nav.others.forEach(function(o){ items.push(o); html += '<button type="button" class="ms-btn ms-other" data-i="' + (items.length - 1) + '">' + esc(o.label) + "</button>"; });
-      html += "</div>";
-    }
-    nav.innerHTML = html;
-    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b) go(items[+b.dataset.i]); });
+    var items = cfg.nav.items;
+    nav.innerHTML = '<p class="ms-nav-t">' + esc(cfg.nav.title) + '</p><div class="ms-cards">' + items.map(function(it, i){
+      var cur = it.current;
+      return '<button type="button" class="ms-card' + (cur ? " cur" : "") + '" data-i="' + i + '"' + (cur ? " disabled" : "") + ">" +
+        '<span class="ms-ic" style="background:' + it.bg + '" aria-hidden="true">' + it.icon + "</span>" +
+        '<span class="ms-cb"><small>' + esc(cur ? "방금 푼 퀴즈" : it.step) + "</small><b>" + esc(it.title) + "</b>" +
+        '<span class="ms-tags">' + it.tags.map(function(g){ return "<span>" + g + "</span>"; }).join("") + "</span></span>" +
+        (cur ? "" : '<span class="ms-go" aria-hidden="true">›</span>') + "</button>";
+    }).join("") + "</div>";
+    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b && !b.disabled) go(items[+b.dataset.i]); });
     before.insertAdjacentElement("beforebegin", nav);
   }
 
@@ -1862,11 +1969,11 @@ document.addEventListener("keydown", e => {
         }, true);
       }
     },
-    onResult: function(){ renderPanels(); },
+    onResult: function(){ MSG = {}; renderPanels(); countdown(); },
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"next": {"key": "basics", "label": "다음 퀴즈 · 파이썬 첫걸음"}, "othersTitle": "이 파트의 다른 퀴즈", "others": [{"key": "ox", "label": "파이썬 OX"}, {"key": "basics", "label": "파이썬 첫걸음"}, {"key": "ifq", "label": "파이썬 선택문"}]}});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업 · 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"]}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계 · 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"], "current": true}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계 · 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"]}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계 · 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"]}]}, "quiz": "blank"});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -2114,6 +2221,29 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
   #result .result-actions .btn{background:none !important;color:var(--ink-soft) !important;box-shadow:none !important;border:none !important;padding:4px 0;font-size:.98rem;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
   #result .result-actions .btn:hover{color:var(--ink) !important;filter:none}
   #result .result-actions .btn:active{transform:none}
+  .ms-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ms-card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:#33303c;cursor:pointer;background:#ffffff;border:2px solid #ddd7e6;border-radius:18px;padding:12px 14px;box-shadow:0 4px 0 #ddd7e6;transition:transform .12s,box-shadow .12s,border-color .12s}
+  .ms-card:hover:not(:disabled){transform:translateY(-2px);border-color:#c9c2d5;box-shadow:0 6px 0 #c9c2d5}
+  .ms-card:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ms-card.cur{opacity:.45;filter:grayscale(1);cursor:default;box-shadow:none;background:#f6f5f8}
+  .ms-ic{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:1.45rem}
+  .ms-ic .globe{width:1em;height:1em;display:block}
+  .ms-cb{flex:1;min-width:0;display:grid;gap:1px}
+  .ms-cb small{font-size:.75rem;font-weight:700;color:#686472}
+  .ms-cb b{font-size:1rem;font-weight:800;line-height:1.3}
+  .ms-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+  .ms-tags>span{font-size:.72rem;font-weight:700;border-radius:999px;padding:1px 8px;background:#f6f4fa;color:#5a4f7e}
+  .ms-tags .st{color:#efb72d;letter-spacing:1px}
+  .ms-go{flex:none;color:#bfb4e4;font-weight:800;font-size:1.2rem}
+  @media (max-width:560px){ .ms-cards{grid-template-columns:1fr} }
+  .ms-panel.compact{padding:14px 18px}
+  .ms-sum{list-style:none;display:grid}
+  .ms-sum li{display:grid;grid-template-columns:5.2em auto 1fr;align-items:baseline;gap:10px;padding:6px 0;border-bottom:1px solid #eeeaf2}
+  .ms-sum li:last-child{border-bottom:none}
+  .ms-sum span{color:#686472;font-weight:700}
+  .ms-sum b{font-size:1.1rem;font-weight:800}
+  .ms-sum small{color:#8a8594;font-size:.85rem;text-align:right}
+  .ms-act{margin-top:6px}
   .ms-wrap{display:grid;gap:14px;margin-top:18px}
   .ms-panel{background:#ffffff;border-radius:22px;padding:16px 18px;box-shadow:0 6px 0 #ddd7e6;text-align:left;word-break:keep-all}
   .ms-panel h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
@@ -2483,7 +2613,7 @@ document.addEventListener("keydown", e => {
 <script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
-/* 학번·이름 입력 + 영역별 점수 모아 보기 + 구글 시트로 점수 보내기(영역마다 3번) */
+/* 학번·이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
 (function(){
   var LIMIT = 3;
   var AREAS = {
@@ -2573,6 +2703,8 @@ document.addEventListener("keydown", e => {
   function openGate(){ editing = !!student(); renderWho(); focusWho(); }
 
   /* ---------- 점수 모아 보기 ---------- */
+  function quizInfo(area, k){ var q = AREAS[area].quizzes.filter(function(x){ return x[0] === k; })[0]; return q ? { key: q[0], label: q[1], total: q[2] } : null; }
+  function sendKey(area, k){ return area + ":" + k; }
   function renderPanels(){
     var wrap = document.querySelector(".ms-wrap");
     if (!wrap){
@@ -2582,60 +2714,77 @@ document.addEventListener("keydown", e => {
       wrap = document.createElement("div");
       wrap.className = "ms-wrap";
       if (before) before.insertAdjacentElement("beforebegin", wrap); else anchor.insertAdjacentElement("afterend", wrap);
-      wrap.addEventListener("click", function(e){
-        var b = e.target.closest(".ms-send");
-        if (b) send(b.dataset.area, b.closest(".ms-panel"));
-      });
+      wrap.addEventListener("click", function(e){ if (e.target.closest(".ms-send")) send(); });
     }
     var st = student();
-    wrap.innerHTML = cfg.areas.map(function(area){
-      var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p><p class="ms-msg"></p></section>';
-      var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
-      return '<section class="ms-panel" data-area="' + area + '">' +
-        "<h3>📊 내 점수 · " + A.label + "</h3>" +
-        '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
-        '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
-        '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
-        '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
-        '<p class="ms-msg' + (/^✅/.test(MSG[area] || "") ? " ok" : "") + '">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
-    }).join("");
+    if (cfg.compact){
+      // 첫 화면·목차: 영역별 한 줄 요약만
+      wrap.innerHTML = '<section class="ms-panel compact"><h3>📊 내 점수</h3>' + (st ?
+        '<ul class="ms-sum">' + cfg.areas.map(function(area){
+          var s = summary(key(st), area), n = AREAS[area].quizzes.length;
+          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제 · 퀴즈 " + s.done + "/" + n + "</small></li>";
+        }).join("") + "</ul>" : '<p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p>') + "</section>";
+      return;
+    }
+    var area = cfg.areas[0], A = AREAS[area];
+    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
+    var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
+    var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
+    var m = MSG.text || "";
+    wrap.innerHTML = '<section class="ms-panel">' +
+      "<h3>📊 내 점수 · " + A.label + "</h3>" +
+      '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
+      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+      (qi ? '<p class="ms-msg' + (/^✅/.test(m) ? " ok" : "") + '">' + esc(m) + "</p>" +
+        '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
+        '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
+      "</section>";
   }
 
-  function send(area, panel){
-    var st = student();
-    if (!st){ openGate(); return; }
-    var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
-    var left = LIMIT - sentCount(key(st), area);
-    var url = window.SCORE_URL;
-    if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
-    if (left <= 0 || !s.done) return;
-    var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까요?" +
-            (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
-    if (!window.confirm(q)) return;
-    btn.disabled = true;
-    msg.textContent = "보내는 중…";
-    function say(text){ MSG[area] = text; msg.textContent = text; }
-    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, grade: st.grade, cls: st.cls, num: st.num, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
+  /* 퀴즈를 끝까지 풀면 3초 뒤 자동 전송 */
+  var timer = null;
+  function setMsg(text, fail){ MSG = { text: text, fail: !!fail }; renderPanels(); }
+  function countdown(){
+    clearInterval(timer);
+    var st = student(), area = cfg.areas[0], qi = cfg.quiz && quizInfo(area, cfg.quiz);
+    if (!qi) return;
+    if (!st){ setMsg("학년, 반, 번호, 이름을 입력해야 전송됩니다.", false); return; }
+    if (!window.SCORE_URL){ setMsg("⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자.", false); return; }
+    if (LIMIT - sentCount(key(st), sendKey(area, qi.key)) <= 0){ setMsg("이 퀴즈는 3번 모두 전송했습니다.", false); return; }
+    var n = 3;
+    setMsg(n + "초 후에 전송됩니다.");
+    timer = setInterval(function(){
+      n--;
+      if (n > 0) setMsg(n + "초 후에 전송됩니다.");
+      else { clearInterval(timer); send(); }
+    }, 1000);
+  }
+  function send(){
+    var st = student(), area = cfg.areas[0], A = AREAS[area], qi = cfg.quiz && quizInfo(area, cfg.quiz);
+    if (!st || !qi || !window.SCORE_URL) return;
+    var sk = sendKey(area, qi.key);
+    if (LIMIT - sentCount(key(st), sk) <= 0) return;
+    var x = (results(key(st))[area] || {})[qi.key];
+    if (!x) return;
+    var s = summary(key(st), area);
+    setMsg("전송하는 중…");
+    fetch(window.SCORE_URL, { method: "POST", body: JSON.stringify({
+      id: st.id, grade: st.grade, cls: st.cls, num: st.num, name: st.name, area: A.label, quiz: qi.label,
+      correct: x.c, total: x.t, score: Math.round(x.c / x.t * 100), areaScore: s.score, detail: s.detail }) })
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 전송되었습니다. (" + hm + " · 3번 중 " + d.count + "번째)"); }
-        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
-        else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
-        renderPanels();
+        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + " · 이 퀴즈 3번 중 " + d.count + "번째)"); }
+        else if (d && d.error === "limit"){ setSent(key(st), sk, LIMIT); setMsg("이 퀴즈는 3번 모두 전송했습니다."); }
+        else setMsg("⚠️ 전송하지 못했습니다: " + ((d && d.error) || "알 수 없는 오류"), true);
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
-      .catch(function(){ say("⚠️ 보내지 못했습니다. 잠시 뒤 다시 눌러 보자. 계속 안 되면 선생님께 알리자."); btn.disabled = false; });
+      .catch(function(){ setMsg("⚠️ 전송하지 못했습니다. 아래 버튼으로 다시 보내 보자. 계속 안 되면 선생님께 알리자.", true); });
   }
 
-  /* ---------- 결과 화면: 다음 퀴즈·다른 퀴즈로 가기 ---------- */
+  /* ---------- 결과 화면: 이 파트의 퀴즈 목록 (방금 푼 퀴즈는 흐리게) ---------- */
   function go(item){
-    if (item.key){
-      if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*");
-      return;
-    }
+    if (item.key){ if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*"); return; }
     var url = new URL(item.href, document.baseURI).href;
     try{ window.top.location.href = url; }catch(e){ window.location.href = url; }
   }
@@ -2645,16 +2794,16 @@ document.addEventListener("keydown", e => {
     if (!before) return;
     var nav = document.createElement("div");
     nav.className = "ms-nav";
-    var items = [];
-    var html = "";
-    if (cfg.nav.next){ items.push(cfg.nav.next); html += '<button type="button" class="ms-btn ms-next" data-i="0">' + esc(cfg.nav.next.label) + " ▶</button>"; }
-    if (cfg.nav.others && cfg.nav.others.length){
-      html += '<p class="ms-nav-t">' + esc(cfg.nav.othersTitle || "다른 퀴즈 고르기") + '</p><div class="ms-nav-list">';
-      cfg.nav.others.forEach(function(o){ items.push(o); html += '<button type="button" class="ms-btn ms-other" data-i="' + (items.length - 1) + '">' + esc(o.label) + "</button>"; });
-      html += "</div>";
-    }
-    nav.innerHTML = html;
-    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b) go(items[+b.dataset.i]); });
+    var items = cfg.nav.items;
+    nav.innerHTML = '<p class="ms-nav-t">' + esc(cfg.nav.title) + '</p><div class="ms-cards">' + items.map(function(it, i){
+      var cur = it.current;
+      return '<button type="button" class="ms-card' + (cur ? " cur" : "") + '" data-i="' + i + '"' + (cur ? " disabled" : "") + ">" +
+        '<span class="ms-ic" style="background:' + it.bg + '" aria-hidden="true">' + it.icon + "</span>" +
+        '<span class="ms-cb"><small>' + esc(cur ? "방금 푼 퀴즈" : it.step) + "</small><b>" + esc(it.title) + "</b>" +
+        '<span class="ms-tags">' + it.tags.map(function(g){ return "<span>" + g + "</span>"; }).join("") + "</span></span>" +
+        (cur ? "" : '<span class="ms-go" aria-hidden="true">›</span>') + "</button>";
+    }).join("") + "</div>";
+    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b && !b.disabled) go(items[+b.dataset.i]); });
     before.insertAdjacentElement("beforebegin", nav);
   }
 
@@ -2688,11 +2837,11 @@ document.addEventListener("keydown", e => {
         }, true);
       }
     },
-    onResult: function(){ renderPanels(); },
+    onResult: function(){ MSG = {}; renderPanels(); countdown(); },
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"next": {"key": "ifq", "label": "다음 퀴즈 · 파이썬 선택문"}, "othersTitle": "이 파트의 다른 퀴즈", "others": [{"key": "ox", "label": "파이썬 OX"}, {"key": "blank", "label": "파이썬 빈칸 채우기"}, {"key": "ifq", "label": "파이썬 선택문"}]}});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업 · 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"]}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계 · 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"]}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계 · 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"], "current": true}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계 · 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"]}]}, "quiz": "basics"});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -3099,6 +3248,29 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
   #result .result-actions .btn{background:none !important;color:var(--ink-soft) !important;box-shadow:none !important;border:none !important;padding:4px 0;font-size:.98rem;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
   #result .result-actions .btn:hover{color:var(--ink) !important;filter:none}
   #result .result-actions .btn:active{transform:none}
+  .ms-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ms-card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:#33303c;cursor:pointer;background:#ffffff;border:2px solid #ddd7e6;border-radius:18px;padding:12px 14px;box-shadow:0 4px 0 #ddd7e6;transition:transform .12s,box-shadow .12s,border-color .12s}
+  .ms-card:hover:not(:disabled){transform:translateY(-2px);border-color:#c9c2d5;box-shadow:0 6px 0 #c9c2d5}
+  .ms-card:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ms-card.cur{opacity:.45;filter:grayscale(1);cursor:default;box-shadow:none;background:#f6f5f8}
+  .ms-ic{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:1.45rem}
+  .ms-ic .globe{width:1em;height:1em;display:block}
+  .ms-cb{flex:1;min-width:0;display:grid;gap:1px}
+  .ms-cb small{font-size:.75rem;font-weight:700;color:#686472}
+  .ms-cb b{font-size:1rem;font-weight:800;line-height:1.3}
+  .ms-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+  .ms-tags>span{font-size:.72rem;font-weight:700;border-radius:999px;padding:1px 8px;background:#f6f4fa;color:#5a4f7e}
+  .ms-tags .st{color:#efb72d;letter-spacing:1px}
+  .ms-go{flex:none;color:#bfb4e4;font-weight:800;font-size:1.2rem}
+  @media (max-width:560px){ .ms-cards{grid-template-columns:1fr} }
+  .ms-panel.compact{padding:14px 18px}
+  .ms-sum{list-style:none;display:grid}
+  .ms-sum li{display:grid;grid-template-columns:5.2em auto 1fr;align-items:baseline;gap:10px;padding:6px 0;border-bottom:1px solid #eeeaf2}
+  .ms-sum li:last-child{border-bottom:none}
+  .ms-sum span{color:#686472;font-weight:700}
+  .ms-sum b{font-size:1.1rem;font-weight:800}
+  .ms-sum small{color:#8a8594;font-size:.85rem;text-align:right}
+  .ms-act{margin-top:6px}
   .ms-wrap{display:grid;gap:14px;margin-top:18px}
   .ms-panel{background:#ffffff;border-radius:22px;padding:16px 18px;box-shadow:0 6px 0 #ddd7e6;text-align:left;word-break:keep-all}
   .ms-panel h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
@@ -3914,7 +4086,7 @@ document.addEventListener("keydown", e => {
 <script src="score-config.js"><\/script>
 <script>
 /* mirim-score-v1 */
-/* 학번·이름 입력 + 영역별 점수 모아 보기 + 구글 시트로 점수 보내기(영역마다 3번) */
+/* 학번·이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
 (function(){
   var LIMIT = 3;
   var AREAS = {
@@ -4004,6 +4176,8 @@ document.addEventListener("keydown", e => {
   function openGate(){ editing = !!student(); renderWho(); focusWho(); }
 
   /* ---------- 점수 모아 보기 ---------- */
+  function quizInfo(area, k){ var q = AREAS[area].quizzes.filter(function(x){ return x[0] === k; })[0]; return q ? { key: q[0], label: q[1], total: q[2] } : null; }
+  function sendKey(area, k){ return area + ":" + k; }
   function renderPanels(){
     var wrap = document.querySelector(".ms-wrap");
     if (!wrap){
@@ -4013,60 +4187,77 @@ document.addEventListener("keydown", e => {
       wrap = document.createElement("div");
       wrap.className = "ms-wrap";
       if (before) before.insertAdjacentElement("beforebegin", wrap); else anchor.insertAdjacentElement("afterend", wrap);
-      wrap.addEventListener("click", function(e){
-        var b = e.target.closest(".ms-send");
-        if (b) send(b.dataset.area, b.closest(".ms-panel"));
-      });
+      wrap.addEventListener("click", function(e){ if (e.target.closest(".ms-send")) send(); });
     }
     var st = student();
-    wrap.innerHTML = cfg.areas.map(function(area){
-      var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p><p class="ms-msg"></p></section>';
-      var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
-      return '<section class="ms-panel" data-area="' + area + '">' +
-        "<h3>📊 내 점수 · " + A.label + "</h3>" +
-        '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
-        '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
-        '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
-        '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
-        '<p class="ms-msg' + (/^✅/.test(MSG[area] || "") ? " ok" : "") + '">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
-    }).join("");
+    if (cfg.compact){
+      // 첫 화면·목차: 영역별 한 줄 요약만
+      wrap.innerHTML = '<section class="ms-panel compact"><h3>📊 내 점수</h3>' + (st ?
+        '<ul class="ms-sum">' + cfg.areas.map(function(area){
+          var s = summary(key(st), area), n = AREAS[area].quizzes.length;
+          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제 · 퀴즈 " + s.done + "/" + n + "</small></li>";
+        }).join("") + "</ul>" : '<p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p>') + "</section>";
+      return;
+    }
+    var area = cfg.areas[0], A = AREAS[area];
+    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
+    var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
+    var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
+    var m = MSG.text || "";
+    wrap.innerHTML = '<section class="ms-panel">' +
+      "<h3>📊 내 점수 · " + A.label + "</h3>" +
+      '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
+      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+      (qi ? '<p class="ms-msg' + (/^✅/.test(m) ? " ok" : "") + '">' + esc(m) + "</p>" +
+        '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
+        '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
+      "</section>";
   }
 
-  function send(area, panel){
-    var st = student();
-    if (!st){ openGate(); return; }
-    var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
-    var left = LIMIT - sentCount(key(st), area);
-    var url = window.SCORE_URL;
-    if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
-    if (left <= 0 || !s.done) return;
-    var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까요?" +
-            (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
-    if (!window.confirm(q)) return;
-    btn.disabled = true;
-    msg.textContent = "보내는 중…";
-    function say(text){ MSG[area] = text; msg.textContent = text; }
-    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, grade: st.grade, cls: st.cls, num: st.num, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
+  /* 퀴즈를 끝까지 풀면 3초 뒤 자동 전송 */
+  var timer = null;
+  function setMsg(text, fail){ MSG = { text: text, fail: !!fail }; renderPanels(); }
+  function countdown(){
+    clearInterval(timer);
+    var st = student(), area = cfg.areas[0], qi = cfg.quiz && quizInfo(area, cfg.quiz);
+    if (!qi) return;
+    if (!st){ setMsg("학년, 반, 번호, 이름을 입력해야 전송됩니다.", false); return; }
+    if (!window.SCORE_URL){ setMsg("⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자.", false); return; }
+    if (LIMIT - sentCount(key(st), sendKey(area, qi.key)) <= 0){ setMsg("이 퀴즈는 3번 모두 전송했습니다.", false); return; }
+    var n = 3;
+    setMsg(n + "초 후에 전송됩니다.");
+    timer = setInterval(function(){
+      n--;
+      if (n > 0) setMsg(n + "초 후에 전송됩니다.");
+      else { clearInterval(timer); send(); }
+    }, 1000);
+  }
+  function send(){
+    var st = student(), area = cfg.areas[0], A = AREAS[area], qi = cfg.quiz && quizInfo(area, cfg.quiz);
+    if (!st || !qi || !window.SCORE_URL) return;
+    var sk = sendKey(area, qi.key);
+    if (LIMIT - sentCount(key(st), sk) <= 0) return;
+    var x = (results(key(st))[area] || {})[qi.key];
+    if (!x) return;
+    var s = summary(key(st), area);
+    setMsg("전송하는 중…");
+    fetch(window.SCORE_URL, { method: "POST", body: JSON.stringify({
+      id: st.id, grade: st.grade, cls: st.cls, num: st.num, name: st.name, area: A.label, quiz: qi.label,
+      correct: x.c, total: x.t, score: Math.round(x.c / x.t * 100), areaScore: s.score, detail: s.detail }) })
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 전송되었습니다. (" + hm + " · 3번 중 " + d.count + "번째)"); }
-        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
-        else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
-        renderPanels();
+        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + " · 이 퀴즈 3번 중 " + d.count + "번째)"); }
+        else if (d && d.error === "limit"){ setSent(key(st), sk, LIMIT); setMsg("이 퀴즈는 3번 모두 전송했습니다."); }
+        else setMsg("⚠️ 전송하지 못했습니다: " + ((d && d.error) || "알 수 없는 오류"), true);
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
-      .catch(function(){ say("⚠️ 보내지 못했습니다. 잠시 뒤 다시 눌러 보자. 계속 안 되면 선생님께 알리자."); btn.disabled = false; });
+      .catch(function(){ setMsg("⚠️ 전송하지 못했습니다. 아래 버튼으로 다시 보내 보자. 계속 안 되면 선생님께 알리자.", true); });
   }
 
-  /* ---------- 결과 화면: 다음 퀴즈·다른 퀴즈로 가기 ---------- */
+  /* ---------- 결과 화면: 이 파트의 퀴즈 목록 (방금 푼 퀴즈는 흐리게) ---------- */
   function go(item){
-    if (item.key){
-      if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*");
-      return;
-    }
+    if (item.key){ if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*"); return; }
     var url = new URL(item.href, document.baseURI).href;
     try{ window.top.location.href = url; }catch(e){ window.location.href = url; }
   }
@@ -4076,16 +4267,16 @@ document.addEventListener("keydown", e => {
     if (!before) return;
     var nav = document.createElement("div");
     nav.className = "ms-nav";
-    var items = [];
-    var html = "";
-    if (cfg.nav.next){ items.push(cfg.nav.next); html += '<button type="button" class="ms-btn ms-next" data-i="0">' + esc(cfg.nav.next.label) + " ▶</button>"; }
-    if (cfg.nav.others && cfg.nav.others.length){
-      html += '<p class="ms-nav-t">' + esc(cfg.nav.othersTitle || "다른 퀴즈 고르기") + '</p><div class="ms-nav-list">';
-      cfg.nav.others.forEach(function(o){ items.push(o); html += '<button type="button" class="ms-btn ms-other" data-i="' + (items.length - 1) + '">' + esc(o.label) + "</button>"; });
-      html += "</div>";
-    }
-    nav.innerHTML = html;
-    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b) go(items[+b.dataset.i]); });
+    var items = cfg.nav.items;
+    nav.innerHTML = '<p class="ms-nav-t">' + esc(cfg.nav.title) + '</p><div class="ms-cards">' + items.map(function(it, i){
+      var cur = it.current;
+      return '<button type="button" class="ms-card' + (cur ? " cur" : "") + '" data-i="' + i + '"' + (cur ? " disabled" : "") + ">" +
+        '<span class="ms-ic" style="background:' + it.bg + '" aria-hidden="true">' + it.icon + "</span>" +
+        '<span class="ms-cb"><small>' + esc(cur ? "방금 푼 퀴즈" : it.step) + "</small><b>" + esc(it.title) + "</b>" +
+        '<span class="ms-tags">' + it.tags.map(function(g){ return "<span>" + g + "</span>"; }).join("") + "</span></span>" +
+        (cur ? "" : '<span class="ms-go" aria-hidden="true">›</span>') + "</button>";
+    }).join("") + "</div>";
+    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b && !b.disabled) go(items[+b.dataset.i]); });
     before.insertAdjacentElement("beforebegin", nav);
   }
 
@@ -4119,11 +4310,11 @@ document.addEventListener("keydown", e => {
         }, true);
       }
     },
-    onResult: function(){ renderPanels(); },
+    onResult: function(){ MSG = {}; renderPanels(); countdown(); },
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"next": {"href": "index.html", "label": "전체 퀴즈 모음으로"}, "othersTitle": "이 파트의 다른 퀴즈", "others": [{"key": "ox", "label": "파이썬 OX"}, {"key": "blank", "label": "파이썬 빈칸 채우기"}, {"key": "basics", "label": "파이썬 첫걸음"}]}});
+MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"title": "이 파트의 퀴즈", "items": [{"key": "ox", "bg": "#e8f3ee", "icon": "⭕", "step": "워밍업 · 시작하기 전에", "title": "파이썬 OX 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★</span>", "15문제"]}, {"key": "blank", "bg": "#ede4cd", "icon": "✏️", "step": "1단계 · 기초 다지기", "title": "파이썬 빈칸 채우기", "tags": ["난이도 <span class=\"st\">★~★★</span>", "10문제"]}, {"key": "basics", "bg": "#f8eaf0", "icon": "🐍", "step": "2단계 · 개념 넓히기", "title": "파이썬 첫걸음 퀴즈", "tags": ["난이도 <span class=\"st\">★~★★★</span>", "30문제"]}, {"key": "ifq", "bg": "#e8f3ee", "icon": "🔀", "step": "3단계 · 도전하기", "title": "파이썬 선택문 퀴즈", "tags": ["난이도 <span class=\"st\">★★~★★★</span>", "5문제"], "current": true}]}, "quiz": "ifq"});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -4190,7 +4381,7 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
 <script src="score-config.js"></script>
 <script>
 /* mirim-score-v1 */
-/* 학번·이름 입력 + 영역별 점수 모아 보기 + 구글 시트로 점수 보내기(영역마다 3번) */
+/* 학번·이름 입력 + 영역별 점수 모아 보기 + 퀴즈를 끝까지 풀면 3초 뒤 구글 시트로 자동 전송(퀴즈마다 3번) */
 (function(){
   var LIMIT = 3;
   var AREAS = {
@@ -4280,6 +4471,8 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
   function openGate(){ editing = !!student(); renderWho(); focusWho(); }
 
   /* ---------- 점수 모아 보기 ---------- */
+  function quizInfo(area, k){ var q = AREAS[area].quizzes.filter(function(x){ return x[0] === k; })[0]; return q ? { key: q[0], label: q[1], total: q[2] } : null; }
+  function sendKey(area, k){ return area + ":" + k; }
   function renderPanels(){
     var wrap = document.querySelector(".ms-wrap");
     if (!wrap){
@@ -4289,60 +4482,77 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
       wrap = document.createElement("div");
       wrap.className = "ms-wrap";
       if (before) before.insertAdjacentElement("beforebegin", wrap); else anchor.insertAdjacentElement("afterend", wrap);
-      wrap.addEventListener("click", function(e){
-        var b = e.target.closest(".ms-send");
-        if (b) send(b.dataset.area, b.closest(".ms-panel"));
-      });
+      wrap.addEventListener("click", function(e){ if (e.target.closest(".ms-send")) send(); });
     }
     var st = student();
-    wrap.innerHTML = cfg.areas.map(function(area){
-      var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p><p class="ms-msg"></p></section>';
-      var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
-      return '<section class="ms-panel" data-area="' + area + '">' +
-        "<h3>📊 내 점수 · " + A.label + "</h3>" +
-        '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
-        '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
-        '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
-        '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
-        '<p class="ms-msg' + (/^✅/.test(MSG[area] || "") ? " ok" : "") + '">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
-    }).join("");
+    if (cfg.compact){
+      // 첫 화면·목차: 영역별 한 줄 요약만
+      wrap.innerHTML = '<section class="ms-panel compact"><h3>📊 내 점수</h3>' + (st ?
+        '<ul class="ms-sum">' + cfg.areas.map(function(area){
+          var s = summary(key(st), area), n = AREAS[area].quizzes.length;
+          return "<li><span>" + AREAS[area].label + "</span><b>" + (s.done ? s.score + "점" : "-") + "</b><small>" + s.c + "/" + s.t + "문제 · 퀴즈 " + s.done + "/" + n + "</small></li>";
+        }).join("") + "</ul>" : '<p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p>') + "</section>";
+      return;
+    }
+    var area = cfg.areas[0], A = AREAS[area];
+    if (!st){ wrap.innerHTML = '<section class="ms-panel"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모입니다.</p></section>'; return; }
+    var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
+    var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
+    var m = MSG.text || "";
+    wrap.innerHTML = '<section class="ms-panel">' +
+      "<h3>📊 내 점수 · " + A.label + "</h3>" +
+      '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
+      '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+      (qi ? '<p class="ms-msg' + (/^✅/.test(m) ? " ok" : "") + '">' + esc(m) + "</p>" +
+        '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
+        '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
+      "</section>";
   }
 
-  function send(area, panel){
-    var st = student();
-    if (!st){ openGate(); return; }
-    var s = summary(key(st), area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
-    var left = LIMIT - sentCount(key(st), area);
-    var url = window.SCORE_URL;
-    if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
-    if (left <= 0 || !s.done) return;
-    var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까요?" +
-            (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
-    if (!window.confirm(q)) return;
-    btn.disabled = true;
-    msg.textContent = "보내는 중…";
-    function say(text){ MSG[area] = text; msg.textContent = text; }
-    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, grade: st.grade, cls: st.cls, num: st.num, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
+  /* 퀴즈를 끝까지 풀면 3초 뒤 자동 전송 */
+  var timer = null;
+  function setMsg(text, fail){ MSG = { text: text, fail: !!fail }; renderPanels(); }
+  function countdown(){
+    clearInterval(timer);
+    var st = student(), area = cfg.areas[0], qi = cfg.quiz && quizInfo(area, cfg.quiz);
+    if (!qi) return;
+    if (!st){ setMsg("학년, 반, 번호, 이름을 입력해야 전송됩니다.", false); return; }
+    if (!window.SCORE_URL){ setMsg("⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자.", false); return; }
+    if (LIMIT - sentCount(key(st), sendKey(area, qi.key)) <= 0){ setMsg("이 퀴즈는 3번 모두 전송했습니다.", false); return; }
+    var n = 3;
+    setMsg(n + "초 후에 전송됩니다.");
+    timer = setInterval(function(){
+      n--;
+      if (n > 0) setMsg(n + "초 후에 전송됩니다.");
+      else { clearInterval(timer); send(); }
+    }, 1000);
+  }
+  function send(){
+    var st = student(), area = cfg.areas[0], A = AREAS[area], qi = cfg.quiz && quizInfo(area, cfg.quiz);
+    if (!st || !qi || !window.SCORE_URL) return;
+    var sk = sendKey(area, qi.key);
+    if (LIMIT - sentCount(key(st), sk) <= 0) return;
+    var x = (results(key(st))[area] || {})[qi.key];
+    if (!x) return;
+    var s = summary(key(st), area);
+    setMsg("전송하는 중…");
+    fetch(window.SCORE_URL, { method: "POST", body: JSON.stringify({
+      id: st.id, grade: st.grade, cls: st.cls, num: st.num, name: st.name, area: A.label, quiz: qi.label,
+      correct: x.c, total: x.t, score: Math.round(x.c / x.t * 100), areaScore: s.score, detail: s.detail }) })
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 전송되었습니다. (" + hm + " · 3번 중 " + d.count + "번째)"); }
-        else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
-        else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
-        renderPanels();
+        if (d && d.ok){ setSent(key(st), sk, d.count); setMsg("✅ 전송되었습니다. (" + hm + " · 이 퀴즈 3번 중 " + d.count + "번째)"); }
+        else if (d && d.error === "limit"){ setSent(key(st), sk, LIMIT); setMsg("이 퀴즈는 3번 모두 전송했습니다."); }
+        else setMsg("⚠️ 전송하지 못했습니다: " + ((d && d.error) || "알 수 없는 오류"), true);
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
-      .catch(function(){ say("⚠️ 보내지 못했습니다. 잠시 뒤 다시 눌러 보자. 계속 안 되면 선생님께 알리자."); btn.disabled = false; });
+      .catch(function(){ setMsg("⚠️ 전송하지 못했습니다. 아래 버튼으로 다시 보내 보자. 계속 안 되면 선생님께 알리자.", true); });
   }
 
-  /* ---------- 결과 화면: 다음 퀴즈·다른 퀴즈로 가기 ---------- */
+  /* ---------- 결과 화면: 이 파트의 퀴즈 목록 (방금 푼 퀴즈는 흐리게) ---------- */
   function go(item){
-    if (item.key){
-      if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*");
-      return;
-    }
+    if (item.key){ if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*"); return; }
     var url = new URL(item.href, document.baseURI).href;
     try{ window.top.location.href = url; }catch(e){ window.location.href = url; }
   }
@@ -4352,16 +4562,16 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
     if (!before) return;
     var nav = document.createElement("div");
     nav.className = "ms-nav";
-    var items = [];
-    var html = "";
-    if (cfg.nav.next){ items.push(cfg.nav.next); html += '<button type="button" class="ms-btn ms-next" data-i="0">' + esc(cfg.nav.next.label) + " ▶</button>"; }
-    if (cfg.nav.others && cfg.nav.others.length){
-      html += '<p class="ms-nav-t">' + esc(cfg.nav.othersTitle || "다른 퀴즈 고르기") + '</p><div class="ms-nav-list">';
-      cfg.nav.others.forEach(function(o){ items.push(o); html += '<button type="button" class="ms-btn ms-other" data-i="' + (items.length - 1) + '">' + esc(o.label) + "</button>"; });
-      html += "</div>";
-    }
-    nav.innerHTML = html;
-    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b) go(items[+b.dataset.i]); });
+    var items = cfg.nav.items;
+    nav.innerHTML = '<p class="ms-nav-t">' + esc(cfg.nav.title) + '</p><div class="ms-cards">' + items.map(function(it, i){
+      var cur = it.current;
+      return '<button type="button" class="ms-card' + (cur ? " cur" : "") + '" data-i="' + i + '"' + (cur ? " disabled" : "") + ">" +
+        '<span class="ms-ic" style="background:' + it.bg + '" aria-hidden="true">' + it.icon + "</span>" +
+        '<span class="ms-cb"><small>' + esc(cur ? "방금 푼 퀴즈" : it.step) + "</small><b>" + esc(it.title) + "</b>" +
+        '<span class="ms-tags">' + it.tags.map(function(g){ return "<span>" + g + "</span>"; }).join("") + "</span></span>" +
+        (cur ? "" : '<span class="ms-go" aria-hidden="true">›</span>') + "</button>";
+    }).join("") + "</div>";
+    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b && !b.disabled) go(items[+b.dataset.i]); });
     before.insertAdjacentElement("beforebegin", nav);
   }
 
@@ -4395,11 +4605,11 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
         }, true);
       }
     },
-    onResult: function(){ renderPanels(); },
+    onResult: function(){ MSG = {}; renderPanels(); countdown(); },
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["python"], "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "#menu header.top", "panelAfter": "#menu .list"});
+MirimScore.init({"areas": ["python"], "accent": "#d6557d", "deep": "#bd426e", "whoAfter": "#menu header.top", "panelAfter": "#menu .list", "compact": true});
 </script>
 </body>
 </html>
