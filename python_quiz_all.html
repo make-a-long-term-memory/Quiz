@@ -161,6 +161,17 @@
   .card .ms-rows li{border-bottom-color:#e6dfcd}
   a.credit{width:max-content;color:var(--ink);text-decoration:none}
   a.credit:hover{text-decoration:underline;text-underline-offset:3px}
+  /* 전송 안내 강조, 안내 상자는 그림자 없이 테두리만 */
+  .ms-status{font-size:1.08rem;font-weight:800;padding:12px 16px;border-radius:14px;margin:0 0 14px;border:2px solid #ddd7e6;background:#ffffff;color:#33303c}
+  .ms-status.wait{background:#eaf3fb;border-color:#b9d4ee;color:#2d5f8f}
+  .ms-status.ok{background:#e8f4ed;border-color:#a8cbb9;color:#2f6b4d}
+  .ms-status.fail{background:#fbeef0;border-color:#ebc9d0;color:#9a4656}
+  .ms-who{box-shadow:none;border:2px solid #ddd7e6}
+  .ms-panel{box-shadow:none;border:2px solid #ddd7e6}
+  .card .ms-panel{border:none}
+  .guide{box-shadow:none !important;border:2px solid #ddd7e6 !important}
+  /* 위쪽 막대: 버튼과 제목을 본문 폭(680px)에 맞춰 정렬 */
+  .bar{padding-left:max(16px, calc((100% - 680px) / 2 + 4px));padding-right:max(16px, calc((100% - 680px) / 2))}
 </style>
 </head>
 <body>
@@ -173,7 +184,7 @@
       <p>처음 배우는 사람을 위한 3단계 퀴즈</p>
     </div>
   </header>
-  <div class="guide">파이썬이 처음이라면 <b>워밍업 OX 퀴즈</b>로 시작해서 <b>1단계부터 차례대로</b> 풀어 보자. 모든 문제에 힌트가 함께 보입니다. 퀴즈를 풀다가 <b>← 목록</b>을 눌러도 푼 내용은 그대로 남아 있습니다.</div>
+  <div class="guide">파이썬이 처음이라면 <b>워밍업 OX 퀴즈</b>로 시작해서 <b>1단계부터 차례대로</b> 풀어 보자. 모든 문제에 힌트가 함께 보입니다. 퀴즈를 풀다가 <b>← 첫 페이지로 이동</b>을 눌러도 푼 내용은 그대로 남아 있습니다.</div>
   <div class="list">
     <button class="quiz-card" data-quiz="ox" data-title="워밍업 · 파이썬 OX 퀴즈" type="button">
       <span class="qc-icon" style="background:#e8f3ee">⭕</span>
@@ -221,7 +232,7 @@
 
 <div id="player" class="hidden">
   <div class="bar">
-    <button class="back" id="backBtn" type="button">← 목록</button>
+    <button class="back" id="backBtn" type="button">← 첫 페이지로 이동</button>
     <span class="bar-title" id="barTitle"></span>
   </div>
   <div class="frames" id="frames"></div>
@@ -502,6 +513,15 @@
   .actions{justify-content:center}
   .bar span{background:#7ab2e6 !important}
   .dot.current{background:#7ab2e6}
+  /* 전송 안내 강조, 안내 상자는 그림자 없이 테두리만 */
+  .ms-status{font-size:1.08rem;font-weight:800;padding:12px 16px;border-radius:14px;margin:0 0 14px;border:2px solid #ddd7e6;background:#ffffff;color:#33303c}
+  .ms-status.wait{background:#eaf3fb;border-color:#b9d4ee;color:#2d5f8f}
+  .ms-status.ok{background:#e8f4ed;border-color:#a8cbb9;color:#2f6b4d}
+  .ms-status.fail{background:#fbeef0;border-color:#ebc9d0;color:#9a4656}
+  .ms-who{box-shadow:none;border:2px solid #ddd7e6}
+  .ms-panel{box-shadow:none;border:2px solid #ddd7e6}
+  .card .ms-panel{border:none}
+  .guide{box-shadow:none !important;border:2px solid #ddd7e6 !important}
 </style>
 </head>
 <body>
@@ -951,12 +971,13 @@ document.addEventListener("keydown", e => {
     var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
     var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
     var m = MSG.text || "";
+    var kind = /^✅/.test(m) ? "ok" : /^⚠️/.test(m) ? "fail" : m ? "wait" : "";
     wrap.innerHTML = '<section class="ms-panel">' +
+      (qi && m ? '<p class="ms-status ' + kind + '" role="status">' + esc(m) + "</p>" : "") +
       "<h3>📊 내 점수 · " + A.label + "</h3>" +
       '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
       '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
-      (qi ? '<p class="ms-msg' + (/^✅/.test(m) ? " ok" : "") + '">' + esc(m) + "</p>" +
-        '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
+      (qi ? '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
         '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
       "</section>";
   }
@@ -1375,6 +1396,15 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
   .actions{justify-content:center}
   .bar span{background:#7ab2e6 !important}
   .dot.current{background:#7ab2e6}
+  /* 전송 안내 강조, 안내 상자는 그림자 없이 테두리만 */
+  .ms-status{font-size:1.08rem;font-weight:800;padding:12px 16px;border-radius:14px;margin:0 0 14px;border:2px solid #ddd7e6;background:#ffffff;color:#33303c}
+  .ms-status.wait{background:#eaf3fb;border-color:#b9d4ee;color:#2d5f8f}
+  .ms-status.ok{background:#e8f4ed;border-color:#a8cbb9;color:#2f6b4d}
+  .ms-status.fail{background:#fbeef0;border-color:#ebc9d0;color:#9a4656}
+  .ms-who{box-shadow:none;border:2px solid #ddd7e6}
+  .ms-panel{box-shadow:none;border:2px solid #ddd7e6}
+  .card .ms-panel{border:none}
+  .guide{box-shadow:none !important;border:2px solid #ddd7e6 !important}
 </style>
 </head>
 <body>
@@ -1871,12 +1901,13 @@ document.addEventListener("keydown", e => {
     var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
     var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
     var m = MSG.text || "";
+    var kind = /^✅/.test(m) ? "ok" : /^⚠️/.test(m) ? "fail" : m ? "wait" : "";
     wrap.innerHTML = '<section class="ms-panel">' +
+      (qi && m ? '<p class="ms-status ' + kind + '" role="status">' + esc(m) + "</p>" : "") +
       "<h3>📊 내 점수 · " + A.label + "</h3>" +
       '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
       '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
-      (qi ? '<p class="ms-msg' + (/^✅/.test(m) ? " ok" : "") + '">' + esc(m) + "</p>" +
-        '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
+      (qi ? '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
         '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
       "</section>";
   }
@@ -2274,6 +2305,15 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
   .actions{justify-content:center}
   .bar span{background:#7ab2e6 !important}
   .dot.current{background:#7ab2e6}
+  /* 전송 안내 강조, 안내 상자는 그림자 없이 테두리만 */
+  .ms-status{font-size:1.08rem;font-weight:800;padding:12px 16px;border-radius:14px;margin:0 0 14px;border:2px solid #ddd7e6;background:#ffffff;color:#33303c}
+  .ms-status.wait{background:#eaf3fb;border-color:#b9d4ee;color:#2d5f8f}
+  .ms-status.ok{background:#e8f4ed;border-color:#a8cbb9;color:#2f6b4d}
+  .ms-status.fail{background:#fbeef0;border-color:#ebc9d0;color:#9a4656}
+  .ms-who{box-shadow:none;border:2px solid #ddd7e6}
+  .ms-panel{box-shadow:none;border:2px solid #ddd7e6}
+  .card .ms-panel{border:none}
+  .guide{box-shadow:none !important;border:2px solid #ddd7e6 !important}
 </style>
 </head>
 <body>
@@ -2743,12 +2783,13 @@ document.addEventListener("keydown", e => {
     var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
     var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
     var m = MSG.text || "";
+    var kind = /^✅/.test(m) ? "ok" : /^⚠️/.test(m) ? "fail" : m ? "wait" : "";
     wrap.innerHTML = '<section class="ms-panel">' +
+      (qi && m ? '<p class="ms-status ' + kind + '" role="status">' + esc(m) + "</p>" : "") +
       "<h3>📊 내 점수 · " + A.label + "</h3>" +
       '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
       '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
-      (qi ? '<p class="ms-msg' + (/^✅/.test(m) ? " ok" : "") + '">' + esc(m) + "</p>" +
-        '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
+      (qi ? '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
         '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
       "</section>";
   }
@@ -3305,6 +3346,15 @@ MirimScore.init({"areas": ["python"], "panelBefore": "#result .result-actions", 
   .actions{justify-content:center}
   .bar span{background:#7ab2e6 !important}
   .dot.current{background:#7ab2e6}
+  /* 전송 안내 강조, 안내 상자는 그림자 없이 테두리만 */
+  .ms-status{font-size:1.08rem;font-weight:800;padding:12px 16px;border-radius:14px;margin:0 0 14px;border:2px solid #ddd7e6;background:#ffffff;color:#33303c}
+  .ms-status.wait{background:#eaf3fb;border-color:#b9d4ee;color:#2d5f8f}
+  .ms-status.ok{background:#e8f4ed;border-color:#a8cbb9;color:#2f6b4d}
+  .ms-status.fail{background:#fbeef0;border-color:#ebc9d0;color:#9a4656}
+  .ms-who{box-shadow:none;border:2px solid #ddd7e6}
+  .ms-panel{box-shadow:none;border:2px solid #ddd7e6}
+  .card .ms-panel{border:none}
+  .guide{box-shadow:none !important;border:2px solid #ddd7e6 !important}
 </style>
 </head>
 <body>
@@ -4220,12 +4270,13 @@ document.addEventListener("keydown", e => {
     var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
     var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
     var m = MSG.text || "";
+    var kind = /^✅/.test(m) ? "ok" : /^⚠️/.test(m) ? "fail" : m ? "wait" : "";
     wrap.innerHTML = '<section class="ms-panel">' +
+      (qi && m ? '<p class="ms-status ' + kind + '" role="status">' + esc(m) + "</p>" : "") +
       "<h3>📊 내 점수 · " + A.label + "</h3>" +
       '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
       '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
-      (qi ? '<p class="ms-msg' + (/^✅/.test(m) ? " ok" : "") + '">' + esc(m) + "</p>" +
-        '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
+      (qi ? '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
         '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
       "</section>";
   }
@@ -4515,12 +4566,13 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
     var s = summary(key(st), area), qi = cfg.quiz ? quizInfo(area, cfg.quiz) : null;
     var left = qi ? Math.max(0, LIMIT - sentCount(key(st), sendKey(area, qi.key))) : 0;
     var m = MSG.text || "";
+    var kind = /^✅/.test(m) ? "ok" : /^⚠️/.test(m) ? "fail" : m ? "wait" : "";
     wrap.innerHTML = '<section class="ms-panel">' +
+      (qi && m ? '<p class="ms-status ' + kind + '" role="status">' + esc(m) + "</p>" : "") +
       "<h3>📊 내 점수 · " + A.label + "</h3>" +
       '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
       '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
-      (qi ? '<p class="ms-msg' + (/^✅/.test(m) ? " ok" : "") + '">' + esc(m) + "</p>" +
-        '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
+      (qi ? '<div class="ms-act">' + (MSG.fail && left ? '<button class="ms-btn ms-send" type="button">📤 다시 보내기</button>' : "") +
         '<span class="ms-left">이 퀴즈 남은 전송 ' + left + "번</span></div>" : "") +
       "</section>";
   }
