@@ -802,7 +802,7 @@ document.addEventListener("keydown", e => {
         e.preventDefault();
         var gc = box.querySelector(".ms-gc").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!gc){ err.textContent = "학년, 학급을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
+        if (!gc){ err.textContent = "학년, 반을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
         if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
         if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
         var g = gc.charAt(0), c = gc.charAt(1);
@@ -826,8 +826,8 @@ document.addEventListener("keydown", e => {
       return;
     }
     box.classList.remove("set");
-    box.innerHTML = '<form><b class="ms-who-t">학년, 학급, 번호, 이름을 입력하세요</b>' +
-      '<div class="ms-who-row"><select class="ms-gc" aria-label="학년, 학급"><option value="">학년, 학급</option>' + GC.map(function(v){ return '<option value="' + v + '">' + v.charAt(0) + "학년 " + v.charAt(1) + "반</option>"; }).join("") + "</select>" +
+    box.innerHTML = '<form><b class="ms-who-t">학년, 반, 번호, 이름을 입력하세요</b>' +
+      '<div class="ms-who-row"><select class="ms-gc" aria-label="학년, 반"><option value="">학년, 반</option>' + GC.map(function(v){ return '<option value="' + v + '">' + v.charAt(0) + "학년 " + v.charAt(1) + "반</option>"; }).join("") + "</select>" +
       '<select class="ms-num" aria-label="번호"><option value="">번호</option>' + nums(1, 20, "번") + "</select>" +
       '<input class="ms-name" maxlength="10" autocomplete="off" placeholder="이름" aria-label="이름">' +
       '<button class="ms-btn" type="submit">확인</button></div>' +
@@ -855,7 +855,7 @@ document.addEventListener("keydown", e => {
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 학급, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
       var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
@@ -914,7 +914,7 @@ document.addEventListener("keydown", e => {
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학년, 학급, 번호, 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 반, 번호, 이름을 입력해야 시작할 수 있음.";
           focusWho();
         }, true);
       }
@@ -1635,7 +1635,7 @@ document.addEventListener("keydown", e => {
         e.preventDefault();
         var gc = box.querySelector(".ms-gc").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!gc){ err.textContent = "학년, 학급을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
+        if (!gc){ err.textContent = "학년, 반을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
         if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
         if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
         var g = gc.charAt(0), c = gc.charAt(1);
@@ -1659,8 +1659,8 @@ document.addEventListener("keydown", e => {
       return;
     }
     box.classList.remove("set");
-    box.innerHTML = '<form><b class="ms-who-t">학년, 학급, 번호, 이름을 입력하세요</b>' +
-      '<div class="ms-who-row"><select class="ms-gc" aria-label="학년, 학급"><option value="">학년, 학급</option>' + GC.map(function(v){ return '<option value="' + v + '">' + v.charAt(0) + "학년 " + v.charAt(1) + "반</option>"; }).join("") + "</select>" +
+    box.innerHTML = '<form><b class="ms-who-t">학년, 반, 번호, 이름을 입력하세요</b>' +
+      '<div class="ms-who-row"><select class="ms-gc" aria-label="학년, 반"><option value="">학년, 반</option>' + GC.map(function(v){ return '<option value="' + v + '">' + v.charAt(0) + "학년 " + v.charAt(1) + "반</option>"; }).join("") + "</select>" +
       '<select class="ms-num" aria-label="번호"><option value="">번호</option>' + nums(1, 20, "번") + "</select>" +
       '<input class="ms-name" maxlength="10" autocomplete="off" placeholder="이름" aria-label="이름">' +
       '<button class="ms-btn" type="submit">확인</button></div>' +
@@ -1688,7 +1688,7 @@ document.addEventListener("keydown", e => {
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 학급, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
       var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
@@ -1747,7 +1747,7 @@ document.addEventListener("keydown", e => {
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학년, 학급, 번호, 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 반, 번호, 이름을 입력해야 시작할 수 있음.";
           focusWho();
         }, true);
       }
@@ -2389,7 +2389,7 @@ document.addEventListener("keydown", e => {
         e.preventDefault();
         var gc = box.querySelector(".ms-gc").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!gc){ err.textContent = "학년, 학급을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
+        if (!gc){ err.textContent = "학년, 반을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
         if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
         if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
         var g = gc.charAt(0), c = gc.charAt(1);
@@ -2413,8 +2413,8 @@ document.addEventListener("keydown", e => {
       return;
     }
     box.classList.remove("set");
-    box.innerHTML = '<form><b class="ms-who-t">학년, 학급, 번호, 이름을 입력하세요</b>' +
-      '<div class="ms-who-row"><select class="ms-gc" aria-label="학년, 학급"><option value="">학년, 학급</option>' + GC.map(function(v){ return '<option value="' + v + '">' + v.charAt(0) + "학년 " + v.charAt(1) + "반</option>"; }).join("") + "</select>" +
+    box.innerHTML = '<form><b class="ms-who-t">학년, 반, 번호, 이름을 입력하세요</b>' +
+      '<div class="ms-who-row"><select class="ms-gc" aria-label="학년, 반"><option value="">학년, 반</option>' + GC.map(function(v){ return '<option value="' + v + '">' + v.charAt(0) + "학년 " + v.charAt(1) + "반</option>"; }).join("") + "</select>" +
       '<select class="ms-num" aria-label="번호"><option value="">번호</option>' + nums(1, 20, "번") + "</select>" +
       '<input class="ms-name" maxlength="10" autocomplete="off" placeholder="이름" aria-label="이름">' +
       '<button class="ms-btn" type="submit">확인</button></div>' +
@@ -2442,7 +2442,7 @@ document.addEventListener("keydown", e => {
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 학급, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
       var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
@@ -2501,7 +2501,7 @@ document.addEventListener("keydown", e => {
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학년, 학급, 번호, 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 반, 번호, 이름을 입력해야 시작할 수 있음.";
           focusWho();
         }, true);
       }
@@ -3849,7 +3849,7 @@ document.addEventListener("keydown", e => {
         e.preventDefault();
         var gc = box.querySelector(".ms-gc").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!gc){ err.textContent = "학년, 학급을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
+        if (!gc){ err.textContent = "학년, 반을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
         if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
         if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
         var g = gc.charAt(0), c = gc.charAt(1);
@@ -3873,8 +3873,8 @@ document.addEventListener("keydown", e => {
       return;
     }
     box.classList.remove("set");
-    box.innerHTML = '<form><b class="ms-who-t">학년, 학급, 번호, 이름을 입력하세요</b>' +
-      '<div class="ms-who-row"><select class="ms-gc" aria-label="학년, 학급"><option value="">학년, 학급</option>' + GC.map(function(v){ return '<option value="' + v + '">' + v.charAt(0) + "학년 " + v.charAt(1) + "반</option>"; }).join("") + "</select>" +
+    box.innerHTML = '<form><b class="ms-who-t">학년, 반, 번호, 이름을 입력하세요</b>' +
+      '<div class="ms-who-row"><select class="ms-gc" aria-label="학년, 반"><option value="">학년, 반</option>' + GC.map(function(v){ return '<option value="' + v + '">' + v.charAt(0) + "학년 " + v.charAt(1) + "반</option>"; }).join("") + "</select>" +
       '<select class="ms-num" aria-label="번호"><option value="">번호</option>' + nums(1, 20, "번") + "</select>" +
       '<input class="ms-name" maxlength="10" autocomplete="off" placeholder="이름" aria-label="이름">' +
       '<button class="ms-btn" type="submit">확인</button></div>' +
@@ -3902,7 +3902,7 @@ document.addEventListener("keydown", e => {
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 학급, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
       var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
@@ -3961,7 +3961,7 @@ document.addEventListener("keydown", e => {
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학년, 학급, 번호, 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 반, 번호, 이름을 입력해야 시작할 수 있음.";
           focusWho();
         }, true);
       }
@@ -4085,7 +4085,7 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
         e.preventDefault();
         var gc = box.querySelector(".ms-gc").value, n = box.querySelector(".ms-num").value, name = box.querySelector(".ms-name").value.replace(/\s+/g, " ").trim();
         var err = box.querySelector(".ms-err");
-        if (!gc){ err.textContent = "학년, 학급을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
+        if (!gc){ err.textContent = "학년, 반을 골라야 함."; box.querySelector(".ms-gc").focus(); return; }
         if (!n){ err.textContent = "번호를 골라야 함."; box.querySelector(".ms-num").focus(); return; }
         if (!name){ err.textContent = "이름을 입력해야 함."; box.querySelector(".ms-name").focus(); return; }
         var g = gc.charAt(0), c = gc.charAt(1);
@@ -4109,8 +4109,8 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
       return;
     }
     box.classList.remove("set");
-    box.innerHTML = '<form><b class="ms-who-t">학년, 학급, 번호, 이름을 입력하세요</b>' +
-      '<div class="ms-who-row"><select class="ms-gc" aria-label="학년, 학급"><option value="">학년, 학급</option>' + GC.map(function(v){ return '<option value="' + v + '">' + v.charAt(0) + "학년 " + v.charAt(1) + "반</option>"; }).join("") + "</select>" +
+    box.innerHTML = '<form><b class="ms-who-t">학년, 반, 번호, 이름을 입력하세요</b>' +
+      '<div class="ms-who-row"><select class="ms-gc" aria-label="학년, 반"><option value="">학년, 반</option>' + GC.map(function(v){ return '<option value="' + v + '">' + v.charAt(0) + "학년 " + v.charAt(1) + "반</option>"; }).join("") + "</select>" +
       '<select class="ms-num" aria-label="번호"><option value="">번호</option>' + nums(1, 20, "번") + "</select>" +
       '<input class="ms-name" maxlength="10" autocomplete="off" placeholder="이름" aria-label="이름">' +
       '<button class="ms-btn" type="submit">확인</button></div>' +
@@ -4138,7 +4138,7 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
     var st = student();
     wrap.innerHTML = cfg.areas.map(function(area){
       var A = AREAS[area];
-      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 학급, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학년, 반, 번호, 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
       var s = summary(key(st), area), left = Math.max(0, LIMIT - sentCount(key(st), area));
       return '<section class="ms-panel" data-area="' + area + '">' +
         "<h3>📊 내 점수 · " + A.label + "</h3>" +
@@ -4197,7 +4197,7 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
           e.preventDefault(); e.stopImmediatePropagation();
           renderWho();
           var err = document.querySelector(".ms-who .ms-err");
-          if (err) err.textContent = "먼저 학년, 학급, 번호, 이름을 입력해야 시작할 수 있음.";
+          if (err) err.textContent = "먼저 학년, 반, 번호, 이름을 입력해야 시작할 수 있음.";
           focusWho();
         }, true);
       }
