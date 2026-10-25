@@ -108,6 +108,19 @@
   .ms-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ms-deep)}
   .ms-btn:disabled{opacity:.45;cursor:default;transform:none;box-shadow:0 4px 0 var(--ms-deep)}
   .ms-btn:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ms-nav{display:grid;gap:10px;margin:0 0 20px}
+  .ms-next{justify-self:start;font-size:1.1rem;padding:13px 26px}
+  .ms-nav-t{font-size:.9rem;font-weight:700;color:#686472;margin-top:8px}
+  .ms-nav-list{display:flex;flex-wrap:wrap;gap:10px}
+  .ms-other{background:#ffffff;color:#33303c;border:2px solid #ddd7e6;box-shadow:0 4px 0 #ddd7e6;font-size:1rem;padding:10px 18px}
+  .ms-other:hover{border-color:#c9c2d5;box-shadow:0 4px 0 #c9c2d5}
+  .ms-other:active{box-shadow:0 1px 0 #ddd7e6}
+  .ms-msg.ok{color:#3d6e56;font-weight:700;font-size:.98rem}
+  /* 결과 화면의 다시 풀기는 글자 메뉴 */
+  #result .result-actions{gap:6px 22px;margin-top:4px}
+  #result .result-actions .btn{background:none !important;color:var(--ink-soft) !important;box-shadow:none !important;border:none !important;padding:4px 0;font-size:.98rem;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+  #result .result-actions .btn:hover{color:var(--ink) !important;filter:none}
+  #result .result-actions .btn:active{transform:none}
   .ms-wrap{display:grid;gap:14px;margin-top:18px}
   .ms-panel{background:#ffffff;border-radius:22px;padding:16px 18px;box-shadow:0 6px 0 #ddd7e6;text-align:left;word-break:keep-all}
   .ms-panel h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
@@ -415,6 +428,19 @@
   .ms-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ms-deep)}
   .ms-btn:disabled{opacity:.45;cursor:default;transform:none;box-shadow:0 4px 0 var(--ms-deep)}
   .ms-btn:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ms-nav{display:grid;gap:10px;margin:0 0 20px}
+  .ms-next{justify-self:start;font-size:1.1rem;padding:13px 26px}
+  .ms-nav-t{font-size:.9rem;font-weight:700;color:#686472;margin-top:8px}
+  .ms-nav-list{display:flex;flex-wrap:wrap;gap:10px}
+  .ms-other{background:#ffffff;color:#33303c;border:2px solid #ddd7e6;box-shadow:0 4px 0 #ddd7e6;font-size:1rem;padding:10px 18px}
+  .ms-other:hover{border-color:#c9c2d5;box-shadow:0 4px 0 #c9c2d5}
+  .ms-other:active{box-shadow:0 1px 0 #ddd7e6}
+  .ms-msg.ok{color:#3d6e56;font-weight:700;font-size:.98rem}
+  /* 결과 화면의 다시 풀기는 글자 메뉴 */
+  #result .result-actions{gap:6px 22px;margin-top:4px}
+  #result .result-actions .btn{background:none !important;color:var(--ink-soft) !important;box-shadow:none !important;border:none !important;padding:4px 0;font-size:.98rem;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+  #result .result-actions .btn:hover{color:var(--ink) !important;filter:none}
+  #result .result-actions .btn:active{transform:none}
   .ms-wrap{display:grid;gap:14px;margin-top:18px}
   .ms-panel{background:#ffffff;border-radius:22px;padding:16px 18px;box-shadow:0 6px 0 #ddd7e6;text-align:left;word-break:keep-all}
   .ms-panel h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
@@ -468,8 +494,8 @@
     <div class="hint-row"><button class="hint-btn" id="hintBtn" type="button">💡 힌트 보기</button></div>
     <div class="hint-box hidden" id="hintBox"></div>
     <div class="choices" id="choices"></div>
-    <div class="feedback hidden" id="feedback" aria-live="polite"></div>
     <div class="actions"><button class="btn hidden" id="nextBtn" type="button">다음 문제 ▶</button></div>
+    <div class="feedback hidden" id="feedback" aria-live="polite"></div>
     <div class="diff-row" id="qDiff"></div>
   </section>
 
@@ -482,8 +508,8 @@
     <ul class="stage-result" id="stageResult"></ul>
     <p class="wrong-list" id="wrongList"></p>
     <div class="result-actions">
-      <button class="btn" id="retryWrongBtn" type="button">❗ 틀린 문제만 다시 풀기</button>
-      <button class="btn sub" id="retryAllBtn" type="button">🔄 처음부터 다시 풀기</button>
+      <button class="btn" id="retryWrongBtn" type="button">틀린 문제만 다시 풀기</button>
+      <button class="btn sub" id="retryAllBtn" type="button">처음부터 다시 풀기</button>
     </div>
   </section>
 
@@ -879,7 +905,7 @@ document.addEventListener("keydown", e => {
         '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
         '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
         '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
-        '<p class="ms-msg">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
+        '<p class="ms-msg' + (/^✅/.test(MSG[area] || "") ? " ok" : "") + '">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
     }).join("");
   }
 
@@ -892,7 +918,7 @@ document.addEventListener("keydown", e => {
     if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
+    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까요?" +
             (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
@@ -902,13 +928,41 @@ document.addEventListener("keydown", e => {
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냈습니다 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 전송되었습니다. (" + hm + " · 3번 중 " + d.count + "번째)"); }
         else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
         else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
-      .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
+      .catch(function(){ say("⚠️ 보내지 못했습니다. 잠시 뒤 다시 눌러 보자. 계속 안 되면 선생님께 알리자."); btn.disabled = false; });
+  }
+
+  /* ---------- 결과 화면: 다음 퀴즈·다른 퀴즈로 가기 ---------- */
+  function go(item){
+    if (item.key){
+      if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*");
+      return;
+    }
+    var url = new URL(item.href, document.baseURI).href;
+    try{ window.top.location.href = url; }catch(e){ window.location.href = url; }
+  }
+  function renderNav(){
+    if (!cfg.nav || document.querySelector(".ms-nav")) return;
+    var before = document.querySelector(cfg.panelBefore || "#result .result-actions");
+    if (!before) return;
+    var nav = document.createElement("div");
+    nav.className = "ms-nav";
+    var items = [];
+    var html = "";
+    if (cfg.nav.next){ items.push(cfg.nav.next); html += '<button type="button" class="ms-btn ms-next" data-i="0">' + esc(cfg.nav.next.label) + " ▶</button>"; }
+    if (cfg.nav.others && cfg.nav.others.length){
+      html += '<p class="ms-nav-t">' + esc(cfg.nav.othersTitle || "다른 퀴즈 고르기") + '</p><div class="ms-nav-list">';
+      cfg.nav.others.forEach(function(o){ items.push(o); html += '<button type="button" class="ms-btn ms-other" data-i="' + (items.length - 1) + '">' + esc(o.label) + "</button>"; });
+      html += "</div>";
+    }
+    nav.innerHTML = html;
+    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b) go(items[+b.dataset.i]); });
+    before.insertAdjacentElement("beforebegin", nav);
   }
 
   function render(){ renderWho(); renderPanels(); }
@@ -920,7 +974,12 @@ document.addEventListener("keydown", e => {
       root.setProperty("--ms-accent", o.accent || "#5d4dbe");
       root.setProperty("--ms-deep", o.deep || "#4a3c9e");
       render();
-      window.addEventListener("message", function(e){ if (e.data && e.data.mirimScore) render(); });
+      renderNav();
+      window.addEventListener("message", function(e){
+        if (!e.data) return;
+        if (e.data.mirimScore) render();
+        if (e.data.mirimOpen){ var c = document.querySelector('.quiz-card[data-quiz="' + e.data.mirimOpen + '"]'); if (c) c.click(); }
+      });
       window.addEventListener("storage", function(){ if (!editing) render(); });
       var bb = document.getElementById("backBtn");
       if (bb) bb.addEventListener("click", render);
@@ -940,7 +999,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
+MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"next": {"key": "blank", "label": "다음 퀴즈 · HTML 빈칸 채우기"}, "othersTitle": "이 파트의 다른 퀴즈", "others": [{"key": "blank", "label": "HTML 빈칸 채우기"}, {"key": "basics", "label": "HTML 첫걸음"}, {"key": "layout", "label": "CSS 레이아웃"}]}});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -1210,6 +1269,19 @@ MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "a
   .ms-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ms-deep)}
   .ms-btn:disabled{opacity:.45;cursor:default;transform:none;box-shadow:0 4px 0 var(--ms-deep)}
   .ms-btn:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ms-nav{display:grid;gap:10px;margin:0 0 20px}
+  .ms-next{justify-self:start;font-size:1.1rem;padding:13px 26px}
+  .ms-nav-t{font-size:.9rem;font-weight:700;color:#686472;margin-top:8px}
+  .ms-nav-list{display:flex;flex-wrap:wrap;gap:10px}
+  .ms-other{background:#ffffff;color:#33303c;border:2px solid #ddd7e6;box-shadow:0 4px 0 #ddd7e6;font-size:1rem;padding:10px 18px}
+  .ms-other:hover{border-color:#c9c2d5;box-shadow:0 4px 0 #c9c2d5}
+  .ms-other:active{box-shadow:0 1px 0 #ddd7e6}
+  .ms-msg.ok{color:#3d6e56;font-weight:700;font-size:.98rem}
+  /* 결과 화면의 다시 풀기는 글자 메뉴 */
+  #result .result-actions{gap:6px 22px;margin-top:4px}
+  #result .result-actions .btn{background:none !important;color:var(--ink-soft) !important;box-shadow:none !important;border:none !important;padding:4px 0;font-size:.98rem;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+  #result .result-actions .btn:hover{color:var(--ink) !important;filter:none}
+  #result .result-actions .btn:active{transform:none}
   .ms-wrap{display:grid;gap:14px;margin-top:18px}
   .ms-panel{background:#ffffff;border-radius:22px;padding:16px 18px;box-shadow:0 6px 0 #ddd7e6;text-align:left;word-break:keep-all}
   .ms-panel h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
@@ -1270,6 +1342,7 @@ MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "a
     <div class="output" id="qOut"><span class="ol">🖥️ 브라우저 화면</span><div id="qOutText" class="out-body"></div></div>
 
     <div class="choices" id="choices"></div>
+    <div class="actions"><button class="btn hidden" id="nextBtn" type="button">다음 문제 ▶</button></div>
     <div class="row">
       <button class="hint-btn" id="hintBtn" type="button">💡 힌트 보기</button>
       <span class="spacer"></span>
@@ -1278,7 +1351,6 @@ MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "a
 
     <div class="hint-box hidden" id="hintBox"></div>
     <div class="feedback hidden" id="feedback" aria-live="polite"></div>
-    <div class="actions"><button class="btn hidden" id="nextBtn" type="button">다음 문제 ▶</button></div>
     <div class="diff-row" id="qDiff"></div>
   </section>
 
@@ -1290,8 +1362,8 @@ MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "a
     <p class="final-msg" id="finalMsg"></p>
     <ul class="review" id="review"></ul>
     <div class="result-actions">
-      <button class="btn" id="retryWrongBtn" type="button">❗ 틀린 문제만 다시 풀기</button>
-      <button class="btn sub" id="retryAllBtn" type="button">🔄 처음부터 다시 풀기</button>
+      <button class="btn" id="retryWrongBtn" type="button">틀린 문제만 다시 풀기</button>
+      <button class="btn sub" id="retryAllBtn" type="button">처음부터 다시 풀기</button>
     </div>
   </section>
 
@@ -1725,7 +1797,7 @@ document.addEventListener("keydown", e => {
         '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
         '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
         '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
-        '<p class="ms-msg">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
+        '<p class="ms-msg' + (/^✅/.test(MSG[area] || "") ? " ok" : "") + '">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
     }).join("");
   }
 
@@ -1738,7 +1810,7 @@ document.addEventListener("keydown", e => {
     if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
+    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까요?" +
             (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
@@ -1748,13 +1820,41 @@ document.addEventListener("keydown", e => {
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냈습니다 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 전송되었습니다. (" + hm + " · 3번 중 " + d.count + "번째)"); }
         else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
         else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
-      .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
+      .catch(function(){ say("⚠️ 보내지 못했습니다. 잠시 뒤 다시 눌러 보자. 계속 안 되면 선생님께 알리자."); btn.disabled = false; });
+  }
+
+  /* ---------- 결과 화면: 다음 퀴즈·다른 퀴즈로 가기 ---------- */
+  function go(item){
+    if (item.key){
+      if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*");
+      return;
+    }
+    var url = new URL(item.href, document.baseURI).href;
+    try{ window.top.location.href = url; }catch(e){ window.location.href = url; }
+  }
+  function renderNav(){
+    if (!cfg.nav || document.querySelector(".ms-nav")) return;
+    var before = document.querySelector(cfg.panelBefore || "#result .result-actions");
+    if (!before) return;
+    var nav = document.createElement("div");
+    nav.className = "ms-nav";
+    var items = [];
+    var html = "";
+    if (cfg.nav.next){ items.push(cfg.nav.next); html += '<button type="button" class="ms-btn ms-next" data-i="0">' + esc(cfg.nav.next.label) + " ▶</button>"; }
+    if (cfg.nav.others && cfg.nav.others.length){
+      html += '<p class="ms-nav-t">' + esc(cfg.nav.othersTitle || "다른 퀴즈 고르기") + '</p><div class="ms-nav-list">';
+      cfg.nav.others.forEach(function(o){ items.push(o); html += '<button type="button" class="ms-btn ms-other" data-i="' + (items.length - 1) + '">' + esc(o.label) + "</button>"; });
+      html += "</div>";
+    }
+    nav.innerHTML = html;
+    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b) go(items[+b.dataset.i]); });
+    before.insertAdjacentElement("beforebegin", nav);
   }
 
   function render(){ renderWho(); renderPanels(); }
@@ -1766,7 +1866,12 @@ document.addEventListener("keydown", e => {
       root.setProperty("--ms-accent", o.accent || "#5d4dbe");
       root.setProperty("--ms-deep", o.deep || "#4a3c9e");
       render();
-      window.addEventListener("message", function(e){ if (e.data && e.data.mirimScore) render(); });
+      renderNav();
+      window.addEventListener("message", function(e){
+        if (!e.data) return;
+        if (e.data.mirimScore) render();
+        if (e.data.mirimOpen){ var c = document.querySelector('.quiz-card[data-quiz="' + e.data.mirimOpen + '"]'); if (c) c.click(); }
+      });
       window.addEventListener("storage", function(){ if (!editing) render(); });
       var bb = document.getElementById("backBtn");
       if (bb) bb.addEventListener("click", render);
@@ -1786,7 +1891,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
+MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"next": {"key": "basics", "label": "다음 퀴즈 · HTML 첫걸음"}, "othersTitle": "이 파트의 다른 퀴즈", "others": [{"key": "ox", "label": "HTML OX"}, {"key": "basics", "label": "HTML 첫걸음"}, {"key": "layout", "label": "CSS 레이아웃"}]}});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -2028,6 +2133,19 @@ MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "a
   .ms-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ms-deep)}
   .ms-btn:disabled{opacity:.45;cursor:default;transform:none;box-shadow:0 4px 0 var(--ms-deep)}
   .ms-btn:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ms-nav{display:grid;gap:10px;margin:0 0 20px}
+  .ms-next{justify-self:start;font-size:1.1rem;padding:13px 26px}
+  .ms-nav-t{font-size:.9rem;font-weight:700;color:#686472;margin-top:8px}
+  .ms-nav-list{display:flex;flex-wrap:wrap;gap:10px}
+  .ms-other{background:#ffffff;color:#33303c;border:2px solid #ddd7e6;box-shadow:0 4px 0 #ddd7e6;font-size:1rem;padding:10px 18px}
+  .ms-other:hover{border-color:#c9c2d5;box-shadow:0 4px 0 #c9c2d5}
+  .ms-other:active{box-shadow:0 1px 0 #ddd7e6}
+  .ms-msg.ok{color:#3d6e56;font-weight:700;font-size:.98rem}
+  /* 결과 화면의 다시 풀기는 글자 메뉴 */
+  #result .result-actions{gap:6px 22px;margin-top:4px}
+  #result .result-actions .btn{background:none !important;color:var(--ink-soft) !important;box-shadow:none !important;border:none !important;padding:4px 0;font-size:.98rem;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+  #result .result-actions .btn:hover{color:var(--ink) !important;filter:none}
+  #result .result-actions .btn:active{transform:none}
   .ms-wrap{display:grid;gap:14px;margin-top:18px}
   .ms-panel{background:#ffffff;border-radius:22px;padding:16px 18px;box-shadow:0 6px 0 #ddd7e6;text-align:left;word-break:keep-all}
   .ms-panel h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
@@ -2081,8 +2199,8 @@ MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "a
     <div class="hint-row"><button class="hint-btn" id="hintBtn" type="button">💡 힌트 보기</button></div>
     <div class="hint-box hidden" id="hintBox"></div>
     <div class="choices" id="choices"></div>
-    <div class="feedback hidden" id="feedback" aria-live="polite"></div>
     <div class="actions"><button class="btn hidden" id="nextBtn" type="button">다음 문제 ▶</button></div>
+    <div class="feedback hidden" id="feedback" aria-live="polite"></div>
     <div class="diff-row" id="qDiff"></div>
   </section>
 
@@ -2095,8 +2213,8 @@ MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "a
     <ul class="stage-result" id="stageResult"></ul>
     <p class="wrong-list" id="wrongList"></p>
     <div class="result-actions">
-      <button class="btn" id="retryWrongBtn" type="button">❗ 틀린 문제만 다시 풀기</button>
-      <button class="btn sub" id="retryAllBtn" type="button">🔄 처음부터 다시 풀기</button>
+      <button class="btn" id="retryWrongBtn" type="button">틀린 문제만 다시 풀기</button>
+      <button class="btn sub" id="retryAllBtn" type="button">처음부터 다시 풀기</button>
     </div>
   </section>
 
@@ -2492,7 +2610,7 @@ document.addEventListener("keydown", e => {
         '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
         '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
         '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
-        '<p class="ms-msg">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
+        '<p class="ms-msg' + (/^✅/.test(MSG[area] || "") ? " ok" : "") + '">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
     }).join("");
   }
 
@@ -2505,7 +2623,7 @@ document.addEventListener("keydown", e => {
     if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
+    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까요?" +
             (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
@@ -2515,13 +2633,41 @@ document.addEventListener("keydown", e => {
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냈습니다 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 전송되었습니다. (" + hm + " · 3번 중 " + d.count + "번째)"); }
         else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
         else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
-      .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
+      .catch(function(){ say("⚠️ 보내지 못했습니다. 잠시 뒤 다시 눌러 보자. 계속 안 되면 선생님께 알리자."); btn.disabled = false; });
+  }
+
+  /* ---------- 결과 화면: 다음 퀴즈·다른 퀴즈로 가기 ---------- */
+  function go(item){
+    if (item.key){
+      if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*");
+      return;
+    }
+    var url = new URL(item.href, document.baseURI).href;
+    try{ window.top.location.href = url; }catch(e){ window.location.href = url; }
+  }
+  function renderNav(){
+    if (!cfg.nav || document.querySelector(".ms-nav")) return;
+    var before = document.querySelector(cfg.panelBefore || "#result .result-actions");
+    if (!before) return;
+    var nav = document.createElement("div");
+    nav.className = "ms-nav";
+    var items = [];
+    var html = "";
+    if (cfg.nav.next){ items.push(cfg.nav.next); html += '<button type="button" class="ms-btn ms-next" data-i="0">' + esc(cfg.nav.next.label) + " ▶</button>"; }
+    if (cfg.nav.others && cfg.nav.others.length){
+      html += '<p class="ms-nav-t">' + esc(cfg.nav.othersTitle || "다른 퀴즈 고르기") + '</p><div class="ms-nav-list">';
+      cfg.nav.others.forEach(function(o){ items.push(o); html += '<button type="button" class="ms-btn ms-other" data-i="' + (items.length - 1) + '">' + esc(o.label) + "</button>"; });
+      html += "</div>";
+    }
+    nav.innerHTML = html;
+    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b) go(items[+b.dataset.i]); });
+    before.insertAdjacentElement("beforebegin", nav);
   }
 
   function render(){ renderWho(); renderPanels(); }
@@ -2533,7 +2679,12 @@ document.addEventListener("keydown", e => {
       root.setProperty("--ms-accent", o.accent || "#5d4dbe");
       root.setProperty("--ms-deep", o.deep || "#4a3c9e");
       render();
-      window.addEventListener("message", function(e){ if (e.data && e.data.mirimScore) render(); });
+      renderNav();
+      window.addEventListener("message", function(e){
+        if (!e.data) return;
+        if (e.data.mirimScore) render();
+        if (e.data.mirimOpen){ var c = document.querySelector('.quiz-card[data-quiz="' + e.data.mirimOpen + '"]'); if (c) c.click(); }
+      });
       window.addEventListener("storage", function(){ if (!editing) render(); });
       var bb = document.getElementById("backBtn");
       if (bb) bb.addEventListener("click", render);
@@ -2553,7 +2704,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
+MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"next": {"key": "layout", "label": "다음 퀴즈 · CSS 레이아웃"}, "othersTitle": "이 파트의 다른 퀴즈", "others": [{"key": "ox", "label": "HTML OX"}, {"key": "blank", "label": "HTML 빈칸 채우기"}, {"key": "layout", "label": "CSS 레이아웃"}]}});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -2817,6 +2968,19 @@ MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "a
   .ms-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ms-deep)}
   .ms-btn:disabled{opacity:.45;cursor:default;transform:none;box-shadow:0 4px 0 var(--ms-deep)}
   .ms-btn:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ms-nav{display:grid;gap:10px;margin:0 0 20px}
+  .ms-next{justify-self:start;font-size:1.1rem;padding:13px 26px}
+  .ms-nav-t{font-size:.9rem;font-weight:700;color:#686472;margin-top:8px}
+  .ms-nav-list{display:flex;flex-wrap:wrap;gap:10px}
+  .ms-other{background:#ffffff;color:#33303c;border:2px solid #ddd7e6;box-shadow:0 4px 0 #ddd7e6;font-size:1rem;padding:10px 18px}
+  .ms-other:hover{border-color:#c9c2d5;box-shadow:0 4px 0 #c9c2d5}
+  .ms-other:active{box-shadow:0 1px 0 #ddd7e6}
+  .ms-msg.ok{color:#3d6e56;font-weight:700;font-size:.98rem}
+  /* 결과 화면의 다시 풀기는 글자 메뉴 */
+  #result .result-actions{gap:6px 22px;margin-top:4px}
+  #result .result-actions .btn{background:none !important;color:var(--ink-soft) !important;box-shadow:none !important;border:none !important;padding:4px 0;font-size:.98rem;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+  #result .result-actions .btn:hover{color:var(--ink) !important;filter:none}
+  #result .result-actions .btn:active{transform:none}
   .ms-wrap{display:grid;gap:14px;margin-top:18px}
   .ms-panel{background:#ffffff;border-radius:22px;padding:16px 18px;box-shadow:0 6px 0 #ddd7e6;text-align:left;word-break:keep-all}
   .ms-panel h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
@@ -2890,11 +3054,11 @@ MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "a
     <p class="pv-note" id="pvNote"></p>
 
     <div class="choices" id="choices"></div>
+    <div class="actions"><button class="btn hidden" id="nextBtn" type="button">다음 문제 ▶</button></div>
     <p class="keyhint">키보드 1·2·3으로도 고를 수 있습니다</p>
 
     <div class="hint-box" id="hintBox"></div>
     <div class="feedback hidden" id="feedback" aria-live="polite"></div>
-    <div class="actions"><button class="btn hidden" id="nextBtn" type="button">다음 문제 ▶</button></div>
     <div class="diff-row" id="qDiff"></div>
   </section>
 
@@ -2907,8 +3071,8 @@ MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "a
     <ul class="stage-result" id="stageResult"></ul>
     <p class="wrong-list" id="wrongList"></p>
     <div class="result-actions">
-      <button class="btn" id="retryWrongBtn" type="button">❗ 틀린 문제만 다시 풀기</button>
-      <button class="btn sub" id="retryAllBtn" type="button">🔄 처음부터 다시 풀기</button>
+      <button class="btn" id="retryWrongBtn" type="button">틀린 문제만 다시 풀기</button>
+      <button class="btn sub" id="retryAllBtn" type="button">처음부터 다시 풀기</button>
     </div>
   </section>
 
@@ -3965,7 +4129,7 @@ document.addEventListener("keydown", e => {
         '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
         '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
         '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
-        '<p class="ms-msg">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
+        '<p class="ms-msg' + (/^✅/.test(MSG[area] || "") ? " ok" : "") + '">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
     }).join("");
   }
 
@@ -3978,7 +4142,7 @@ document.addEventListener("keydown", e => {
     if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
+    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까요?" +
             (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
@@ -3988,13 +4152,41 @@ document.addEventListener("keydown", e => {
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냈습니다 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 전송되었습니다. (" + hm + " · 3번 중 " + d.count + "번째)"); }
         else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
         else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
-      .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
+      .catch(function(){ say("⚠️ 보내지 못했습니다. 잠시 뒤 다시 눌러 보자. 계속 안 되면 선생님께 알리자."); btn.disabled = false; });
+  }
+
+  /* ---------- 결과 화면: 다음 퀴즈·다른 퀴즈로 가기 ---------- */
+  function go(item){
+    if (item.key){
+      if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*");
+      return;
+    }
+    var url = new URL(item.href, document.baseURI).href;
+    try{ window.top.location.href = url; }catch(e){ window.location.href = url; }
+  }
+  function renderNav(){
+    if (!cfg.nav || document.querySelector(".ms-nav")) return;
+    var before = document.querySelector(cfg.panelBefore || "#result .result-actions");
+    if (!before) return;
+    var nav = document.createElement("div");
+    nav.className = "ms-nav";
+    var items = [];
+    var html = "";
+    if (cfg.nav.next){ items.push(cfg.nav.next); html += '<button type="button" class="ms-btn ms-next" data-i="0">' + esc(cfg.nav.next.label) + " ▶</button>"; }
+    if (cfg.nav.others && cfg.nav.others.length){
+      html += '<p class="ms-nav-t">' + esc(cfg.nav.othersTitle || "다른 퀴즈 고르기") + '</p><div class="ms-nav-list">';
+      cfg.nav.others.forEach(function(o){ items.push(o); html += '<button type="button" class="ms-btn ms-other" data-i="' + (items.length - 1) + '">' + esc(o.label) + "</button>"; });
+      html += "</div>";
+    }
+    nav.innerHTML = html;
+    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b) go(items[+b.dataset.i]); });
+    before.insertAdjacentElement("beforebegin", nav);
   }
 
   function render(){ renderWho(); renderPanels(); }
@@ -4006,7 +4198,12 @@ document.addEventListener("keydown", e => {
       root.setProperty("--ms-accent", o.accent || "#5d4dbe");
       root.setProperty("--ms-deep", o.deep || "#4a3c9e");
       render();
-      window.addEventListener("message", function(e){ if (e.data && e.data.mirimScore) render(); });
+      renderNav();
+      window.addEventListener("message", function(e){
+        if (!e.data) return;
+        if (e.data.mirimScore) render();
+        if (e.data.mirimOpen){ var c = document.querySelector('.quiz-card[data-quiz="' + e.data.mirimOpen + '"]'); if (c) c.click(); }
+      });
       window.addEventListener("storage", function(){ if (!editing) render(); });
       var bb = document.getElementById("backBtn");
       if (bb) bb.addEventListener("click", render);
@@ -4026,7 +4223,7 @@ document.addEventListener("keydown", e => {
     openGate: openGate
   };
 })();
-MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true});
+MirimScore.init({"areas": ["html"], "panelBefore": "#result .result-actions", "accent": "#3a7fc3", "deep": "#3a608a", "whoAfter": "header.top", "guard": "#startBtn", "hideWhenSet": true, "nav": {"next": {"href": "python_quiz_all.html", "label": "다음 파트 · 파이썬 기초 퀴즈"}, "othersTitle": "이 파트의 다른 퀴즈", "others": [{"key": "ox", "label": "HTML OX"}, {"key": "blank", "label": "HTML 빈칸 채우기"}, {"key": "basics", "label": "HTML 첫걸음"}]}});
 <\/script>
 <script>
 /* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
@@ -4209,7 +4406,7 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
         '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
         '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
         '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈습니다") + "</span></div>" +
-        '<p class="ms-msg">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
+        '<p class="ms-msg' + (/^✅/.test(MSG[area] || "") ? " ok" : "") + '">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있습니다.")) + "</p></section>";
     }).join("");
   }
 
@@ -4222,7 +4419,7 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
     if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않았습니다. 선생님께 알리자."; return; }
     if (left <= 0 || !s.done) return;
     var miss = s.rows.filter(function(r){ return !r[2]; }).length;
-    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
+    var q = label(st) + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까요?" +
             (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어갑니다." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됩니다.";
     if (!window.confirm(q)) return;
     btn.disabled = true;
@@ -4232,13 +4429,41 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
       .then(function(r){ return r.json(); })
       .then(function(d){
         var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
-        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 보냈습니다 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        if (d && d.ok){ setSent(key(st), area, d.count); say("✅ 전송되었습니다. (" + hm + " · 3번 중 " + d.count + "번째)"); }
         else if (d && d.error === "limit"){ setSent(key(st), area, LIMIT); say("이미 3번 모두 보냈습니다."); }
         else { say("⚠️ 보내지 못했습니다: " + ((d && d.error) || "알 수 없는 오류")); }
         renderPanels();
         if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
       })
-      .catch(function(){ say("⚠️ 보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 보자."); btn.disabled = false; });
+      .catch(function(){ say("⚠️ 보내지 못했습니다. 잠시 뒤 다시 눌러 보자. 계속 안 되면 선생님께 알리자."); btn.disabled = false; });
+  }
+
+  /* ---------- 결과 화면: 다음 퀴즈·다른 퀴즈로 가기 ---------- */
+  function go(item){
+    if (item.key){
+      if (window.parent !== window) window.parent.postMessage({ mirimOpen: item.key }, "*");
+      return;
+    }
+    var url = new URL(item.href, document.baseURI).href;
+    try{ window.top.location.href = url; }catch(e){ window.location.href = url; }
+  }
+  function renderNav(){
+    if (!cfg.nav || document.querySelector(".ms-nav")) return;
+    var before = document.querySelector(cfg.panelBefore || "#result .result-actions");
+    if (!before) return;
+    var nav = document.createElement("div");
+    nav.className = "ms-nav";
+    var items = [];
+    var html = "";
+    if (cfg.nav.next){ items.push(cfg.nav.next); html += '<button type="button" class="ms-btn ms-next" data-i="0">' + esc(cfg.nav.next.label) + " ▶</button>"; }
+    if (cfg.nav.others && cfg.nav.others.length){
+      html += '<p class="ms-nav-t">' + esc(cfg.nav.othersTitle || "다른 퀴즈 고르기") + '</p><div class="ms-nav-list">';
+      cfg.nav.others.forEach(function(o){ items.push(o); html += '<button type="button" class="ms-btn ms-other" data-i="' + (items.length - 1) + '">' + esc(o.label) + "</button>"; });
+      html += "</div>";
+    }
+    nav.innerHTML = html;
+    nav.addEventListener("click", function(e){ var b = e.target.closest("[data-i]"); if (b) go(items[+b.dataset.i]); });
+    before.insertAdjacentElement("beforebegin", nav);
   }
 
   function render(){ renderWho(); renderPanels(); }
@@ -4250,7 +4475,12 @@ if (card) openQuiz(card.dataset.quiz, card.dataset.title);
       root.setProperty("--ms-accent", o.accent || "#5d4dbe");
       root.setProperty("--ms-deep", o.deep || "#4a3c9e");
       render();
-      window.addEventListener("message", function(e){ if (e.data && e.data.mirimScore) render(); });
+      renderNav();
+      window.addEventListener("message", function(e){
+        if (!e.data) return;
+        if (e.data.mirimScore) render();
+        if (e.data.mirimOpen){ var c = document.querySelector('.quiz-card[data-quiz="' + e.data.mirimOpen + '"]'); if (c) c.click(); }
+      });
       window.addEventListener("storage", function(){ if (!editing) render(); });
       var bb = document.getElementById("backBtn");
       if (bb) bb.addEventListener("click", render);
