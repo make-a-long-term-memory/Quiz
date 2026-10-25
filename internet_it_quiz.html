@@ -244,6 +244,40 @@
   .home-link:hover{border-color:#c9c2d5}
   /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 배경과 비슷한 톤의 조금 어두운 원 + 짙은 글자(가. 나. 다.) */
   .stage-list .sn{width:36px;height:36px;background:#ebe3d0;color:#5b5243;border:none;box-shadow:none;font-family:var(--font);font-weight:700;font-size:.92rem;letter-spacing:-.02em;line-height:1;padding-left:3px}
+  /* ---------- 학번·이름 입력과 점수 보내기 ---------- */
+  .ms-gate{position:fixed;inset:0;z-index:1000;background:rgba(51,48,60,.45);display:grid;place-items:center;padding:16px}
+  .ms-box{background:#ffffff;border-radius:24px;padding:24px 22px;width:100%;max-width:400px;box-shadow:0 8px 0 #ddd7e6,0 20px 40px rgba(0,0,0,.15);display:grid;gap:12px;font-family:var(--font);color:#33303c;text-align:left;word-break:keep-all}
+  .ms-box h2{font-size:1.3rem;font-weight:800;line-height:1.3}
+  .ms-box p{color:#686472;font-size:.92rem}
+  .ms-box label{display:grid;gap:6px;font-weight:700}
+  .ms-box select,.ms-box input{font:inherit;font-weight:400;font-size:1.05rem;padding:10px 14px;border-radius:14px;border:2px solid #ddd7e6;background:#ffffff;color:#33303c;width:100%}
+  .ms-box select:focus,.ms-box input:focus{outline:3px solid #bfb4e4;outline-offset:1px}
+  .ms-box .ms-err{color:#b25d6c;min-height:1.2em;font-size:.9rem}
+  .ms-btn{font-family:var(--font);font-weight:700;font-size:1.05rem;border:none;border-radius:999px;padding:11px 22px;cursor:pointer;background:var(--ms-accent);color:#ffffff;box-shadow:0 4px 0 var(--ms-deep)}
+  .ms-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ms-deep)}
+  .ms-btn:disabled{opacity:.45;cursor:default;transform:none;box-shadow:0 4px 0 var(--ms-deep)}
+  .ms-btn:focus-visible{outline:3px solid #bfb4e4;outline-offset:3px}
+  .ms-chip{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:.85rem;color:#686472;background:#ffffff;border:1px solid #ddd7e6;border-radius:999px;padding:2px 4px 2px 10px;white-space:nowrap}
+  .ms-chip b{color:#33303c}
+  .ms-chip button{font:inherit;font-size:.8rem;font-weight:700;color:#5a4f7e;background:#f6f4fa;border:none;border-radius:999px;padding:2px 10px;cursor:pointer}
+  .ms-wrap{display:grid;gap:14px;margin-top:18px}
+  .ms-panel{background:#ffffff;border-radius:22px;padding:16px 18px;box-shadow:0 6px 0 #ddd7e6;text-align:left;word-break:keep-all}
+  .ms-panel h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
+  .ms-rows{list-style:none;display:grid;margin-bottom:10px}
+  .ms-rows li{display:flex;justify-content:space-between;gap:10px;font-size:.95rem;padding:5px 0;border-bottom:1px solid #eeeaf2}
+  .ms-rows li span{color:#686472}
+  .ms-rows li.no b{color:#a8a3b0;font-weight:500}
+  .ms-total{margin-bottom:12px}
+  .ms-total b{font-weight:800}
+  .ms-act{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .ms-left{font-size:.88rem;color:#686472}
+  .ms-note,.ms-msg{font-size:.9rem;color:#686472;margin-top:8px}
+  .ms-msg:empty{display:none}
+  .card .ms-wrap{margin:0 0 20px}
+  .card .ms-panel{box-shadow:none;background:#f7f2e6}
+  .card .ms-rows li{border-bottom-color:#e6dfcd}
+  a.credit{width:max-content;color:var(--ink);text-decoration:none}
+  a.credit:hover{text-decoration:underline;text-underline-offset:3px}
 </style>
 </head>
 <body>
@@ -251,7 +285,7 @@
   <header class="top">
     <div class="mascot" aria-hidden="true">🛰️</div>
     <div>
-      <span class="eyebrow">미림마이스터고 디자인과 재학생을 위한</span>
+      <span class="eyebrow">고등학생을 위한</span>
       <h1>인터넷과 <span class="accent">IT 서비스</span> 퀴즈</h1>
       <p>홈페이지가 만들어지고, 공개되고, 분석되기까지 30문제로 알아봄</p>
     </div>
@@ -303,7 +337,7 @@
     </div>
   </section>
 
-  <footer><a class="home-link" href="index.html">← 전체 퀴즈 모음</a><br>인터넷과 IT 서비스 · 30문제 · 3지 선다<span class="credit">by Make a long term memory</span></footer>
+  <footer><a class="home-link" href="index.html">← 전체 퀴즈 모음</a><br>인터넷과 IT 서비스 · 30문제 · 3지 선다<a class="credit" href="https://www.instagram.com/Make.a.long.term.memory" target="_blank" rel="noopener">by Make a long term memory</a></footer>
 </div>
 
 <script>
@@ -910,6 +944,190 @@ document.addEventListener("keydown", e => {
     if (b && !b.disabled) b.click();
   }
 });
+</script>
+<script src="score-config.js"></script>
+<script>
+/* mirim-score-v1 */
+/* 학번·이름 입력 + 영역별 점수 모아 보기 + 구글 시트로 점수 보내기(영역마다 3번) */
+(function(){
+  var LIMIT = 3;
+  var AREAS = {
+    it:     { label: "IT 지식", quizzes: [["it", "인터넷과 IT 서비스", 30]] },
+    html:   { label: "HTML",    quizzes: [["ox", "HTML OX", 15], ["blank", "HTML 빈칸 채우기", 10], ["basics", "HTML 첫걸음", 20], ["layout", "CSS 레이아웃", 30]] },
+    python: { label: "파이썬",  quizzes: [["ox", "파이썬 OX", 15], ["blank", "파이썬 빈칸 채우기", 10], ["basics", "파이썬 첫걸음", 30], ["ifq", "파이썬 선택문", 5]] }
+  };
+  var CLASSES = [["15", "1학년 5반"], ["16", "1학년 6반"], ["25", "2학년 5반"], ["26", "2학년 6반"]];
+  var cfg = {}, MSG = {};
+
+  function jget(store, k, d){ try{ var v = store.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+  function jset(store, k, v){ try{ store.setItem(k, JSON.stringify(v)); }catch(e){} }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function student(){ return jget(sessionStorage, "mirim-student", null); }
+  function results(id){ return jget(localStorage, "mirim-results", {})[id] || {}; }
+  function sentCount(id, area){ var s = jget(localStorage, "mirim-sent", {}); return (s[id] && s[id][area]) || 0; }
+  function setSent(id, area, n){ var s = jget(localStorage, "mirim-sent", {}); s[id] = s[id] || {}; s[id][area] = n; jset(localStorage, "mirim-sent", s); }
+
+  function summary(id, area){
+    var A = AREAS[area], r = results(id)[area] || {}, c = 0, t = 0, done = 0, parts = [], rows = [];
+    A.quizzes.forEach(function(q){
+      var x = r[q[0]]; t += q[2];
+      if (x){ c += x.c; done++; parts.push(q[1] + " " + x.c + "/" + x.t); rows.push([q[1], x.c + " / " + x.t, true]); }
+      else { parts.push(q[1] + " 미응시"); rows.push([q[1], "아직 안 풂", false]); }
+    });
+    return { c: c, t: t, done: done, score: Math.round(c / t * 100), detail: parts.join(" · "), rows: rows };
+  }
+
+  /* ---------- 학번·이름 입력 ---------- */
+  function openGate(){
+    if (document.querySelector(".ms-gate")) return;
+    var opts = CLASSES.map(function(k){
+      var o = "";
+      for (var i = 1; i <= 18; i++){ var id = k[0] + (i < 10 ? "0" : "") + i; o += '<option value="' + id + '">' + id + "</option>"; }
+      return '<optgroup label="' + k[1] + '">' + o + "</optgroup>";
+    }).join("");
+    var st = student();
+    var g = document.createElement("div");
+    g.className = "ms-gate";
+    g.innerHTML = '<form class="ms-box" role="dialog" aria-modal="true" aria-labelledby="msGateT">' +
+      '<h2 id="msGateT">학번과 이름을 입력하세요</h2>' +
+      '<p>퀴즈 점수를 선생님께 보낼 때 쓰임.</p>' +
+      '<label>학번<select id="msId"><option value="">학번 고르기</option>' + opts + "</select></label>" +
+      '<label>이름<input id="msName" maxlength="10" autocomplete="off" placeholder="예: 김미림"></label>' +
+      '<p class="ms-err" id="msErr"></p>' +
+      '<button class="ms-btn" type="submit">시작하기 ▶</button></form>';
+    document.body.appendChild(g);
+    if (st){ g.querySelector("#msId").value = st.id; g.querySelector("#msName").value = st.name; }
+    g.querySelector("form").addEventListener("submit", function(e){
+      e.preventDefault();
+      var id = g.querySelector("#msId").value, name = g.querySelector("#msName").value.replace(/\s+/g, " ").trim();
+      var err = g.querySelector("#msErr");
+      if (!id){ err.textContent = "학번을 골라야 함."; g.querySelector("#msId").focus(); return; }
+      if (!name){ err.textContent = "이름을 입력해야 함."; g.querySelector("#msName").focus(); return; }
+      jset(sessionStorage, "mirim-student", { id: id, name: name });
+      g.remove();
+      render();
+    });
+    setTimeout(function(){ g.querySelector(st ? "#msName" : "#msId").focus(); }, 30);
+  }
+
+  function renderChip(){
+    var st = student(), chip = document.querySelector(".ms-chip");
+    if (!chip){
+      var anchor = cfg.chipAfter && document.querySelector(cfg.chipAfter);
+      if (!anchor) return;
+      chip = document.createElement("div");
+      chip.className = "ms-chip";
+      anchor.insertAdjacentElement("afterend", chip);
+      chip.addEventListener("click", function(e){ if (e.target.closest("button")) openGate(); });
+    }
+    chip.innerHTML = st ? '🙋 <b>' + esc(st.id) + "</b> " + esc(st.name) + ' <button type="button">바꾸기</button>'
+                        : '🙋 학번 입력 전 <button type="button">입력하기</button>';
+  }
+
+  /* ---------- 점수 모아 보기 ---------- */
+  function renderPanels(){
+    var wrap = document.querySelector(".ms-wrap");
+    if (!wrap){
+      var anchor = cfg.panelAfter ? document.querySelector(cfg.panelAfter) : null;
+      var before = cfg.panelBefore ? document.querySelector(cfg.panelBefore) : null;
+      if (!anchor && !before) return;
+      wrap = document.createElement("div");
+      wrap.className = "ms-wrap";
+      if (before) before.insertAdjacentElement("beforebegin", wrap); else anchor.insertAdjacentElement("afterend", wrap);
+      wrap.addEventListener("click", function(e){
+        var b = e.target.closest(".ms-send");
+        if (b) send(b.dataset.area, b.closest(".ms-panel"));
+      });
+    }
+    var st = student();
+    wrap.innerHTML = cfg.areas.map(function(area){
+      var A = AREAS[area];
+      if (!st) return '<section class="ms-panel" data-area="' + area + '"><h3>📊 내 점수 · ' + A.label + '</h3><p class="ms-note">학번과 이름을 입력하면 점수가 모임.</p><p class="ms-msg"></p></section>';
+      var s = summary(st.id, area), left = Math.max(0, LIMIT - sentCount(st.id, area));
+      return '<section class="ms-panel" data-area="' + area + '">' +
+        "<h3>📊 내 점수 · " + A.label + "</h3>" +
+        '<ul class="ms-rows">' + s.rows.map(function(r){ return '<li class="' + (r[2] ? "" : "no") + '"><span>' + r[0] + "</span><b>" + r[1] + "</b></li>"; }).join("") + "</ul>" +
+        '<div class="ms-total">합계 <b>' + s.c + "</b> / " + s.t + "문제 · 100점 환산 <b>" + s.score + "점</b></div>" +
+        '<div class="ms-act"><button class="ms-btn ms-send" type="button" data-area="' + area + '"' + (left && s.done ? "" : " disabled") + ">📤 선생님께 점수 보내기</button>" +
+        '<span class="ms-left">' + (left ? "남은 횟수 " + left + "번" : "3번 모두 보냈음") + "</span></div>" +
+        '<p class="ms-msg">' + esc(MSG[area] || (s.done ? "" : "퀴즈를 끝까지 풀면 보낼 수 있음.")) + "</p></section>";
+    }).join("");
+  }
+
+  function send(area, panel){
+    var st = student();
+    if (!st){ openGate(); return; }
+    var s = summary(st.id, area), A = AREAS[area], msg = panel.querySelector(".ms-msg"), btn = panel.querySelector(".ms-send");
+    var left = LIMIT - sentCount(st.id, area);
+    var url = window.SCORE_URL;
+    if (!url){ msg.textContent = "⚠️ 점수 받을 주소가 아직 설정되지 않음. 선생님께 알려 주기."; return; }
+    if (left <= 0 || !s.done) return;
+    var miss = s.rows.filter(function(r){ return !r[2]; }).length;
+    var q = st.id + " " + st.name + "\n" + A.label + " 점수 " + s.score + "점 (" + s.c + "/" + s.t + ")을 보낼까?" +
+            (miss ? "\n아직 안 푼 퀴즈 " + miss + "개는 0점으로 들어감." : "") + "\n보내면 남은 횟수가 " + (left - 1) + "번이 됨.";
+    if (!window.confirm(q)) return;
+    btn.disabled = true;
+    msg.textContent = "보내는 중…";
+    function say(text){ MSG[area] = text; msg.textContent = text; }
+    fetch(url, { method: "POST", body: JSON.stringify({ id: st.id, name: st.name, area: A.label, score: s.score, correct: s.c, total: s.t, detail: s.detail }) })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        var t = new Date(), hm = t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
+        if (d && d.ok){ setSent(st.id, area, d.count); say("✅ 보냄 (" + hm + ") · 3번 중 " + d.count + "번째"); }
+        else if (d && d.error === "limit"){ setSent(st.id, area, LIMIT); say("이미 3번 모두 보냈음."); }
+        else { say("⚠️ 보내지 못함: " + ((d && d.error) || "알 수 없는 오류")); }
+        renderPanels();
+      })
+      .catch(function(){ say("⚠️ 보내지 못함. 인터넷 연결을 확인하고 다시 눌러 보기."); btn.disabled = false; });
+  }
+
+  function render(){ renderChip(); renderPanels(); }
+
+  window.MirimScore = {
+    init: function(o){
+      cfg = o;
+      var root = document.documentElement.style;
+      root.setProperty("--ms-accent", o.accent || "#5d4dbe");
+      root.setProperty("--ms-deep", o.deep || "#4a3c9e");
+      render();
+      if (!student()) openGate();
+      window.addEventListener("message", function(e){ if (e.data && e.data.mirimScore) renderPanels(); });
+      var bb = document.getElementById("backBtn");
+      if (bb) bb.addEventListener("click", renderPanels);
+    },
+    onResult: function(){ renderPanels(); },
+    openGate: openGate
+  };
+})();
+MirimScore.init({"areas": ["it"], "accent": "#358473", "deep": "#266255", "chipAfter": ".top p", "panelBefore": "#result .result-actions"});
+</script>
+<script>
+/* mirim-score-v1: 끝까지 푼 점수를 학번별로 저장 */
+(function(){
+  var AREA = "it", KEY = "it";
+  function stu(){ try{ return JSON.parse(sessionStorage.getItem("mirim-student") || "null"); }catch(e){ return null; } }
+  if (KEY === "ifq"){ var s0 = stu(), ni = document.getElementById("nameInput"); if (s0 && ni && !ni.value) ni.value = (s0.id + " " + s0.name).slice(0, 12); }
+  if (typeof showResult !== "function") return;
+  var orig = showResult;
+  showResult = function(){
+    var ret = orig.apply(this, arguments);
+    try{
+      var c, t, full = true;
+      if (typeof QUESTIONS !== "undefined" && typeof POINT !== "undefined"){ c = score / POINT; t = QUESTIONS.length; }
+      else { full = order.length === Q.length; c = correct; t = Q.length; }
+      if (full){
+        var s = stu(), id = s ? s.id : "guest";
+        var all = JSON.parse(localStorage.getItem("mirim-results") || "{}");
+        all[id] = all[id] || {}; all[id][AREA] = all[id][AREA] || {};
+        all[id][AREA][KEY] = { c: c, t: t, at: Date.now() };
+        localStorage.setItem("mirim-results", JSON.stringify(all));
+        if (window.MirimScore) window.MirimScore.onResult();
+        else if (window.parent !== window) window.parent.postMessage({ mirimScore: true }, "*");
+      }
+    }catch(e){}
+    return ret;
+  };
+})();
 </script>
 </body>
 </html>
