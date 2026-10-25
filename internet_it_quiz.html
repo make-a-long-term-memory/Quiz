@@ -256,7 +256,8 @@
   .ms-who select,.ms-who input{flex:1 1 0}
   @media (max-width:560px){ .ms-who{padding:18px 16px 20px;border-radius:22px} .ms-who select,.ms-who input{padding:9px 8px} .ms-who .ms-gc{flex-grow:1.5} .ms-who .ms-name{flex-grow:1.2} .ms-who .ms-btn{flex:1 0 100%} }
   .ms-who select:focus,.ms-who input:focus{outline:3px solid #bfb4e4;outline-offset:1px}
-  .ms-who .ms-btn{padding:9px 20px;font-size:1rem}
+  .ms-who .ms-btn{padding:9px 20px;font-size:1rem;border-radius:14px}
+  .ms-ok{flex-basis:100%;font-size:.9rem;font-weight:700;color:#3d6e56}
   .ms-who .ms-err{color:#b25d6c;font-size:.88rem;margin-top:6px}
   .ms-who .ms-err:empty{display:none}
   .ms-btn{font-family:var(--font);font-weight:700;font-size:1.05rem;border:none;border-radius:999px;padding:11px 22px;cursor:pointer;background:var(--ms-accent);color:#ffffff;box-shadow:0 4px 0 var(--ms-deep)}
@@ -983,7 +984,7 @@ document.addEventListener("keydown", e => {
   }
 
   /* ---------- 학번·이름 입력 (제목 아래 칸) ---------- */
-  var editing = false;
+  var editing = false, savedAt = 0;
   var GC = ["15", "16", "25", "26", "35", "36"];
   function nums(from, to, unit){ var o = ""; for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + unit + "</option>"; return o; }
   function whoBox(){
@@ -1006,6 +1007,8 @@ document.addEventListener("keydown", e => {
         var id = gc + (n < 10 ? "0" : "") + n, lb = g + "학년 " + c + "반 " + n + "번";
         jset(localStorage, "mirim-student", { id: id, grade: +g, cls: +c, num: +n, label: lb, name: name, at: Date.now() });
         editing = false;
+        savedAt = Date.now();
+        setTimeout(renderWho, 3200);
         var ni = document.getElementById("nameInput");
         if (ni) ni.value = (lb + " " + name).slice(0, 12);
         render();
@@ -1017,11 +1020,13 @@ document.addEventListener("keydown", e => {
   function renderWho(){
     var box = whoBox(); if (!box) return;
     var st = student();
-    if (st && !editing && cfg.hideWhenSet){ box.style.display = "none"; return; }
+    var justSaved = Date.now() - savedAt < 3000;
+    if (st && !editing && cfg.hideWhenSet && !justSaved){ box.style.display = "none"; return; }
     box.style.display = "";
     if (st && !editing){
       box.classList.add("set");
-      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(label(st)) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>';
+      box.innerHTML = '<span class="ms-who-me">🙋 <b>' + esc(label(st)) + "</b> " + esc(st.name) + '</span><button type="button" class="ms-edit">바꾸기</button>' +
+        (justSaved ? '<span class="ms-ok" role="status">✅ 학번과 이름이 입력되었습니다.</span>' : "");
       return;
     }
     box.classList.remove("set");
