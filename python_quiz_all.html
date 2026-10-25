@@ -342,6 +342,10 @@
   }
   .ox-hero{display:flex;gap:.18em;line-height:1}
   .ox-hero svg{width:1em;height:1em;display:block}
+  /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 밝은 원 + 짙은 로마 숫자 */
+  .stage-list .sn{width:38px;height:38px;background:#fffdf9;border:none;box-shadow:none;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:.9rem;letter-spacing:-.03em;line-height:1}
+  .stage-list .sn[data-n="4"]{font-size:.74rem}
+  .stage-list .sn[data-n="5"]{font-size:.62rem}
 </style>
 </head>
 <body>
@@ -507,10 +511,11 @@ function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floo
 function restartAnim(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
 
 /* 시작 화면의 단계 목록 */
+const ROMAN = ["I.","II.","III.","IV.","V.","VI.","VII.","VIII.","IX.","X."];
 $("stageList").innerHTML = STAGES.map((st, i) => {
   const n = Q.filter(q => q.s === i).length;
   const first = Q.findIndex(q => q.s === i) + 1;
-  return `<li><span class="sn" style="background:${st.color[1]};color:#ffffff">${i + 1}</span>` +
+  return `<li><span class="sn" data-n="${ROMAN[i].length}" style="color:${st.color[1]}">${ROMAN[i]}</span>` +
          `<div><b>${st.name}</b><small>${n}문제</small></div></li>`;
 }).join("");
 
@@ -1427,6 +1432,10 @@ document.addEventListener("keydown", e => {
     .tag{font-size:1rem;padding:4px 14px}
     .concept .ct{font-size:1.02rem;margin-bottom:4px}
   }
+  /* 단계 번호: 분류 표시라서 버튼처럼 보이지 않게, 밝은 원 + 짙은 로마 숫자 */
+  .stage-list .sn{width:38px;height:38px;background:#fffdf9;border:none;box-shadow:none;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:.9rem;letter-spacing:-.03em;line-height:1}
+  .stage-list .sn[data-n="4"]{font-size:.74rem}
+  .stage-list .sn[data-n="5"]{font-size:.62rem}
 </style>
 </head>
 <body>
@@ -1615,10 +1624,11 @@ function burst(x, y, n = 12){
 function restartAnim(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
 
 /* 시작 화면의 단계 목록 */
+const ROMAN = ["I.","II.","III.","IV.","V.","VI.","VII.","VIII.","IX.","X."];
 $("stageList").innerHTML = STAGES.map((st, i) => {
   const n = Q.filter(q => q.s === i).length;
   const first = Q.findIndex(q => q.s === i) + 1;
-  return `<li><span class="sn" style="background:${st.color[1]};color:#ffffff">${i + 1}</span>` +
+  return `<li><span class="sn" data-n="${ROMAN[i].length}" style="color:${st.color[1]}">${ROMAN[i]}</span>` +
          `<div><b>${st.name}</b><small>${first}~${first + n - 1}번 · ${n}문제</small></div></li>`;
 }).join("");
 
